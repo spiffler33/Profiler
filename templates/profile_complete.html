@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile Complete{% endblock %}
+
+{% block content %}
+<div class="profile-complete-container">
+    <div class="completion-header">
+        <h2>Financial Profile Complete!</h2>
+        <p class="completion-message">
+            Congratulations, {{ profile.name }}! You've completed your financial profile.
+        </p>
+    </div>
+    
+    <div class="completion-stats">
+        <div class="overall-stats">
+            <div class="stats-card">
+                <h3>Overall Completion</h3>
+                <div class="big-percentage">{{ completion.overall }}%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ completion.overall }}%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-stats">
+            <h3>Category Breakdown</h3>
+            
+            <div class="stats-grid">
+                <div class="category-stat-card demographics">
+                    <h4>Demographics</h4>
+                    <div class="category-percentage">{{ completion.by_category.demographics }}%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ completion.by_category.demographics }}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="category-stat-card financial_basics">
+                    <h4>Financial Basics</h4>
+                    <div class="category-percentage">{{ completion.by_category.financial_basics }}%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ completion.by_category.financial_basics }}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="category-stat-card assets_and_debts">
+                    <h4>Assets & Debts</h4>
+                    <div class="category-percentage">{{ completion.by_category.assets_and_debts }}%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ completion.by_category.assets_and_debts }}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="category-stat-card special_cases">
+                    <h4>Special Cases</h4>
+                    <div class="category-percentage">{{ completion.by_category.special_cases }}%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ completion.by_category.special_cases }}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-summary">
+        <h3>Profile Summary</h3>
+        
+        <div class="profile-info">
+            <div class="info-item">
+                <div class="label">Name:</div>
+                <div class="value">{{ profile.name }}</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="label">Email:</div>
+                <div class="value">{{ profile.email }}</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="label">Created:</div>
+                <div class="value">{{ profile.created_at[:10] }}</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="label">Last Updated:</div>
+                <div class="value">{{ profile.updated_at[:10] }}</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="label">Questions Answered:</div>
+                <div class="value">{{ answered_questions|length }}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="answered-summary">
+        <h3>Your Financial Profile Summary</h3>
+        
+        <div class="summary-sections">
+            {% set categories = {
+                'demographics': 'Demographics',
+                'financial_basics': 'Financial Basics',
+                'assets_and_debts': 'Assets & Debts',
+                'special_cases': 'Special Cases'
+            } %}
+            
+            {% for cat_id, cat_name in categories.items() %}
+            <div class="summary-section">
+                <h4 class="section-title {{ cat_id }}">{{ cat_name }}</h4>
+                
+                <div class="section-questions">
+                    {% for qa in answered_questions if qa.question.category == cat_id %}
+                    <div class="summary-item">
+                        <div class="summary-question">{{ qa.question.text }}</div>
+                        <div class="summary-answer">{{ qa.answer }}</div>
+                    </div>
+                    {% else %}
+                    <div class="no-answers">No answers in this category.</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('view_profile_analytics', profile_id=profile.id) }}" class="btn primary">View Analytics</a>
+        <a href="{{ url_for('questions', skip_completion=1) }}" class="btn secondary">Continue Answering Questions</a>
+        <a href="{{ url_for('switch_profile') }}" class="btn">Create a New Profile</a>
+    </div>
+</div>
+{% endblock %}

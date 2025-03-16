@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Financial Profiler - Welcome{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    <h2>Welcome to the Financial Profiler</h2>
+    
+    <div class="intro-text">
+        <p>
+            Our financial profiler helps create a comprehensive profile of your financial situation,
+            preferences, and behaviors. This will enable personalized financial guidance tailored to your unique needs.
+        </p>
+        <p>
+            The profiler will ask you a series of questions across multiple categories:
+        </p>
+        <ul class="category-list">
+            <li><span class="cat-badge demographics">Demographics</span> - Basic information about you</li>
+            <li><span class="cat-badge financial_basics">Financial Basics</span> - Income, expenses, and savings</li>
+            <li><span class="cat-badge assets_and_debts">Assets &amp; Debts</span> - Your financial holdings and obligations</li>
+            <li><span class="cat-badge special_cases">Special Cases</span> - Unique financial situations</li>
+        </ul>
+    </div>
+    
+    <div class="action-buttons">
+        {% if session.get('profile_id') %}
+        <a href="{{ url_for('questions') }}" class="btn primary">Continue Your Profile</a>
+        <a href="{{ url_for('switch_profile') }}" class="btn secondary">Start a New Profile</a>
+        {% else %}
+        <a href="{{ url_for('create_profile') }}" class="btn primary">Create Your Profile</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

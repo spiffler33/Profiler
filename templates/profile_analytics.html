@@ -1,0 +1,823 @@
+{% extends 'base.html' %}
+
+{% block title %}Financial Profile Analytics{% endblock %}
+
+{% block extra_css %}
+<style>
+    .analytics-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .analytics-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .analytics-header h2 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    .analytics-timestamp {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+    
+    .analytics-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #ecf0f1;
+    }
+    
+    .analytics-section:last-child {
+        border-bottom: none;
+    }
+    
+    .analytics-section h3 {
+        color: #3498db;
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+    }
+    
+    .dimensions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .dimension-card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.25rem;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .dimension-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    .dimension-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3498db;
+    }
+    
+    .investment-profile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .profile-type {
+        flex: 1;
+    }
+    
+    .profile-type h4 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    .profile-type p {
+        color: #7f8c8d;
+    }
+    
+    .profile-chart {
+        flex: 1;
+        max-width: 400px;
+        height: 200px;
+        background-color: #ecf0f1;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .profile-chart canvas {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .financial-health {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .health-score {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 1rem 0;
+    }
+    
+    .health-score.excellent {
+        color: #27ae60;
+    }
+    
+    .health-score.good {
+        color: #2ecc71;
+    }
+    
+    .health-score.fair {
+        color: #f39c12;
+    }
+    
+    .health-score.poor {
+        color: #e74c3c;
+    }
+    
+    .health-status {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .health-status.excellent {
+        color: #27ae60;
+    }
+    
+    .health-status.good {
+        color: #2ecc71;
+    }
+    
+    .health-status.fair {
+        color: #f39c12;
+    }
+    
+    .health-status.poor {
+        color: #e74c3c;
+    }
+    
+    .insights-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .insight-item {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .insights-list li:last-child {
+        margin-bottom: 0;
+    }
+    
+    .recommendations-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .recommendation-item {
+        background-color: #e8f4f8;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-left: 4px solid #3498db;
+    }
+    
+    .recommendations-list li:last-child {
+        margin-bottom: 0;
+    }
+    
+    .loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+    }
+    
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+        background-color: #fceaea;
+        border-left: 4px solid #e74c3c;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        color: #c0392b;
+    }
+    
+    .behavioral-profile {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .behavioral-summary {
+        font-size: 1.2rem;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background-color: #e0cffc;
+        border-radius: 8px;
+        color: #5a12b0;
+    }
+    
+    .behavioral-traits {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .behavioral-trait {
+        background-color: #f0f0f0;
+        padding: 0.75rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .trait-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .trait-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #5a12b0;
+    }
+    
+    .traits-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .strengths-container, .challenges-container {
+        background-color: #f0f0f0;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+    
+    .strengths-container h4, .challenges-container h4 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .strengths-list, .challenges-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .strength-item, .challenge-item {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        border-radius: 6px;
+    }
+    
+    .strength-item {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+    
+    .challenge-item {
+        background-color: #f8d7da;
+        color: #842029;
+    }
+    
+    @media (max-width: 768px) {
+        .traits-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="analytics-container" id="analytics-container">
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div class="analytics-header">
+        <h2>Financial Profile Analytics</h2>
+        <p class="analytics-timestamp">Generated: <span id="generated-timestamp">Loading...</span></p>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Financial Dimensions</h3>
+        <div class="dimensions-grid" id="dimensions-grid">
+            <!-- Dimensions will be dynamically added here -->
+        </div>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Investment Profile</h3>
+        <div class="investment-profile">
+            <div class="profile-type">
+                <h4 id="profile-type-title">Loading...</h4>
+                <p id="profile-type-description">Loading...</p>
+            </div>
+            <div class="profile-chart">
+                <canvas id="allocation-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Financial Health</h3>
+        <div class="financial-health">
+            <div class="health-score" id="health-score">--</div>
+            <div class="health-status" id="health-status">Loading...</div>
+        </div>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Financial Psychology</h3>
+        <div class="behavioral-profile" id="behavioral-profile">
+            <div class="behavioral-summary" id="behavioral-summary">Loading...</div>
+            <div class="behavioral-traits" id="behavioral-traits">
+                <!-- Behavioral traits will be added here -->
+            </div>
+            <div class="traits-container">
+                <div class="strengths-container">
+                    <h4>Behavioral Strengths</h4>
+                    <ul class="strengths-list" id="strengths-list">
+                        <!-- Strengths will be added here -->
+                    </ul>
+                </div>
+                <div class="challenges-container">
+                    <h4>Behavioral Challenges</h4>
+                    <ul class="challenges-list" id="challenges-list">
+                        <!-- Challenges will be added here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Key Insights</h3>
+        <ul class="insights-list" id="insights-list">
+            <!-- Insights will be dynamically added here -->
+        </ul>
+    </div>
+    
+    <div class="analytics-section">
+        <h3>Recommendations</h3>
+        <ul class="recommendations-list" id="recommendations-list">
+            <!-- Recommendations will be dynamically added here -->
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get profile ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileId = urlParams.get('profile_id') || '{{ profile_id }}';
+        
+        if (!profileId) {
+            showError("No profile ID provided");
+            return;
+        }
+        
+        // Fetch analytics data
+        fetchAnalytics(profileId);
+    });
+    
+    function fetchAnalytics(profileId) {
+        fetch(`/profile/analytics/summary/${profileId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch analytics');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Render the analytics
+                renderAnalytics(data);
+                hideLoading();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError("Failed to load analytics: " + error.message);
+                hideLoading();
+            });
+    }
+    
+    function renderAnalytics(data) {
+        // Set timestamp
+        document.getElementById('generated-timestamp').textContent = new Date().toLocaleString();
+        
+        // Render dimensions
+        renderDimensions(data.dimensions);
+        
+        // Render investment profile
+        renderInvestmentProfile(data.investment_profile);
+        
+        // Render financial health
+        renderFinancialHealth(data.financial_health);
+        
+        // Render behavioral profile
+        renderBehavioralProfile(data.behavioral_profile);
+        
+        // Render insights
+        renderInsights(data.key_insights);
+        
+        // Render recommendations
+        renderRecommendations(data.recommendations);
+    }
+    
+    function renderDimensions(dimensions) {
+        const grid = document.getElementById('dimensions-grid');
+        grid.innerHTML = '';
+        
+        const dimensionLabels = {
+            'risk': 'Risk Tolerance',
+            'knowledge': 'Financial Knowledge',
+            'stability': 'Financial Stability',
+            'goal_orientation': 'Goal Orientation',
+            'india_context': 'India Context'
+        };
+        
+        for (const [key, value] of Object.entries(dimensions)) {
+            if (value !== null && value !== undefined) {
+                const card = document.createElement('div');
+                card.className = 'dimension-card';
+                
+                const label = document.createElement('div');
+                label.className = 'dimension-label';
+                label.textContent = dimensionLabels[key] || key.replace('_', ' ');
+                
+                const valueEl = document.createElement('div');
+                valueEl.className = 'dimension-value';
+                valueEl.textContent = value + '/10';
+                
+                card.appendChild(label);
+                card.appendChild(valueEl);
+                grid.appendChild(card);
+            }
+        }
+        
+        if (grid.children.length === 0) {
+            grid.innerHTML = '<p>No dimension data available.</p>';
+        }
+    }
+    
+    function renderInvestmentProfile(profile) {
+        document.getElementById('profile-type-title').textContent = profile.type || 'Balanced';
+        document.getElementById('profile-type-description').textContent = profile.description || '';
+        
+        // Create dummy allocation data for the chart
+        const dummyData = {
+            'Conservative': {
+                'Fixed Income': 60,
+                'Large Cap Equity': 20,
+                'Mid Cap Equity': 10,
+                'Small Cap Equity': 0,
+                'International Equity': 5,
+                'Alternative Investments': 5
+            },
+            'Moderately Conservative': {
+                'Fixed Income': 50,
+                'Large Cap Equity': 25,
+                'Mid Cap Equity': 15,
+                'Small Cap Equity': 0,
+                'International Equity': 5,
+                'Alternative Investments': 5
+            },
+            'Balanced': {
+                'Fixed Income': 40,
+                'Large Cap Equity': 25,
+                'Mid Cap Equity': 15,
+                'Small Cap Equity': 10,
+                'International Equity': 5,
+                'Alternative Investments': 5
+            },
+            'Moderately Aggressive': {
+                'Fixed Income': 25,
+                'Large Cap Equity': 30,
+                'Mid Cap Equity': 20,
+                'Small Cap Equity': 10,
+                'International Equity': 10,
+                'Alternative Investments': 5
+            },
+            'Aggressive': {
+                'Fixed Income': 10,
+                'Large Cap Equity': 30,
+                'Mid Cap Equity': 25,
+                'Small Cap Equity': 15,
+                'International Equity': 15,
+                'Alternative Investments': 5
+            }
+        };
+        
+        const allocationType = profile.type || 'Balanced';
+        const allocation = dummyData[allocationType] || dummyData['Balanced'];
+        
+        // Create chart
+        const ctx = document.getElementById('allocation-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(allocation),
+                datasets: [{
+                    data: Object.values(allocation),
+                    backgroundColor: [
+                        '#3498db',
+                        '#2ecc71',
+                        '#e74c3c',
+                        '#f39c12',
+                        '#9b59b6',
+                        '#1abc9c'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    function renderBehavioralProfile(profile) {
+        // Handle case when profile is not available
+        if (!profile || Object.keys(profile).length === 0) {
+            console.log("No behavioral profile data available");
+            const behavioralSection = document.querySelector('.analytics-section:nth-of-type(4)'); // Updated selector to match actual position
+            if (behavioralSection) {
+                behavioralSection.style.display = 'none';
+            }
+            return;
+        }
+        
+        console.log("Rendering behavioral profile:", profile);
+        
+        // Render summary
+        const summaryElement = document.getElementById('behavioral-summary');
+        
+        if (profile.traits && Object.keys(profile.traits).length > 0) {
+            summaryElement.textContent = profile.summary || 'Your financial personality is based on your responses to behavioral questions.';
+        } else {
+            summaryElement.textContent = 'Financial personality profile not yet established';
+        }
+        
+        // Render traits
+        const traitsContainer = document.getElementById('behavioral-traits');
+        traitsContainer.innerHTML = '';
+        
+        const traitLabels = {
+            'loss_aversion': 'Loss Aversion',
+            'recency_bias': 'Recency Bias',
+            'herd_mentality': 'Herd Mentality',
+            'overconfidence': 'Overconfidence',
+            'fomo': 'FOMO',
+            'emotional_investing': 'Emotional Investing',
+            'discipline': 'Discipline',
+            'information_processing': 'Information Processing'
+        };
+        
+        if (profile.traits && Object.keys(profile.traits).length > 0) {
+            for (const [trait, value] of Object.entries(profile.traits)) {
+                if (value !== null && value !== undefined) {
+                    const traitElement = document.createElement('div');
+                    traitElement.className = 'behavioral-trait';
+                    
+                    const traitName = document.createElement('div');
+                    traitName.className = 'trait-name';
+                    traitName.textContent = traitLabels[trait] || trait.replace('_', ' ');
+                    
+                    const traitValue = document.createElement('div');
+                    traitValue.className = 'trait-value';
+                    traitValue.textContent = value + '/10';
+                    
+                    traitElement.appendChild(traitName);
+                    traitElement.appendChild(traitValue);
+                    traitsContainer.appendChild(traitElement);
+                }
+            }
+        } else {
+            traitsContainer.innerHTML = '<p>No behavioral traits available yet.</p>';
+        }
+        
+        // Render strengths
+        const strengthsList = document.getElementById('strengths-list');
+        strengthsList.innerHTML = '';
+        
+        if (profile.strengths && profile.strengths.length > 0) {
+            profile.strengths.forEach(strength => {
+                const strengthItem = document.createElement('li');
+                strengthItem.className = 'strength-item';
+                strengthItem.textContent = strength;
+                strengthsList.appendChild(strengthItem);
+            });
+        } else {
+            strengthsList.innerHTML = '<li>Complete more behavioral questions to discover your strengths</li>';
+        }
+        
+        // Render challenges
+        const challengesList = document.getElementById('challenges-list');
+        challengesList.innerHTML = '';
+        
+        if (profile.challenges && profile.challenges.length > 0) {
+            profile.challenges.forEach(challenge => {
+                const challengeItem = document.createElement('li');
+                challengeItem.className = 'challenge-item';
+                challengeItem.textContent = challenge;
+                challengesList.appendChild(challengeItem);
+            });
+        } else {
+            challengesList.innerHTML = '<li>Complete more behavioral questions to identify potential challenges</li>';
+        }
+    }
+    
+    function renderFinancialHealth(health) {
+        const scoreElement = document.getElementById('health-score');
+        const statusElement = document.getElementById('health-status');
+        
+        scoreElement.textContent = health.score;
+        statusElement.textContent = health.status;
+        
+        // Add appropriate classes based on health status
+        if (health.status === 'Excellent') {
+            scoreElement.className = 'health-score excellent';
+            statusElement.className = 'health-status excellent';
+        } else if (health.status === 'Good') {
+            scoreElement.className = 'health-score good';
+            statusElement.className = 'health-status good';
+        } else if (health.status === 'Fair') {
+            scoreElement.className = 'health-score fair';
+            statusElement.className = 'health-status fair';
+        } else {
+            scoreElement.className = 'health-score poor';
+            statusElement.className = 'health-status poor';
+        }
+        
+        // Add additional financial metrics if available
+        if (health.metrics) {
+            const metricsContainer = document.createElement('div');
+            metricsContainer.className = 'financial-metrics';
+            metricsContainer.style.marginTop = '1.5rem';
+            metricsContainer.style.display = 'flex';
+            metricsContainer.style.flexWrap = 'wrap';
+            metricsContainer.style.justifyContent = 'center';
+            metricsContainer.style.gap = '1rem';
+            
+            // Display INR-formatted values
+            const showMetric = (label, value) => {
+                if (value) {
+                    const metric = document.createElement('div');
+                    metric.className = 'financial-metric';
+                    metric.style.backgroundColor = '#f1f5f9';
+                    metric.style.padding = '0.75rem 1rem';
+                    metric.style.borderRadius = '0.5rem';
+                    metric.style.textAlign = 'center';
+                    
+                    const metricLabel = document.createElement('div');
+                    metricLabel.className = 'metric-label';
+                    metricLabel.style.fontSize = '0.875rem';
+                    metricLabel.style.color = '#64748b';
+                    metricLabel.style.marginBottom = '0.25rem';
+                    metricLabel.textContent = label;
+                    
+                    const metricValue = document.createElement('div');
+                    metricValue.className = 'metric-value';
+                    metricValue.style.fontSize = '1.125rem';
+                    metricValue.style.fontWeight = '600';
+                    metricValue.style.color = '#1e293b';
+                    metricValue.textContent = value;
+                    
+                    metric.appendChild(metricLabel);
+                    metric.appendChild(metricValue);
+                    metricsContainer.appendChild(metric);
+                }
+            };
+            
+            // Show currency values with ₹ symbol
+            showMetric('Savings', health.metrics.current_savings_inr || '');
+            showMetric('Monthly Expenses', health.metrics.monthly_expenses_inr || '');
+            showMetric('Total Debt', health.metrics.total_debt_inr || '');
+            
+            // Show ratios
+            if (health.metrics.emergency_fund_ratio) {
+                showMetric('Emergency Fund', `${health.metrics.emergency_fund_ratio} months`);
+            }
+            
+            if (health.metrics.savings_rate) {
+                showMetric('Savings Rate', `${health.metrics.savings_rate}%`);
+            }
+            
+            if (health.metrics.debt_to_savings_ratio) {
+                showMetric('Debt to Savings', `${health.metrics.debt_to_savings_ratio}x`);
+            }
+            
+            // Append metrics to financial health section
+            document.querySelector('.financial-health').appendChild(metricsContainer);
+        }
+    }
+    
+    function renderInsights(insights) {
+        const list = document.getElementById('insights-list');
+        list.innerHTML = '';
+        
+        if (!insights || insights.length === 0) {
+            list.innerHTML = '<p>No insights available.</p>';
+            return;
+        }
+        
+        insights.forEach(insight => {
+            const item = document.createElement('li');
+            item.className = 'insight-item';
+            item.textContent = insight;
+            list.appendChild(item);
+        });
+    }
+    
+    function renderRecommendations(recommendations) {
+        const list = document.getElementById('recommendations-list');
+        list.innerHTML = '';
+        
+        if (!recommendations || recommendations.length === 0) {
+            list.innerHTML = '<p>No recommendations available.</p>';
+            return;
+        }
+        
+        recommendations.forEach(recommendation => {
+            const item = document.createElement('li');
+            item.className = 'recommendation-item';
+            item.textContent = recommendation;
+            list.appendChild(item);
+        });
+    }
+    
+    function hideLoading() {
+        document.getElementById('loading-overlay').style.display = 'none';
+    }
+    
+    function showError(message) {
+        hideLoading();
+        
+        const container = document.getElementById('analytics-container');
+        const error = document.createElement('div');
+        error.className = 'error-message';
+        error.textContent = message;
+        
+        container.prepend(error);
+    }
+</script>
+{% endblock %}

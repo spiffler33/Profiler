@@ -1,0 +1,565 @@
+/* Questions Interface Styling */
+
+/* Colors for understanding levels */
+:root {
+    --profile-level-red: #ff5757;
+    --profile-level-amber: #ffaa33;
+    --profile-level-yellow: #ffd24c;
+    --profile-level-green: #4caf50;
+    --profile-level-dark-green: #2e7d32;
+}
+
+/* Understanding level indicator styles */
+.understanding-level-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.understanding-level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.understanding-level-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.understanding-level-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.profile-level-red {
+    background-color: var(--profile-level-red);
+}
+
+.profile-level-amber {
+    background-color: var(--profile-level-amber);
+}
+
+.profile-level-yellow {
+    background-color: var(--profile-level-yellow);
+    color: #333; /* Dark text for better contrast on light background */
+}
+
+.profile-level-green {
+    background-color: var(--profile-level-green);
+}
+
+.profile-level-dark-green {
+    background-color: var(--profile-level-dark-green);
+}
+
+.understanding-level-description {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.next-level-info {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+}
+
+.next-level-info h5 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.next-level-requirements {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.next-level-requirements li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: #555;
+}
+
+.next-level-requirements li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #777;
+}
+
+/* Growing metaphor indicators */
+.level-indicator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 60px;
+    margin: 15px 0;
+    position: relative;
+}
+
+.level-indicator-container:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #ddd;
+    z-index: 0;
+}
+
+.level-indicator {
+    width: 18%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.level-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.level-label {
+    font-size: 11px;
+    color: #777;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.level-indicator.active .level-icon {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.level-indicator.active .level-label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Level specific icons and colors */
+.level-red .level-icon {
+    color: var(--profile-level-red);
+}
+
+.level-amber .level-icon {
+    color: var(--profile-level-amber);
+}
+
+.level-yellow .level-icon {
+    color: var(--profile-level-yellow);
+}
+
+.level-green .level-icon {
+    color: var(--profile-level-green);
+}
+
+.level-dark-green .level-icon {
+    color: var(--profile-level-dark-green);
+}
+
+.questions-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: 
+        "progress question"
+        "answers question";
+    gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .questions-container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "progress"
+            "question"
+            "answers";
+    }
+}
+
+/* ----- PROGRESS SECTION ----- */
+.progress-section {
+    grid-area: progress;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.overall-progress {
+    margin-bottom: 1rem;
+}
+
+.tier-progress {
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+}
+
+.progress-tier {
+    margin-bottom: 0.75rem;
+}
+
+.progress-tier:last-child {
+    margin-bottom: 0;
+}
+
+.progress-fill.core {
+    background-color: #0d6efd;
+}
+
+.progress-fill.next-level {
+    background-color: #20c997;
+}
+
+.progress-fill.behavioral {
+    background-color: #7b2ebd;
+}
+
+.progress-stats {
+    font-size: 0.8rem;
+    text-align: right;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+.progress-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.progress-item {
+    margin-bottom: 1rem;
+}
+
+.progress-percentage {
+    font-size: 0.9rem;
+    text-align: right;
+    margin-top: 0.25rem;
+    color: #6c757d;
+}
+
+/* ----- QUESTION SECTION ----- */
+.question-answer-section {
+    grid-area: question;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.current-question-card {
+    position: relative;
+}
+
+.question-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.question-type-badge {
+    display: inline-block;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+}
+
+.question-type-badge.core {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.question-type-badge.next-level {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.question-type-badge.behavioral {
+    background-color: #e0cffc;
+    color: #5a12b0;
+}
+
+.question-text {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    color: #212529;
+}
+
+.help-text {
+    background-color: #f8f9fa;
+    border-left: 4px solid #6c757d;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input-container {
+    margin-bottom: 1.5rem;
+}
+
+/* Radio options styling */
+.radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+/* Slider styling */
+.slider-container {
+    padding: 0 0.5rem;
+}
+
+.slider {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.slider-value {
+    text-align: center;
+    font-weight: 600;
+    color: #005FB8;
+}
+
+/* Multiselect styling */
+.multiselect-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.checkbox-option:hover {
+    background-color: #f8f9fa;
+}
+
+.multiselect-checkbox {
+    margin-right: 0.75rem;
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-label {
+    font-size: 1rem;
+}
+
+/* Educational panel styling */
+.educational-panel {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #0d6efd;
+}
+
+.educational-content {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.educational-content h3 {
+    color: #0d6efd;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.educational-content p {
+    margin-bottom: 1rem;
+}
+
+.educational-content ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.educational-content li {
+    margin-bottom: 0.5rem;
+}
+
+.calculation-box {
+    background-color: #e8f4fd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.25rem 0;
+    border: 1px solid #c9e2f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.calculation-details {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.calculation-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #d1e6fa;
+}
+
+.calculation-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.calculation-item:first-child {
+    padding-top: 0;
+}
+
+.calculation-label {
+    font-weight: 500;
+    color: #505050;
+    flex: 1;
+}
+
+.calculation-value {
+    font-weight: 700;
+    color: #0d6efd;
+    font-size: 1.15rem;
+    text-align: right;
+    margin-left: 1rem;
+}
+
+/* Highlight the recommended amount */
+.calculation-item:last-child .calculation-value {
+    color: #0a58ca;
+    font-size: 1.2rem;
+}
+
+.disclaimer-box {
+    background-color: #fff8e6;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    border: 1px solid #ffe8b3;
+    font-size: 0.9rem;
+    color: #664d03;
+    margin-bottom: 1rem;
+}
+
+.disclaimer-box p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.disclaimer-box strong {
+    color: #997404;
+}
+
+/* ----- PREVIOUS ANSWERS ----- */
+.previous-answers-section {
+    grid-area: answers;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.answers-list {
+    margin-top: 1rem;
+}
+
+.answer-item {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    border-left: 4px solid #dee2e6;
+    transition: background-color 0.2s;
+}
+
+.answer-item:hover {
+    background-color: #e9ecef;
+}
+
+.answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.question-text {
+    margin-bottom: 0.5rem;
+}
+
+.answer-text {
+    color: #0056b3;
+}
+
+.multiselect-answer-list {
+    margin: 0.5rem 0 0 1rem;
+    padding: 0;
+}
+
+.multiselect-answer-list li {
+    margin-bottom: 0.25rem;
+}
+
+.no-answers {
+    text-align: center;
+    padding: 2rem 0;
+    color: #6c757d;
+}
+
+/* Animation for question transitions */
+.current-question-card {
+    animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

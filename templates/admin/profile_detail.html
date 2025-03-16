@@ -1,0 +1,172 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Profile Details - Admin Dashboard{% endblock %}
+{% block page_title %}Profile: {{ profile.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-admin">
+            <div class="card-header">
+                <i class="bi bi-person-badge me-2"></i> Profile Information
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Name:</strong> {{ profile.name }}
+                </div>
+                <div class="mb-3">
+                    <strong>Email:</strong> {{ profile.email }}
+                </div>
+                <div class="mb-3">
+                    <strong>Profile ID:</strong> 
+                    <small class="text-muted">{{ profile.id }}</small>
+                </div>
+                <div class="mb-3">
+                    <strong>Created:</strong> 
+                    <span>{{ profile.created_at[:19] if profile.created_at else 'Unknown' }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Last Updated:</strong> 
+                    <span>{{ profile.updated_at[:19] if profile.updated_at else 'Unknown' }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Total Answers:</strong> 
+                    <span class="badge bg-primary">{{ profile.answers|length }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Profile Versions:</strong> 
+                    <span class="badge bg-info">{{ profile.versions|length }}</span>
+                </div>
+            </div>
+        </div>
+        
+        {% if analytics %}
+        <div class="card card-admin mt-3">
+            <div class="card-header">
+                <i class="bi bi-graph-up me-2"></i> Analytics Summary
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Investment Profile:</strong> 
+                    <span class="badge bg-primary">{{ analytics.investment_profile.type }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Financial Health:</strong> 
+                    <div class="progress mt-2">
+                        <div class="progress-bar 
+                            {% if analytics.financial_health_score.score >= 80 %}bg-success
+                            {% elif analytics.financial_health_score.score >= 60 %}bg-info
+                            {% elif analytics.financial_health_score.score >= 40 %}bg-warning
+                            {% else %}bg-danger{% endif %}" 
+                            role="progressbar" 
+                            style="width: {{ analytics.financial_health_score.score }}%"
+                            aria-valuenow="{{ analytics.financial_health_score.score }}" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100">
+                            {{ analytics.financial_health_score.score }}%
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mt-1">
+                        {{ analytics.financial_health_score.status }}
+                    </small>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Key Dimensions:</strong>
+                    <ul class="list-group mt-2">
+                        {% for key, value in analytics.dimensions.items() %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ key|replace('_', ' ')|title }}
+                            <span class="badge bg-primary rounded-pill">{{ value }}/10</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card card-admin">
+            <div class="card-header">
+                <i class="bi bi-card-list me-2"></i> All Answers
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Question ID</th>
+                                <th>Answer</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for answer in profile.answers %}
+                            <tr>
+                                <td>
+                                    <span class="text-monospace">{{ answer.question_id }}</span>
+                                    {% if answer.question_id.endswith('_insights') %}
+                                    <span class="badge bg-info ms-1">LLM Insight</span>
+                                    {% elif '_next_level_' in answer.question_id or 'next_level_' in answer.question_id %}
+                                    <span class="badge bg-success ms-1">Next-Level</span>
+                                    {% else %}
+                                    <span class="badge bg-primary ms-1">Core</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if answer.question_id.endswith('_insights') and answer.answer is mapping %}
+                                    <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#insight-{{ loop.index }}">
+                                        View Insights
+                                    </button>
+                                    <div class="collapse mt-2" id="insight-{{ loop.index }}">
+                                        <div class="card card-body">
+                                            <pre class="small">{{ answer.answer|tojson(indent=2) }}</pre>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {{ answer.answer }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ answer.timestamp[:19] if answer.timestamp else 'Unknown' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        {% if analytics and analytics.key_insights %}
+        <div class="card card-admin mt-3">
+            <div class="card-header">
+                <i class="bi bi-lightbulb me-2"></i> Key Insights
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for insight in analytics.key_insights %}
+                    <li class="list-group-item">{{ insight }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if analytics and analytics.recommendations %}
+        <div class="card card-admin mt-3">
+            <div class="card-header">
+                <i class="bi bi-check2-square me-2"></i> Recommendations
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for recommendation in analytics.recommendations %}
+                    <li class="list-group-item">{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

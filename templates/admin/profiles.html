@@ -1,0 +1,57 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Profiles - Admin Dashboard{% endblock %}
+{% block page_title %}User Profiles{% endblock %}
+
+{% block content %}
+<div class="card card-admin">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-people me-2"></i> All Profiles
+            </div>
+            <div>
+                <span class="badge bg-primary">{{ profiles|length }} Profiles</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {% if profiles %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Created</th>
+                        <th>Last Updated</th>
+                        <th>Answers</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in profiles %}
+                    <tr>
+                        <td>{{ profile.name }}</td>
+                        <td>{{ profile.email }}</td>
+                        <td>{{ profile.created_at[:10] if profile.created_at else 'Unknown' }}</td>
+                        <td>{{ profile.updated_at[:10] if profile.updated_at else 'Unknown' }}</td>
+                        <td>{{ profile.answers_count }}</td>
+                        <td>
+                            <a href="{{ url_for('admin_profile_detail', profile_id=profile.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            No profiles have been created yet.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
