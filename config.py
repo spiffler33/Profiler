@@ -21,7 +21,10 @@ class Config:
     # LLM settings
     OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
     OPENAI_MODEL = os.environ.get('OPENAI_MODEL', 'gpt-4o')
-    LLM_ENABLED = bool(OPENAI_API_KEY)
+    
+    # Allow explicit disabling of LLM via environment variable
+    LLM_ENABLED_ENV = os.environ.get('LLM_ENABLED', 'True')
+    LLM_ENABLED = LLM_ENABLED_ENV.lower() not in ('false', '0', 'f', 'no') and bool(OPENAI_API_KEY)
     
     # Profile settings
     DATA_DIRECTORY = os.environ.get('DATA_DIRECTORY') or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')

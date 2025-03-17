@@ -132,7 +132,15 @@ class LLMService:
         
         self.model = model
         self.base_url = "https://api.openai.com/v1"
-        self.enabled = bool(self.api_key)
+        
+        # Check if LLM_ENABLED is explicitly set in the environment
+        llm_enabled_env = os.environ.get('LLM_ENABLED', '').lower()
+        if llm_enabled_env in ('false', '0', 'f', 'no'):
+            self.enabled = False
+            logging.warning("LLM service explicitly disabled via LLM_ENABLED environment variable")
+        else:
+            self.enabled = bool(self.api_key)
+            
         self.prompt_templates = self._load_prompt_templates()
         
         # Initialize response cache for performance improvement
@@ -142,6 +150,7 @@ class LLMService:
         self.total_calls = 0
         
         logging.info(f"LLM Service initialized with model: {self.model}, caching enabled (max {cache_size} entries)")
+        logging.info(f"LLM service enabled: {self.enabled}, API key length: {len(self.api_key or '')}")
         
         # Initialize schema for standardized data extraction
         self.insight_schema = self.INSIGHT_SCHEMA
@@ -538,7 +547,10 @@ class LLMService:
             import traceback
             logging.error(f"Error generating next-level questions: {str(e)}")
             logging.error(f"Stack trace: {traceback.format_exc()}")
-            return []
+            
+            # Return mock questions as a fallback
+            logging.warning(f"Using mock questions for {category} due to LLM error")
+            return self.generate_mock_next_level_questions(category)
     
     def extract_insights(self, question: str, answer: str, behavioral_trait: str = None) -> Dict[str, Any]:
         """

@@ -203,11 +203,13 @@ def submit_answer():
             logging.error(f"❌ INVALID QUESTION ID: {question_id} - Not found in repository")
             
             # Special handling - if this looks like a generic LLM question ID that wasn't caught above
-            if question_id.startswith('next_level_question_') or '_question_' in question_id:
-                logging.info(f"🛠️ TREATING AS LLM QUESTION DESPITE UNEXPECTED FORMAT: {question_id}")
+            if (question_id.startswith('next_level_question_') or 
+                '_question_' in question_id or 
+                question_id.startswith('mock_nl_')):  # Added check for mock_nl_ prefix
+                logging.info(f"🛠️ TREATING AS LLM OR MOCK QUESTION DESPITE UNEXPECTED FORMAT: {question_id}")
                 is_llm_question = True
                 input_type = request.form.get('input_type', 'text')
-                logging.info(f"✅ PROCESSING GENERIC QUESTION AS LLM: {question_id} with input_type={input_type}")
+                logging.info(f"✅ PROCESSING GENERIC QUESTION AS LLM/MOCK: {question_id} with input_type={input_type}")
                 question = {
                     'input_type': input_type,
                     'id': question_id,
