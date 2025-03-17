@@ -98,6 +98,28 @@ def questions():
     next_question, _ = question_service.get_next_question(profile_id)
     completion = question_service.get_profile_completion(profile_id)
     
+    # Log when a question is displayed to the user
+    if next_question:
+        question_id = next_question.get('id')
+        question_text = next_question.get('text', '')
+        logging.info(f"Displaying question to user: {question_id} - {question_text[:50]}...")
+        
+        # Ensure this question is in the cache before showing it to the user
+        # This is a critical safety check to prevent questions appearing that aren't in the cache
+        if question_id and question_id.startswith(('llm_next_level_', 'gen_question_', 'fallback_')):
+            cached_questions = question_service.dynamic_questions_cache.get(profile_id, [])
+            question_in_cache = any(q.get('id') == question_id for q in cached_questions)
+            
+            if not question_in_cache:
+                logging.info(f"Adding displayed question to cache for safety: {question_id}")
+                question_copy = next_question.copy()
+                if profile_id not in question_service.dynamic_questions_cache:
+                    question_service.dynamic_questions_cache[profile_id] = []
+                question_service.dynamic_questions_cache[profile_id].append(question_copy)
+        
+        # Log the question display event
+        question_service.question_logger.log_question_displayed(profile_id, question_id, next_question)
+    
     # Ensure question ID is consistent - this can help with fallback questions
     if next_question and 'fallback_' in next_question.get('id', ''):
         # Log the exact question ID being presented to the user
@@ -258,6 +280,12 @@ def submit_answer():
         return jsonify({'success': False, 'error': 'Failed to save answer'})
     
     logging.info(f"Successfully saved answer for question: {question_id}. Profile: {profile_id}")
+    
+    # Log when a question is answered, including the question data if available
+    question_data = None
+    if not is_llm_question:
+        question_data = question
+    question_service.question_logger.log_question_answered(profile_id, question_id, answer_value, question_data)
     
     # Get updated completion and next question
     completion = question_service.get_profile_completion(profile_id)

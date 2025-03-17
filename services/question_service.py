@@ -2,9 +2,373 @@ import logging
 from datetime import datetime
 import json
 import time
+import os
 from typing import Dict, List, Optional, Any, Tuple
 from services.llm_service import LLMService
 from models.profile_understanding import ProfileUnderstandingCalculator
+
+class QuestionLogger:
+    """
+    Dedicated logger for tracking question lifecycle events.
+    Creates and maintains logs of all question events for each profile.
+    """
+    
+    def __init__(self, log_dir="/Users/coddiwomplers/Desktop/Python/Profiler4/data/question_logs"):
+        """Initialize the question logger with the specified log directory"""
+        self.log_dir = log_dir
+        
+        # Create the log directory if it doesn't exist
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+            
+        # Dictionary to store in-memory logs before writing to file
+        self.question_logs = {}
+    
+    def _ensure_profile_log(self, profile_id):
+        """Ensure the profile's log file exists and is properly initialized"""
+        profile_log_dir = os.path.join(self.log_dir, profile_id)
+        
+        if not os.path.exists(profile_log_dir):
+            os.makedirs(profile_log_dir)
+            
+        return profile_log_dir
+    
+    def log_question_generated(self, profile_id, question_id, question_data):
+        """Log when a question is generated (by system or LLM)"""
+        log_entry = {
+            "event": "question_generated",
+            "timestamp": datetime.now().isoformat(),
+            "question_id": question_id,
+            "question_type": question_data.get('type', 'unknown'),
+            "question_category": question_data.get('category', 'unknown'),
+            "question_text": question_data.get('text', ''),
+            "input_type": question_data.get('input_type', 'unknown'),
+            "is_llm_generated": bool('llm_next_level' in question_id or 'gen_question' in question_id),
+            "is_fallback": bool('fallback' in question_id),
+            "is_required": question_data.get('required', False),
+            "order": question_data.get('order', None),
+        }
+        
+        self._append_to_question_log(profile_id, question_id, log_entry)
+    
+    def log_question_displayed(self, profile_id, question_id, question_data):
+        """Log when a question is displayed to the user"""
+        log_entry = {
+            "event": "question_displayed",
+            "timestamp": datetime.now().isoformat(),
+            "question_id": question_id,
+            "question_text": question_data.get('text', ''),
+        }
+        
+        self._append_to_question_log(profile_id, question_id, log_entry)
+    
+    def log_question_answered(self, profile_id, question_id, answer_value, question_data=None):
+        """Log when a question is answered by the user"""
+        log_entry = {
+            "event": "question_answered",
+            "timestamp": datetime.now().isoformat(),
+            "question_id": question_id,
+            "answer_value": self._format_answer_for_log(answer_value),
+        }
+        
+        if question_data:
+            log_entry["question_text"] = question_data.get('text', '')
+            log_entry["question_type"] = question_data.get('type', 'unknown')
+            log_entry["question_category"] = question_data.get('category', 'unknown')
+        
+        self._append_to_question_log(profile_id, question_id, log_entry)
+    
+    def _format_answer_for_log(self, answer_value):
+        """Format the answer value to ensure it can be properly serialized"""
+        # If the answer is an iterable but not a string or dict, convert to list
+        if hasattr(answer_value, '__iter__') and not isinstance(answer_value, (str, dict)):
+            return list(answer_value)
+        return answer_value
+    
+    def _append_to_question_log(self, profile_id, question_id, log_entry):
+        """Append a log entry to the appropriate question log"""
+        # Initialize profile logs if not exist
+        if profile_id not in self.question_logs:
+            self.question_logs[profile_id] = {}
+            
+        # Initialize question log if not exist
+        if question_id not in self.question_logs[profile_id]:
+            self.question_logs[profile_id][question_id] = []
+            
+        # Add the log entry
+        self.question_logs[profile_id][question_id].append(log_entry)
+        
+        # Write the updated logs to disk
+        self._write_logs_to_disk(profile_id)
+    
+    def _write_logs_to_disk(self, profile_id):
+        """Write the question logs for a profile to disk"""
+        profile_log_dir = self._ensure_profile_log(profile_id)
+        
+        # Write a comprehensive log file with all questions
+        all_questions_log_path = os.path.join(profile_log_dir, "all_questions.json")
+        
+        try:
+            with open(all_questions_log_path, 'w') as f:
+                json.dump(self.question_logs[profile_id], f, indent=2)
+        except Exception as e:
+            logging.error(f"Error writing question logs for profile {profile_id}: {str(e)}")
+            
+        # Write a summary file for easier analysis
+        summary_log_path = os.path.join(profile_log_dir, "question_summary.json")
+        
+        try:
+            summary = {}
+            for question_id, events in self.question_logs[profile_id].items():
+                # Get the most recent version of each event type
+                latest_events = {}
+                for event in events:
+                    event_type = event["event"]
+                    latest_events[event_type] = event
+                
+                # Create the summary entry
+                summary[question_id] = {
+                    "question_id": question_id,
+                    "question_text": (latest_events.get("question_generated", {}).get("question_text") or
+                                     latest_events.get("question_displayed", {}).get("question_text") or
+                                     latest_events.get("question_answered", {}).get("question_text") or ""),
+                    "question_type": latest_events.get("question_generated", {}).get("question_type", "unknown"),
+                    "category": latest_events.get("question_generated", {}).get("question_category", "unknown"),
+                    "is_llm_generated": latest_events.get("question_generated", {}).get("is_llm_generated", False),
+                    "is_fallback": latest_events.get("question_generated", {}).get("is_fallback", False),
+                    "generated_at": latest_events.get("question_generated", {}).get("timestamp", None),
+                    "displayed_at": latest_events.get("question_displayed", {}).get("timestamp", None),
+                    "answered_at": latest_events.get("question_answered", {}).get("timestamp", None),
+                    "answer_value": latest_events.get("question_answered", {}).get("answer_value", None),
+                    "lifecycle_complete": all(e in latest_events for e in ["question_generated", "question_displayed", "question_answered"]),
+                }
+            
+            with open(summary_log_path, 'w') as f:
+                json.dump(summary, f, indent=2)
+                
+            # Generate an HTML summary for easier viewing
+            self._generate_html_summary(profile_id, summary)
+                
+        except Exception as e:
+            logging.error(f"Error writing question summary log for profile {profile_id}: {str(e)}")
+            
+    def _generate_html_summary(self, profile_id, summary):
+        """Generate an HTML summary of questions for easier analysis"""
+        profile_log_dir = self._ensure_profile_log(profile_id)
+        html_path = os.path.join(profile_log_dir, "question_report.html")
+        
+        try:
+            # Sort questions by types and the time they were first displayed
+            core_questions = []
+            goal_questions = []
+            next_level_questions = []
+            behavioral_questions = []
+            other_questions = []
+            
+            for qid, q_data in summary.items():
+                if q_data["question_type"] == "core":
+                    core_questions.append(q_data)
+                elif q_data["question_type"] == "goal":
+                    goal_questions.append(q_data)
+                elif q_data["question_type"] == "next_level":
+                    next_level_questions.append(q_data)
+                elif q_data["question_type"] == "behavioral":
+                    behavioral_questions.append(q_data)
+                else:
+                    other_questions.append(q_data)
+            
+            # Sort each group by displayed_at timestamp
+            for q_list in [core_questions, goal_questions, next_level_questions, behavioral_questions, other_questions]:
+                q_list.sort(key=lambda q: q.get("displayed_at", "9999-99-99") or "9999-99-99")
+            
+            # Generate HTML
+            html_content = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Question Report for Profile {profile_id}</title>
+                <style>
+                    body {{ font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }}
+                    h1, h2, h3 {{ color: #333; }}
+                    table {{ border-collapse: collapse; width: 100%; margin-bottom: 20px; }}
+                    th, td {{ padding: 8px; text-align: left; border: 1px solid #ddd; }}
+                    th {{ background-color: #f2f2f2; }}
+                    tr:nth-child(even) {{ background-color: #f9f9f9; }}
+                    .timestamp {{ font-size: 0.8em; color: #666; }}
+                    .duplicated {{ background-color: #ffe6e6; }}
+                    .section {{ margin-bottom: 40px; }}
+                    .question-text {{ font-weight: bold; }}
+                    .llm-generated {{ background-color: #e6f7ff; }}
+                    .fallback {{ background-color: #fff2e6; }}
+                    .lifecycle-incomplete {{ background-color: #fffde6; }}
+                    .durations {{ font-size: 0.85em; color: #444; }}
+                </style>
+            </head>
+            <body>
+                <h1>Question Report for Profile {profile_id}</h1>
+                <p>Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+                
+                <div class="section">
+                    <h2>Summary Statistics</h2>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Count</th>
+                        </tr>
+                        <tr>
+                            <td>Total Questions</td>
+                            <td>{len(summary)}</td>
+                        </tr>
+                        <tr>
+                            <td>Core Questions</td>
+                            <td>{len(core_questions)}</td>
+                        </tr>
+                        <tr>
+                            <td>Goal Questions</td>
+                            <td>{len(goal_questions)}</td>
+                        </tr>
+                        <tr>
+                            <td>Next-Level Questions</td>
+                            <td>{len(next_level_questions)}</td>
+                        </tr>
+                        <tr>
+                            <td>Behavioral Questions</td>
+                            <td>{len(behavioral_questions)}</td>
+                        </tr>
+                        <tr>
+                            <td>LLM-Generated Questions</td>
+                            <td>{len([q for q in summary.values() if q.get("is_llm_generated", False)])}</td>
+                        </tr>
+                        <tr>
+                            <td>Fallback Questions</td>
+                            <td>{len([q for q in summary.values() if q.get("is_fallback", False)])}</td>
+                        </tr>
+                    </table>
+                </div>
+            """
+            
+            # Function to generate a table for a question set
+            def generate_question_table(title, questions):
+                if not questions:
+                    return f"<div class='section'><h2>{title}</h2><p>No questions in this category.</p></div>"
+                
+                # Find duplicate questions (by text)
+                text_count = {}
+                for q in questions:
+                    text = q.get("question_text", "")
+                    text_count[text] = text_count.get(text, 0) + 1
+                
+                html = f"""
+                <div class="section">
+                    <h2>{title} ({len(questions)})</h2>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Timestamps</th>
+                            <th>Details</th>
+                        </tr>
+                """
+                
+                for q in questions:
+                    # Calculate time between events
+                    generated_time = None
+                    displayed_time = None
+                    answered_time = None
+                    
+                    if q.get("generated_at"):
+                        generated_time = datetime.fromisoformat(q["generated_at"])
+                    if q.get("displayed_at"):
+                        displayed_time = datetime.fromisoformat(q["displayed_at"])
+                    if q.get("answered_at"):
+                        answered_time = datetime.fromisoformat(q["answered_at"])
+                    
+                    durations = []
+                    if generated_time and displayed_time:
+                        gen_to_display = (displayed_time - generated_time).total_seconds()
+                        durations.append(f"Gen→Display: {gen_to_display:.1f}s")
+                    
+                    if displayed_time and answered_time:
+                        display_to_answer = (answered_time - displayed_time).total_seconds()
+                        durations.append(f"Display→Answer: {display_to_answer:.1f}s")
+                    
+                    # Check if this question text is duplicated
+                    is_duplicated = text_count.get(q.get("question_text", ""), 0) > 1
+                    is_llm = q.get("is_llm_generated", False)
+                    is_fallback = q.get("is_fallback", False)
+                    is_complete = q.get("lifecycle_complete", False)
+                    
+                    # Determine row CSS classes
+                    row_classes = []
+                    if is_duplicated:
+                        row_classes.append("duplicated")
+                    if is_llm:
+                        row_classes.append("llm-generated")
+                    if is_fallback:
+                        row_classes.append("fallback")
+                    if not is_complete:
+                        row_classes.append("lifecycle-incomplete")
+                    
+                    row_class = f"class='{' '.join(row_classes)}'" if row_classes else ""
+                    
+                    # Format the answer value for display
+                    answer_value = q.get("answer_value")
+                    if isinstance(answer_value, list):
+                        answer_display = ", ".join(str(item) for item in answer_value)
+                    elif answer_value is None:
+                        answer_display = "<em>Not answered</em>"
+                    else:
+                        answer_display = str(answer_value)
+                    
+                    html += f"""
+                        <tr {row_class}>
+                            <td>{q["question_id"]}</td>
+                            <td class="question-text">{q["question_text"]}</td>
+                            <td>{answer_display}</td>
+                            <td>
+                                <div class="timestamp">Generated: {q.get("generated_at", "N/A")}</div>
+                                <div class="timestamp">Displayed: {q.get("displayed_at", "N/A")}</div>
+                                <div class="timestamp">Answered: {q.get("answered_at", "N/A")}</div>
+                                <div class="durations">{" | ".join(durations)}</div>
+                            </td>
+                            <td>
+                                <div>Type: {q["question_type"]}</div>
+                                <div>Category: {q["category"]}</div>
+                                <div>LLM Generated: {str(is_llm)}</div>
+                                <div>Fallback: {str(is_fallback)}</div>
+                                <div>Lifecycle Complete: {str(is_complete)}</div>
+                            </td>
+                        </tr>
+                    """
+                
+                html += """
+                    </table>
+                </div>
+                """
+                return html
+            
+            # Generate tables for each question type
+            html_content += generate_question_table("Core Questions", core_questions)
+            html_content += generate_question_table("Goal Questions", goal_questions)
+            html_content += generate_question_table("Next-Level Questions", next_level_questions)
+            html_content += generate_question_table("Behavioral Questions", behavioral_questions)
+            html_content += generate_question_table("Other Questions", other_questions)
+            
+            # Finish the HTML document
+            html_content += """
+            </body>
+            </html>
+            """
+            
+            # Write to file
+            with open(html_path, 'w') as f:
+                f.write(html_content)
+                
+            logging.info(f"Generated HTML question report for profile {profile_id}: {html_path}")
+            
+        except Exception as e:
+            logging.error(f"Error generating HTML question report for profile {profile_id}: {str(e)}")
 
 class QuestionService:
     """
@@ -31,6 +395,9 @@ class QuestionService:
         # Understanding level calculator
         self.understanding_calculator = ProfileUnderstandingCalculator()
         
+        # Initialize the question logger
+        self.question_logger = QuestionLogger()
+        
         logging.basicConfig(level=logging.INFO)
         
     def get_next_question(self, profile_id):
@@ -55,11 +422,18 @@ class QuestionService:
         # Check for special cases (business owner and real estate value)
         special_case_question = self._check_special_case_questions(profile)
         if special_case_question:
-            logging.info(f"Prioritizing special case question ({special_case_question.get('id')}) in profile {profile_id}")
+            question_id = special_case_question.get('id')
+            logging.info(f"Prioritizing special case question ({question_id}) in profile {profile_id}")
+            # Log the question generation
+            self._log_question_generation(profile_id, special_case_question)
             return special_case_question, profile
             
         # Check for unanswered core questions from repository
         next_core_question = self.question_repository.get_next_question(profile)
+        
+        # Log core question generation if present
+        if next_core_question:
+            self._log_question_generation(profile_id, next_core_question)
         
         # If all core questions are answered, check for goal questions
         if not next_core_question and self._is_ready_for_goals(profile):
@@ -194,6 +568,8 @@ class QuestionService:
                         goal_question['help_text'] = help_text
                 
                 logging.info(f"Presenting goal question to profile {profile_id}: {goal_question.get('id')}")
+                # Log the goal question generation
+                self._log_question_generation(profile_id, goal_question)
                 return goal_question, profile
         
         # If all core questions are answered, check for pending goal questions first
@@ -203,6 +579,8 @@ class QuestionService:
                 goal_question = self._get_goal_question(profile)
                 if goal_question:
                     logging.info(f"Found pending goal question {goal_question.get('id')} for profile {profile_id}")
+                    # Log the goal question generation
+                    self._log_question_generation(profile_id, goal_question)
                     return goal_question, profile
             
             # Count how many next-level questions have been answered
@@ -231,6 +609,8 @@ class QuestionService:
                 # If we have a next-level question, return it
                 if next_level_question:
                     logging.info(f"Presenting next-level question ({next_level_question.get('id')}) to profile {profile_id}")
+                    # Log the next-level question generation
+                    self._log_question_generation(profile_id, next_level_question)
                     return next_level_question, profile
                 
                 # If no next-level questions, check if there are any new goal questions to ask
@@ -238,6 +618,8 @@ class QuestionService:
                     goal_question = self._get_goal_question(profile)
                     if goal_question:
                         logging.info(f"Returning to goal questions after next-level questions for profile {profile_id}")
+                        # Log the goal question generation
+                        self._log_question_generation(profile_id, goal_question)
                         return goal_question, profile
                 
                 # If no next-level or goal questions are available and we've answered enough questions,
@@ -248,6 +630,8 @@ class QuestionService:
                     
                     if behavioral_question:
                         logging.info(f"Presenting behavioral question ({behavioral_question.get('id')}) to profile {profile_id}")
+                        # Log the behavioral question generation
+                        self._log_question_generation(profile_id, behavioral_question)
                         return behavioral_question, profile
         
         return next_core_question, profile
@@ -797,9 +1181,14 @@ class QuestionService:
                 # If we successfully generated new questions, return the first one
                 if filtered_questions and len(filtered_questions) > 0:
                     logging.info(f"Successfully generated new LLM questions, returning first one")
-                    # Cache the rest for later
-                    self.dynamic_questions_cache[profile_id] = filtered_questions
-                    return filtered_questions[0]
+                    first_question = filtered_questions[0]
+                    # Mark this question as already asked to prevent it from being shown again
+                    q_id = first_question.get('id')
+                    if q_id:
+                        self.asked_questions[profile_id].add(q_id)
+                    # Cache the rest (excluding the one we're returning) for later
+                    self.dynamic_questions_cache[profile_id] = filtered_questions[1:]
+                    return first_question
                 else:
                     logging.warning(f"LLM generation returned no questions, falling back to fallback questions")
                     
@@ -829,7 +1218,53 @@ class QuestionService:
                 logging.info(f"Created emergency fallback question with ID: {emergency_q['id']}")
                 return emergency_q
         
-        # Check if we already have cached questions for this profile
+        # Determine if it's time to regenerate questions
+        # Count next-level questions already asked to determine if we should regenerate
+        next_level_question_count = 0
+        for q_id in answered_ids:
+            if (q_id.startswith("next_level_") or 
+                q_id.startswith("llm_next_level_") or 
+                q_id.startswith("gen_question_") or 
+                q_id.startswith("fallback_")) and not q_id.endswith("_insights"):
+                next_level_question_count += 1
+        
+        # Force regeneration every 3 questions to ensure questions consider new answers
+        regeneration_frequency = 3
+        force_regeneration = next_level_question_count > 0 and next_level_question_count % regeneration_frequency == 0
+        
+        if force_regeneration:
+            logging.info(f"Forcing LLM question regeneration after {next_level_question_count} next-level questions")
+            # Generate new questions based on the updated profile with all latest answers
+            new_questions = self._generate_next_level_questions(profile)
+            
+            # Initialize tracking dictionary if it doesn't exist
+            if not hasattr(self, 'asked_questions'):
+                self.asked_questions = {}
+                
+            # Initialize set for this profile if it doesn't exist
+            if profile_id not in self.asked_questions:
+                self.asked_questions[profile_id] = set()
+            
+            # Get previously asked questions for this profile
+            previously_asked = self.asked_questions.get(profile_id, set())
+            
+            # Filter out questions that are similar to previously asked ones
+            filtered_questions = self._filter_similar_questions(new_questions, previously_asked, answered_ids)
+            
+            # If we successfully generated new questions, return the first one
+            if filtered_questions and len(filtered_questions) > 0:
+                logging.info(f"Returning newly regenerated question after recent answers")
+                first_question = filtered_questions[0]
+                # Mark this question as already asked to prevent it from being shown again
+                q_id = first_question.get('id')
+                if q_id:
+                    self.asked_questions[profile_id].add(q_id)
+                # Store the rest (excluding the one we're returning) for later
+                max_cache_size = 3  # Only keep 3 questions in cache to force regeneration soon
+                self.dynamic_questions_cache[profile_id] = filtered_questions[1:max_cache_size+1]
+                return first_question
+        
+        # If not regenerating, check if we already have cached questions for this profile
         cached_questions = self.dynamic_questions_cache.get(profile_id, [])
         
         # Initialize tracking dictionary if it doesn't exist
@@ -857,7 +1292,14 @@ class QuestionService:
         # If we still have unanswered cached questions, return the first one
         if unanswered_questions and len(unanswered_questions) > 0:
             logging.info(f"Returning cached unanswered question for profile {profile_id}")
-            return unanswered_questions[0]
+            first_question = unanswered_questions[0]
+            # Mark this question as already asked to prevent it from being shown again
+            q_id = first_question.get('id')
+            if q_id:
+                self.asked_questions[profile_id].add(q_id)
+            # Update the cache to remove the question we're returning
+            self.dynamic_questions_cache[profile_id] = [q for q in cached_questions if q.get('id') != q_id]
+            return first_question
         
         # Check if we've reached a reasonable completion state (e.g., X questions answered)
         question_count = len(answered_ids)
@@ -879,13 +1321,21 @@ class QuestionService:
         # Filter out questions that are similar to previously asked ones
         filtered_questions = self._filter_similar_questions(new_questions, previously_asked, answered_ids)
         
-        # Cache the new questions
-        self.dynamic_questions_cache[profile_id] = filtered_questions
+        # Cache the new questions - we'll update this below when returning a question
         
         # Return the first new question if available
         if filtered_questions and len(filtered_questions) > 0:
             logging.info(f"Returning newly generated question for profile {profile_id}")
-            return filtered_questions[0]
+            first_question = filtered_questions[0]
+            # Mark this question as already asked to prevent it from being shown again
+            q_id = first_question.get('id')
+            if q_id:
+                self.asked_questions[profile_id].add(q_id)
+            # Store the rest (excluding the one we're returning) for later
+            # Only cache a few questions to ensure we regenerate frequently
+            max_cache_size = 3  # Only keep 3 questions in cache to force regeneration soon
+            self.dynamic_questions_cache[profile_id] = filtered_questions[1:max_cache_size+1]
+            return first_question
         
         # If we need more next-level questions and can't generate them,
         # try to use fallback questions directly
@@ -906,6 +1356,9 @@ class QuestionService:
                         question_copy = fallback_q.copy()
                         question_copy["id"] = unique_id
                         question_copy["question_id"] = unique_id
+                        
+                        # Mark this question as already asked to prevent it from being shown again
+                        self.asked_questions[profile_id].add(unique_id)
                         
                         logging.info(f"Using fallback question for category {category}: {unique_id}")
                         return question_copy
@@ -1250,12 +1703,39 @@ class QuestionService:
                     duplicate_content_count += 1
                     continue
                     
-                # Check for high similarity with existing questions (simple substring check)
+                # Special handling for investment allocation questions - these are particularly problematic
+                investment_patterns = [
+                    "savings are distributed", 
+                    "savings are allocated", 
+                    "how your savings are",
+                    "investment allocation",
+                    "portfolio allocation",
+                    "asset allocation"
+                ]
+                
+                # If this is an investment allocation question, check for other similar ones
+                is_investment_q = any(pattern in q_text.lower() for pattern in investment_patterns)
+                if is_investment_q:
+                    for existing_text in all_question_texts:
+                        # If the existing text is also an investment allocation question, filter this one
+                        if any(pattern in existing_text.lower() for pattern in investment_patterns):
+                            logging.info(f"⚠️ Filtering out investment allocation question: {q_text[:50]}...")
+                            duplicate_content_count += 1
+                            similar_found = True
+                            break
+                            
+                    # If we found a similar investment question, skip to the next question
+                    if similar_found:
+                        continue
+                    
+                # Check for high similarity with existing questions
                 similar_found = False
                 for existing_text in all_question_texts:
-                    # Calculate Jaccard similarity for overlap detection
-                    if self._calculate_text_similarity(q_text, existing_text) > 0.7:
-                        logging.info(f"⚠️ Filtering out similar question: {q_text[:50]}...")
+                    # Calculate improved similarity for overlap detection
+                    similarity = self._calculate_text_similarity(q_text, existing_text)
+                    # Lower the threshold from 0.7 to 0.6 for broader matching
+                    if similarity > 0.6:
+                        logging.info(f"⚠️ Filtering out similar question (similarity: {similarity:.2f}): {q_text[:50]}...")
                         duplicate_content_count += 1
                         similar_found = True
                         break
@@ -1287,7 +1767,7 @@ class QuestionService:
         
     def _calculate_text_similarity(self, text1, text2):
         """
-        Calculate similarity between two text strings using Jaccard similarity.
+        Calculate similarity between two text strings using improved methods.
         
         Args:
             text1 (str): First text
@@ -1296,9 +1776,22 @@ class QuestionService:
         Returns:
             float: Similarity score between 0-1
         """
-        # Use simple word-based Jaccard similarity
-        words1 = set(text1.split())
-        words2 = set(text2.split())
+        # First check for exact match after normalization
+        normalized_text1 = ' '.join(text1.lower().split())
+        normalized_text2 = ' '.join(text2.lower().split())
+        
+        if normalized_text1 == normalized_text2:
+            return 1.0  # Exact match after normalization
+            
+        # Check if one text contains another significantly
+        if len(normalized_text1) > 20 and len(normalized_text2) > 20:
+            # If one text is almost fully contained in the other, consider it similar
+            if normalized_text1 in normalized_text2 or normalized_text2 in normalized_text1:
+                return 0.95  # Very high similarity for contained text
+        
+        # Use simple word-based Jaccard similarity as a fallback
+        words1 = set(normalized_text1.split())
+        words2 = set(normalized_text2.split())
         
         # Avoid division by zero
         if not words1 or not words2:
@@ -1308,7 +1801,22 @@ class QuestionService:
         intersection = words1.intersection(words2)
         union = words1.union(words2)
         
-        return len(intersection) / len(union)
+        jaccard = len(intersection) / len(union)
+        
+        # Check for common keywords that indicate similar questions
+        investment_keywords = [
+            'savings', 'allocated', 'investment', 'portfolio', 'asset', 'distribution', 
+            'accounts', 'equity', 'fixed deposit', 'mutual funds', 'stocks'
+        ]
+        
+        # Count common financial keywords in both texts
+        keyword_matches = sum(1 for kw in investment_keywords if kw in normalized_text1 and kw in normalized_text2)
+        
+        # If we have multiple financial keywords in common, boost the similarity score
+        if keyword_matches >= 3:
+            jaccard = max(jaccard, 0.8)  # Ensure at least 0.8 similarity for financial question matches
+            
+        return jaccard
         
     # Fallback questions for each category if LLM generation fails
     FALLBACK_QUESTIONS = {
@@ -1531,6 +2039,10 @@ class QuestionService:
                     
                 # Extra safety - log the final IDs
                 logging.info(f"✓ Final question IDs: id={q['id']}, question_id={q['question_id']}")
+                
+                # Log each question generation
+                profile_id = profile.get('id')
+                self._log_question_generation(profile_id, q)
             
             all_generated_questions.extend(questions)
             logging.info(f"Added {len(questions)} next-level questions for category {category}")
@@ -1672,7 +2184,35 @@ class QuestionService:
                 if profile_id in self.dynamic_questions_cache:
                     cache_ids = [q.get('id') for q in self.dynamic_questions_cache[profile_id]]
                     logging.error(f"❌ Questions in cache for profile {profile_id}: {cache_ids}")
-                return False, {"error": f"Question not found: {question_id}"}
+                    
+                # Emergency recovery: Create a placeholder question on demand to handle the answer
+                # This ensures we don't lose user responses even if there's a cache/tracking issue
+                if question_id and (question_id.startswith("llm_next_level_") or 
+                                   question_id.startswith("gen_question_") or 
+                                   question_id.startswith("fallback_")):
+                    logging.info(f"🚨 EMERGENCY RECOVERY: Creating placeholder for missing question {question_id}")
+                    
+                    # Extract category from question ID if possible
+                    category = "unknown"
+                    for cat in ["demographics", "financial_basics", "assets_and_debts", "special_cases"]:
+                        if cat in question_id:
+                            category = cat
+                            break
+                            
+                    # Create a placeholder question to accept the answer
+                    question = {
+                        'id': question_id,
+                        'question_id': question_id,
+                        'type': 'next_level',
+                        'category': category,
+                        'text': "Question not found in cache - placeholder created to save your answer",
+                        'input_type': 'text',
+                        'required': False,
+                        'is_recovered': True  # Mark as recovered for tracking
+                    }
+                    is_dynamic_question = True
+                else:
+                    return False, {"error": f"Question not found: {question_id}"}
             
             # Log question details for debugging
             logging.info(f"Question details: type={question.get('type')}, category={question.get('category')}, input_type={question.get('input_type')}")
@@ -2144,6 +2684,22 @@ class QuestionService:
             cached_q_ids = [q.get('id') for q in self.dynamic_questions_cache[profile_id]]
             logging.info(f"Dynamic questions available in cache for profile {profile_id}: {cached_q_ids}")
         
+    def _log_question_generation(self, profile_id, question):
+        """
+        Log when a question is generated.
+        
+        Args:
+            profile_id: The profile ID
+            question: The question definition
+        """
+        question_id = question.get('id')
+        if not question_id:
+            return
+            
+        # Log the question generation
+        self.question_logger.log_question_generated(profile_id, question_id, question)
+        logging.info(f"Logged generation of question {question_id} for profile {profile_id}")
+
     def _use_fallback_next_level_question(self, profile_id):
         """
         Generate and provide a fallback next-level question for profiles that need more
@@ -2252,6 +2808,9 @@ class QuestionService:
             # Also add the base ID to our tracking to prevent duplicates in same session
             self.asked_questions[profile_id].add(unique_id)
             
+            # Log the question generation
+            self._log_question_generation(profile_id, question_copy)
+            
             logging.info(f"Added fallback question for category {category} to cache: {unique_id}")
             return True
                     
@@ -2278,6 +2837,9 @@ class QuestionService:
             
             # Also add to our tracking to prevent duplicates in same session
             self.asked_questions[profile_id].add(extra_q["id"])
+            
+            # Log the question generation
+            self._log_question_generation(profile_id, extra_q)
             
             logging.info(f"Added extra fallback question to cache: {extra_q['id']}")
             return True

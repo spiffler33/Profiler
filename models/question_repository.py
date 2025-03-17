@@ -1012,6 +1012,9 @@ class QuestionRepository:
             raise ValueError("Question must have an id")
         
         self.questions[question['id']] = question
+        
+        # If there's a question logger in the QuestionService, it will log these repository questions
+        # when they are actually selected for display to the user
     
     def get_question(self, question_id):
         """
