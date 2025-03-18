@@ -195,9 +195,13 @@ class LLMService:
             
             Focus on questions that would reveal:
             - Savings allocation and strategy
-            - Discretionary vs. essential expenses
-            - Financial goals and priorities
             - Income stability and potential
+            - Spending patterns and financial habits
+            - Short-term financial management
+            
+            IMPORTANT: 
+            - DO NOT generate questions about essential vs. discretionary expense percentages as this is already covered elsewhere.
+            - DO NOT generate questions about financial goals, long-term plans, or savings targets as these are covered in the goals section.
             
             Format your response as a JSON array of objects with the following structure:
             [
@@ -222,8 +226,10 @@ class LLMService:
             Focus on questions that would reveal:
             - Debt strategy and prioritization
             - Asset liquidity and accessibility
-            - Future plans for major assets
             - Risk exposure in asset portfolio
+            - Current management of existing assets
+            
+            IMPORTANT: DO NOT generate questions about plans to acquire major assets like real estate or vehicles, as these are already covered in the goals section.
             
             Format your response as a JSON array of objects with the following structure:
             [
@@ -405,7 +411,9 @@ class LLMService:
         self, 
         category: str, 
         core_answers: Dict[str, Any],
-        max_questions: int = 2
+        max_questions: int = 2,
+        existing_question_ids: List[str] = None,
+        profile: Dict[str, Any] = None
     ) -> List[Dict[str, Any]]:
         """
         Generate next-level questions based on core answers for a specific category.
@@ -414,6 +422,8 @@ class LLMService:
             category: Category to generate questions for (demographics, financial_basics, etc.)
             core_answers: Dictionary of core answers with question_id as keys
             max_questions: Maximum number of questions to generate
+            existing_question_ids: List of question IDs that have already been asked or are in the repository
+            profile: User profile data to check for completed sections (like goals)
             
         Returns:
             List of question definitions in dictionary format
@@ -426,6 +436,10 @@ class LLMService:
         if not self.enabled:
             logging.warning("LLM service is disabled. Returning empty question list.")
             return []
+        
+        # Initialize existing questions if None
+        if existing_question_ids is None:
+            existing_question_ids = []
         
         # Format core answers for the prompt
         formatted_answers = []
@@ -440,8 +454,50 @@ class LLMService:
             logging.error(f"No prompt template found for category: {category}")
             return []
         
+        # Create context about existing questions
+        existing_questions_context = ""
+        if existing_question_ids:
+            existing_questions_context = f"\nIMPORTANT: The following questions have already been asked or are in the repository, so avoid generating similar questions:\n- " + "\n- ".join(existing_question_ids)
+            logging.info(f"Added context about {len(existing_question_ids)} existing questions")
+        
+        # Check if goals section has been completed
+        goals_completed = False
+        goals_context = ""
+        if profile is not None:
+            answers = profile.get('answers', [])
+            goal_answers = [a for a in answers if a.get('question_id', '').startswith('goals_')]
+            if any(a.get('question_id') == 'goals_other_categories' for a in goal_answers):
+                goals_completed = True
+                # Extract the actual goals the user selected
+                for a in goal_answers:
+                    if a.get('question_id') == 'goals_other_categories':
+                        selected_goals = a.get('answer', [])
+                        if selected_goals and isinstance(selected_goals, list):
+                            goals_context = f"\nIMPORTANT: The user has already completed the goals section and selected the following goals: {', '.join(selected_goals)}.\nDO NOT generate questions about financial goals, savings goals, or future financial plans that would overlap with these existing goals."
+                        else:
+                            goals_context = "\nIMPORTANT: The user has already completed the goals section. DO NOT generate questions about financial goals, savings goals, or future financial plans."
+                        logging.info("Added context about completed goals section")
+                        break
+        
         # Fill in the template
         prompt = self.prompt_templates[template_key].replace("{{core_answers}}", answers_text)
+        
+        # Add context to the prompt
+        additional_context = ""
+        if existing_questions_context:
+            additional_context += existing_questions_context
+        if goals_context:
+            additional_context += goals_context
+            
+        if additional_context:
+            # Find the position to insert the context - before the Format section
+            format_section = "Format your response as a JSON array"
+            if format_section in prompt:
+                parts = prompt.split(format_section, 1)
+                prompt = parts[0] + additional_context + "\n\n" + format_section + parts[1]
+            else:
+                # If we can't find the format section, append to the end
+                prompt += additional_context
         
         try:
             # Call the LLM API
@@ -521,7 +577,7 @@ class LLMService:
                     break
                 question_subset.append(q)
             
-            # Validate questions
+            # Validate questions and filter out any too similar to existing ones
             valid_questions = []
             for i, q in enumerate(question_subset):
                 # Generate a consistent question_id if one wasn't provided
@@ -537,9 +593,56 @@ class LLMService:
                 if "id" not in q:
                     q["id"] = q["question_id"]
                 
-                valid_questions.append(q)
+                # Check if this question is too similar to existing questions
+                question_text = q.get("text", "").lower()
+                skip_question = False
                 
-            logging.info(f"Generated {len(valid_questions)} next-level questions for category {category}")
+                # Keywords that indicate potential redundancy
+                redundancy_keywords = {
+                    "essential": ["discretionary", "percentage", "expenses"],
+                    "plans to": ["acquire", "major assets", "real estate", "vehicle", "property"],
+                    "vehicle": ["purchase", "buy", "car", "automobile"],
+                    "discretionary": ["essential", "percentage", "expenses"],
+                    "property": ["purchase", "buy", "real estate", "home"],
+                    "financial goals": ["primary", "next 5", "future", "priorities"],
+                    "goals": ["financial", "saving", "investment", "planning", "future"],
+                    "saving for": ["future", "goals", "plans", "aim"],
+                    "future plans": ["financial", "money", "invest", "save"]
+                }
+                
+                # Check for combinations of redundancy keywords
+                for primary_keyword, related_keywords in redundancy_keywords.items():
+                    if primary_keyword in question_text:
+                        if any(related in question_text for related in related_keywords):
+                            logging.warning(f"Skipping potentially redundant question based on keywords: {question_text}")
+                            skip_question = True
+                            break
+                
+                # Additional check for goal-related questions if goals have been completed
+                if not skip_question and goals_completed:
+                    goal_related_terms = [
+                        "financial goal", "saving goal", "investment goal", "future plan", 
+                        "retirement", "education fund", "home purchase", "financial priority", 
+                        "what are your goals", "primary objective", "financial objective"
+                    ]
+                    if any(term in question_text for term in goal_related_terms):
+                        logging.warning(f"Skipping goal-related question since goals section is complete: {question_text}")
+                        skip_question = True
+                
+                if not skip_question and existing_question_ids:
+                    # Basic similarity check with existing questions
+                    for q_id in existing_question_ids:
+                        if q_id in question_text or question_text in q_id:
+                            logging.warning(f"Skipping question similar to existing ID {q_id}: {question_text}")
+                            skip_question = True
+                            break
+                
+                if not skip_question:
+                    valid_questions.append(q)
+            
+            filtered_count = len(question_subset) - len(valid_questions)
+            logging.info(f"Generated {len(valid_questions)} next-level questions for category {category}" + 
+                         (f" (filtered out {filtered_count} redundant ones)" if filtered_count > 0 else ""))
             return valid_questions
             
         except Exception as e:
@@ -567,7 +670,26 @@ class LLMService:
         """
         if not self.enabled:
             logging.warning("LLM service is disabled. Returning comprehensive fallback insights structure.")
-            # Return a more comprehensive fallback structure with all expected fields
+            
+            # If this is a behavioral question, return a behavioral-specific fallback structure
+            if behavioral_trait:
+                logging.info(f"Creating default behavioral insights structure for trait: {behavioral_trait}")
+                return {
+                    "raw_answer": answer,
+                    "question": question,
+                    "behavioral_indicators": {
+                        behavioral_trait: 6.0  # Default middle value 
+                    },
+                    "behavioral_strengths": [f"Awareness of {behavioral_trait}"],
+                    "behavioral_challenges": [f"Managing {behavioral_trait} consistently"],
+                    "behavioral_summary": f"You show awareness of how {behavioral_trait} affects your financial decisions.",
+                    "confidence_score": 0.5,
+                    "primary_bias": behavioral_trait,
+                    "insight_id": str(uuid.uuid4()),
+                    "timestamp": datetime.now().isoformat()
+                }
+            
+            # Otherwise return a more comprehensive fallback structure with all expected fields
             return {
                 "raw_answer": answer,
                 "question": question,
@@ -728,6 +850,21 @@ class LLMService:
             valid_types = self.insight_schema["investment_profile_type"]["options"]
             if insights["investment_profile_type"] in valid_types:
                 validated["investment_profile_type"] = insights["investment_profile_type"]
+        
+        # Validate behavioral strengths and challenges
+        if "behavioral_strengths" in insights and isinstance(insights["behavioral_strengths"], list):
+            validated["behavioral_strengths"] = insights["behavioral_strengths"][:3]  # Limit to top 3
+        
+        if "behavioral_challenges" in insights and isinstance(insights["behavioral_challenges"], list):
+            validated["behavioral_challenges"] = insights["behavioral_challenges"][:3]  # Limit to top 3
+            
+        # Validate behavioral summary
+        if "behavioral_summary" in insights and isinstance(insights["behavioral_summary"], str):
+            validated["behavioral_summary"] = insights["behavioral_summary"]
+            
+        # Validate primary bias
+        if "primary_bias" in insights:
+            validated["primary_bias"] = insights["primary_bias"]
         
         # Validate confidence score
         if "confidence_score" in insights and isinstance(insights["confidence_score"], (int, float)):
