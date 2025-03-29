@@ -1,0 +1,762 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit' if action == 'edit' else 'Create' }} Financial Goal{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Goal probability styling */
+    .probability-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    @media (min-width: 768px) {
+        .probability-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    .probability-overview {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.25rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .probability-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .probability-header h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #333;
+    }
+    
+    .probability-value-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .probability-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0d6efd;
+    }
+    
+    .probability-loading {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+    }
+    
+    .probability-spinner {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #0d6efd;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .probability-bar-container {
+        margin-bottom: 1rem;
+    }
+    
+    .probability-bar {
+        height: 12px;
+        background-color: #e9ecef;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 0.25rem;
+    }
+    
+    .probability-bar-fill {
+        height: 100%;
+        background-color: #0d6efd;
+        border-radius: 6px;
+        transition: width 0.5s ease-out;
+    }
+    
+    .probability-range {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+    
+    .probability-status {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #495057;
+    }
+    
+    .probability-adjustments {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.25rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .probability-adjustments h4 {
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+        color: #333;
+    }
+    
+    .adjustment-impacts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .adjustment-impact-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    
+    .adjustment-label {
+        font-size: 0.9rem;
+    }
+    
+    .adjustment-impact {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    
+    .adjustment-impact.positive {
+        color: #198754;
+    }
+    
+    .adjustment-impact.negative {
+        color: #dc3545;
+    }
+    
+    .adjustment-explanation {
+        font-size: 0.85rem;
+        color: #6c757d;
+        line-height: 1.4;
+    }
+    
+    .react-component-mount {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        padding: 1rem;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+    
+    /* Hide react mount point if empty */
+    .react-component-mount:empty {
+        display: none;
+    }
+    
+    .hidden {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="goal-form-container">
+    <div class="goal-form-header">
+        <h2>{{ 'Edit' if action == 'edit' else 'Create' }} Financial Goal</h2>
+        <p>Set clear targets and track your progress towards financial success.</p>
+    </div>
+    
+    <form id="goal-form" method="post" action="{{ url_for('edit_goal', goal_id=goal.id) if action == 'edit' and goal else url_for('create_goal') }}">
+        <!-- Basic Information Section -->
+        <div class="goal-form-section">
+            <h3 class="section-title">Basic Information</h3>
+            
+            <div class="form-group">
+                <label for="title">Goal Title</label>
+                <input type="text" id="title" name="title" class="form-control" required
+                       value="{{ goal.title if action == 'edit' and goal else '' }}">
+                <span class="form-help-text">Give your goal a clear, specific name</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Goal Category</label>
+                <select id="category" name="category" class="form-control" required>
+                    <option value="">Select a category</option>
+                    
+                    <!-- Security category group -->
+                    <optgroup label="Security (Foundation)">
+                        <option value="emergency_fund" {{ 'selected' if action == 'edit' and goal and goal.category == 'emergency_fund' else '' }}>
+                            Emergency Fund
+                        </option>
+                        <option value="health_insurance" {{ 'selected' if action == 'edit' and goal and goal.category == 'health_insurance' else '' }}>
+                            Health Insurance
+                        </option>
+                        <option value="life_insurance" {{ 'selected' if action == 'edit' and goal and goal.category == 'life_insurance' else '' }}>
+                            Life Insurance
+                        </option>
+                    </optgroup>
+                    
+                    <!-- Essential category group -->
+                    <optgroup label="Essential">
+                        <option value="home_purchase" {{ 'selected' if action == 'edit' and goal and goal.category == 'home_purchase' else '' }}>
+                            Home Purchase
+                        </option>
+                        <option value="education" {{ 'selected' if action == 'edit' and goal and goal.category == 'education' else '' }}>
+                            Education
+                        </option>
+                        <option value="debt_repayment" {{ 'selected' if action == 'edit' and goal and goal.category == 'debt_repayment' else '' }}>
+                            Debt Repayment
+                        </option>
+                        <option value="debt_elimination" {{ 'selected' if action == 'edit' and goal and goal.category == 'debt_elimination' else '' }}>
+                            Debt Elimination
+                        </option>
+                    </optgroup>
+                    
+                    <!-- Retirement category group -->
+                    <optgroup label="Retirement">
+                        <option value="traditional_retirement" {{ 'selected' if action == 'edit' and goal and goal.category == 'traditional_retirement' else '' }}>
+                            Traditional Retirement
+                        </option>
+                        <option value="early_retirement" {{ 'selected' if action == 'edit' and goal and goal.category == 'early_retirement' else '' }}>
+                            Early Retirement
+                        </option>
+                    </optgroup>
+                    
+                    <!-- Lifestyle category group -->
+                    <optgroup label="Lifestyle">
+                        <option value="travel" {{ 'selected' if action == 'edit' and goal and goal.category == 'travel' else '' }}>
+                            Travel
+                        </option>
+                        <option value="vehicle" {{ 'selected' if action == 'edit' and goal and goal.category == 'vehicle' else '' }}>
+                            Vehicle
+                        </option>
+                        <option value="home_improvement" {{ 'selected' if action == 'edit' and goal and goal.category == 'home_improvement' else '' }}>
+                            Home Improvement
+                        </option>
+                    </optgroup>
+                    
+                    <!-- Legacy category group -->
+                    <optgroup label="Legacy">
+                        <option value="estate_planning" {{ 'selected' if action == 'edit' and goal and goal.category == 'estate_planning' else '' }}>
+                            Estate Planning
+                        </option>
+                        <option value="charitable_giving" {{ 'selected' if action == 'edit' and goal and goal.category == 'charitable_giving' else '' }}>
+                            Charitable Giving
+                        </option>
+                    </optgroup>
+                    
+                    <!-- Custom category -->
+                    <optgroup label="Other">
+                        <option value="custom" {{ 'selected' if action == 'edit' and goal and goal.category == 'custom' else '' }}>
+                            Custom Goal
+                        </option>
+                    </optgroup>
+                </select>
+                <span class="form-help-text">Different categories have specialized calculations and advice</span>
+            </div>
+            
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="target_amount">Target Amount (₹)</label>
+                    <input type="number" id="target_amount" name="target_amount" class="form-control" required min="0" step="0.01"
+                           value="{{ goal.target_amount if action == 'edit' and goal else '' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="current_amount">Current Amount (₹)</label>
+                    <input type="number" id="current_amount" name="current_amount" class="form-control" min="0" step="0.01"
+                           value="{{ goal.current_amount if action == 'edit' and goal else '0' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="timeframe">Target Date</label>
+                    <input type="date" id="timeframe" name="timeframe" class="form-control" required
+                           value="{{ goal.timeframe|replace('T', ' ')|truncate(10, True, '') if action == 'edit' and goal and goal.timeframe else '' }}">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category-specific sections -->
+        <div id="emergency-fund-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Emergency Fund Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="emergency_fund_months">Months of Expenses</label>
+                    <input type="number" id="emergency_fund_months" name="emergency_fund_months" class="form-control" min="1" max="24" step="0.5"
+                           value="{{ goal.funding_strategy_parsed.months if action == 'edit' and goal and goal.funding_strategy_parsed and goal.funding_strategy_parsed.months else '6' }}">
+                    <span class="form-help-text">Typically 3-6 months recommended</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="monthly_expenses">Monthly Expenses (₹)</label>
+                    <input type="number" id="monthly_expenses" name="monthly_expenses" class="form-control" min="0" step="0.01"
+                           value="{{ goal.funding_strategy_parsed.monthly_expenses if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.monthly_expenses else '' }}">
+                    <span class="form-help-text">Your typical monthly expenses</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="retirement-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Retirement Planning Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="retirement_age">Retirement Age</label>
+                    <input type="number" id="retirement_age" name="retirement_age" class="form-control" min="30" max="90" step="1"
+                           value="{{ goal.funding_strategy_parsed.retirement_age if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.retirement_age else '65' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdrawal_rate">Withdrawal Rate (%)</label>
+                    <input type="number" id="withdrawal_rate" name="withdrawal_rate" class="form-control" min="0.01" max="10" step="0.01"
+                           value="{{ goal.funding_strategy_parsed.withdrawal_rate * 100 if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.withdrawal_rate else '4' }}">
+                    <span class="form-help-text">Typically 4% (traditional) or 3-3.5% (early retirement)</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearly_expenses">Annual Expenses in Retirement (₹)</label>
+                    <input type="number" id="yearly_expenses" name="yearly_expenses" class="form-control" min="0" step="100"
+                           value="{{ goal.funding_strategy_parsed.yearly_expenses if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.yearly_expenses else '' }}">
+                </div>
+            </div>
+        </div>
+        
+        <div id="early_retirement-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Early Retirement Planning Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="retirement_age">Early Retirement Age</label>
+                    <input type="number" id="retirement_age" name="retirement_age" class="form-control" min="30" max="60" step="1"
+                           value="{{ goal.funding_strategy_parsed.retirement_age if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.retirement_age else '45' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdrawal_rate">Safe Withdrawal Rate (%)</label>
+                    <input type="number" id="withdrawal_rate" name="withdrawal_rate" class="form-control" min="0.01" max="5" step="0.01"
+                           value="{{ goal.funding_strategy_parsed.withdrawal_rate * 100 if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.withdrawal_rate else '3.5' }}">
+                    <span class="form-help-text">Conservative rate recommended for early retirement</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearly_expenses">Annual Expenses in Retirement (₹)</label>
+                    <input type="number" id="yearly_expenses" name="yearly_expenses" class="form-control" min="0" step="100"
+                           value="{{ goal.funding_strategy_parsed.yearly_expenses if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.yearly_expenses else '' }}">
+                </div>
+            </div>
+        </div>
+        
+        <div id="traditional_retirement-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Traditional Retirement Planning Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="retirement_age">Retirement Age</label>
+                    <input type="number" id="retirement_age" name="retirement_age" class="form-control" min="55" max="90" step="1"
+                           value="{{ goal.funding_strategy_parsed.retirement_age if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.retirement_age else '65' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdrawal_rate">Withdrawal Rate (%)</label>
+                    <input type="number" id="withdrawal_rate" name="withdrawal_rate" class="form-control" min="0.01" max="10" step="0.01"
+                           value="{{ goal.funding_strategy_parsed.withdrawal_rate * 100 if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.withdrawal_rate else '4' }}">
+                    <span class="form-help-text">Typically 4% for traditional retirement</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearly_expenses">Annual Expenses in Retirement (₹)</label>
+                    <input type="number" id="yearly_expenses" name="yearly_expenses" class="form-control" min="0" step="100"
+                           value="{{ goal.funding_strategy_parsed.yearly_expenses if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.yearly_expenses else '' }}">
+                </div>
+            </div>
+        </div>
+        
+        <div id="education-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Education Planning Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="education_type">Education Type</label>
+                    <select id="education_type" name="education_type" class="form-control">
+                        <option value="college" {{ 'selected' if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.education_type == 'college' else '' }}>College/University</option>
+                        <option value="graduate" {{ 'selected' if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.education_type == 'graduate' else '' }}>Graduate School</option>
+                        <option value="professional" {{ 'selected' if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.education_type == 'professional' else '' }}>Professional Certification</option>
+                        <option value="other" {{ 'selected' if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.education_type == 'other' else '' }}>Other Education</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="education_years">Years of Education</label>
+                    <input type="number" id="education_years" name="education_years" class="form-control" min="1" max="10" step="1"
+                           value="{{ goal.funding_strategy_parsed.years if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.years else '4' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearly_cost">Annual Cost (₹)</label>
+                    <input type="number" id="yearly_cost" name="yearly_cost" class="form-control" min="0" step="100"
+                           value="{{ goal.funding_strategy_parsed.yearly_cost if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.yearly_cost else '' }}">
+                </div>
+            </div>
+        </div>
+        
+        <div id="home_purchase-section" class="category-specific-section hidden">
+            <h3 class="category-specific-title">Home Purchase Details</h3>
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="property_value">Property Value (₹)</label>
+                    <input type="number" id="property_value" name="property_value" class="form-control" min="0" step="1000"
+                           value="{{ goal.funding_strategy_parsed.property_value if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.property_value else '' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="down_payment_percent">Down Payment (%)</label>
+                    <input type="number" id="down_payment_percent" name="down_payment_percent" class="form-control" min="1" max="100" step="0.1"
+                           value="{{ goal.funding_strategy_parsed.down_payment_percent * 100 if mode == 'edit' and goal.funding_strategy_parsed and goal.funding_strategy_parsed.down_payment_percent else '20' }}">
+                    <span class="form-help-text">Typically 20% for best rates</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Goal Priority Section -->
+        <div class="goal-form-section">
+            <h3 class="section-title">Goal Priority</h3>
+            
+            <div class="goal-form-grid">
+                <div class="form-group">
+                    <label for="importance">Importance</label>
+                    <select id="importance" name="importance" class="form-control" required>
+                        <option value="high" {{ 'selected' if mode == 'edit' and goal.importance == 'high' else '' }}>High</option>
+                        <option value="medium" {{ 'selected' if mode == 'edit' and goal.importance == 'medium' or not mode == 'edit' else '' }}>Medium</option>
+                        <option value="low" {{ 'selected' if mode == 'edit' and goal.importance == 'low' else '' }}>Low</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="flexibility">Flexibility</label>
+                    <select id="flexibility" name="flexibility" class="form-control" required>
+                        <option value="fixed" {{ 'selected' if mode == 'edit' and goal.flexibility == 'fixed' else '' }}>Fixed (cannot change)</option>
+                        <option value="somewhat_flexible" {{ 'selected' if mode == 'edit' and goal.flexibility == 'somewhat_flexible' or not mode == 'edit' else '' }}>Somewhat Flexible</option>
+                        <option value="very_flexible" {{ 'selected' if mode == 'edit' and goal.flexibility == 'very_flexible' else '' }}>Very Flexible</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Goal Success Probability Section -->
+        <div class="goal-form-section">
+            <h3 class="section-title">Goal Success Probability</h3>
+            <div class="probability-container">
+                <div class="probability-overview">
+                    <div class="probability-header">
+                        <h4>Current Success Probability</h4>
+                        <div class="probability-value-container">
+                            <span id="success-probability-value" class="probability-value">
+                                {% if mode == 'edit' and goal and goal.goal_success_probability is not none %}
+                                  {{ '%.1f'|format(goal.goal_success_probability) }}%
+                                {% else %}
+                                  --%
+                                {% endif %}
+                            </span>
+                            <div class="probability-loading hidden">
+                                <div class="probability-spinner"></div>
+                                <span>Calculating...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="probability-bar-container">
+                        <div class="probability-bar">
+                            <div id="probability-bar-fill" class="probability-bar-fill" 
+                                style="width: {{ goal.goal_success_probability|default(0) if goal and goal.goal_success_probability is not none else 0 }}%"></div>
+                        </div>
+                        <div class="probability-range">
+                            <span>0%</span>
+                            <span>50%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="probability-status">
+                        <div id="probability-status-text" class="probability-status-text">
+                            As you modify your goal parameters, we'll calculate and update the success probability in real-time.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- React Component Container -->
+                <div id="goal-probability-visualizer" 
+                     class="react-component-mount" 
+                     data-goal-id="{{ goal.id if action == 'edit' and goal else '' }}" 
+                     data-goal-target="{{ goal.target_amount if action == 'edit' and goal else '' }}"
+                     data-goal-timeline="{{ goal.timeframe if action == 'edit' and goal else '' }}"
+                     data-goal-probability="{{ goal.goal_success_probability if action == 'edit' and goal and goal.goal_success_probability is not none else '' }}">
+                </div>
+                
+                <div class="probability-adjustments">
+                    <h4>Impact of Adjustments</h4>
+                    <div id="adjustment-impacts" class="adjustment-impacts">
+                        <div class="adjustment-impact-item">
+                            <div class="adjustment-label">Increase Target Amount</div>
+                            <div class="adjustment-impact negative">-5.2%</div>
+                        </div>
+                        <div class="adjustment-impact-item">
+                            <div class="adjustment-label">Extend Timeline</div>
+                            <div class="adjustment-impact positive">+8.3%</div>
+                        </div>
+                        <div class="adjustment-impact-item">
+                            <div class="adjustment-label">Increase Monthly Contribution</div>
+                            <div class="adjustment-impact positive">+12.1%</div>
+                        </div>
+                    </div>
+                    <div class="adjustment-explanation">
+                        This shows how changes to your goal parameters could impact your success probability.
+                        Modify the values above to see real-time updates.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advanced Options (hidden by default) -->
+        <a href="#" id="advanced-toggle" class="advanced-toggle">Show Advanced Options</a>
+        
+        <div id="advanced-options" class="goal-form-section hidden">
+            <h3 class="section-title">Advanced Options</h3>
+            
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" class="form-control" rows="4">{{ goal.notes if mode == 'edit' else '' }}</textarea>
+                <span class="form-help-text">Add any additional details or thoughts about this goal</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="additional_funding_sources">Additional Funding Sources</label>
+                <textarea id="additional_funding_sources" name="additional_funding_sources" class="form-control" rows="3">{{ goal.additional_funding_sources if mode == 'edit' else '' }}</textarea>
+                <span class="form-help-text">List any other sources of funding besides regular savings (gifts, windfalls, etc.)</span>
+            </div>
+        </div>
+        
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="submit" class="btn primary">{{ 'Update Goal' if action == 'edit' else 'Create Goal' }}</button>
+            <a href="{{ url_for('list_goals') }}" class="btn secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Include our visualization services -->
+<script src="{{ url_for('static', filename='js/services/visualizationDataService.js') }}"></script>
+<!-- Include the goal visualization initializer -->
+<script src="{{ url_for('static', filename='js/goal_visualization_initializer.js') }}"></script>
+<!-- Include the goal adjustment handler -->
+<script src="{{ url_for('static', filename='js/goal_adjustment_handler.js') }}"></script>
+<!-- Include the scenario comparison handler -->
+<script src="{{ url_for('static', filename='js/scenario_comparison_handler.js') }}"></script>
+<!-- Include the new probability calculator -->
+<script src="{{ url_for('static', filename='js/goal_form_probability.js') }}"></script>
+<!-- Include the simplified React visualizer component -->
+<script src="{{ url_for('static', filename='js/components/SimpleProbabilityVisualizer.js') }}"></script>
+<!-- Initialize the visualizer -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const visualizerMount = document.getElementById('goal-probability-visualizer');
+  if (visualizerMount && window.React && window.ReactDOM) {
+    // Get data from data attributes
+    const goalId = visualizerMount.dataset.goalId || '';
+    const targetAmount = parseFloat(visualizerMount.dataset.goalTarget) || 0;
+    const currentAmount = parseFloat(document.getElementById('current_amount')?.value) || 0;
+    const timeframe = visualizerMount.dataset.goalTimeline || '';
+    const probability = parseFloat(visualizerMount.dataset.goalProbability) || 0;
+    
+    // Render the simplified React component
+    ReactDOM.render(
+      React.createElement(SimpleProbabilityVisualizer, {
+        goalId: goalId,
+        targetAmount: targetAmount,
+        currentAmount: currentAmount,
+        timeframe: timeframe,
+        successProbability: probability / 100  // Convert from percentage to decimal
+      }),
+      visualizerMount
+    );
+  }
+});
+</script>
+<!-- Add styles for the visualizer -->
+<style>
+  .visualization-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .visualization-header h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .probability-gauge {
+    margin-bottom: 1.5rem;
+  }
+  
+  .gauge-container {
+    width: 100%;
+  }
+  
+  .gauge-value-container {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .gauge-value {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .gauge-value.high-probability {
+    color: #28a745;
+  }
+  
+  .gauge-value.medium-probability {
+    color: #ffc107;
+  }
+  
+  .gauge-value.low-probability {
+    color: #dc3545;
+  }
+  
+  .gauge-bar {
+    height: 12px;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .gauge-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease-out;
+  }
+  
+  .gauge-fill.high-probability {
+    background-color: #28a745;
+  }
+  
+  .gauge-fill.medium-probability {
+    background-color: #ffc107;
+  }
+  
+  .gauge-fill.low-probability {
+    background-color: #dc3545;
+  }
+  
+  .probability-description {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .probability-description p {
+    color: #495057;
+    margin: 0;
+  }
+  
+  .goal-progress-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .goal-progress-container h4 {
+    font-size: 1rem;
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+  
+  .goal-metrics {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  
+  .goal-metric {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .goal-metric:last-child {
+    margin-bottom: 0;
+  }
+  
+  .metric-label {
+    color: #6c757d;
+  }
+  
+  .metric-value {
+    font-weight: 600;
+    color: #212529;
+  }
+  
+  .recommended-adjustments h4 {
+    font-size: 1rem;
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+  
+  .adjustment-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
+  .adjustment-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  
+  .adjustment-item:hover {
+    background-color: #e9ecef;
+  }
+  
+  .adjustment-label {
+    color: #495057;
+  }
+  
+  .adjustment-impact {
+    font-weight: 600;
+  }
+  
+  .adjustment-impact.positive {
+    color: #28a745;
+  }
+  
+  .adjustment-impact.negative {
+    color: #dc3545;
+  }
+</style>
+{% endblock %}
