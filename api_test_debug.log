@@ -1,0 +1,34 @@
+2025-03-24 21:49:00,191 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-24 21:49:00,202 - root - INFO - Goal categories already initialized
+2025-03-24 21:49:00,202 - root - INFO - Database initialized successfully
+2025-03-24 21:49:00,202 - root - INFO - Initialized core questions: 16
+2025-03-24 21:49:00,202 - root - INFO - Initialized next-level questions: 10
+2025-03-24 21:49:00,202 - root - INFO - Initialized behavioral questions: 7
+2025-03-24 21:49:00,202 - root - INFO - Initialized goal questions: 27
+2025-03-24 21:49:00,202 - root - INFO - LLM Service initialized with model: gpt-4o, caching enabled (max 100 entries)
+2025-03-24 21:49:00,202 - root - INFO - LLM service enabled: True, API key length: 164
+2025-03-24 21:49:00,202 - root - INFO - QuestionGenerator initialized
+2025-03-24 21:49:00,204 - services.financial_parameter_service - INFO - Financial Parameter Service initialized
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - Initializing default GoalProbabilityAnalyzer
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - Initializing default GoalAdjustmentRecommender
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - Initializing default GapAnalysis
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - Using default parameter service
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - GoalAdjustmentService initialized
+2025-03-24 21:49:00,205 - services.goal_adjustment_service - INFO - GoalAdjustmentService initialized
+2025-03-24 21:49:00,223 - api_test_fix - INFO - Running test test_04_get_goal_scenarios from GoalProbabilityAPITest
+2025-03-24 21:49:00,223 - tests.api.test_goal_probability_api - INFO - Setting up test environment for goal probability API tests
+2025-03-24 21:49:00,225 - root - INFO - Goal categories already initialized
+2025-03-24 21:49:00,225 - root - INFO - Database initialized successfully
+2025-03-24 21:49:00,225 - tests.api.test_goal_probability_api - INFO - Creating test profile: API Probability Test User 44d938 <api_prob_test_cec1e3@example.com>
+2025-03-24 21:49:00,226 - root - INFO - Created new profile with ID: c74ad9c3-b47b-4736-9316-0c6cd39e60d4
+2025-03-24 21:49:00,227 - root - INFO - Created goal d8afafe1-6d53-4dcb-a1e9-2ee2241a1b18 for profile c74ad9c3-b47b-4736-9316-0c6cd39e60d4
+2025-03-24 21:49:00,228 - root - INFO - Created goal fd06c187-59e5-4d79-8b48-4c41d6548742 for profile c74ad9c3-b47b-4736-9316-0c6cd39e60d4
+2025-03-24 21:49:00,228 - root - INFO - Created goal 4c8059bd-2ad8-4f2b-bcee-564229268038 for profile c74ad9c3-b47b-4736-9316-0c6cd39e60d4
+2025-03-24 21:49:00,228 - tests.api.test_goal_probability_api - INFO - Created test goals - Education: d8afafe1-6d53-4dcb-a1e9-2ee2241a1b18, Retirement: fd06c187-59e5-4d79-8b48-4c41d6548742, Wedding: 4c8059bd-2ad8-4f2b-bcee-564229268038
+2025-03-24 21:49:00,230 - tests.api.test_goal_probability_api - INFO - Testing GET /api/v2/goals/<goal_id>/scenarios
+2025-03-24 21:49:00,232 - tests.api.test_goal_probability_api - INFO - Successfully retrieved goal scenarios
+2025-03-24 21:49:00,232 - tests.api.test_goal_probability_api - INFO - Cleaning up test environment
+2025-03-24 21:49:00,233 - root - INFO - Deleted goal d8afafe1-6d53-4dcb-a1e9-2ee2241a1b18
+2025-03-24 21:49:00,233 - root - INFO - Deleted goal fd06c187-59e5-4d79-8b48-4c41d6548742
+2025-03-24 21:49:00,234 - root - INFO - Deleted goal 4c8059bd-2ad8-4f2b-bcee-564229268038
+2025-03-24 21:49:00,236 - root - INFO - Deleted profile c74ad9c3-b47b-4736-9316-0c6cd39e60d4

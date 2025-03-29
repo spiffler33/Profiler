@@ -1,0 +1,380 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Profiler4{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Sign In</h2>
+      <p>Please enter your credentials to access admin features</p>
+    </div>
+    
+    <div class="login-form">
+      <!-- Session Expired Message -->
+      {% if request.args.get('expired') == '1' %}
+      <div class="alert alert-warning" id="session-expired-message">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Your session has expired. Please log in again to continue.
+      </div>
+      {% endif %}
+      
+      <!-- Authentication Error Message -->
+      <div class="alert alert-danger" id="login-error" style="display: none;">
+        <div class="error-icon">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        </div>
+        <div class="error-content">
+          <div class="error-title">Authentication Error</div>
+          <div class="error-message"></div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Enter username" required 
+          autocomplete="username">
+        <div class="invalid-feedback username-error"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Enter password" required
+          autocomplete="current-password">
+        <div class="invalid-feedback password-error"></div>
+      </div>
+      
+      <div class="form-check">
+        <input type="checkbox" id="remember-me" class="form-check-input">
+        <label for="remember-me" class="form-check-label">Remember me</label>
+      </div>
+      
+      <div class="login-actions">
+        <button id="login-button" class="btn btn-primary btn-block">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+          Sign In
+        </button>
+      </div>
+    </div>
+    
+    <div class="login-footer">
+      <p>
+        <small class="text-muted">
+          Development mode is {% if dev_mode %}enabled{% else %}disabled{% endif %}
+          {% if dev_mode %}
+          <br>
+          <span class="text-success">
+            (Authentication bypass is active)
+          </span>
+          {% endif %}
+        </small>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+  }
+  
+  .login-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+  }
+  
+  .login-header {
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .login-header h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .login-header p {
+    color: #666;
+    margin-bottom: 0;
+  }
+  
+  .login-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .login-actions {
+    margin-top: 25px;
+  }
+  
+  .login-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #login-error {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+  }
+  
+  .error-icon {
+    margin-right: 12px;
+    font-size: 20px;
+  }
+  
+  .error-content {
+    flex: 1;
+  }
+  
+  .error-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  /* Form validation styling */
+  .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
+  
+  .invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+  }
+  
+  .form-control.is-invalid + .invalid-feedback {
+    display: block;
+  }
+  
+  /* Loading state styling */
+  #login-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  .spinner-border {
+    margin-right: 8px;
+  }
+  
+  /* Session expired message styling */
+  #session-expired-message {
+    margin-bottom: 20px;
+  }
+  
+  #session-expired-message i {
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginButton = document.getElementById('login-button');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const rememberMeCheckbox = document.getElementById('remember-me');
+    const loginErrorDiv = document.getElementById('login-error');
+    const loginErrorMessage = loginErrorDiv.querySelector('.error-message');
+    const spinner = loginButton.querySelector('.spinner-border');
+    
+    // Return URL from query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnUrl = urlParams.get('return_to') || '/admin/dashboard';
+    
+    // Focus username field on load
+    usernameInput.focus();
+    
+    // Validate form
+    function validateForm() {
+      let isValid = true;
+      
+      // Reset validation state
+      resetValidationState(usernameInput);
+      resetValidationState(passwordInput);
+      
+      // Validate username
+      if (!usernameInput.value.trim()) {
+        showFieldError(usernameInput, 'Username is required');
+        isValid = false;
+      }
+      
+      // Validate password
+      if (!passwordInput.value.trim()) {
+        showFieldError(passwordInput, 'Password is required');
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+    
+    // Show field error
+    function showFieldError(field, message) {
+      field.classList.add('is-invalid');
+      const feedback = field.nextElementSibling;
+      if (feedback && feedback.classList.contains('invalid-feedback')) {
+        feedback.textContent = message;
+      }
+    }
+    
+    // Reset validation state
+    function resetValidationState(field) {
+      field.classList.remove('is-invalid');
+      const feedback = field.nextElementSibling;
+      if (feedback && feedback.classList.contains('invalid-feedback')) {
+        feedback.textContent = '';
+      }
+    }
+    
+    // Set loading state
+    function setLoadingState(isLoading) {
+      if (isLoading) {
+        loginButton.disabled = true;
+        spinner.style.display = 'inline-block';
+        loginButton.innerHTML = spinner.outerHTML + ' Signing in...';
+      } else {
+        loginButton.disabled = false;
+        spinner.style.display = 'none';
+        loginButton.innerHTML = spinner.outerHTML + ' Sign In';
+      }
+    }
+    
+    // Show error message
+    function showError(message, code) {
+      loginErrorDiv.style.display = 'flex';
+      loginErrorMessage.textContent = message;
+      
+      // Add error code specific styling if needed
+      if (code) {
+        loginErrorDiv.setAttribute('data-error-code', code);
+      } else {
+        loginErrorDiv.removeAttribute('data-error-code');
+      }
+      
+      // Shake animation for error feedback
+      loginErrorDiv.classList.add('shake-animation');
+      setTimeout(() => {
+        loginErrorDiv.classList.remove('shake-animation');
+      }, 500);
+    }
+    
+    // Handle login process
+    async function handleLogin() {
+      // Hide any existing errors
+      loginErrorDiv.style.display = 'none';
+      
+      // Validate form
+      if (!validateForm()) {
+        return;
+      }
+      
+      // Get input values
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+      const rememberMe = rememberMeCheckbox.checked;
+      
+      // Show loading state
+      setLoadingState(true);
+      
+      try {
+        // Check if AuthenticationService is available
+        if (!window.AuthenticationService) {
+          throw new Error('Authentication service not available');
+        }
+        
+        // Attempt login
+        const result = await window.AuthenticationService.login(
+          username, 
+          password, 
+          rememberMe
+        );
+        
+        if (result.success) {
+          // Show success message briefly
+          const successMessage = document.createElement('div');
+          successMessage.className = 'alert alert-success';
+          successMessage.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true"></i> Login successful. Redirecting...';
+          loginErrorDiv.parentNode.insertBefore(successMessage, loginErrorDiv);
+          
+          // Redirect to return URL or dashboard
+          setTimeout(() => {
+            window.location.href = returnUrl;
+          }, 500);
+        } else {
+          // Show error message
+          showError(result.error || 'Login failed. Please check your credentials.', result.errorCode);
+          
+          // Focus the appropriate field based on error
+          if (result.errorCode === 'invalid_credentials') {
+            passwordInput.focus();
+            passwordInput.select();
+          }
+        }
+      } catch (error) {
+        // Handle any unexpected errors
+        console.error('Login error:', error);
+        
+        // Show error message
+        showError('An unexpected error occurred. Please try again.');
+      } finally {
+        // Reset button state
+        setLoadingState(false);
+      }
+    }
+    
+    // Click event for login button
+    loginButton.addEventListener('click', handleLogin);
+    
+    // Also trigger login on Enter key
+    document.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter' && !loginButton.disabled) {
+        event.preventDefault();
+        handleLogin();
+      }
+    });
+    
+    // Input event listeners to clear errors on typing
+    usernameInput.addEventListener('input', function() {
+      resetValidationState(usernameInput);
+      if (loginErrorDiv.style.display !== 'none') {
+        loginErrorDiv.style.display = 'none';
+      }
+    });
+    
+    passwordInput.addEventListener('input', function() {
+      resetValidationState(passwordInput);
+      if (loginErrorDiv.style.display !== 'none') {
+        loginErrorDiv.style.display = 'none';
+      }
+    });
+    
+    // Add shake animation style
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+      
+      .shake-animation {
+        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+      }
+    `;
+    document.head.appendChild(style);
+  });
+</script>
+{% endblock %}

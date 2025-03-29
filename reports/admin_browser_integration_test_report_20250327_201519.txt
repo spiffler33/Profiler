@@ -1,0 +1,49 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:15:19
+
+**NOTE: Tests were run using a mock WebDriver implementation.**
+Some tests may be marked as SKIPPED when run with mock driver.
+
+## Summary
+
+Total Tests: 13
+Passed: 5
+Failed: 6
+Skipped: 2
+Pass Percentage: 45.5% (excluding skipped tests)
+
+## Health Component
+
+Tests: 7, Passed: 1, Failed: 5, Skipped: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| SH-01 | Dashboard Loading | SKIP |  |
+| SH-02 | Service Status Indicators | PASS |  |
+| SH-03 | System Metrics Display | FAIL |  |
+| SH-04 | Alerts Section | FAIL |  |
+| SH-05 | Historical Data Charts | FAIL |  |
+| SH-06 | Time Range Selection | FAIL |  |
+| SH-07 | Auto-Refresh Functionality | FAIL |  |
+
+## Cache Component
+
+Tests: 5, Passed: 4, Failed: 1, Skipped: 0
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| CM-01 | Cache Overview Loading | FAIL |  |
+| CM-02 | Cache Statistics Display | PASS |  |
+| CM-03 | Cache Action Buttons | PASS |  |
+| CM-04 | Cache Performance Chart | PASS |  |
+| CM-05 | Cache Configuration Form | PASS |  |
+
+## Parameters Component
+
+Tests: 1, Passed: 0, Failed: 0, Skipped: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| PA-01 | Parameter Panel Loading | SKIP |  |
+

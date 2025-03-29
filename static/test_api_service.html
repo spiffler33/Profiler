@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Service Tests</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Load our services -->
+  <script src="/static/js/services/LoadingStateManager.js"></script>
+  <script src="/static/js/services/ErrorHandlingService.js"></script>
+  <script src="/static/js/services/ApiService.js"></script>
+  
+  <style>
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .test-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: white;
+    }
+    
+    .test-card.success {
+      border-left: 4px solid #10b981;
+    }
+    
+    .test-card.failure {
+      border-left: 4px solid #ef4444;
+    }
+    
+    .test-card.pending {
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .test-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .test-description {
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+    
+    .test-result {
+      font-family: monospace;
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 0.25rem;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    
+    .test-status {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .test-status.success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+    
+    .test-status.failure {
+      background-color: #fee2e2;
+      color: #b91c1c;
+    }
+    
+    .test-status.pending {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+    
+    .console-output {
+      background-color: #f8f9fa;
+      padding: 10px;
+      font-family: monospace;
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .test-timing {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="test-container">
+    <div class="test-header">
+      <h1 class="text-2xl font-bold text-gray-800">API Service Tests</h1>
+      <div>
+        <button id="run-all-btn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Run All Tests
+        </button>
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <p class="text-gray-700">
+        This page runs a comprehensive test suite for the ApiService implementation, testing:
+      </p>
+      <ul class="list-disc ml-6 mt-2">
+        <li>Request handling and response parsing</li>
+        <li>Authentication flow</li>
+        <li>Cache operations (get, set, clear)</li>
+        <li>Error handling and retry mechanisms</li>
+        <li>Request batching</li>
+        <li>Loading state integration</li>
+      </ul>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div class="bg-white rounded-lg p-4 shadow-sm">
+        <h2 class="font-semibold text-lg mb-2">Test Statistics</h2>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="bg-gray-50 p-3 rounded-md">
+            <div class="text-sm text-gray-500">Total Tests</div>
+            <div id="total-count" class="text-xl font-bold text-gray-800">0</div>
+          </div>
+          <div class="bg-green-50 p-3 rounded-md">
+            <div class="text-sm text-green-500">Passed</div>
+            <div id="passed-count" class="text-xl font-bold text-green-600">0</div>
+          </div>
+          <div class="bg-red-50 p-3 rounded-md">
+            <div class="text-sm text-red-500">Failed</div>
+            <div id="failed-count" class="text-xl font-bold text-red-600">0</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow-sm">
+        <h2 class="font-semibold text-lg mb-2">API Service Configuration</h2>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-gray-50 p-3 rounded-md">
+            <div class="text-sm text-gray-500">Caching Enabled</div>
+            <div id="cache-enabled" class="font-medium">Loading...</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-md">
+            <div class="text-sm text-gray-500">Network Detection</div>
+            <div id="network-detection" class="font-medium">Loading...</div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <button id="toggle-debug-btn" class="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm">
+            Toggle Debug Mode
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="test-results" class="mb-6">
+      <!-- Test result cards will be added here -->
+    </div>
+    
+    <div class="mb-4">
+      <h2 class="text-xl font-bold mb-2">Test Console</h2>
+      <div id="console-output" class="console-output"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Mock API server endpoint
+    const MOCK_API_ENDPOINT = 'https://jsonplaceholder.typicode.com';
+    
+    // Test state tracking
+    let testResults = {};
+    let testsRun = 0;
+    let testsPassed = 0;
+    let testsFailed = 0;
+    
+    // Console logging function
+    function logToConsole(message, type = 'info') {
+      const consoleEl = document.getElementById('console-output');
+      const timestamp = new Date().toLocaleTimeString();
+      const colorClass = type === 'error' ? 'text-red-600' : 
+                         type === 'success' ? 'text-green-600' :
+                         type === 'warning' ? 'text-amber-600' : 'text-gray-800';
+      
+      consoleEl.innerHTML += `<div class="${colorClass}">[${timestamp}] ${message}</div>`;
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+    
+    // Update test statistics
+    function updateTestStats() {
+      document.getElementById('total-count').textContent = testsRun;
+      document.getElementById('passed-count').textContent = testsPassed;
+      document.getElementById('failed-count').textContent = testsFailed;
+    }
+    
+    // Display API Service configuration
+    function displayApiConfig() {
+      // Create a method to access private configuration in API service
+      if (window.ApiService.getConfig) {
+        const config = window.ApiService.getConfig();
+        document.getElementById('cache-enabled').textContent = config.useCache ? 'Yes' : 'No';
+        document.getElementById('network-detection').textContent = config.enableNetworkDetection ? 'Yes' : 'No';
+      } else {
+        document.getElementById('cache-enabled').textContent = 'Unknown';
+        document.getElementById('network-detection').textContent = 'Unknown';
+      }
+    }
+    
+    // Initialize test card
+    function createTestCard(id, title, description) {
+      const testResultsContainer = document.getElementById('test-results');
+      
+      const card = document.createElement('div');
+      card.id = `test-card-${id}`;
+      card.className = 'test-card pending';
+      
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-2">
+          <div class="test-title">${title}</div>
+          <span id="test-status-${id}" class="test-status pending">Pending</span>
+        </div>
+        <div class="test-description">${description}</div>
+        <div id="test-result-${id}" class="test-result hidden"></div>
+        <div id="test-timing-${id}" class="test-timing hidden"></div>
+        <div class="mt-2">
+          <button id="run-test-${id}" class="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm">
+            Run Test
+          </button>
+        </div>
+      `;
+      
+      testResultsContainer.appendChild(card);
+      
+      // Set up click handler for individual test
+      document.getElementById(`run-test-${id}`).addEventListener('click', function() {
+        runTest(id);
+      });
+      
+      return card;
+    }
+    
+    // Update test result
+    function updateTestResult(id, passed, result, timing) {
+      const card = document.getElementById(`test-card-${id}`);
+      const statusEl = document.getElementById(`test-status-${id}`);
+      const resultEl = document.getElementById(`test-result-${id}`);
+      const timingEl = document.getElementById(`test-timing-${id}`);
+      
+      card.className = `test-card ${passed ? 'success' : 'failure'}`;
+      statusEl.className = `test-status ${passed ? 'success' : 'failure'}`;
+      statusEl.textContent = passed ? 'Passed' : 'Failed';
+      
+      if (result) {
+        resultEl.textContent = typeof result === 'object' ? JSON.stringify(result, null, 2) : result.toString();
+        resultEl.classList.remove('hidden');
+      }
+      
+      if (timing) {
+        timingEl.textContent = `Completed in ${timing}ms`;
+        timingEl.classList.remove('hidden');
+      }
+      
+      // Update test counts
+      testsRun++;
+      if (passed) {
+        testsPassed++;
+      } else {
+        testsFailed++;
+      }
+      
+      updateTestStats();
+    }
+    
+    // Run a specific test
+    async function runTest(id) {
+      const testConfig = testConfigurations[id];
+      if (!testConfig) {
+        logToConsole(`Test with ID ${id} not found!`, 'error');
+        return;
+      }
+      
+      logToConsole(`Running test: ${testConfig.title}`, 'info');
+      
+      const startTime = performance.now();
+      let result, passed;
+      
+      try {
+        // Run the test function
+        result = await testConfig.testFn();
+        passed = true;
+        logToConsole(`Test ${id} passed!`, 'success');
+      } catch (error) {
+        result = error.message || 'Unknown error';
+        passed = false;
+        logToConsole(`Test ${id} failed: ${error.message}`, 'error');
+      }
+      
+      const timing = Math.round(performance.now() - startTime);
+      
+      // Update test result
+      updateTestResult(id, passed, result, timing);
+      
+      // Return result for chaining
+      return { id, passed, result, timing };
+    }
+    
+    // Run all tests
+    async function runAllTests() {
+      logToConsole('Running all tests...', 'info');
+      
+      // Reset counters
+      testsRun = 0;
+      testsPassed = 0;
+      testsFailed = 0;
+      
+      // Run tests sequentially (in order)
+      for (const id of Object.keys(testConfigurations)) {
+        await runTest(id);
+      }
+      
+      logToConsole(`All tests completed. ${testsPassed} passed, ${testsFailed} failed.`, testsFailed > 0 ? 'warning' : 'success');
+    }
+    
+    // Test configurations
+    const testConfigurations = {
+      'basic-get': {
+        title: 'Basic GET Request',
+        description: 'Tests a simple GET request using the ApiService.get method',
+        testFn: async function() {
+          // Using JSONPlaceholder as a mock API
+          const result = await window.ApiService.get('/todos/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false
+          });
+          
+          // Verify we got a valid response
+          if (!result || !result.id || result.id !== 1) {
+            throw new Error('Unexpected response format');
+          }
+          
+          return result;
+        }
+      },
+      
+      'request-methods': {
+        title: 'HTTP Methods Support',
+        description: 'Tests that all HTTP methods (GET, POST, PUT, DELETE) are working',
+        testFn: async function() {
+          const results = {};
+          
+          // Test GET
+          results.get = await window.ApiService.get('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false
+          });
+          
+          // Test POST
+          results.post = await window.ApiService.post('/posts', {
+            title: 'Test Post',
+            body: 'This is a test post',
+            userId: 1
+          }, {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false
+          });
+          
+          // Test PUT
+          results.put = await window.ApiService.put('/posts/1', {
+            id: 1,
+            title: 'Updated Post',
+            body: 'This post has been updated',
+            userId: 1
+          }, {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false
+          });
+          
+          // Test DELETE
+          results.delete = await window.ApiService.delete('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false
+          });
+          
+          // Validate each response
+          if (!results.get || !results.get.id) throw new Error('GET request failed');
+          if (!results.post || !results.post.id) throw new Error('POST request failed');
+          if (!results.put || !results.put.id) throw new Error('PUT request failed');
+          
+          return results;
+        }
+      },
+      
+      'caching': {
+        title: 'Response Caching',
+        description: 'Tests that responses are properly cached and retrieved from cache',
+        testFn: async function() {
+          const results = {};
+          
+          // Enable caching explicitly
+          window.ApiService.configure({ useCache: true });
+          
+          // First request should hit the network
+          const startTime1 = performance.now();
+          results.firstRequest = await window.ApiService.get('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false,
+            useCache: true
+          });
+          results.firstTime = performance.now() - startTime1;
+          
+          // Second request should come from cache
+          const startTime2 = performance.now();
+          results.secondRequest = await window.ApiService.get('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false,
+            useCache: true
+          });
+          results.secondTime = performance.now() - startTime2;
+          
+          // Third request with cache disabled should hit network
+          const startTime3 = performance.now();
+          results.thirdRequest = await window.ApiService.get('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false,
+            useCache: false
+          });
+          results.thirdTime = performance.now() - startTime3;
+          
+          // Verify responses match
+          if (JSON.stringify(results.firstRequest) !== JSON.stringify(results.secondRequest)) {
+            throw new Error('Cached response does not match original');
+          }
+          
+          // Second request should be much faster if caching works
+          if (results.secondTime > results.firstTime / 2) {
+            logToConsole(`Cache timing suspicious: First ${results.firstTime.toFixed(2)}ms, Second ${results.secondTime.toFixed(2)}ms`, 'warning');
+          }
+          
+          return {
+            firstTime: Math.round(results.firstTime),
+            secondTime: Math.round(results.secondTime),
+            thirdTime: Math.round(results.thirdTime),
+            cacheWorking: results.secondTime < results.firstTime / 2
+          };
+        }
+      },
+      
+      'error-handling': {
+        title: 'Error Handling',
+        description: 'Tests error handling with invalid requests',
+        testFn: async function() {
+          const results = {};
+          
+          try {
+            // Try to access a non-existent resource
+            await window.ApiService.get('/posts/999999', {
+              baseUrl: MOCK_API_ENDPOINT,
+              requiresAuth: false,
+              allowFailure: true
+            });
+            results.notFound = false; // Should not reach here
+          } catch (error) {
+            results.notFound = true;
+            results.errorStatus = error.status;
+            results.errorMessage = error.message;
+          }
+          
+          // Verify the error behavior
+          if (!results.notFound) {
+            throw new Error('Error handling failed - 404 not detected');
+          }
+          
+          // Check error handling service integration by intentionally creating an error
+          // but with allowFailure to prevent it from being shown to the user
+          const errorHandled = await new Promise(resolve => {
+            // Save original handler to restore it
+            const originalHandler = window.ErrorHandlingService.handleError;
+            let errorWasHandled = false;
+            
+            // Override error handler temporarily
+            window.ErrorHandlingService.handleError = function(error, context, options) {
+              errorWasHandled = true;
+              return originalHandler.call(this, error, context, {
+                ...options,
+                showToast: false, // Don't actually show errors during test
+                silent: true
+              });
+            };
+            
+            // Make failing request
+            window.ApiService.get('/invalid-endpoint', {
+              baseUrl: MOCK_API_ENDPOINT,
+              requiresAuth: false,
+              allowFailure: true
+            }).catch(() => {
+              // Restore original handler
+              window.ErrorHandlingService.handleError = originalHandler;
+              resolve(errorWasHandled);
+            });
+          });
+          
+          results.errorHandlingIntegration = errorHandled;
+          
+          if (!results.errorHandlingIntegration) {
+            throw new Error('ErrorHandlingService integration failed');
+          }
+          
+          return results;
+        }
+      },
+      
+      'loading-states': {
+        title: 'Loading State Integration',
+        description: 'Tests that LoadingStateManager is properly integrated',
+        testFn: async function() {
+          const results = {};
+          const loadingId = 'test-loading-state';
+          
+          // Track loading state changes
+          let loadingStates = [];
+          const originalSetLoading = window.LoadingStateManager.setLoading;
+          
+          window.LoadingStateManager.setLoading = function(id, isLoading, options) {
+            if (id === loadingId) {
+              loadingStates.push({ timestamp: Date.now(), isLoading });
+            }
+            return originalSetLoading.call(this, id, isLoading, options);
+          };
+          
+          // Make request with loading ID
+          await window.ApiService.get('/posts/1', {
+            baseUrl: MOCK_API_ENDPOINT,
+            requiresAuth: false,
+            loadingId
+          });
+          
+          // Restore original method
+          window.LoadingStateManager.setLoading = originalSetLoading;
+          
+          // Check that loading state was set to true and then back to false
+          results.loadingStarted = loadingStates.some(state => state.isLoading === true);
+          results.loadingEnded = loadingStates.some(state => state.isLoading === false);
+          results.sequence = loadingStates.length === 2 && 
+                             loadingStates[0].isLoading === true && 
+                             loadingStates[1].isLoading === false;
+          
+          if (!results.loadingStarted || !results.loadingEnded || !results.sequence) {
+            throw new Error('Loading state integration failed');
+          }
+          
+          return results;
+        }
+      },
+      
+      'batching': {
+        title: 'Request Batching',
+        description: 'Tests that batch requests work correctly',
+        testFn: async function() {
+          // Define batch of requests
+          const batchRequests = [
+            {
+              method: 'GET',
+              endpoint: '/posts/1',
+              options: { baseUrl: MOCK_API_ENDPOINT, requiresAuth: false }
+            },
+            {
+              method: 'GET',
+              endpoint: '/posts/2',
+              options: { baseUrl: MOCK_API_ENDPOINT, requiresAuth: false }
+            },
+            {
+              method: 'GET',
+              endpoint: '/posts/3',
+              options: { baseUrl: MOCK_API_ENDPOINT, requiresAuth: false }
+            }
+          ];
+          
+          // Execute batch request
+          const results = await window.ApiService.batch(batchRequests, {
+            baseUrl: MOCK_API_ENDPOINT,
+            parallel: true,
+            loadingId: 'batch-loading'
+          });
+          
+          // Verify results
+          if (!Array.isArray(results) || results.length !== 3) {
+            throw new Error('Batch request returned invalid results');
+          }
+          
+          // Check that all requests succeeded
+          const allSucceeded = results.every(result => result && result.id);
+          if (!allSucceeded) {
+            throw new Error('One or more batch requests failed');
+          }
+          
+          return {
+            count: results.length,
+            successful: allSucceeded,
+            ids: results.map(r => r.id)
+          };
+        }
+      },
+      
+      'endpoint-helpers': {
+        title: 'Endpoint Helper Methods',
+        description: 'Tests the convenience methods for common endpoints',
+        testFn: async function() {
+          const results = {};
+          
+          // Mock the underlying request method for testing
+          const originalRequest = window.ApiService.request;
+          
+          window.ApiService.request = function(method, endpoint, data, options) {
+            // Just record the call instead of making actual requests
+            const call = { method, endpoint, data, options };
+            if (!results.calls) results.calls = [];
+            results.calls.push(call);
+            
+            // Return mock data
+            return Promise.resolve({ success: true, mocked: true, endpoint });
+          };
+          
+          // Test profile endpoint helpers
+          await window.ApiService.getProfiles();
+          await window.ApiService.getProfile('123');
+          await window.ApiService.createProfile({ name: 'Test User' });
+          await window.ApiService.updateProfile('123', { name: 'Updated User' });
+          
+          // Test goal endpoint helpers
+          await window.ApiService.getGoals('123');
+          await window.ApiService.getGoal('456');
+          await window.ApiService.createGoal('123', { name: 'Test Goal' });
+          await window.ApiService.updateGoal('456', { name: 'Updated Goal' });
+          await window.ApiService.deleteGoal('456');
+          await window.ApiService.getVisualizationData('456');
+          await window.ApiService.calculateProbability('456', { param1: 'value1' });
+          
+          // Test question endpoint helpers
+          await window.ApiService.getQuestionFlow('123');
+          await window.ApiService.submitQuestionResponse({ questionId: '789', answer: 'Test' });
+          
+          // Restore original request method
+          window.ApiService.request = originalRequest;
+          
+          // Verify that all endpoint helpers were called
+          if (!results.calls || results.calls.length !== 13) {
+            throw new Error(`Expected 13 endpoint helper calls, got ${results.calls?.length || 0}`);
+          }
+          
+          return {
+            callCount: results.calls.length,
+            endpoints: results.calls.map(call => call.endpoint)
+          };
+        }
+      }
+    };
+    
+    // Initialize the page
+    function initialize() {
+      // Create test cards
+      for (const [id, config] of Object.entries(testConfigurations)) {
+        createTestCard(id, config.title, config.description);
+      }
+      
+      // Set up event listeners
+      document.getElementById('run-all-btn').addEventListener('click', runAllTests);
+      document.getElementById('toggle-debug-btn').addEventListener('click', function() {
+        // Toggle debug mode
+        const isDebugMode = window.ApiService.configure ? 
+          window.ApiService.configure({ debugMode: true }) : 
+          false;
+          
+        logToConsole(`Debug mode ${isDebugMode ? 'enabled' : 'unknown'}`, 'info');
+      });
+      
+      // Display API configuration
+      displayApiConfig();
+      
+      // Log initialization
+      logToConsole('Test page initialized. Click "Run All Tests" or run individual tests.', 'info');
+    }
+    
+    // Run on page load
+    window.addEventListener('DOMContentLoaded', initialize);
+  </script>
+</body>
+</html>

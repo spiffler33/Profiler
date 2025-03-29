@@ -1,0 +1,93 @@
+[
+    {
+        "id": 1,
+        "name": "emergency_fund",
+        "description": "Emergency fund for unexpected expenses",
+        "order_index": 1,
+        "is_foundation": 1
+    },
+    {
+        "id": 2,
+        "name": "insurance",
+        "description": "Insurance coverage for protection",
+        "order_index": 2,
+        "is_foundation": 1
+    },
+    {
+        "id": 3,
+        "name": "home_purchase",
+        "description": "Saving for home purchase or down payment",
+        "order_index": 3,
+        "is_foundation": 0
+    },
+    {
+        "id": 4,
+        "name": "education",
+        "description": "Education funding for self or family",
+        "order_index": 4,
+        "is_foundation": 0
+    },
+    {
+        "id": 5,
+        "name": "debt_elimination",
+        "description": "Paying off existing debts",
+        "order_index": 5,
+        "is_foundation": 0
+    },
+    {
+        "id": 6,
+        "name": "early_retirement",
+        "description": "Saving for early retirement",
+        "order_index": 6,
+        "is_foundation": 0
+    },
+    {
+        "id": 7,
+        "name": "traditional_retirement",
+        "description": "Saving for traditional retirement age",
+        "order_index": 7,
+        "is_foundation": 0
+    },
+    {
+        "id": 8,
+        "name": "travel",
+        "description": "Saving for travel experiences",
+        "order_index": 8,
+        "is_foundation": 0
+    },
+    {
+        "id": 9,
+        "name": "vehicle",
+        "description": "Saving for vehicle purchase",
+        "order_index": 9,
+        "is_foundation": 0
+    },
+    {
+        "id": 10,
+        "name": "home_improvement",
+        "description": "Saving for home improvements or renovations",
+        "order_index": 10,
+        "is_foundation": 0
+    },
+    {
+        "id": 11,
+        "name": "estate_planning",
+        "description": "Planning for wealth transfer and estate",
+        "order_index": 11,
+        "is_foundation": 0
+    },
+    {
+        "id": 12,
+        "name": "charitable_giving",
+        "description": "Saving for charitable donations or giving",
+        "order_index": 12,
+        "is_foundation": 0
+    },
+    {
+        "id": 13,
+        "name": "custom",
+        "description": "User-defined custom goal",
+        "order_index": 13,
+        "is_foundation": 0
+    }
+]

@@ -1,0 +1,451 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Question Flow Simulation Report - 6b41e9db-2a05-402e-a865-6f0d0906ee24</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                h1, h2, h3 { color: #333; }
+                table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                .summary { background-color: #f0f8ff; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+                .question { margin-bottom: 30px; border-left: 4px solid #ccc; padding-left: 15px; }
+                .question.core { border-left-color: #4CAF50; }
+                .question.goal { border-left-color: #2196F3; }
+                .question.next_level { border-left-color: #FF9800; }
+                .question.behavioral { border-left-color: #9C27B0; }
+                .meta { color: #666; font-size: 0.9em; }
+                .answer { margin-top: 10px; background-color: #f0f0f0; padding: 10px; border-radius: 3px; }
+            </style>
+        </head>
+        <body>
+            <h1>Question Flow Simulation Report</h1>
+            
+            <div class="summary">
+                <h2>Summary</h2>
+                <p>Profile ID: 6b41e9db-2a05-402e-a865-6f0d0906ee24</p>
+                <p>Simulation Date: 2025-03-22T15:09:05.027347</p>
+                <p>Total Questions: 30</p>
+                <p>Understanding Level: {'label': 'Basic Information', 'description': "We're gathering basic information about your financial situation", 'requirements': {'core_completion_pct': 0}, 'css_class': 'profile-level-red', 'id': 'RED', 'counts': {'goal_questions': 14, 'next_level_questions': 0, 'behavioral_questions': 0, 'core_completion': 81}, 'next_level': {'id': 'AMBER', 'label': 'Financial Foundation', 'requirements': ['Complete all core questions (100%)']}}</p>
+                
+                <h3>Questions by Type</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Count</th>
+                    </tr>
+        
+                    <tr>
+                        <td>core</td>
+                        <td>16</td>
+                    </tr>
+            
+                    <tr>
+                        <td>goal</td>
+                        <td>14</td>
+                    </tr>
+            
+                </table>
+                
+                <h3>Questions by Category</h3>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Count</th>
+                    </tr>
+        
+                    <tr>
+                        <td>demographics</td>
+                        <td>8</td>
+                    </tr>
+            
+                    <tr>
+                        <td>financial_basics</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>assets_and_debts</td>
+                        <td>2</td>
+                    </tr>
+            
+                    <tr>
+                        <td>special_cases</td>
+                        <td>3</td>
+                    </tr>
+            
+                    <tr>
+                        <td>goals</td>
+                        <td>14</td>
+                    </tr>
+            
+                </table>
+            </div>
+            
+            <h2>Questions and Answers</h2>
+        
+            <div class="question core">
+                <h3>Question 1: demographics_health_status</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: select</p>
+                    
+                </div>
+                <p>How would you rate your overall health?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Excellent
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 2: financial_basics_monthly_expenses</h3>
+                <div class="meta">
+                    <p>Type: core | Category: financial_basics | Input Type: number</p>
+                    
+                </div>
+                <p>What are your average monthly expenses?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 56286
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 3: financial_basics_savings_percentage</h3>
+                <div class="meta">
+                    <p>Type: core | Category: financial_basics | Input Type: number</p>
+                    
+                </div>
+                <p>What percentage of your income do you save monthly?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 91
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 4: financial_basics_current_savings</h3>
+                <div class="meta">
+                    <p>Type: core | Category: financial_basics | Input Type: number</p>
+                    
+                </div>
+                <p>What is the total value of your current savings and investments?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 136893
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 5: assets_debts_total_debt</h3>
+                <div class="meta">
+                    <p>Type: core | Category: assets_and_debts | Input Type: number</p>
+                    
+                </div>
+                <p>What is your total outstanding debt?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 971170
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 6: assets_debts_housing_loan</h3>
+                <div class="meta">
+                    <p>Type: core | Category: assets_and_debts | Input Type: radio</p>
+                    
+                </div>
+                <p>Do you have a housing loan?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Yes
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 7: demographics_age</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: number</p>
+                    
+                </div>
+                <p>What is your age?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 34
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 8: demographics_dependents</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: number</p>
+                    
+                </div>
+                <p>How many dependents do you have?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 11
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 9: demographics_location</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: text</p>
+                    
+                </div>
+                <p>Where are you located?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Response for demographics_location
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 10: special_cases_business_value</h3>
+                <div class="meta">
+                    <p>Type: core | Category: special_cases | Input Type: number</p>
+                    
+                </div>
+                <p>If you own a business, what is its approximate value?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 1209604
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 11: demographics_employment_type</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: select</p>
+                    
+                </div>
+                <p>What is your employment type?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Self-employed
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 12: special_cases_real_estate_value</h3>
+                <div class="meta">
+                    <p>Type: core | Category: special_cases | Input Type: number</p>
+                    
+                </div>
+                <p>What is the total value of real estate you own?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 826862
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 13: special_cases_real_estate_type</h3>
+                <div class="meta">
+                    <p>Type: core | Category: special_cases | Input Type: select</p>
+                    
+                </div>
+                <p>What type of real estate do you own?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Investment property
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 14: demographics_risk_appetite</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: select</p>
+                    
+                </div>
+                <p>How would you describe your risk tolerance?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Moderate (0)
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 15: demographics_financial_maturity</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: select</p>
+                    
+                </div>
+                <p>How would you rate your financial knowledge?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Intermediate
+                </div>
+            </div>
+            
+            <div class="question core">
+                <h3>Question 16: demographics_market_outlook</h3>
+                <div class="meta">
+                    <p>Type: core | Category: demographics | Input Type: select</p>
+                    
+                </div>
+                <p>What is your outlook on the market for the next 12 months?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Bearish (Negative)
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 17: goals_emergency_fund_exists</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: radio</p>
+                    
+                </div>
+                <p>Do you have an emergency fund set aside for unexpected expenses?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Yes
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 18: goals_emergency_fund_months</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: select</p>
+                    
+                </div>
+                <p>How many months of expenses does your emergency fund cover?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 9-12 months
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 19: goals_emergency_fund_education</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: educational</p>
+                    
+                </div>
+                <p>Emergency Fund Guidelines for India</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Generated answer for goals_emergency_fund_education
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 20: goals_emergency_fund_calculation</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: educational</p>
+                    
+                </div>
+                <p>Your Emergency Fund Calculation</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Generated answer for goals_emergency_fund_calculation
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 21: goals_emergency_fund_target</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: radio</p>
+                    
+                </div>
+                <p>Would you like to set a goal to build or enhance your emergency fund?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 506574
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 22: goals_emergency_fund_timeframe</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: select</p>
+                    
+                </div>
+                <p>By when would you like to complete your emergency fund goal?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 3-5 years
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 23: goals_emergency_fund_amount</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: number</p>
+                    
+                </div>
+                <p>What is your target amount for your emergency fund?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 4243908
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 24: goals_retirement_amount</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: number</p>
+                    
+                </div>
+                <p>What is your target amount for retirement savings?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 3530624
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 25: goals_retirement_timeframe</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: number</p>
+                    
+                </div>
+                <p>By what age would you like to retire?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 10+ years
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 26: goals_insurance_education</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: educational</p>
+                    
+                </div>
+                <p>Insurance Guidelines for India</p>
+                <div class="answer">
+                    <strong>Answer:</strong> Generated answer for goals_insurance_education
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 27: goals_education_amount</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: number</p>
+                    
+                </div>
+                <p>What is your target amount for education funding?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 4179966
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 28: goals_education_timeframe</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: select</p>
+                    
+                </div>
+                <p>By when would you like to achieve your education funding goal?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 5-10 years
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 29: goals_home_purchase_amount</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: number</p>
+                    
+                </div>
+                <p>What is your target amount for home purchase or down payment?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 2060646
+                </div>
+            </div>
+            
+            <div class="question goal">
+                <h3>Question 30: goals_home_purchase_timeframe</h3>
+                <div class="meta">
+                    <p>Type: goal | Category: goals | Input Type: select</p>
+                    
+                </div>
+                <p>By when would you like to achieve your home purchase goal?</p>
+                <div class="answer">
+                    <strong>Answer:</strong> 10+ years
+                </div>
+            </div>
+            
+        </body>
+        </html>
+        

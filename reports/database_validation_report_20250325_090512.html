@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Validation Report - 20250325_090512</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            color: #333;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        .report-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stats-card {
+            display: inline-block;
+            width: 200px;
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stats-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #3498db;
+        }
+        .stats-card .label {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .chart-container {
+            height: 300px;
+            margin: 20px 0;
+        }
+        .success {
+            color: #27ae60;
+        }
+        .warning {
+            color: #f39c12;
+        }
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Database Validation Report</h1>
+    <p>Generated: 2025-03-25 09:05:12</p>
+    
+    <div class="report-section">
+        <h2>Summary</h2>
+        <div class="stats-card">
+            <div class="label">Goals Count</div>
+            <div class="value">36</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Parameters Count</div>
+            <div class="value">137</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Avg Goal Probability</div>
+            <div class="value">51.5%</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Avg Monthly SIP</div>
+            <div class="value">₹0</div>
+        </div>
+    </div>
+
+    <div class="report-section">
+        <h2>Goals Analysis</h2>
+        
+        <h3>Data Completeness</h3>
+        <div class="stats-card">
+            <div class="label">Has Simulation Parameters</div>
+            <div class="value">36/36</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Has Simulation Data</div>
+            <div class="value">36/36</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Has Scenarios</div>
+            <div class="value">36/36</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Has Adjustments</div>
+            <div class="value">36/36</div>
+        </div>
+        
+        <h3>Goal Distribution by Category</h3>
+        <div class="chart-container">
+            <canvas id="categoryChart"></canvas>
+        </div>
+        
+        <h3>Goal Timeframe Distribution</h3>
+        <div class="chart-container">
+            <canvas id="timeframeChart"></canvas>
+        </div>
+        
+        <h3>Goal Success Probability Distribution</h3>
+        <div class="chart-container">
+            <canvas id="probabilityChart"></canvas>
+        </div>
+        
+        <h3>Goal Sample (5 Random Goals)</h3>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Target Amount</th>
+                <th>Years to Goal</th>
+                <th>Success Probability</th>
+                <th>Monthly SIP</th>
+            </tr>
+
+            <tr>
+                <td>Retirement Corpus</td>
+                <td>traditional_retirement</td>
+                <td>₹77,253,673</td>
+                <td>25.0</td>
+                <td>61.6%</td>
+                <td>₹0</td>
+            </tr>
+
+            <tr>
+                <td>Home Purchase</td>
+                <td>home_purchase</td>
+                <td>₹20,000,000</td>
+                <td>N/A</td>
+                <td>47.5%</td>
+                <td>₹0</td>
+            </tr>
+
+            <tr>
+                <td>Car!</td>
+                <td>custom</td>
+                <td>₹350,000</td>
+                <td>N/A</td>
+                <td>49.3%</td>
+                <td>₹0</td>
+            </tr>
+
+            <tr>
+                <td>Retirement Corpus</td>
+                <td>traditional_retirement</td>
+                <td>₹77,253,673</td>
+                <td>25.0</td>
+                <td>61.6%</td>
+                <td>₹0</td>
+            </tr>
+
+            <tr>
+                <td>Education Funding</td>
+                <td>education</td>
+                <td>₹800,000</td>
+                <td>N/A</td>
+                <td>47.1%</td>
+                <td>₹0</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="report-section">
+        <h2>Parameters Analysis</h2>
+        
+        <h3>Parameter Statistics</h3>
+        <div class="stats-card">
+            <div class="label">Total Parameters</div>
+            <div class="value">137</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">India-Specific</div>
+            <div class="value">112/137</div>
+        </div>
+        <div class="stats-card">
+            <div class="label">Parameter Groups</div>
+            <div class="value">35</div>
+        </div>
+        
+        <h3>Parameter Groups Distribution</h3>
+        <div class="chart-container">
+            <canvas id="paramGroupChart"></canvas>
+        </div>
+        
+        <h3>Parameter Sample (5 Random Parameters)</h3>
+        <table>
+            <tr>
+                <th>Group</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>India-Specific</th>
+                <th>Description</th>
+            </tr>
+
+            <tr>
+                <td>loans.auto</td>
+                <td>car_loan_typical_rate</td>
+                <td>9.5</td>
+                <td>Yes</td>
+                <td>Typical car loan interest rate in India</td>
+            </tr>
+
+            <tr>
+                <td>retirement.planning</td>
+                <td>retirement_age</td>
+                <td>60.0</td>
+                <td>Yes</td>
+                <td>Typical retirement age in India</td>
+            </tr>
+
+            <tr>
+                <td>retirement.planning</td>
+                <td>life_expectancy</td>
+                <td>85.0</td>
+                <td>Yes</td>
+                <td>Life expectancy for retirement planning in India</td>
+            </tr>
+
+            <tr>
+                <td>market.equity</td>
+                <td>equity_small_cap</td>
+                <td>15.0</td>
+                <td>Yes</td>
+                <td>Long-term small cap equity return in India</td>
+            </tr>
+
+            <tr>
+                <td>insurance.health</td>
+                <td>health_cover_individual</td>
+                <td>500000.0</td>
+                <td>Yes</td>
+                <td>Recommended individual health insurance coverage in INR</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="report-section">
+        <h2>Validation Status</h2>
+        <table>
+            <tr>
+                <th>Check</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+
+            <tr>
+                <td>Goals Table Exists</td>
+                <td class="success">Success</td>
+                <td>Found 36 goals</td>
+            </tr>
+
+            <tr>
+                <td>Parameters Table Exists</td>
+                <td class="success">Success</td>
+                <td>Found 137 parameters</td>
+            </tr>
+
+            <tr>
+                <td>Goal Simulation Parameters</td>
+                <td class="success">Success</td>
+                <td>All goals have simulation parameters</td>
+            </tr>
+
+            <tr>
+                <td>India-Specific Parameters</td>
+                <td class="success">Success</td>
+                <td>Found 112 India-specific parameters</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <script>
+        // Helper to get random colors
+        function getRandomColors(count) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                const r = Math.floor(Math.random() * 200);
+                const g = Math.floor(Math.random() * 200);
+                const b = Math.floor(Math.random() * 200);
+                colors.push(`rgba(${r}, ${g}, ${b}, 0.7)`);
+            }
+            return colors;
+        }
+
+        // Category Chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'bar',
+            data: {
+                labels: ["home_purchase", "traditional_retirement", "custom", "education", "emergency_fund"],
+                datasets: [{
+                    label: 'Number of Goals',
+                    data: [24, 5, 2, 2, 3],
+                    backgroundColor: getRandomColors(5)
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Goal Distribution by Category'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Goals'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Timeframe Chart
+        const timeframeCtx = document.getElementById('timeframeChart').getContext('2d');
+        new Chart(timeframeCtx, {
+            type: 'pie',
+            data: {
+                labels: ["Past Due", "Short Term (0-3 years)", "Medium Term (3-7 years)", "Long Term (7+ years)"],
+                datasets: [{
+                    label: 'Goal Timeframes',
+                    data: [0, 3, 0, 3],
+                    backgroundColor: [
+                        'rgba(231, 76, 60, 0.7)',
+                        'rgba(241, 196, 15, 0.7)',
+                        'rgba(46, 204, 113, 0.7)',
+                        'rgba(52, 152, 219, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Goal Timeframe Distribution'
+                    }
+                }
+            }
+        });
+
+        // Probability Chart
+        const probCtx = document.getElementById('probabilityChart').getContext('2d');
+        new Chart(probCtx, {
+            type: 'bar',
+            data: {
+                labels: ["0-20%", "21-40%", "41-60%", "61-80%", "81-100%"],
+                datasets: [{
+                    label: 'Goal Success Probability',
+                    data: [0, 0, 33, 3, 0],
+                    backgroundColor: [
+                        'rgba(231, 76, 60, 0.7)',
+                        'rgba(230, 126, 34, 0.7)',
+                        'rgba(241, 196, 15, 0.7)',
+                        'rgba(46, 204, 113, 0.7)',
+                        'rgba(39, 174, 96, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Goal Success Probability Distribution'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Goals'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Parameter Group Chart
+        const paramGroupCtx = document.getElementById('paramGroupChart').getContext('2d');
+        new Chart(paramGroupCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ["market.equity", "market.debt", "market.alternative", "market.cash", "inflation", "inflation.education", "inflation.healthcare", "inflation.housing", "inflation.other", "tax.income.new_regime", "tax.income.old_regime", "tax.surcharge", "tax.cess", "tax.capital_gains", "tax.deductions", "retirement.epf", "retirement.ppf", "retirement.nps", "retirement.planning", "investments.sip", "investments.mutual_funds", "asset_allocation.age_based", "asset_allocation.risk_based", "insurance.life", "insurance.health", "loans.home", "loans.personal", "loans.auto", "loans.education", "rules_of_thumb.emergency", "rules_of_thumb.savings", "rules_of_thumb.debt", "rules_of_thumb.housing", "rules_of_thumb.vehicle", "monte_carlo"],
+                datasets: [{
+                    label: 'Parameter Groups',
+                    data: [6, 6, 5, 2, 1, 5, 5, 5, 4, 11, 7, 4, 1, 7, 7, 3, 4, 4, 5, 3, 4, 5, 4, 3, 4, 4, 1, 1, 2, 2, 2, 2, 2, 1, 5],
+                    backgroundColor: getRandomColors(35)
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Parameter Groups Distribution'
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -167,6 +167,11 @@
                     {% else %}
                     <span class="question-type-badge">{{ next_question.type|replace('_', ' ')|title }}</span>
                     {% endif %}
+                    
+                    {# Include the dynamic question indicator if this is a dynamically generated question #}
+                    {% with question=next_question %}
+                        {% include 'components/dynamic_question_indicator.html' %}
+                    {% endwith %}
                 </div>
                 
                 <h3 class="question-text">{{ next_question.text }}</h3>
@@ -177,7 +182,7 @@
                 </div>
                 {% endif %}
                 
-                <form id="answer-form" action="{{ url_for('submit_answer') }}" method="POST">
+                <form id="answer-form" action="{{ url_for('submit_answer') }}" method="POST" onsubmit="return handleFormSubmit(event)">
                     <input type="hidden" name="question_id" value="{{ next_question.id }}">
                     <input type="hidden" name="input_type" value="{{ next_question.input_type }}">
                     
@@ -281,6 +286,8 @@
                                 <span class="checkbox-label">{{ option }}</span>
                             </label>
                             {% endfor %}
+                            <!-- Ensure at least one checkbox is submitted even if none are checked -->
+                            <input type="hidden" name="answer" value="">
                         </div>
                         {% endif %}
                     </div>
@@ -306,6 +313,11 @@
             <div class="answer-item">
                 <div class="answer-header">
                     <span class="cat-badge {{ qa.question.category }}">{{ qa.question.category|replace('_', ' ')|title }}</span>
+                    {% if qa.question.is_dynamic %}
+                    <span class="dynamic-mini-badge" title="This was a personalized question based on your financial profile">
+                        <i class="fa fa-brain"></i>
+                    </span>
+                    {% endif %}
                 </div>
                 <div class="question-text">{{ qa.question.text }}</div>
                 <div class="answer-text">
@@ -339,7 +351,95 @@
 {% endblock %}
 
 {% block extra_js %}
+<!-- Support components -->
+<script src="{{ url_for('static', filename='js/tooltips.js') }}"></script>
+<script src="{{ url_for('static', filename='js/question_flow_settings.js') }}"></script>
+
+<!-- API service components -->
+{% if 'api_service' not in request.args or request.args.get('api_service') != 'disable' %}
+<script src="{{ url_for('static', filename='js/services/ApiService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/ErrorHandlingService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/LoadingStateManager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/dataEventBus.js') }}"></script>
+{% endif %}
+
+<!-- Question flow components -->
+<script src="{{ url_for('static', filename='js/services/QuestionFlowManager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/DynamicQuestionRenderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/QuestionResponseSubmitter.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/UnderstandingLevelDisplay.js') }}"></script>
+<script src="{{ url_for('static', filename='js/question_flow_manager_integration.js') }}"></script>
+
 <script>
+    // AJAX form submission handler
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        
+        submitButton.textContent = 'Saving...';
+        submitButton.disabled = true;
+        
+        // Process multiselect checkboxes
+        const multiselectCheckboxes = form.querySelectorAll('.multiselect-checkbox:checked');
+        if (multiselectCheckboxes.length > 0) {
+            formData.delete('answer');
+            multiselectCheckboxes.forEach(checkbox => {
+                formData.append('answer', checkbox.value);
+            });
+            formData.append('is_multiselect', 'true');
+        }
+        
+        // Set Accept header to ensure JSON response
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirect to next question
+                window.location.href = data.next_url;
+            } else {
+                // Show error
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+                
+                const errorMessage = document.createElement('div');
+                errorMessage.classList.add('error-message');
+                errorMessage.style.color = '#dc3545';
+                errorMessage.style.padding = '0.75rem';
+                errorMessage.style.marginTop = '1rem';
+                errorMessage.style.border = '1px solid #f5c6cb';
+                errorMessage.style.borderRadius = '0.25rem';
+                errorMessage.style.backgroundColor = '#f8d7da';
+                
+                let errorText = data.error || 'An error occurred while saving your answer. Please try again.';
+                errorMessage.textContent = errorText;
+                
+                // Remove existing errors
+                const existingErrors = form.querySelectorAll('.error-message');
+                existingErrors.forEach(err => err.remove());
+                
+                form.appendChild(errorMessage);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            alert('An error occurred. Please try again.');
+        });
+        
+        return false; // Prevent traditional form submission
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Handle sliders
         const sliders = document.querySelectorAll('.slider');
@@ -355,7 +455,90 @@
             });
         });
         
-        // Form submission is now handled by main.js to avoid duplicates
+        // Initialize tooltips for dynamic question indicators in previous answers
+        const dynamicMiniBadges = document.querySelectorAll('.dynamic-mini-badge');
+        dynamicMiniBadges.forEach(badge => {
+            if (badge.title) {
+                badge.setAttribute('data-tooltip', badge.title);
+                badge.removeAttribute('title'); // Remove native title to use our custom tooltips
+            }
+        });
+        
+        // Close context panels when submitting the form
+        const answerForm = document.getElementById('answer-form');
+        if (answerForm) {
+            answerForm.addEventListener('submit', function() {
+                document.querySelectorAll('.context-panel:not(.hidden)').forEach(panel => {
+                    panel.classList.add('hidden');
+                });
+            });
+        }
+        
+        // Add profile ID to the questions container for API integration
+        const questionsContainer = document.querySelector('.questions-container');
+        if (questionsContainer) {
+            questionsContainer.dataset.profileId = "{{ profile_id }}";
+        }
+        
+        // Initialize components
+        const profileId = "{{ profile_id }}";
+        
+        // Initialize QuestionFlowManager
+        if (window.QuestionFlowManager) {
+            QuestionFlowManager.initialize({
+                profileId: profileId,
+                containerSelector: '.question-answer-section'
+            });
+            
+            QuestionFlowManager.on('questionLoaded', function(data) {
+                console.log('QuestionFlowManager: Question loaded', data.question?.id);
+            });
+            
+            QuestionFlowManager.on('answerSubmitted', function(data) {
+                console.log('QuestionFlowManager: Answer submitted', data.questionId);
+            });
+            
+            QuestionFlowManager.on('error', function(data) {
+                console.error('QuestionFlowManager error:', data.error);
+            });
+        }
+        
+        // Initialize DynamicQuestionRenderer
+        if (window.DynamicQuestionRenderer) {
+            DynamicQuestionRenderer.initialize({
+                profileId: profileId,
+                containerSelector: '.question-answer-section'
+            });
+            
+            // If there's a current dynamic question, enhance it
+            const currentQuestionCard = document.querySelector('.current-question-card');
+            if (currentQuestionCard) {
+                const questionId = currentQuestionCard.querySelector('input[name="question_id"]')?.value;
+                const isDynamic = currentQuestionCard.querySelector('.dynamic-question-indicator') !== null;
+                
+                if (questionId && isDynamic) {
+                    DynamicQuestionRenderer.enhanceDynamicQuestion({
+                        id: questionId,
+                        is_dynamic: true
+                    });
+                }
+            }
+        }
+        
+        // Initialize QuestionResponseSubmitter
+        if (window.QuestionResponseSubmitter) {
+            QuestionResponseSubmitter.initialize({
+                profileId: profileId
+            });
+        }
+        
+        // Initialize UnderstandingLevelDisplay
+        if (window.UnderstandingLevelDisplay) {
+            UnderstandingLevelDisplay.initialize({
+                profileId: profileId,
+                autoRefresh: false
+            });
+        }
     });
 </script>
 {% endblock %}

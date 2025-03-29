@@ -1,0 +1,76 @@
+{
+  "test_RED_text_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:47:59.316282",
+      "question_id": "test_RED_text_q",
+      "answer_value": "Answer for RED text question",
+      "question_text": "Test RED Text Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ],
+  "demographics_age": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:47:59.316948",
+      "question_id": "demographics_age",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your age?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:47:59.319047",
+      "question_id": "demographics_age",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your age?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:47:59.321168",
+      "question_id": "demographics_age",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your age?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    }
+  ],
+  "test_RED_number_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:47:59.318578",
+      "question_id": "test_RED_number_q",
+      "answer_value": 42.0,
+      "question_text": "Test RED Number Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ],
+  "test_RED_select_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:47:59.320625",
+      "question_id": "test_RED_select_q",
+      "answer_value": "Option A",
+      "question_text": "Test RED Select Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ]
+}

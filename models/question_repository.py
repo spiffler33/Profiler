@@ -1027,6 +1027,18 @@ class QuestionRepository:
             dict: Question definition or None if not found
         """
         return self.questions.get(question_id)
+        
+    def get_question_by_id(self, question_id):
+        """
+        Get a question by ID (alias for get_question).
+        
+        Args:
+            question_id (str): ID of the question
+            
+        Returns:
+            dict: Question definition or None if not found
+        """
+        return self.questions.get(question_id)
     
     def get_questions_by_category(self, category):
         """

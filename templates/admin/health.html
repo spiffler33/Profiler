@@ -1,0 +1,224 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}System Health Dashboard{% endblock %}
+
+{% block page_title %}System Health Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .system-health-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .system-health-header .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .spin {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .metrics-card {
+        transition: all 0.3s;
+    }
+    
+    .metrics-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+    }
+
+    .system-health-loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .system-health-loading .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    #system-health-container {
+        position: relative;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="system-health-container" class="container-fluid">
+    <!-- System Health Header -->
+    <div class="system-health-header">
+        <div>
+            <h4 class="text-dark">System Health Overview</h4>
+            <p class="text-muted">
+                Last updated: <span id="last-update-time">-</span>
+            </p>
+        </div>
+        <div class="actions">
+            <select id="refresh-interval" class="form-select form-select-sm" aria-label="Refresh Interval">
+                <option value="0">No auto-refresh</option>
+                <option value="30000">Every 30 seconds</option>
+                <option value="60000" selected>Every minute</option>
+                <option value="300000">Every 5 minutes</option>
+            </select>
+            <button id="refresh-health-data" class="btn btn-sm btn-primary">
+                <i class="bi bi-arrow-clockwise"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <!-- Service Status Overview -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Service Status</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-api" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="API Server"></span>
+                        <span>API Server</span>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-database" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="Database"></span>
+                        <span>Database</span>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-cache" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="Cache System"></span>
+                        <span>Cache System</span>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-llm" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="LLM Service"></span>
+                        <span>LLM Service</span>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-filesystem" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="File System"></span>
+                        <span>File System</span>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <span id="status-montecarlo" class="status-indicator bg-secondary" data-bs-toggle="tooltip" title="Monte Carlo Engine"></span>
+                        <span>Monte Carlo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Metrics -->
+    <div id="system-metrics" class="mb-4">
+        <!-- Metrics will be populated here -->
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading system metrics...</p>
+        </div>
+    </div>
+
+    <!-- System Alerts -->
+    <div id="system-alerts" class="mb-4">
+        <!-- Alerts will be populated here -->
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading system alerts...</p>
+        </div>
+    </div>
+
+    <!-- Historical Data -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Historical Performance</h6>
+            <div>
+                <select id="history-time-range" class="form-select form-select-sm">
+                    <option value="1h" selected>Last Hour</option>
+                    <option value="6h">Last 6 Hours</option>
+                    <option value="1d">Last 24 Hours</option>
+                    <option value="7d">Last 7 Days</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="system-history">
+                <!-- Historical charts will be populated here -->
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading historical data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="system-health-loading" class="system-health-loading" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/services/SystemHealthDashboard.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Initialize the health dashboard
+        window.SystemHealthDashboard.initialize({
+            metricsElement: 'system-metrics',
+            alertsElement: 'system-alerts',
+            historyElement: 'system-history',
+            autoRefresh: true,
+            refreshInterval: 60000 // 1 minute
+        });
+    });
+</script>
+{% endblock %}

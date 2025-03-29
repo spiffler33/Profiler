@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Loading Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Basic loading state styles */
+        .is-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .is-loading::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 1000;
+            border-radius: 0.5rem;
+        }
+        
+        .is-loading::after {
+            content: "";
+            position: absolute;
+            top: calc(50% - 20px);
+            left: calc(50% - 20px);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0d6efd;
+            border-radius: 50%;
+            z-index: 1001;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Loading State Test</h1>
+    <p>This page tests the basic loading state functionality.</p>
+    
+    <div class="test-box" id="test-box">
+        <h2>Test Loading Box</h2>
+        <p>This box will show a loading state when you click the button below.</p>
+    </div>
+    
+    <button id="toggle-loading">Toggle Loading State</button>
+    
+    <div class="test-box">
+        <h2>Test Results</h2>
+        <p id="test-message">No tests run yet</p>
+    </div>
+    
+    <script>
+        // Simple test script embedded directly
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            document.getElementById('test-message').textContent = 'Page loaded successfully';
+            
+            // Set up toggle button
+            const toggleBtn = document.getElementById('toggle-loading');
+            const testBox = document.getElementById('test-box');
+            let isLoading = false;
+            
+            toggleBtn.addEventListener('click', function() {
+                isLoading = !isLoading;
+                
+                if (isLoading) {
+                    testBox.classList.add('is-loading');
+                    document.getElementById('test-message').textContent = 'Loading state ON';
+                } else {
+                    testBox.classList.remove('is-loading');
+                    document.getElementById('test-message').textContent = 'Loading state OFF';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

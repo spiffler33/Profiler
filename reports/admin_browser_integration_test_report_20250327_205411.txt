@@ -1,0 +1,19 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:54:11
+
+## Summary
+
+Total Tests: 1
+Passed: 0
+Failed: 1
+Pass Percentage: 0.0%
+
+## Health Component
+
+Tests: 1, Passed: 0, Failed: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| SH-01 | Dashboard Loading | FAIL |  |
+

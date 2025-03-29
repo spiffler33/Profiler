@@ -1,0 +1,14 @@
+{
+  "profile_id": "e3b0c2b8-52e0-42da-98d5-b16456a957c7",
+  "total_questions": 60,
+  "answered_questions": 60,
+  "completion_percentage": 100.0,
+  "question_types": {
+    "core": 16,
+    "goal": 27,
+    "next_level": 10,
+    "behavioral": 7
+  },
+  "avg_response_time_seconds": 0,
+  "generated_at": "2025-03-28T21:38:07.392338"
+}

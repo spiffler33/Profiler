@@ -1,0 +1,132 @@
+{% comment %}
+HTML template for including React-based goal visualization components.
+{% endcomment %}
+
+<div class="goal-visualization-container">
+  <!-- Probabilistic Goal Visualizer -->
+  <div 
+    id="probabilistic-goal-visualizer" 
+    class="react-component-mount" 
+    data-goal-id="{{ goal.id }}" 
+    data-goal-target="{{ goal.target_amount }}"
+    data-goal-timeline="{{ goal.timeframe }}"
+    data-goal-probability="{{ goal.success_probability }}"
+    data-simulation-data="{{ simulation_data|tojson|safe if simulation_data else '{}' }}">
+  </div>
+  
+  <!-- Adjustment Impact Panel -->
+  <div 
+    id="adjustment-impact-panel" 
+    class="react-component-mount" 
+    data-goal-id="{{ goal.id }}"
+    data-adjustments="{{ adjustments|tojson|safe if adjustments else '[]' }}"
+    data-current-probability="{{ goal.success_probability }}">
+  </div>
+  
+  <!-- Scenario Comparison Chart -->
+  <div 
+    id="scenario-comparison-chart" 
+    class="react-component-mount" 
+    data-goal-id="{{ goal.id }}"
+    data-scenarios="{{ scenarios|tojson|safe if scenarios else '[]' }}">
+  </div>
+</div>
+
+<!-- Load React and dependencies -->
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+
+<!-- Load the React components -->
+<script src="{{ url_for('static', filename='js/components/ProbabilisticGoalVisualizer.jsx') }}"></script>
+<script src="{{ url_for('static', filename='js/components/AdjustmentImpactPanel.jsx') }}"></script>
+<script src="{{ url_for('static', filename='js/components/ScenarioComparisonChart.jsx') }}"></script>
+
+<!-- Initialize the React components -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Probabilistic Goal Visualizer
+    const probabilisticGoalVisualizerElement = document.getElementById('probabilistic-goal-visualizer');
+    if (probabilisticGoalVisualizerElement) {
+      const goalId = probabilisticGoalVisualizerElement.dataset.goalId;
+      const goalTarget = parseFloat(probabilisticGoalVisualizerElement.dataset.goalTarget);
+      const goalTimeline = parseInt(probabilisticGoalVisualizerElement.dataset.goalTimeline);
+      const goalProbability = parseFloat(probabilisticGoalVisualizerElement.dataset.goalProbability);
+      const simulationData = JSON.parse(probabilisticGoalVisualizerElement.dataset.simulationData);
+      
+      ReactDOM.render(
+        React.createElement(ProbabilisticGoalVisualizer, {
+          goalId: goalId,
+          targetAmount: goalTarget,
+          timeframe: goalTimeline,
+          successProbability: goalProbability,
+          simulationData: simulationData
+        }),
+        probabilisticGoalVisualizerElement
+      );
+    }
+    
+    // Initialize Adjustment Impact Panel
+    const adjustmentImpactPanelElement = document.getElementById('adjustment-impact-panel');
+    if (adjustmentImpactPanelElement) {
+      const goalId = adjustmentImpactPanelElement.dataset.goalId;
+      const adjustments = JSON.parse(adjustmentImpactPanelElement.dataset.adjustments);
+      const currentProbability = parseFloat(adjustmentImpactPanelElement.dataset.currentProbability);
+      
+      ReactDOM.render(
+        React.createElement(AdjustmentImpactPanel, {
+          goalId: goalId,
+          adjustments: adjustments,
+          currentProbability: currentProbability
+        }),
+        adjustmentImpactPanelElement
+      );
+    }
+    
+    // Initialize Scenario Comparison Chart
+    const scenarioComparisonChartElement = document.getElementById('scenario-comparison-chart');
+    if (scenarioComparisonChartElement) {
+      const goalId = scenarioComparisonChartElement.dataset.goalId;
+      const scenarios = JSON.parse(scenarioComparisonChartElement.dataset.scenarios);
+      
+      ReactDOM.render(
+        React.createElement(ScenarioComparisonChart, {
+          goalId: goalId,
+          scenarios: scenarios
+        }),
+        scenarioComparisonChartElement
+      );
+    }
+  });
+</script>
+
+<!-- Responsive styles -->
+<style>
+  .goal-visualization-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    width: 100%;
+  }
+  
+  .react-component-mount {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    background-color: #fff;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .goal-visualization-container {
+      gap: 1rem;
+    }
+    
+    .react-component-mount {
+      min-height: 180px;
+      padding: 0.75rem;
+    }
+  }
+</style>

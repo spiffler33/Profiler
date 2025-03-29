@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Dashboard Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  
+  <!-- Load our services -->
+  <script src="/static/js/services/LoadingStateManager.js"></script>
+  <script src="/static/js/services/ErrorHandlingService.js"></script>
+  <script src="/static/js/services/ApiService.js"></script>
+  <script src="/static/js/components/FinancialOverviewDashboard.jsx"></script>
+  
+  <style>
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.25rem;
+    }
+    
+    .config-section {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .config-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .console-output {
+      background-color: #f8f9fa;
+      padding: 10px;
+      font-family: monospace;
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Skeleton loader styles */
+    .skeleton-loader {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 0.25rem;
+    }
+    
+    .skeleton-text {
+      height: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .skeleton-box {
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    
+    .skeleton-circle {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+    }
+    
+    .width-25 {
+      width: 25%;
+    }
+    
+    .width-50 {
+      width: 50%;
+    }
+    
+    .width-75 {
+      width: 75%;
+    }
+    
+    @keyframes skeleton-loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <div class="test-header">
+      <h1 class="text-2xl font-bold text-gray-800">Financial Dashboard Tests</h1>
+      <div>
+        <button id="run-tests-btn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Run All Tests
+        </button>
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <p class="text-gray-700">
+        This page tests the FinancialOverviewDashboard component and ApiService implementation, verifying:
+      </p>
+      <ul class="list-disc ml-6 mt-2">
+        <li>Component initialization and loading states</li>
+        <li>API connectivity with various endpoints</li>
+        <li>Error handling and recovery mechanisms</li>
+        <li>Dynamic chart rendering</li>
+        <li>Responsive UI adapting to different data scenarios</li>
+      </ul>
+    </div>
+    
+    <div class="config-section">
+      <h2 class="config-title">Configuration</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="input-group">
+          <label for="profile-id">Profile ID</label>
+          <input type="text" id="profile-id" value="test-profile-123" />
+        </div>
+        <div class="input-group">
+          <label for="refresh-interval">Refresh Interval (ms)</label>
+          <input type="number" id="refresh-interval" value="30000" />
+        </div>
+        <div class="input-group">
+          <label for="test-mode">Test Mode</label>
+          <select id="test-mode" class="w-full p-2 border border-gray-200 rounded">
+            <option value="mock">Mock API Response</option>
+            <option value="error">Simulate Error</option>
+            <option value="real">Real API Connection</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-4 flex space-x-2">
+        <button id="init-dashboard-btn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+          Initialize Dashboard
+        </button>
+        <button id="reset-btn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          Reset
+        </button>
+      </div>
+    </div>
+    
+    <div id="dashboard-container" class="mb-8 border border-gray-200 rounded-lg min-h-[600px]">
+      <!-- Dashboard will be rendered here -->
+    </div>
+    
+    <div class="mb-4">
+      <h2 class="text-xl font-bold mb-2">Test Console</h2>
+      <div id="console-output" class="console-output"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Mock data for testing
+    const mockOverviewData = {
+      profile: {
+        id: "test-profile-123",
+        name: "Test User",
+        createdAt: "2025-01-15T10:30:00Z",
+        updatedAt: "2025-03-25T14:22:15Z"
+      },
+      summary: {
+        netWorth: 4528000,
+        monthlyIncome: 187500,
+        monthlyExpenses: 105000,
+        monthlySavings: 82500,
+        goalSuccessRate: 72.5
+      },
+      assets: {
+        allocation: [
+          { name: "Equity", percentage: 45, color: "#4F46E5" },
+          { name: "Debt", percentage: 25, color: "#2563EB" },
+          { name: "Real Estate", percentage: 15, color: "#0EA5E9" },
+          { name: "Gold", percentage: 10, color: "#EAB308" },
+          { name: "Cash", percentage: 5, color: "#84CC16" }
+        ]
+      },
+      goals: [
+        {
+          id: "goal-1",
+          name: "Retirement",
+          type: "retirement",
+          targetAmount: 12500000,
+          currentAmount: 3750000,
+          targetDate: "2050-01-01",
+          progress: 30,
+          probability: 65
+        },
+        {
+          id: "goal-2",
+          name: "Home Purchase",
+          type: "home",
+          targetAmount: 7500000,
+          currentAmount: 5625000,
+          targetDate: "2027-06-30",
+          progress: 75,
+          probability: 88
+        },
+        {
+          id: "goal-3",
+          name: "Children's Education",
+          type: "education",
+          targetAmount: 4000000,
+          currentAmount: 1000000,
+          targetDate: "2035-04-15",
+          progress: 25,
+          probability: 42
+        },
+        {
+          id: "goal-4",
+          name: "Emergency Fund",
+          type: "emergency",
+          targetAmount: 625000,
+          currentAmount: 156250,
+          targetDate: null,
+          progress: 25,
+          probability: 35
+        }
+      ],
+      recommendations: [
+        {
+          id: "rec-1",
+          type: "contribution",
+          title: "Increase Retirement Contribution",
+          description: "Increasing your monthly retirement contribution by ₹15,000 will significantly improve your retirement goal success probability.",
+          impact: "Improves retirement probability by 25%",
+          actionType: "adjust_contribution",
+          actionText: "Apply"
+        },
+        {
+          id: "rec-2",
+          type: "allocation",
+          title: "Optimize Asset Allocation",
+          description: "Reallocating 10% from debt to equity could improve your long-term returns.",
+          impact: "Potential 3% increase in annual returns",
+          actionType: "adjust_allocation",
+          actionText: "Apply"
+        },
+        {
+          id: "rec-3",
+          type: "expense",
+          title: "Reduce Discretionary Expenses",
+          description: "Reducing monthly discretionary expenses by ₹10,000 would allow higher savings rate.",
+          impact: "Improves all goal probabilities by ~5-10%",
+          actionType: "adjust_expense",
+          actionText: "Learn More"
+        }
+      ]
+    };
+    
+    // Variables to track test state
+    let dashboardInstance = null;
+    let originalApiGet = null;
+    let originalApiRequest = null;
+    
+    // Console logging function
+    function logToConsole(message, type = 'info') {
+      const consoleEl = document.getElementById('console-output');
+      const timestamp = new Date().toLocaleTimeString();
+      const colorClass = type === 'error' ? 'text-red-600' : 
+                         type === 'success' ? 'text-green-600' :
+                         type === 'warning' ? 'text-amber-600' : 'text-gray-800';
+      
+      consoleEl.innerHTML += `<div class="${colorClass}">[${timestamp}] ${message}</div>`;
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+    
+    // Mock API responses for testing
+    function setupMockApi() {
+      // Store original methods
+      originalApiGet = window.ApiService.get;
+      originalApiRequest = window.ApiService.request;
+      
+      // Mock the get method
+      window.ApiService.get = function(endpoint, options = {}) {
+        logToConsole(`Mock API GET: ${endpoint}`);
+        
+        // Simulate network delay
+        return new Promise((resolve, reject) => {
+          // Show loading state if ID provided
+          if (options.loadingId) {
+            window.LoadingStateManager.setLoading(options.loadingId, true, {
+              text: options.loadingText || 'Loading...'
+            });
+          }
+          
+          setTimeout(() => {
+            // Hide loading state
+            if (options.loadingId) {
+              window.LoadingStateManager.setLoading(options.loadingId, false);
+            }
+            
+            // Check the test mode
+            const testMode = document.getElementById('test-mode').value;
+            
+            if (testMode === 'error') {
+              const error = new Error('Simulated API error');
+              error.status = 500;
+              reject(error);
+              return;
+            }
+            
+            // Return mock data for specific endpoints
+            if (endpoint.includes('/overview')) {
+              resolve(mockOverviewData);
+            } else {
+              resolve({ message: 'Mock endpoint not implemented', endpoint });
+            }
+          }, 1000); // 1 second delay
+        });
+      };
+      
+      // Mock the request method
+      window.ApiService.request = function(method, endpoint, data = null, options = {}) {
+        logToConsole(`Mock API ${method}: ${endpoint}`);
+        
+        // For recommendation actions, simulate success
+        if (endpoint.includes('/recommendations/')) {
+          return new Promise((resolve, reject) => {
+            if (options.loadingId) {
+              window.LoadingStateManager.setLoading(options.loadingId, true, {
+                text: options.loadingText || 'Loading...'
+              });
+            }
+            
+            setTimeout(() => {
+              if (options.loadingId) {
+                window.LoadingStateManager.setLoading(options.loadingId, false);
+              }
+              
+              const testMode = document.getElementById('test-mode').value;
+              
+              if (testMode === 'error') {
+                const error = new Error('Simulated API error during recommendation action');
+                error.status = 500;
+                reject(error);
+                return;
+              }
+              
+              resolve({ 
+                success: true, 
+                message: 'Recommendation applied successfully', 
+                recommendationId: data?.recommendationId 
+              });
+            }, 1000);
+          });
+        }
+        
+        // Fall back to get method for other cases
+        if (method === 'GET') {
+          return this.get(endpoint, options);
+        }
+        
+        // Reject for unsupported methods
+        return Promise.reject(new Error('Mock method not implemented'));
+      };
+      
+      logToConsole('Mock API setup complete', 'success');
+    }
+    
+    // Restore original API methods
+    function restoreApiMethods() {
+      if (originalApiGet) {
+        window.ApiService.get = originalApiGet;
+      }
+      
+      if (originalApiRequest) {
+        window.ApiService.request = originalApiRequest;
+      }
+      
+      logToConsole('Original API methods restored', 'info');
+    }
+    
+    // Initialize dashboard
+    function initializeDashboard() {
+      const container = document.getElementById('dashboard-container');
+      const profileId = document.getElementById('profile-id').value;
+      const refreshInterval = parseInt(document.getElementById('refresh-interval').value, 10);
+      const testMode = document.getElementById('test-mode').value;
+      
+      // Clear existing dashboard if any
+      if (dashboardInstance) {
+        dashboardInstance.destroy();
+        dashboardInstance = null;
+      }
+      
+      // Clear container
+      container.innerHTML = '';
+      
+      // Mock API if selected
+      if (testMode === 'mock' || testMode === 'error') {
+        setupMockApi();
+      } else {
+        restoreApiMethods();
+      }
+      
+      logToConsole(`Initializing dashboard for profile ${profileId} with refresh interval ${refreshInterval}ms in ${testMode} mode`, 'info');
+      
+      // Create the dashboard
+      dashboardInstance = new FinancialOverviewDashboard(container, profileId, {
+        refreshInterval: refreshInterval,
+        showAssetAllocation: true,
+        showIncomeBreakdown: true,
+        showGoalProgress: true,
+        showRecommendations: true
+      });
+      
+      logToConsole('Dashboard initialized', 'success');
+    }
+    
+    // Reset everything
+    function resetTest() {
+      // Destroy dashboard if it exists
+      if (dashboardInstance) {
+        dashboardInstance.destroy();
+        dashboardInstance = null;
+      }
+      
+      // Clear container
+      document.getElementById('dashboard-container').innerHTML = '';
+      
+      // Restore original API methods
+      restoreApiMethods();
+      
+      // Clear console
+      document.getElementById('console-output').innerHTML = '';
+      
+      logToConsole('Test reset complete', 'info');
+    }
+    
+    // Run a comprehensive test suite
+    function runAllTests() {
+      resetTest();
+      logToConsole('Running comprehensive test suite...', 'info');
+      
+      // Test 1: Basic initialization with mock data
+      document.getElementById('test-mode').value = 'mock';
+      logToConsole('TEST 1: Basic initialization with mock data', 'info');
+      initializeDashboard();
+      
+      // Test 2: Error handling
+      setTimeout(() => {
+        logToConsole('TEST 2: Error handling', 'info');
+        document.getElementById('test-mode').value = 'error';
+        initializeDashboard();
+        
+        // Test 3: Test recommendation actions
+        setTimeout(() => {
+          logToConsole('TEST 3: Testing recommendation actions', 'info');
+          
+          // Find a recommendation button and click it
+          const actionButtons = document.querySelectorAll('.recommendation-action');
+          if (actionButtons.length > 0) {
+            logToConsole('Clicking recommendation action button...', 'info');
+            actionButtons[0].click();
+          } else {
+            logToConsole('No recommendation buttons found!', 'warning');
+          }
+          
+          // Test 4: Test refresh
+          setTimeout(() => {
+            logToConsole('TEST 4: Testing refresh functionality', 'info');
+            document.getElementById('test-mode').value = 'mock';
+            
+            // Find the refresh button and click it
+            const refreshButton = document.getElementById('refresh-dashboard');
+            if (refreshButton) {
+              logToConsole('Clicking refresh button...', 'info');
+              refreshButton.click();
+            } else {
+              logToConsole('No refresh button found!', 'warning');
+            }
+            
+            // Test 5: Test dashboard options update
+            setTimeout(() => {
+              logToConsole('TEST 5: Testing dashboard options update', 'info');
+              
+              if (dashboardInstance) {
+                logToConsole('Updating dashboard options...', 'info');
+                dashboardInstance.updateOptions({
+                  showAssetAllocation: false,
+                  showRecommendations: false
+                });
+                logToConsole('Options updated. Asset allocation and recommendations should be hidden.', 'success');
+              } else {
+                logToConsole('Dashboard instance not available!', 'error');
+              }
+              
+              logToConsole('All tests completed!', 'success');
+            }, 2000);
+          }, 2000);
+        }, 3000);
+      }, 3000);
+    }
+    
+    // Event Listeners
+    document.getElementById('init-dashboard-btn').addEventListener('click', initializeDashboard);
+    document.getElementById('reset-btn').addEventListener('click', resetTest);
+    document.getElementById('run-tests-btn').addEventListener('click', runAllTests);
+    
+    // Initialize with console output
+    logToConsole('Test page loaded. Use the controls above to test the Financial Overview Dashboard.', 'info');
+  </script>
+</body>
+</html>

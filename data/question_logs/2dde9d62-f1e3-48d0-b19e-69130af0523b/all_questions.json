@@ -1,0 +1,23 @@
+{
+  "demographics_employment_type": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:44:01.024882",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-21T12:44:01.025574",
+      "question_id": "demographics_employment_type",
+      "question_text": "What is your employment type?"
+    }
+  ]
+}

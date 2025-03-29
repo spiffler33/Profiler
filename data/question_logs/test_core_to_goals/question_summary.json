@@ -1,0 +1,28 @@
+{
+  "financial_basics_current_savings": {
+    "question_id": "financial_basics_current_savings",
+    "question_text": "What is the total value of your current savings and investments?",
+    "question_type": "core",
+    "category": "financial_basics",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": "2025-03-21T12:48:00.638513",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  },
+  "goals_test": {
+    "question_id": "goals_test",
+    "question_text": "Test goal question",
+    "question_type": "goal",
+    "category": "unknown",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": "2025-03-21T12:48:00.639597",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  }
+}

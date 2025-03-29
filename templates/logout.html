@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Logged Out - Profiler4{% endblock %}
+
+{% block content %}
+<div class="logout-container">
+  <div class="logout-card">
+    <div class="logout-header">
+      <h2>Logged Out</h2>
+      <p>You have been successfully logged out.</p>
+    </div>
+    
+    <div class="logout-actions">
+      <a href="{{ url_for('login') }}" class="btn btn-primary">Sign In Again</a>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">Return to Home</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+  }
+  
+  .logout-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .logout-header {
+    margin-bottom: 25px;
+  }
+  
+  .logout-header h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .logout-header p {
+    color: #666;
+    margin-bottom: 0;
+  }
+  
+  .logout-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Clear authentication on logout page load
+    if (window.AuthenticationService) {
+      window.AuthenticationService.logout();
+    }
+    
+    // Also clear any legacy tokens stored directly
+    localStorage.removeItem('auth_token');
+    sessionStorage.removeItem('auth_token');
+  });
+</script>
+{% endblock %}

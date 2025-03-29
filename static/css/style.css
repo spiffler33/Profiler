@@ -180,6 +180,45 @@ textarea:focus {
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
 }
 
+/* Goal Form Select Improvements */
+optgroup {
+    font-weight: bold;
+    font-size: 1.05em;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    color: #333;
+}
+
+select.form-control option {
+    padding: 8px 10px;
+    margin: 2px 0;
+    font-size: 0.95em;
+}
+
+select.form-control optgroup {
+    padding: 5px;
+    background-color: #f8f9fa;
+}
+
+select.form-control {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    height: auto !important;
+    min-height: 42px;
+}
+
+/* Style for the dropdown arrow */
+select.form-control {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 8px 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 .help-text {
     display: block;
     margin-top: 0.25rem;
@@ -470,6 +509,509 @@ textarea:focus {
     color: #005FB8;
 }
 
+/* ----- GOAL COMPONENTS ----- */
+.goal-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.goal-header h2 {
+    margin-bottom: 0;
+}
+
+.goal-filters {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-option {
+    padding: 0.5rem 0.75rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-option:hover {
+    border-color: #005FB8;
+}
+
+.filter-option.active {
+    background-color: #005FB8;
+    color: #fff;
+    border-color: #005FB8;
+}
+
+/* Goal Cards */
+.goal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.goal-card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.goal-card-header {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.goal-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.goal-title {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+
+.goal-amounts {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.amount-item {
+    text-align: center;
+}
+
+.amount-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.amount-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.goal-progress {
+    padding: 0 1rem;
+}
+
+.progress-bar {
+    height: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 1rem;
+}
+
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.goal-card-actions {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+}
+
+.goal-expanded-content {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-item {
+    background-color: #f8f9fa;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-weight: 600;
+}
+
+.allocation-chart {
+    margin-top: 1.5rem;
+}
+
+.pie-chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.pie-segment {
+    flex: 1 0 120px;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    color: white;
+    text-align: center;
+}
+
+.segment-label {
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.goal-update-form {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+}
+
+.goal-update-form h4 {
+    margin-bottom: 1rem;
+}
+
+.progress-update-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.progress-update-form input {
+    flex: 1;
+}
+
+/* Goal Form */
+.goal-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    padding: 2rem;
+}
+
+.goal-form-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.goal-form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.section-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: #005FB8;
+}
+
+.goal-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-option {
+    flex: 1 0 200px;
+    padding: 1rem;
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-option:hover {
+    border-color: #005FB8;
+}
+
+.category-option.selected {
+    border-color: #005FB8;
+    background-color: rgba(0,95,184,0.05);
+}
+
+.category-option-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #005FB8;
+}
+
+.category-option-label {
+    font-weight: 600;
+}
+
+.category-option-description {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+.category-specific-section {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.advanced-toggle {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    color: #005FB8;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.advanced-toggle:hover {
+    background-color: #e9ecef;
+}
+
+.form-help-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+/* Utility classes for goals */
+.hidden {
+    display: none !important;
+}
+
+.priority-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.priority-high {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.priority-medium {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.priority-low {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.goal-tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background-color: #e9ecef;
+    color: #495057;
+    margin-right: 0.25rem;
+}
+
+/* ----- PARAMETER MANAGEMENT ----- */
+.parameter-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.parameter-card:hover {
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.parameter-category {
+    font-weight: 600;
+    color: #007bff;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.parameter-path {
+    font-family: 'Courier New', monospace;
+    color: #495057;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.parameter-value {
+    font-weight: 600;
+}
+
+.parameter-relationships {
+    position: relative;
+    height: 400px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+}
+
+.documentation-panel {
+    height: 100%;
+    overflow-y: auto;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
+.audit-entry {
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.audit-entry:hover {
+    background-color: #f8f9fa;
+}
+
+.audit-timestamp {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+.audit-change .old-value {
+    color: #dc3545;
+    text-decoration: line-through;
+}
+
+.audit-change .new-value {
+    color: #28a745;
+}
+
+.parameter-overview {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    margin-bottom: 20px;
+}
+
+.parameter-filter {
+    margin-bottom: 20px;
+}
+
+.user-preference-toggle {
+    margin-right: 10px;
+}
+
+.parameter-tree {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tree-node {
+    transition: background-color 0.2s;
+}
+
+.tree-node:hover {
+    background-color: #f8f9fa;
+}
+
+.parameter-node {
+    cursor: pointer;
+}
+
+.parameter-link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.node-tooltip {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.edit-form {
+    display: none;
+    margin-top: 10px;
+}
+
+.edit-parameter {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.parameter-history {
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+
 /* ----- MEDIA QUERIES ----- */
 @media (max-width: 768px) {
     header .container {
@@ -494,5 +1036,14 @@ textarea:focus {
     .btn {
         width: 100%;
         margin-bottom: 0.5rem;
+    }
+    
+    .goal-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .goal-form-grid {
+        grid-template-columns: 1fr;
     }
 }

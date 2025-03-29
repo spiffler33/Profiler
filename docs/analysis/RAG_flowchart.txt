@@ -1,0 +1,117 @@
+flowchart TD
+    title["9. RAG Integration for Indian Financial Context"]
+
+    start[User Question/Conversation] --> analyze[Analyze User Query]
+    analyze --> detectIntent[Detect Financial Intent]
+    detectIntent --> extractEntities[Extract Financial Entities]
+
+    extractEntities --> needsContext{Needs Indian Context?}
+    needsContext -->|No| standardResponse[Generate Standard Response]
+    needsContext -->|Yes| contextQuery[Formulate Context Query]
+
+    contextQuery --> queryType{Query Type}
+
+    queryType -->|Product| productKB[Query Financial Products KB]
+    queryType -->|Regulation| regulationKB[Query Financial Regulations KB]
+    queryType -->|Tax| taxKB[Query Tax System KB]
+    queryType -->|Market| marketKB[Query Market Data KB]
+    queryType -->|Cultural| culturalKB[Query Financial Culture KB]
+
+    productKB --> productCategories[Product Categories]
+    productCategories --> banking[Banking Products]
+    productCategories --> investment[Investment Products]
+    productCategories --> insurance[Insurance Products]
+    productCategories --> loans[Loan Products]
+    productCategories --> govtSchemes[Government Schemes]
+
+    regulationKB --> regulatoryBodies[Regulatory Bodies]
+    regulatoryBodies --> rbi[RBI Regulations]
+    regulatoryBodies --> sebi[SEBI Regulations]
+    regulatoryBodies --> irdai[IRDAI Regulations]
+    regulatoryBodies --> pfrda[PFRDA Regulations]
+
+    taxKB --> taxCategories[Tax Categories]
+    taxCategories --> incomeTax[Income Tax]
+    taxCategories --> capitalGains[Capital Gains Tax]
+    taxCategories --> gst[GST]
+    taxCategories --> deductions[Tax Deductions]
+
+    marketKB --> marketSegments[Market Segments]
+    marketSegments --> equity[Equity Markets]
+    marketSegments --> debt[Debt Markets]
+    marketSegments --> realEstate[Real Estate Markets]
+    marketSegments --> gold[Gold Markets]
+
+    culturalKB --> culturalAspects[Cultural Aspects]
+    culturalAspects --> family[Family Financial Dynamics]
+    culturalAspects --> wedding[Wedding Financial Practices]
+    culturalAspects --> inheritance[Inheritance Practices]
+    culturalAspects --> retirement[Retirement Cultural Context]
+
+    banking & investment & insurance & loans & govtSchemes --> productInfo[Financial Product Information]
+    rbi & sebi & irdai & pfrda --> regulationInfo[Regulatory Information]
+    incomeTax & capitalGains & gst & deductions --> taxInfo[Tax Information]
+    equity & debt & realEstate & gold --> marketInfo[Market Information]
+    family & wedding & inheritance & retirement --> culturalInfo[Cultural Information]
+
+    productInfo --> vectorSearch[Vector Database Search]
+    regulationInfo --> vectorSearch
+    taxInfo --> vectorSearch
+    marketInfo --> vectorSearch
+    culturalInfo --> vectorSearch
+    standardResponse --> responsePrep[Response Preparation]
+
+    vectorSearch --> topResults[Retrieve Top Results]
+    topResults --> rankResults[Rank by Relevance]
+    rankResults --> filterResults[Filter by Recency & Accuracy]
+    filterResults --> metadataEnhancement[Enhance with Metadata]
+
+    metadataEnhancement --> contextualizeInfo[Contextualize to Query]
+    contextualizeInfo --> responsePrep
+
+    responsePrep --> applyUserContext[Apply User's Financial Profile]
+    applyUserContext --> generateResponse[Generate Personalized Response]
+
+    generateResponse --> responseType{Response Type}
+    responseType -->|Informational| infoResponse[Informational Response]
+    responseType -->|Advisory| advisoryResponse[Advisory with Disclaimers]
+    responseType -->|Educational| educationalResponse[Educational with Examples]
+
+    infoResponse --> formatForMobile[Format for Mobile Interface]
+    advisoryResponse --> formatForMobile
+    educationalResponse --> formatForMobile
+
+    formatForMobile --> visualDecision{Add Visual Element?}
+    visualDecision -->|Yes| createVisual[Create Visual Knowledge Card]
+    visualDecision -->|No| textResponse[Text-Only Response]
+
+    createVisual --> cardType{Knowledge Card Type}
+    cardType -->|Data| dataCard[Data Visualization Card]
+    cardType -->|Comparison| comparisonCard[Comparison Card]
+    cardType -->|Explanation| explanationCard[Explanation Card]
+    cardType -->|Regulatory| regulatoryCard[Regulatory Info Card]
+
+    dataCard --> cardFormatting[Format Knowledge Card]
+    comparisonCard --> cardFormatting
+    explanationCard --> cardFormatting
+    regulatoryCard --> cardFormatting
+
+    cardFormatting --> finalResponseWithCard[Response with Knowledge Card]
+    textResponse --> finalResponseText[Final Text Response]
+
+    finalResponseWithCard --> integrateFinal[Integrate into Conversation]
+    finalResponseText --> integrateFinal
+
+    integrateFinal --> trackKnowledge[Track Knowledge Usage]
+    trackKnowledge --> updateUserProfile[Update User Knowledge Profile]
+    updateUserProfile --> saveConversation[Save to Conversation History]
+    saveConversation --> continuityPrep[Prepare for Conversation Continuity]
+    continuityPrep --> endRAG[End RAG Process]
+
+    style title fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style start fill:#d4f1f9,stroke:#0e87cc,stroke-width:2px
+    style needsContext fill:#ffe6cc,stroke:#d79b00,stroke-width:2px
+    style vectorSearch fill:#fad9d5,stroke:#ae431e,stroke-width:2px
+    style generateResponse fill:#d5e8d4,stroke:#82b366,stroke-width:2px
+    style cardFormatting fill:#e1d5e7,stroke:#9673a6,stroke-width:2px
+    style integrateFinal fill:#fff2cc,stroke:#d6b656,stroke-width:2px

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading States & Real-time Updates Testing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        .test-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .test-section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-controls {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        
+        .test-controls button {
+            margin-right: 10px;
+            padding: 8px 12px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .test-controls button:hover {
+            background-color: #0a58ca;
+        }
+        
+        .test-results {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .test-summary {
+            margin-bottom: 20px;
+        }
+        
+        .test-details {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .test-details th,
+        .test-details td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .test-details th {
+            background-color: #f5f5f5;
+        }
+        
+        .test-details tr.pass {
+            background-color: #d1e7dd;
+        }
+        
+        .test-details tr.fail {
+            background-color: #f8d7da;
+        }
+        
+        /* LoadingStateManager specific styles */
+        .is-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .is-loading::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 1000;
+            border-radius: 0.5rem;
+        }
+        
+        .is-loading::after {
+            content: "";
+            position: absolute;
+            top: calc(50% - 20px);
+            left: calc(50% - 20px);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0d6efd;
+            border-radius: 50%;
+            z-index: 1001;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .size-sm::after {
+            width: 24px;
+            height: 24px;
+            top: calc(50% - 12px);
+            left: calc(50% - 12px);
+        }
+        
+        .progress-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 9999;
+            overflow: hidden;
+            background-color: #f3f3f3;
+        }
+        
+        .progress-loader::after {
+            content: "";
+            position: absolute;
+            left: -50%;
+            width: 50%;
+            height: 100%;
+            background-color: #0d6efd;
+            animation: progress-animation 2s linear infinite;
+        }
+        
+        @keyframes progress-animation {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Mock goal form styles */
+        .probability-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .probability-overview {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .probability-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .probability-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+        
+        .probability-bar {
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+        
+        .probability-bar-fill {
+            height: 100%;
+            background-color: #0d6efd;
+            border-radius: 6px;
+            transition: width 0.5s ease-out;
+        }
+        
+        /* Goal form probability animations */
+        .animated-value {
+            transition: color 0.3s ease-out;
+        }
+        
+        .probability-changing {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .text-changing {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .update-pending {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        [data-affects-probability="true"] {
+            transition: border-color 0.3s ease-out;
+        }
+        
+        [data-affects-probability="true"].probability-calculating {
+            border-color: #add8e6;
+            background-color: rgba(173, 216, 230, 0.05);
+        }
+        
+        .highlight-required {
+            animation: highlightBorder 1s ease-in-out;
+        }
+        
+        @keyframes highlightBorder {
+            0% { border-color: inherit; }
+            50% { border-color: #ff0000; box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            100% { border-color: inherit; }
+        }
+        
+        .adjustment-impact-item {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .adjustment-impact-item.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testing Loading States & Real-time Updates</h1>
+    
+    <div class="test-controls">
+        <p>This page tests the implementation of Phase 3:</p>
+        <ol>
+            <li>LoadingStateManager.js - Loading States (Phase 3, Item 1)</li>
+            <li>goal_form_probability.js - Real-time Probability Updates (Phase 3, Item 2)</li>
+        </ol>
+        <button id="run-tests-btn">Run Automated Tests</button>
+        <button id="manual-loading-test-btn">Test Loading States Manually</button>
+        <button id="manual-probability-test-btn">Test Real-time Probability Manually</button>
+    </div>
+    
+    <div class="test-container">
+        <div class="test-section">
+            <h2>Automated Test Results</h2>
+            <div id="test-results" class="test-results">
+                <p>Click "Run Automated Tests" to start testing...</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Manual Testing Area</h2>
+            
+            <div id="manual-test-area">
+                <div id="loading-state-test" style="display: none;">
+                    <h3>Loading State Manager Tests</h3>
+                    
+                    <div class="test-example">
+                        <h4>Test Element Loading:</h4>
+                        <div id="test-loading-element" style="padding: 30px; border: 1px solid #ccc; margin-bottom: 10px;">
+                            This element will show a loading state
+                        </div>
+                        <button id="toggle-loading-btn">Toggle Loading</button>
+                    </div>
+                    
+                    <div class="test-example">
+                        <h4>Test Progress Bar:</h4>
+                        <button id="show-progress-btn">Show Progress Bar</button>
+                        <button id="hide-progress-btn">Hide Progress Bar</button>
+                    </div>
+                    
+                    <div class="test-example">
+                        <h4>Test Global Loading:</h4>
+                        <button id="show-global-loading-btn">Show Global Loading</button>
+                        <button id="hide-global-loading-btn">Hide Global Loading</button>
+                    </div>
+                    
+                    <div class="test-example">
+                        <h4>Test Error Message:</h4>
+                        <button id="show-error-btn">Show Error Message</button>
+                    </div>
+                    
+                    <div class="test-example">
+                        <h4>Test Skeletons:</h4>
+                        <div id="skeleton-container" style="padding: 10px; border: 1px solid #ccc;">
+                            Skeleton loader will appear here
+                        </div>
+                        <button id="create-skeletons-btn">Create Skeletons</button>
+                    </div>
+                </div>
+                
+                <div id="probability-test" style="display: none;">
+                    <h3>Goal Form Probability Tests</h3>
+                    
+                    <form id="goal-form">
+                        <div class="form-group">
+                            <label for="category">Goal Category</label>
+                            <select id="category" name="category" data-affects-probability="true" data-probability-impact="critical">
+                                <option value="">Select a category</option>
+                                <option value="emergency_fund">Emergency Fund</option>
+                                <option value="traditional_retirement">Traditional Retirement</option>
+                                <option value="home_purchase">Home Purchase</option>
+                                <option value="education">Education</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="target_amount">Target Amount ($)</label>
+                            <input type="number" id="target_amount" name="target_amount" data-affects-probability="true" data-probability-impact="critical" value="10000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="current_amount">Current Amount ($)</label>
+                            <input type="number" id="current_amount" name="current_amount" data-affects-probability="true" value="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="timeframe">Target Date</label>
+                            <input type="date" id="timeframe" name="timeframe" data-affects-probability="true" data-probability-impact="critical" value="2026-01-01">
+                        </div>
+                        
+                        <div id="emergency-fund-section" class="category-specific-section" style="display: none;">
+                            <h3>Emergency Fund Details</h3>
+                            <div>
+                                <label for="emergency_fund_months">Months of Expenses</label>
+                                <input type="number" id="emergency_fund_months" name="emergency_fund_months" value="6">
+                            </div>
+                            
+                            <div>
+                                <label for="monthly_expenses">Monthly Expenses ($)</label>
+                                <input type="number" id="monthly_expenses" name="monthly_expenses" value="2000">
+                            </div>
+                        </div>
+                        
+                        <div class="probability-container">
+                            <div class="probability-overview">
+                                <div class="probability-header">
+                                    <h4>Current Success Probability</h4>
+                                    <div class="probability-value-container">
+                                        <span id="success-probability-value" class="probability-value">--</span>
+                                        <div class="probability-loading hidden">
+                                            <div class="probability-spinner"></div>
+                                            <span>Calculating...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="probability-bar-container">
+                                    <div class="probability-bar">
+                                        <div id="probability-bar-fill" class="probability-bar-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="probability-status">
+                                    <div id="probability-status-text" class="probability-status-text">
+                                        As you modify your goal parameters, we'll calculate and update the success probability in real-time.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="probability-adjustments">
+                                <h4>Impact of Adjustments</h4>
+                                <div id="adjustment-impacts" class="adjustment-impacts">
+                                    <div class="no-adjustments">Fill in goal details to see potential adjustments.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn">Calculate Probability</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mock the DataEventBus -->
+    <script>
+        window.DataEventBus = {
+            publish: function(eventName, data) {
+                console.log('DataEventBus.publish', eventName, data);
+            },
+            subscribe: function(eventName, callback) {
+                console.log('DataEventBus.subscribe', eventName);
+            }
+        };
+        
+        // Mock VisualizationDataService
+        window.VisualizationDataService = {
+            calculateProbability: function(goalId, params, options) {
+                console.log('VisualizationDataService.calculateProbability', goalId, params);
+                
+                if (options && typeof options.onLoadingChange === 'function') {
+                    options.onLoadingChange(true);
+                }
+                
+                // Simulate API delay
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        if (options && typeof options.onLoadingChange === 'function') {
+                            options.onLoadingChange(false);
+                        }
+                        
+                        // Calculate a probability based on parameters
+                        let probability = 50; // Base probability
+                        
+                        if (params.target_amount && params.current_amount && params.timeframe) {
+                            const targetAmount = parseFloat(params.target_amount);
+                            const currentAmount = parseFloat(params.current_amount);
+                            const targetDate = new Date(params.timeframe);
+                            const currentDate = new Date();
+                            
+                            // Simple probability calculation:
+                            // - Higher current amount relative to target = better probability
+                            // - More time to target date = better probability
+                            const progressRatio = currentAmount / targetAmount;
+                            const monthsToTarget = (targetDate.getFullYear() - currentDate.getFullYear()) * 12 + 
+                                                (targetDate.getMonth() - currentDate.getMonth());
+                            
+                            // Adjust probability based on progress and time
+                            probability = 50 + (progressRatio * 30) + (monthsToTarget > 24 ? 20 : (monthsToTarget / 24) * 20);
+                            
+                            // Cap probability between 0-100
+                            probability = Math.max(0, Math.min(100, probability));
+                        }
+                        
+                        // Generate mock adjustment impacts
+                        const adjustments = [
+                            {
+                                description: "Increase monthly contribution by $100",
+                                impact_metrics: {
+                                    probability_increase: 0.15
+                                }
+                            },
+                            {
+                                description: "Extend timeline by 6 months",
+                                impact_metrics: {
+                                    probability_increase: 0.08
+                                }
+                            },
+                            {
+                                description: "Reduce target amount by 10%",
+                                impact_metrics: {
+                                    probability_increase: 0.12
+                                }
+                            }
+                        ];
+                        
+                        resolve({
+                            successProbability: probability,
+                            adjustments: adjustments,
+                            simulationData: {
+                                outcomes: [0.7, 0.8, 0.9, 0.95],
+                                timeline: [0.1, 0.3, 0.5, 0.7, 0.9]
+                            }
+                        });
+                    }, 1000);
+                });
+            }
+        };
+    </script>
+    
+    <!-- Loading State Manager -->
+    <script src="/static/js/services/LoadingStateManager.js"></script>
+    
+    <!-- Goal Form Probability -->
+    <script src="/static/js/goal_form_probability.js"></script>
+    
+    <!-- Test Framework -->
+    <script src="/static/js/test_loading_states.js"></script>
+    
+    <script>
+        // Manual test buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Run tests button
+            document.getElementById('run-tests-btn').addEventListener('click', function() {
+                document.getElementById('test-results').innerHTML = '<p>Running tests...</p>';
+                setTimeout(LoadingStateTests.runTests, 100);
+            });
+            
+            // Manual test buttons
+            document.getElementById('manual-loading-test-btn').addEventListener('click', function() {
+                document.getElementById('loading-state-test').style.display = 'block';
+                document.getElementById('probability-test').style.display = 'none';
+            });
+            
+            document.getElementById('manual-probability-test-btn').addEventListener('click', function() {
+                document.getElementById('loading-state-test').style.display = 'none';
+                document.getElementById('probability-test').style.display = 'block';
+                
+                // Initialize the form
+                if (typeof GoalFormProbability !== 'undefined') {
+                    GoalFormProbability.init();
+                }
+                
+                // Show the emergency fund section when selected
+                document.getElementById('category').addEventListener('change', function() {
+                    if (this.value === 'emergency_fund') {
+                        document.getElementById('emergency-fund-section').style.display = 'block';
+                    } else {
+                        document.getElementById('emergency-fund-section').style.display = 'none';
+                    }
+                });
+                
+                // Manual calculate button
+                document.getElementById('calculate-btn').addEventListener('click', function() {
+                    GoalFormProbability.calculateProbability();
+                });
+            });
+            
+            // Loading state manual test buttons
+            const testLoadingElement = document.getElementById('test-loading-element');
+            let isLoading = false;
+            
+            document.getElementById('toggle-loading-btn')?.addEventListener('click', function() {
+                isLoading = !isLoading;
+                window.loadingState.setLoading(testLoadingElement, isLoading);
+            });
+            
+            document.getElementById('show-progress-btn')?.addEventListener('click', function() {
+                window.loadingState.showProgressBar();
+            });
+            
+            document.getElementById('hide-progress-btn')?.addEventListener('click', function() {
+                window.loadingState.hideProgressBar();
+            });
+            
+            document.getElementById('show-global-loading-btn')?.addEventListener('click', function() {
+                window.loadingState.showGlobalLoading('Processing your request...');
+                
+                // Auto hide after 3 seconds
+                setTimeout(() => {
+                    window.loadingState.hideGlobalLoading();
+                }, 3000);
+            });
+            
+            document.getElementById('hide-global-loading-btn')?.addEventListener('click', function() {
+                window.loadingState.hideGlobalLoading();
+            });
+            
+            document.getElementById('show-error-btn')?.addEventListener('click', function() {
+                window.loadingState.showError('This is a test error message');
+            });
+            
+            document.getElementById('create-skeletons-btn')?.addEventListener('click', function() {
+                window.loadingState.createSkeletons('skeleton-container', 'text', 5);
+            });
+        });
+    </script>
+</body>
+</html>

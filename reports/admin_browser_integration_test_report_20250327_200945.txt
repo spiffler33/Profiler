@@ -1,0 +1,45 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:09:45
+
+## Summary
+
+Total Tests: 13
+Passed: 0
+Failed: 13
+Pass Percentage: 0.0%
+
+## Health Component
+
+Tests: 7, Passed: 0, Failed: 7
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| SH-01 | Dashboard Loading | FAIL |  |
+| SH-02 | Service Status Indicators | FAIL | <lambda>() takes 1 positional argument but 2 were given |
+| SH-03 | System Metrics Display | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| SH-04 | Alerts Section | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| SH-05 | Historical Data Charts | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| SH-06 | Time Range Selection | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| SH-07 | Auto-Refresh Functionality | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+
+## Cache Component
+
+Tests: 5, Passed: 0, Failed: 5
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| CM-01 | Cache Overview Loading | FAIL |  |
+| CM-02 | Cache Statistics Display | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| CM-03 | Cache Action Buttons | FAIL | <lambda>() takes 0 positional arguments but 1 was given |
+| CM-04 | Cache Performance Chart | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+| CM-05 | Cache Configuration Form | FAIL | <lambda>() takes 2 positional arguments but 3 were given |
+
+## Parameters Component
+
+Tests: 1, Passed: 0, Failed: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| PA-01 | Parameter Panel Loading | FAIL |  |
+

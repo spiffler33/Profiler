@@ -1,0 +1,173 @@
+[
+    {
+        "id": 1,
+        "name": "emergency_fund",
+        "description": "Funds for unexpected expenses",
+        "order_index": 1,
+        "is_foundation": 1,
+        "hierarchy_level": 1,
+        "parent_category_id": 14
+    },
+    {
+        "id": 2,
+        "name": "insurance",
+        "description": "Insurance coverage for protection",
+        "order_index": 2,
+        "is_foundation": 1,
+        "hierarchy_level": 1,
+        "parent_category_id": null
+    },
+    {
+        "id": 3,
+        "name": "home_purchase",
+        "description": "Primary residence acquisition",
+        "order_index": 3,
+        "is_foundation": 0,
+        "hierarchy_level": 2,
+        "parent_category_id": 15
+    },
+    {
+        "id": 4,
+        "name": "education",
+        "description": "Education and skill development",
+        "order_index": 4,
+        "is_foundation": 0,
+        "hierarchy_level": 2,
+        "parent_category_id": 15
+    },
+    {
+        "id": 5,
+        "name": "debt_elimination",
+        "description": "Paying off existing debts",
+        "order_index": 5,
+        "is_foundation": 0,
+        "hierarchy_level": 6,
+        "parent_category_id": null
+    },
+    {
+        "id": 6,
+        "name": "early_retirement",
+        "description": "Achieving financial independence before traditional retirement age",
+        "order_index": 6,
+        "is_foundation": 0,
+        "hierarchy_level": 3,
+        "parent_category_id": 16
+    },
+    {
+        "id": 7,
+        "name": "traditional_retirement",
+        "description": "Long-term savings for retirement years",
+        "order_index": 7,
+        "is_foundation": 0,
+        "hierarchy_level": 3,
+        "parent_category_id": 16
+    },
+    {
+        "id": 8,
+        "name": "travel",
+        "description": "Vacation and travel experiences",
+        "order_index": 8,
+        "is_foundation": 0,
+        "hierarchy_level": 4,
+        "parent_category_id": 17
+    },
+    {
+        "id": 9,
+        "name": "vehicle",
+        "description": "Automobile or transportation purchases",
+        "order_index": 9,
+        "is_foundation": 0,
+        "hierarchy_level": 4,
+        "parent_category_id": 17
+    },
+    {
+        "id": 10,
+        "name": "home_improvement",
+        "description": "Enhancing existing property",
+        "order_index": 10,
+        "is_foundation": 0,
+        "hierarchy_level": 4,
+        "parent_category_id": 17
+    },
+    {
+        "id": 11,
+        "name": "estate_planning",
+        "description": "Planning for wealth transfer",
+        "order_index": 11,
+        "is_foundation": 0,
+        "hierarchy_level": 5,
+        "parent_category_id": 18
+    },
+    {
+        "id": 12,
+        "name": "charitable_giving",
+        "description": "Donations and philanthropy",
+        "order_index": 12,
+        "is_foundation": 0,
+        "hierarchy_level": 5,
+        "parent_category_id": 18
+    },
+    {
+        "id": 13,
+        "name": "custom",
+        "description": "User-defined custom goal",
+        "order_index": 13,
+        "is_foundation": 0,
+        "hierarchy_level": 6,
+        "parent_category_id": null
+    },
+    {
+        "id": 14,
+        "name": "Security",
+        "description": "Foundation level for emergency fund and insurance goals",
+        "order_index": 1,
+        "is_foundation": 1,
+        "hierarchy_level": 1,
+        "parent_category_id": null
+    },
+    {
+        "id": 15,
+        "name": "Essential",
+        "description": "Basic needs like home, education, and debt goals",
+        "order_index": 2,
+        "is_foundation": 0,
+        "hierarchy_level": 2,
+        "parent_category_id": null
+    },
+    {
+        "id": 16,
+        "name": "Retirement",
+        "description": "Long-term retirement planning goals",
+        "order_index": 3,
+        "is_foundation": 0,
+        "hierarchy_level": 3,
+        "parent_category_id": null
+    },
+    {
+        "id": 17,
+        "name": "Lifestyle",
+        "description": "Quality of life goals like travel, vehicles, etc.",
+        "order_index": 4,
+        "is_foundation": 0,
+        "hierarchy_level": 4,
+        "parent_category_id": null
+    },
+    {
+        "id": 18,
+        "name": "Legacy",
+        "description": "Estate planning, charitable giving, and impact goals",
+        "order_index": 5,
+        "is_foundation": 0,
+        "hierarchy_level": 5,
+        "parent_category_id": null
+    },
+    {
+        "id": 19,
+        "name": "Custom",
+        "description": "User-defined goals that don't fit other categories",
+        "order_index": 6,
+        "is_foundation": 0,
+        "hierarchy_level": 6,
+        "parent_category_id": null
+    }
+]

@@ -1,0 +1,38 @@
+{
+  "profile_id": "6b41e9db-2a05-402e-a865-6f0d0906ee24",
+  "simulation_date": "2025-03-22T15:09:05.027347",
+  "total_questions": 30,
+  "understanding_level": {
+    "label": "Basic Information",
+    "description": "We're gathering basic information about your financial situation",
+    "requirements": {
+      "core_completion_pct": 0
+    },
+    "css_class": "profile-level-red",
+    "id": "RED",
+    "counts": {
+      "goal_questions": 14,
+      "next_level_questions": 0,
+      "behavioral_questions": 0,
+      "core_completion": 81
+    },
+    "next_level": {
+      "id": "AMBER",
+      "label": "Financial Foundation",
+      "requirements": [
+        "Complete all core questions (100%)"
+      ]
+    }
+  },
+  "question_types": {
+    "core": 16,
+    "goal": 14
+  },
+  "question_categories": {
+    "demographics": 8,
+    "financial_basics": 3,
+    "assets_and_debts": 2,
+    "special_cases": 3,
+    "goals": 14
+  }
+}

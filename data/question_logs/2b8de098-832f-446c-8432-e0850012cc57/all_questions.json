@@ -1,0 +1,1980 @@
+{
+  "demographics_age": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:27:30.195841",
+      "question_id": "demographics_age",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your age?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:27:30.200474",
+      "question_id": "demographics_age",
+      "question_text": "What is your age?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:37.264759",
+      "question_id": "demographics_age",
+      "answer_value": 32.0,
+      "question_text": "What is your age?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_employment_type": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:37.269003",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:37.290338",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:37.292765",
+      "question_id": "demographics_employment_type",
+      "question_text": "What is your employment type?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:39.390126",
+      "question_id": "demographics_employment_type",
+      "answer_value": "Full-time employee",
+      "question_text": "What is your employment type?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_dependents": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:39.394598",
+      "question_id": "demographics_dependents",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How many dependents do you have?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 3
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:39.414578",
+      "question_id": "demographics_dependents",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How many dependents do you have?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 3
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:39.418036",
+      "question_id": "demographics_dependents",
+      "question_text": "How many dependents do you have?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:43.631407",
+      "question_id": "demographics_dependents",
+      "answer_value": 1.0,
+      "question_text": "How many dependents do you have?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_health_status": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:43.634192",
+      "question_id": "demographics_health_status",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you rate your overall health?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 4
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:43.653297",
+      "question_id": "demographics_health_status",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you rate your overall health?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 4
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:43.657584",
+      "question_id": "demographics_health_status",
+      "question_text": "How would you rate your overall health?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:45.747485",
+      "question_id": "demographics_health_status",
+      "answer_value": "Excellent",
+      "question_text": "How would you rate your overall health?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_risk_appetite": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:45.750478",
+      "question_id": "demographics_risk_appetite",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you describe your risk tolerance?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 5
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:45.771660",
+      "question_id": "demographics_risk_appetite",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you describe your risk tolerance?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 5
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:45.775923",
+      "question_id": "demographics_risk_appetite",
+      "question_text": "How would you describe your risk tolerance?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:47.598874",
+      "question_id": "demographics_risk_appetite",
+      "answer_value": "Conservative (-1)",
+      "question_text": "How would you describe your risk tolerance?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_financial_maturity": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:47.604860",
+      "question_id": "demographics_financial_maturity",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you rate your financial knowledge?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 6
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:47.625217",
+      "question_id": "demographics_financial_maturity",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "How would you rate your financial knowledge?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 6
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:47.631361",
+      "question_id": "demographics_financial_maturity",
+      "question_text": "How would you rate your financial knowledge?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:49.485042",
+      "question_id": "demographics_financial_maturity",
+      "answer_value": "Intermediate",
+      "question_text": "How would you rate your financial knowledge?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_market_outlook": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:49.488874",
+      "question_id": "demographics_market_outlook",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your outlook on the market for the next 12 months?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 7
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:49.511551",
+      "question_id": "demographics_market_outlook",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your outlook on the market for the next 12 months?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 7
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:49.516637",
+      "question_id": "demographics_market_outlook",
+      "question_text": "What is your outlook on the market for the next 12 months?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:51.564703",
+      "question_id": "demographics_market_outlook",
+      "answer_value": "Neutral",
+      "question_text": "What is your outlook on the market for the next 12 months?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "demographics_location": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:51.570197",
+      "question_id": "demographics_location",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "Where are you located?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 8
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:51.592353",
+      "question_id": "demographics_location",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "Where are you located?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 8
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:51.597870",
+      "question_id": "demographics_location",
+      "question_text": "Where are you located?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:55.048214",
+      "question_id": "demographics_location",
+      "answer_value": "Mumbai",
+      "question_text": "Where are you located?",
+      "question_type": "core",
+      "question_category": "demographics"
+    }
+  ],
+  "financial_basics_monthly_expenses": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:55.054494",
+      "question_id": "financial_basics_monthly_expenses",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What are your average monthly expenses?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:55.079566",
+      "question_id": "financial_basics_monthly_expenses",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What are your average monthly expenses?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:55.087661",
+      "question_id": "financial_basics_monthly_expenses",
+      "question_text": "What are your average monthly expenses?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:28:58.466338",
+      "question_id": "financial_basics_monthly_expenses",
+      "answer_value": 23000.0,
+      "question_text": "What are your average monthly expenses?",
+      "question_type": "core",
+      "question_category": "financial_basics"
+    }
+  ],
+  "financial_basics_savings_percentage": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:58.471609",
+      "question_id": "financial_basics_savings_percentage",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What percentage of your income do you save monthly?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:28:58.495739",
+      "question_id": "financial_basics_savings_percentage",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What percentage of your income do you save monthly?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:28:58.502325",
+      "question_id": "financial_basics_savings_percentage",
+      "question_text": "What percentage of your income do you save monthly?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:29:00.883243",
+      "question_id": "financial_basics_savings_percentage",
+      "answer_value": 23.0,
+      "question_text": "What percentage of your income do you save monthly?",
+      "question_type": "core",
+      "question_category": "financial_basics"
+    }
+  ],
+  "financial_basics_current_savings": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:29:00.888159",
+      "question_id": "financial_basics_current_savings",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What is the total value of your current savings and investments?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 3
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:29:00.909314",
+      "question_id": "financial_basics_current_savings",
+      "question_type": "core",
+      "question_category": "financial_basics",
+      "question_text": "What is the total value of your current savings and investments?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 3
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:29:00.915169",
+      "question_id": "financial_basics_current_savings",
+      "question_text": "What is the total value of your current savings and investments?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:30:45.421451",
+      "question_id": "financial_basics_current_savings",
+      "answer_value": 2300000.0,
+      "question_text": "What is the total value of your current savings and investments?",
+      "question_type": "core",
+      "question_category": "financial_basics"
+    }
+  ],
+  "assets_debts_total_debt": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:45.430336",
+      "question_id": "assets_debts_total_debt",
+      "question_type": "core",
+      "question_category": "assets_and_debts",
+      "question_text": "What is your total outstanding debt?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:45.455092",
+      "question_id": "assets_debts_total_debt",
+      "question_type": "core",
+      "question_category": "assets_and_debts",
+      "question_text": "What is your total outstanding debt?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:30:45.459913",
+      "question_id": "assets_debts_total_debt",
+      "question_text": "What is your total outstanding debt?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:30:47.800712",
+      "question_id": "assets_debts_total_debt",
+      "answer_value": 0.0,
+      "question_text": "What is your total outstanding debt?",
+      "question_type": "core",
+      "question_category": "assets_and_debts"
+    }
+  ],
+  "assets_debts_housing_loan": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:47.806051",
+      "question_id": "assets_debts_housing_loan",
+      "question_type": "core",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have a housing loan?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:47.832896",
+      "question_id": "assets_debts_housing_loan",
+      "question_type": "core",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have a housing loan?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:30:47.840110",
+      "question_id": "assets_debts_housing_loan",
+      "question_text": "Do you have a housing loan?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:30:50.020649",
+      "question_id": "assets_debts_housing_loan",
+      "answer_value": "No",
+      "question_text": "Do you have a housing loan?",
+      "question_type": "core",
+      "question_category": "assets_and_debts"
+    }
+  ],
+  "next_level_demographics_dependents": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:50.027513",
+      "question_id": "next_level_demographics_dependents",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "You mentioned having dependents. Could you clarify their relationship to you and how financially dependent they are on your income?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:30:50.051234",
+      "question_id": "next_level_demographics_dependents",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "You mentioned having dependents. Could you clarify their relationship to you and how financially dependent they are on your income?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:30:50.057412",
+      "question_id": "next_level_demographics_dependents",
+      "question_text": "You mentioned having dependents. Could you clarify their relationship to you and how financially dependent they are on your income?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:31:05.466391",
+      "question_id": "next_level_demographics_dependents",
+      "answer_value": "just my wife",
+      "question_text": "You mentioned having dependents. Could you clarify their relationship to you and how financially dependent they are on your income?",
+      "question_type": "next_level",
+      "question_category": "demographics"
+    }
+  ],
+  "next_level_financial_savings_distribution": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:31:05.471298",
+      "question_id": "next_level_financial_savings_distribution",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Could you share roughly how your current savings are distributed? What percentage is in fixed deposits, equity, or other investments?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:31:05.494207",
+      "question_id": "next_level_financial_savings_distribution",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Could you share roughly how your current savings are distributed? What percentage is in fixed deposits, equity, or other investments?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:31:05.499495",
+      "question_id": "next_level_financial_savings_distribution",
+      "question_text": "Could you share roughly how your current savings are distributed? What percentage is in fixed deposits, equity, or other investments?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:05.991054",
+      "question_id": "next_level_financial_savings_distribution",
+      "answer_value": "10% FD, 60% equity, 30% gold ",
+      "question_text": "Could you share roughly how your current savings are distributed? What percentage is in fixed deposits, equity, or other investments?",
+      "question_type": "next_level",
+      "question_category": "financial_basics"
+    }
+  ],
+  "goals_emergency_fund_education": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:05.999183",
+      "question_id": "goals_emergency_fund_education",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Emergency Fund Guidelines for India",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:06.026485",
+      "question_id": "goals_emergency_fund_education",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Emergency Fund Guidelines for India",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:06.036276",
+      "question_id": "goals_emergency_fund_education",
+      "question_text": "Emergency Fund Guidelines for India"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:07.669187",
+      "question_id": "goals_emergency_fund_education",
+      "answer_value": "acknowledged"
+    }
+  ],
+  "goals_emergency_fund_calculation": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:07.677230",
+      "question_id": "goals_emergency_fund_calculation",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Your Emergency Fund Calculation",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3.5
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:07.701163",
+      "question_id": "goals_emergency_fund_calculation",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Your Emergency Fund Calculation",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3.5
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:07.706938",
+      "question_id": "goals_emergency_fund_calculation",
+      "question_text": "Your Emergency Fund Calculation"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:08.985479",
+      "question_id": "goals_emergency_fund_calculation",
+      "answer_value": "acknowledged"
+    }
+  ],
+  "goals_emergency_fund_exists": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:08.994729",
+      "question_id": "goals_emergency_fund_exists",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Do you have an emergency fund set aside for unexpected expenses?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 1
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:09.019440",
+      "question_id": "goals_emergency_fund_exists",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Do you have an emergency fund set aside for unexpected expenses?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:09.025129",
+      "question_id": "goals_emergency_fund_exists",
+      "question_text": "Do you have an emergency fund set aside for unexpected expenses?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:13.967384",
+      "question_id": "goals_emergency_fund_exists",
+      "answer_value": "Yes"
+    }
+  ],
+  "goals_emergency_fund_months": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:13.974963",
+      "question_id": "goals_emergency_fund_months",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "How many months of expenses does your emergency fund cover?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:13.998896",
+      "question_id": "goals_emergency_fund_months",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "How many months of expenses does your emergency fund cover?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:14.006235",
+      "question_id": "goals_emergency_fund_months",
+      "question_text": "How many months of expenses does your emergency fund cover?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:16.616910",
+      "question_id": "goals_emergency_fund_months",
+      "answer_value": "5-6 months"
+    }
+  ],
+  "goals_emergency_fund_target": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:16.624206",
+      "question_id": "goals_emergency_fund_target",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Would you like to set a goal to build or enhance your emergency fund?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 4
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:16.658003",
+      "question_id": "goals_emergency_fund_target",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Would you like to set a goal to build or enhance your emergency fund?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 4
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:16.663255",
+      "question_id": "goals_emergency_fund_target",
+      "question_text": "Would you like to set a goal to build or enhance your emergency fund?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:18.000010",
+      "question_id": "goals_emergency_fund_target",
+      "answer_value": "No"
+    }
+  ],
+  "goals_insurance_education": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:18.008434",
+      "question_id": "goals_insurance_education",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Insurance Guidelines for India",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 5.5
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:18.032340",
+      "question_id": "goals_insurance_education",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Insurance Guidelines for India",
+      "input_type": "educational",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 5.5
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:18.039703",
+      "question_id": "goals_insurance_education",
+      "question_text": "Insurance Guidelines for India"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:19.614313",
+      "question_id": "goals_insurance_education",
+      "answer_value": "acknowledged",
+      "question_text": "Insurance Guidelines for India",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_insurance_adequacy": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:19.624506",
+      "question_id": "goals_insurance_adequacy",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Do you feel your current insurance coverage (health, life, etc.) is adequate?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 6
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:19.652040",
+      "question_id": "goals_insurance_adequacy",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Do you feel your current insurance coverage (health, life, etc.) is adequate?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 6
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:19.658241",
+      "question_id": "goals_insurance_adequacy",
+      "question_text": "Do you feel your current insurance coverage (health, life, etc.) is adequate?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:21.687179",
+      "question_id": "goals_insurance_adequacy",
+      "answer_value": "Yes, fully adequate",
+      "question_text": "Do you feel your current insurance coverage (health, life, etc.) is adequate?",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_insurance_types": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:21.694873",
+      "question_id": "goals_insurance_types",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What types of insurance do you currently have? (Select all that apply)",
+      "input_type": "multiselect",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 7
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:21.722076",
+      "question_id": "goals_insurance_types",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What types of insurance do you currently have? (Select all that apply)",
+      "input_type": "multiselect",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 7
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:21.729268",
+      "question_id": "goals_insurance_types",
+      "question_text": "What types of insurance do you currently have? (Select all that apply)"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:24.274521",
+      "question_id": "goals_insurance_types",
+      "answer_value": [
+        "Health Insurance",
+        "Life Insurance",
+        "Term Insurance"
+      ],
+      "question_text": "What types of insurance do you currently have? (Select all that apply)",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_insurance_target": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:24.284156",
+      "question_id": "goals_insurance_target",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Would you like to set a goal to improve your insurance coverage?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 8
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:24.310943",
+      "question_id": "goals_insurance_target",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "Would you like to set a goal to improve your insurance coverage?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 8
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:24.317823",
+      "question_id": "goals_insurance_target",
+      "question_text": "Would you like to set a goal to improve your insurance coverage?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:26.284768",
+      "question_id": "goals_insurance_target",
+      "answer_value": "No",
+      "question_text": "Would you like to set a goal to improve your insurance coverage?",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_other_categories": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:26.295015",
+      "question_id": "goals_other_categories",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What other financial goals are important to you? (Select all that apply)",
+      "input_type": "multiselect",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 11
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:26.322040",
+      "question_id": "goals_other_categories",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What other financial goals are important to you? (Select all that apply)",
+      "input_type": "multiselect",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 11
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:26.328498",
+      "question_id": "goals_other_categories",
+      "question_text": "What other financial goals are important to you? (Select all that apply)"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:28.470735",
+      "question_id": "goals_other_categories",
+      "answer_value": [
+        "Home purchase or down payment"
+      ],
+      "question_text": "What other financial goals are important to you? (Select all that apply)",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_home_purchase_amount": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:28.481757",
+      "question_id": "goals_home_purchase_amount",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What is your target amount for home purchase or down payment?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 12
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:28.507513",
+      "question_id": "goals_home_purchase_amount",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "What is your target amount for home purchase or down payment?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 12
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:28.514374",
+      "question_id": "goals_home_purchase_amount",
+      "question_text": "What is your target amount for home purchase or down payment?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:32.468736",
+      "question_id": "goals_home_purchase_amount",
+      "answer_value": 23000000.0,
+      "question_text": "What is your target amount for home purchase or down payment?",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_home_purchase_timeframe": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:32.479702",
+      "question_id": "goals_home_purchase_timeframe",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "By when would you like to achieve your home purchase goal?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 13
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:32.505378",
+      "question_id": "goals_home_purchase_timeframe",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "By when would you like to achieve your home purchase goal?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 13
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:32.511768",
+      "question_id": "goals_home_purchase_timeframe",
+      "question_text": "By when would you like to achieve your home purchase goal?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:35.685342",
+      "question_id": "goals_home_purchase_timeframe",
+      "answer_value": "5-10 years",
+      "question_text": "By when would you like to achieve your home purchase goal?",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_importance_flexibility": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:35.697050",
+      "question_id": "goals_importance_flexibility",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "For your financial goals, please indicate the most important factors:",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 23
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:35.724891",
+      "question_id": "goals_importance_flexibility",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "For your financial goals, please indicate the most important factors:",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 23
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:35.733639",
+      "question_id": "goals_importance_flexibility",
+      "question_text": "For your financial goals, please indicate the most important factors:"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:32:37.805883",
+      "question_id": "goals_importance_flexibility",
+      "answer_value": "Achieving the goal by the target date is most important, amount is flexible",
+      "question_text": "For your financial goals, please indicate the most important factors:",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "goals_confirmation": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:37.819782",
+      "question_id": "goals_confirmation",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "You've successfully set up your initial financial goals. Would you like to continue with deeper financial profiling questions?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 24
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:32:37.845400",
+      "question_id": "goals_confirmation",
+      "question_type": "goal",
+      "question_category": "goals",
+      "question_text": "You've successfully set up your initial financial goals. Would you like to continue with deeper financial profiling questions?",
+      "input_type": "radio",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 24
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:32:37.851788",
+      "question_id": "goals_confirmation",
+      "question_text": "You've successfully set up your initial financial goals. Would you like to continue with deeper financial profiling questions?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:33:27.988753",
+      "question_id": "goals_confirmation",
+      "answer_value": "Yes, continue with more questions",
+      "question_text": "You've successfully set up your initial financial goals. Would you like to continue with deeper financial profiling questions?",
+      "question_type": "goal",
+      "question_category": "goals"
+    }
+  ],
+  "next_level_financial_expenses_essential": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:28.004358",
+      "question_id": "next_level_financial_expenses_essential",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Of your monthly expenses, approximately what percentage would you consider essential (housing, food, utilities)?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 102
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:28.035337",
+      "question_id": "next_level_financial_expenses_essential",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Of your monthly expenses, approximately what percentage would you consider essential (housing, food, utilities)?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 102
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:33:28.042122",
+      "question_id": "next_level_financial_expenses_essential",
+      "question_text": "Of your monthly expenses, approximately what percentage would you consider essential (housing, food, utilities)?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:33:34.204112",
+      "question_id": "next_level_financial_expenses_essential",
+      "answer_value": 50.0,
+      "question_text": "Of your monthly expenses, approximately what percentage would you consider essential (housing, food, utilities)?",
+      "question_type": "next_level",
+      "question_category": "financial_basics"
+    }
+  ],
+  "next_level_financial_savings_goal": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:34.215155",
+      "question_id": "next_level_financial_savings_goal",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Do you have a specific savings goal or target amount you're working towards?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 103
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:34.240833",
+      "question_id": "next_level_financial_savings_goal",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Do you have a specific savings goal or target amount you're working towards?",
+      "input_type": "text",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 103
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:33:34.248658",
+      "question_id": "next_level_financial_savings_goal",
+      "question_text": "Do you have a specific savings goal or target amount you're working towards?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:33:42.144651",
+      "question_id": "next_level_financial_savings_goal",
+      "answer_value": "no",
+      "question_text": "Do you have a specific savings goal or target amount you're working towards?",
+      "question_type": "next_level",
+      "question_category": "financial_basics"
+    }
+  ],
+  "llm_next_level_demographics_1742290425_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:45.817056",
+      "question_id": "llm_next_level_demographics_1742290425_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:45.830405",
+      "question_id": "llm_next_level_demographics_1742290425_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your cost of living and financial goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.113955",
+      "question_id": "llm_next_level_demographics_1742290425_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    }
+  ],
+  "llm_next_level_financial_basics_1742290438_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:58.935023",
+      "question_id": "llm_next_level_financial_basics_1742290438_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Can you provide more details on how your savings are currently allocated, such as in cash, investments, or retirement accounts?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:33:58.948356",
+      "question_id": "llm_next_level_financial_basics_1742290438_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    }
+  ],
+  "llm_next_level_assets_and_debts_1742290443_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.085868",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.100864",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "How do you prioritize liquidity in your asset portfolio, and do you have any strategies in place to manage potential risks?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.161165",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.165409",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "How do you prioritize liquidity in your asset portfolio, and do you have any strategies in place to manage potential risks?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:19.423494",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:34:19.429971",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:35:28.091672",
+      "question_id": "llm_next_level_assets_and_debts_1742290443_0",
+      "answer_value": "yes - home! but i already mentioned this??"
+    }
+  ],
+  "llm_next_level_demographics_1742290443_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.141463",
+      "question_id": "llm_next_level_demographics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.148621",
+      "question_id": "llm_next_level_demographics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your cost of living and financial goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.174283",
+      "question_id": "llm_next_level_demographics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:34:03.179978",
+      "question_id": "llm_next_level_demographics_1742290443_0",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:34:19.383192",
+      "question_id": "llm_next_level_demographics_1742290443_0",
+      "answer_value": "fully dependent - so will need to take into account "
+    }
+  ],
+  "llm_next_level_financial_basics_1742290443_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.154945",
+      "question_id": "llm_next_level_financial_basics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Can you provide more details on how your savings are currently allocated, such as in cash, investments, or retirement accounts?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:03.158133",
+      "question_id": "llm_next_level_financial_basics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:34:19.396414",
+      "question_id": "llm_next_level_financial_basics_1742290443_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    }
+  ],
+  "llm_next_level_demographics_1742290528_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.105510",
+      "question_id": "llm_next_level_demographics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.112018",
+      "question_id": "llm_next_level_demographics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your cost of living and financial goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.140520",
+      "question_id": "llm_next_level_demographics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your cost of living and financial goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.162847",
+      "question_id": "llm_next_level_demographics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Can you provide more details about your dependent's financial needs and how they impact your current financial planning?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.166301",
+      "question_id": "llm_next_level_demographics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your cost of living and financial goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    }
+  ],
+  "llm_next_level_financial_basics_1742290528_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.118575",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Can you provide more details on how your savings are currently allocated, such as in cash, investments, or retirement accounts?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.124244",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.170009",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Can you provide more details on how your savings are currently allocated, such as in cash, investments, or retirement accounts?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.173660",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.185549",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:35:28.188895",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "question_text": "What portion of your monthly expenses do you consider discretionary versus essential, and are there areas where you might be able to reduce spending?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:37:02.139098",
+      "question_id": "llm_next_level_financial_basics_1742290528_0",
+      "answer_value": "50% essential"
+    }
+  ],
+  "llm_next_level_assets_and_debts_1742290528_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.129881",
+      "question_id": "llm_next_level_assets_and_debts_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.135164",
+      "question_id": "llm_next_level_assets_and_debts_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "How do you prioritize liquidity in your asset portfolio, and do you have any strategies in place to manage potential risks?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.177080",
+      "question_id": "llm_next_level_assets_and_debts_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:35:28.181232",
+      "question_id": "llm_next_level_assets_and_debts_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "How do you prioritize liquidity in your asset portfolio, and do you have any strategies in place to manage potential risks?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:02.153977",
+      "question_id": "llm_next_level_assets_and_debts_1742290528_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets such as real estate or vehicles in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    }
+  ],
+  "behavioral_loss_aversion_1": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:02.183080",
+      "question_id": "behavioral_loss_aversion_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "How much do you agree with this statement: 'I feel the pain of financial losses more strongly than the pleasure of equivalent gains.'",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:37:02.190722",
+      "question_id": "behavioral_loss_aversion_1",
+      "question_text": "How much do you agree with this statement: 'I feel the pain of financial losses more strongly than the pleasure of equivalent gains.'"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:37:10.716356",
+      "question_id": "behavioral_loss_aversion_1",
+      "answer_value": "4",
+      "question_text": "How much do you agree with this statement: 'I feel the pain of financial losses more strongly than the pleasure of equivalent gains.'",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology"
+    }
+  ],
+  "behavioral_fomo_1": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:10.732349",
+      "question_id": "behavioral_fomo_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "When you hear about others making significant gains in an investment that you don't own, how likely are you to feel you should invest in it too?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:10.760668",
+      "question_id": "behavioral_fomo_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "When you hear about others making significant gains in an investment that you don't own, how likely are you to feel you should invest in it too?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 2
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:37:10.773825",
+      "question_id": "behavioral_fomo_1",
+      "question_text": "When you hear about others making significant gains in an investment that you don't own, how likely are you to feel you should invest in it too?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:37:31.015528",
+      "question_id": "behavioral_fomo_1",
+      "answer_value": "4",
+      "question_text": "When you hear about others making significant gains in an investment that you don't own, how likely are you to feel you should invest in it too?",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology"
+    }
+  ],
+  "behavioral_overconfidence_1": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:31.029022",
+      "question_id": "behavioral_overconfidence_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "When making investment decisions, how confident are you in your ability to outperform the market?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:31.056376",
+      "question_id": "behavioral_overconfidence_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "When making investment decisions, how confident are you in your ability to outperform the market?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 3
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:37:31.064463",
+      "question_id": "behavioral_overconfidence_1",
+      "question_text": "When making investment decisions, how confident are you in your ability to outperform the market?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:37:47.917751",
+      "question_id": "behavioral_overconfidence_1",
+      "answer_value": "6",
+      "question_text": "When making investment decisions, how confident are you in your ability to outperform the market?",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology"
+    }
+  ],
+  "behavioral_risk_practice_1": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:47.932357",
+      "question_id": "behavioral_risk_practice_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 4
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:37:47.959547",
+      "question_id": "behavioral_risk_practice_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 4
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:37:47.967386",
+      "question_id": "behavioral_risk_practice_1",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?"
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:38:05.129379",
+      "question_id": "behavioral_risk_practice_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 4
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:38:05.143204",
+      "question_id": "behavioral_risk_practice_1",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?"
+    },
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-18T17:38:17.236030",
+      "question_id": "behavioral_risk_practice_1",
+      "answer_value": "Sell some investments to reduce risk",
+      "question_text": "If your investment portfolio suddenly dropped 20% in value, what would you most likely do?",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology"
+    }
+  ],
+  "behavioral_emotional_investing_1": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:38:17.249674",
+      "question_id": "behavioral_emotional_investing_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "How much do your emotions (fear, excitement, anxiety, etc.) typically influence your financial decisions?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 5
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-18T17:38:17.282206",
+      "question_id": "behavioral_emotional_investing_1",
+      "question_type": "behavioral",
+      "question_category": "financial_psychology",
+      "question_text": "How much do your emotions (fear, excitement, anxiety, etc.) typically influence your financial decisions?",
+      "input_type": "slider",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 5
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-18T17:38:17.291022",
+      "question_id": "behavioral_emotional_investing_1",
+      "question_text": "How much do your emotions (fear, excitement, anxiety, etc.) typically influence your financial decisions?"
+    }
+  ]
+}

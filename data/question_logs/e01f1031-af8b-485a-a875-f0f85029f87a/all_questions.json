@@ -1,0 +1,105 @@
+{
+  "llm_next_level_demographics_1742206307_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:47.020768",
+      "question_id": "llm_next_level_demographics_1742206307_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Are there any financial responsibilities or commitments you have, such as supporting family members or paying off student loans?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:47.023840",
+      "question_id": "llm_next_level_demographics_1742206307_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "How does living in Mumbai influence your financial planning, particularly in terms of cost of living and saving for future goals?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:54.523117",
+      "question_id": "llm_next_level_demographics_1742206307_0",
+      "question_type": "next_level",
+      "question_category": "demographics",
+      "question_text": "Are there any financial responsibilities or commitments you have, such as supporting family members or paying off student loans?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-17T18:11:54.527002",
+      "question_id": "llm_next_level_demographics_1742206307_0",
+      "question_text": "Are there any financial responsibilities or commitments you have, such as supporting family members or paying off student loans?"
+    }
+  ],
+  "llm_next_level_financial_basics_1742206310_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:50.828565",
+      "question_id": "llm_next_level_financial_basics_1742206310_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "Can you provide more details on how your savings are currently allocated across different accounts or investments?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:50.832581",
+      "question_id": "llm_next_level_financial_basics_1742206310_0",
+      "question_type": "next_level",
+      "question_category": "financial_basics",
+      "question_text": "What are your primary financial goals over the next 5 to 10 years, and how do you plan to achieve them?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    }
+  ],
+  "llm_next_level_assets_and_debts_1742206314_0": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:54.512204",
+      "question_id": "llm_next_level_assets_and_debts_1742206314_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "Do you have any plans to acquire major assets, such as real estate or vehicles, in the near future?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 100
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-17T18:11:54.515919",
+      "question_id": "llm_next_level_assets_and_debts_1742206314_0",
+      "question_type": "next_level",
+      "question_category": "assets_and_debts",
+      "question_text": "How liquid are your current assets, and do you have a strategy in place for accessing funds quickly if needed?",
+      "input_type": "text",
+      "is_llm_generated": true,
+      "is_fallback": false,
+      "is_required": false,
+      "order": 101
+    }
+  ]
+}

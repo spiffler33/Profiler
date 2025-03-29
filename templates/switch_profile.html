@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Switch Profile{% endblock %}
+
+{% block content %}
+<div class="switch-profile-container">
+    <h2>Choose a Profile</h2>
+    
+    <div class="profile-list">
+        {% if profiles %}
+        <div class="profile-cards">
+            {% for profile in profiles %}
+            <div class="profile-card">
+                <div class="profile-info">
+                    <h3>{{ profile.name }}</h3>
+                    <p class="profile-email">{{ profile.email }}</p>
+                    <p class="profile-created">Created: {{ profile.created_at[:10] }}</p>
+                </div>
+                <a href="{{ url_for('questions', profile_id=profile.id) }}" class="btn primary">Select</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-profiles">
+            <p>You don't have any profiles yet.</p>
+        </div>
+        {% endif %}
+        
+        <div class="create-new-section">
+            <h3>Create a New Profile</h3>
+            <p>Start a new financial profile to track a different financial situation.</p>
+            <a href="{{ url_for('create_profile') }}" class="btn secondary">Create New Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

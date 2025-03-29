@@ -1,0 +1,65 @@
+{
+  "demographics_health_status": {
+    "question_id": "demographics_health_status",
+    "question_text": "How would you rate your overall health?",
+    "question_type": "core",
+    "generated_at": "2025-03-28T08:12:36.437993",
+    "displayed_at": null,
+    "answered_at": "2025-03-28T08:14:29.092123",
+    "answer": "Fair"
+  },
+  "financial_basics_monthly_expenses": {
+    "question_id": "financial_basics_monthly_expenses",
+    "question_text": "What are your average monthly expenses?",
+    "question_type": "core",
+    "generated_at": "2025-03-28T09:20:06.046806",
+    "displayed_at": null,
+    "answered_at": "2025-03-28T09:20:15.132490",
+    "answer": "34000"
+  },
+  "financial_basics_savings_percentage": {
+    "question_id": "financial_basics_savings_percentage",
+    "question_text": "What percentage of your income do you save monthly?",
+    "question_type": "core",
+    "generated_at": "2025-03-29T09:02:28.950305",
+    "displayed_at": null,
+    "answered_at": "2025-03-29T09:02:33.886805",
+    "answer": "20"
+  },
+  "financial_basics_current_savings": {
+    "question_id": "financial_basics_current_savings",
+    "question_text": "What is the total value of your current savings and investments?",
+    "question_type": "core",
+    "generated_at": "2025-03-29T09:02:33.917641",
+    "displayed_at": null,
+    "answered_at": "2025-03-29T09:02:40.046768",
+    "answer": "3000000"
+  },
+  "assets_debts_total_debt": {
+    "question_id": "assets_debts_total_debt",
+    "question_text": "What is your total outstanding debt?",
+    "question_type": "core",
+    "generated_at": "2025-03-29T09:02:40.062328",
+    "displayed_at": null,
+    "answered_at": "2025-03-29T09:02:43.316686",
+    "answer": "0"
+  },
+  "assets_debts_housing_loan": {
+    "question_id": "assets_debts_housing_loan",
+    "question_text": "Do you have a housing loan?",
+    "question_type": "core",
+    "generated_at": "2025-03-29T09:02:43.335896",
+    "displayed_at": null,
+    "answered_at": "2025-03-29T09:02:45.356695",
+    "answer": "No"
+  },
+  "demographics_age": {
+    "question_id": "demographics_age",
+    "question_text": "What is your age?",
+    "question_type": "core",
+    "generated_at": "2025-03-29T09:02:45.373181",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer": null
+  }
+}

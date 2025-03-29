@@ -1,0 +1,1419 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Cache Management{% endblock %}
+{% block page_title %}Cache Management{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Cache management styles */
+    .cache-type-card {
+        transition: all 0.2s ease;
+        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+        margin-bottom: 1.5rem;
+    }
+    
+    .cache-type-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    }
+    
+    .cache-stats {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-item {
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.75rem;
+        width: calc(33.333% - 0.5rem);
+        text-align: center;
+    }
+    
+    .stat-item .value {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-item .label {
+        font-size: 0.85rem;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .cache-actions {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+    
+    .cache-actions .btn {
+        margin-right: 0.5rem;
+    }
+    
+    .cache-search {
+        margin-bottom: 1rem;
+        display: flex;
+    }
+    
+    .cache-search input {
+        margin-right: 0.5rem;
+    }
+    
+    .cache-entries {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+    
+    .cache-entry {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .cache-entry:last-child {
+        border-bottom: none;
+    }
+    
+    .cache-entry:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .cache-key {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #212529;
+        word-break: break-all;
+        max-width: 70%;
+    }
+    
+    .cache-entry-meta {
+        display: flex;
+        align-items: center;
+    }
+    
+    .cache-entry-meta .badge {
+        margin-right: 0.5rem;
+    }
+    
+    .cache-entry-actions .btn {
+        padding: 0.125rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .cache-performance-chart {
+        height: 250px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .performance-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+    }
+    
+    .performance-metric {
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+        padding: 0.75rem 1rem;
+        margin-right: 0.75rem;
+        margin-bottom: 0.75rem;
+        min-width: 150px;
+        text-align: center;
+    }
+    
+    .performance-metric .value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .performance-metric .label {
+        font-size: 0.75rem;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .stat-item {
+            width: 100%;
+        }
+        
+        .cache-actions {
+            flex-wrap: wrap;
+        }
+        
+        .cache-actions .btn {
+            margin-bottom: 0.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-admin">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Cache Systems Overview</h5>
+                    <div>
+                        <button class="btn btn-sm btn-primary" id="refresh-all-caches">
+                            <i class="bi bi-arrow-repeat"></i> Refresh All
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> The application uses several cache systems to improve performance. This interface allows you to monitor and manage these caches.
+                    </div>
+                    
+                    <div class="row" id="cache-types-container">
+                        <!-- Cache types will be loaded here -->
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Loading cache statistics...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-admin">
+                <div class="card-header">
+                    <h5 class="mb-0">Cache Performance Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="cache-performance-chart" id="cache-performance-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                    
+                    <div class="performance-metrics" id="performance-metrics">
+                        <!-- Performance metrics will be loaded here -->
+                        <div class="performance-metric">
+                            <div class="value">--</div>
+                            <div class="label">Hit Rate</div>
+                        </div>
+                        <div class="performance-metric">
+                            <div class="value">--</div>
+                            <div class="label">Avg. Response Time</div>
+                        </div>
+                        <div class="performance-metric">
+                            <div class="value">--</div>
+                            <div class="label">Memory Usage</div>
+                        </div>
+                        <div class="performance-metric">
+                            <div class="value">--</div>
+                            <div class="label">Load Reduction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-admin">
+                <div class="card-header">
+                    <h5 class="mb-0">Cache Configuration</h5>
+                </div>
+                <div class="card-body">
+                    <form id="cache-config-form">
+                        <div class="mb-3">
+                            <label for="monteCarloCacheSize" class="form-label">Monte Carlo Cache Size</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="monteCarloCacheSize" placeholder="100">
+                                <span class="input-group-text">entries</span>
+                            </div>
+                            <div class="form-text">Maximum number of entries stored in the Monte Carlo simulation cache.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="monteCarloCacheTTL" class="form-label">Monte Carlo Cache TTL</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="monteCarloCacheTTL" placeholder="3600">
+                                <span class="input-group-text">seconds</span>
+                            </div>
+                            <div class="form-text">Time-to-live for Monte Carlo simulation cache entries.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="apiCacheTTL" class="form-label">API Cache TTL</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="apiCacheTTL" placeholder="300">
+                                <span class="input-group-text">seconds</span>
+                            </div>
+                            <div class="form-text">Time-to-live for API response cache entries.</div>
+                        </div>
+                        
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="enableApiCache" checked>
+                            <label class="form-check-label" for="enableApiCache">Enable API Cache</label>
+                        </div>
+                        
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="persistCache" checked>
+                            <label class="form-check-label" for="persistCache">Persist Cache to Disk</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Configuration</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card-admin">
+                <div class="card-header">
+                    <h5 class="mb-0">Cache Maintenance</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>Clear All Caches</h6>
+                        <p>This will clear all cache entries across all cache systems. This operation cannot be undone.</p>
+                        <button class="btn btn-danger" id="clear-all-caches">
+                            <i class="bi bi-trash"></i> Clear All Caches
+                        </button>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6>Cache Invalidation</h6>
+                        <p>Invalidate cache entries by type or pattern.</p>
+                        <form id="cache-invalidation-form" class="mb-3">
+                            <div class="mb-3">
+                                <label for="cacheType" class="form-label">Cache Type</label>
+                                <select class="form-select" id="cacheType">
+                                    <option value="monte_carlo">Monte Carlo Simulation</option>
+                                    <option value="api">API Responses</option>
+                                    <option value="general">General Application</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="cachePattern" class="form-label">Pattern (optional)</label>
+                                <input type="text" class="form-control" id="cachePattern" placeholder="e.g., goal_probability">
+                                <div class="form-text">Only invalidate cache entries matching this pattern.</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-x-circle"></i> Invalidate Cache
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <h6>Cache Backup/Restore</h6>
+                        <p>Backup or restore the cache to/from a file.</p>
+                        <div class="d-flex">
+                            <button class="btn btn-outline-primary me-2" id="backup-cache">
+                                <i class="bi bi-download"></i> Backup
+                            </button>
+                            <button class="btn btn-outline-secondary" id="restore-cache">
+                                <i class="bi bi-upload"></i> Restore
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cache Entries Modal -->
+<div class="modal fade" id="cacheEntriesModal" tabindex="-1" aria-labelledby="cacheEntriesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cacheEntriesModalLabel">Cache Entries</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="cache-search mb-3">
+                    <input type="text" class="form-control" id="entriesSearchInput" placeholder="Search entries...">
+                    <button type="button" class="btn btn-primary" id="entriesSearchButton">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                
+                <div class="cache-entries" id="modal-cache-entries">
+                    <!-- Cache entries will be loaded here -->
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading cache entries...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="invalidateSelectedEntries">Invalidate Selected</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cache Entry Details Modal -->
+<div class="modal fade" id="cacheEntryDetailModal" tabindex="-1" aria-labelledby="cacheEntryDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cacheEntryDetailModalLabel">Cache Entry Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <dl>
+                    <dt>Key</dt>
+                    <dd id="entry-detail-key" class="font-monospace"></dd>
+                    
+                    <dt>Created</dt>
+                    <dd id="entry-detail-created"></dd>
+                    
+                    <dt>Expires</dt>
+                    <dd id="entry-detail-expires"></dd>
+                    
+                    <dt>Size</dt>
+                    <dd id="entry-detail-size"></dd>
+                    
+                    <dt>Type</dt>
+                    <dd id="entry-detail-type"></dd>
+                </dl>
+                
+                <div class="mb-3">
+                    <h6>Value Preview</h6>
+                    <div class="border rounded p-3 bg-light">
+                        <pre id="entry-detail-value" class="mb-0" style="max-height: 200px; overflow: auto;"></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="invalidateDetailEntry">Invalidate</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- API service components -->
+{% if 'api_service' not in request.args or request.args.get('api_service') != 'disable' %}
+<script src="{{ url_for('static', filename='js/services/ApiService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/ErrorHandlingService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/LoadingStateManager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/dataEventBus.js') }}"></script>
+<script src="{{ url_for('static', filename='js/services/CacheManagementService.js') }}"></script>
+{% endif %}
+
+<!-- Cache management integration -->
+<script src="{{ url_for('static', filename='js/cache_management_integration.js') }}"></script>
+
+<script>
+    // Cache data
+    let cacheStats = null;
+    let selectedCacheType = null;
+    let cacheEntries = {};
+    let selectedEntries = new Set();
+    let performanceData = {
+        hitRates: [],
+        responseTimes: []
+    };
+    
+    // DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize cache management
+        if (window.CacheManagementService) {
+            CacheManagementService.initialize();
+        }
+        
+        // Load initial data
+        loadCacheStats();
+        setupEventListeners();
+        initPerformanceChart();
+    });
+    
+    // Set up event listeners
+    function setupEventListeners() {
+        // Refresh all caches button
+        document.getElementById('refresh-all-caches').addEventListener('click', function() {
+            refreshAllCaches();
+        });
+        
+        // Clear all caches button
+        document.getElementById('clear-all-caches').addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear all caches? This action cannot be undone.')) {
+                clearAllCaches();
+            }
+        });
+        
+        // Cache invalidation form
+        document.getElementById('cache-invalidation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cacheType = document.getElementById('cacheType').value;
+            const pattern = document.getElementById('cachePattern').value;
+            
+            invalidateCache(cacheType, pattern);
+        });
+        
+        // Cache config form
+        document.getElementById('cache-config-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const config = {
+                monte_carlo: {
+                    max_size: parseInt(document.getElementById('monteCarloCacheSize').value, 10) || 100,
+                    ttl: parseInt(document.getElementById('monteCarloCacheTTL').value, 10) || 3600
+                },
+                api: {
+                    ttl: parseInt(document.getElementById('apiCacheTTL').value, 10) || 300,
+                    enabled: document.getElementById('enableApiCache').checked
+                },
+                persist: document.getElementById('persistCache').checked
+            };
+            
+            saveCacheConfig(config);
+        });
+        
+        // Cache backup/restore buttons
+        document.getElementById('backup-cache').addEventListener('click', function() {
+            backupCache();
+        });
+        
+        document.getElementById('restore-cache').addEventListener('click', function() {
+            restoreCache();
+        });
+        
+        // Cache entries modal search
+        document.getElementById('entriesSearchButton').addEventListener('click', function() {
+            const searchTerm = document.getElementById('entriesSearchInput').value;
+            searchCacheEntries(searchTerm);
+        });
+        
+        // Filter as you type (debounced)
+        let searchTimeout;
+        document.getElementById('entriesSearchInput').addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = this.value;
+                filterCacheEntries(searchTerm);
+            }, 300);
+        });
+        
+        // Invalidate selected entries
+        document.getElementById('invalidateSelectedEntries').addEventListener('click', function() {
+            invalidateSelectedEntries();
+        });
+        
+        // Invalidate entry from detail modal
+        document.getElementById('invalidateDetailEntry').addEventListener('click', function() {
+            const key = document.getElementById('entry-detail-key').textContent;
+            invalidateCacheEntry(key);
+        });
+    }
+    
+    // Load cache statistics
+    function loadCacheStats() {
+        if (window.CacheManagementService) {
+            CacheManagementService.getCacheStats({ forceRefresh: true })
+                .then(data => {
+                    cacheStats = data;
+                    renderCacheTypes(data);
+                    updatePerformanceMetrics(data);
+                })
+                .catch(error => {
+                    console.error('Error loading cache stats:', error);
+                    const container = document.getElementById('cache-types-container');
+                    container.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-danger">Error loading cache statistics. Please try again.</div>
+                        </div>
+                    `;
+                });
+        } else {
+            // Fallback to fetch API
+            fetch('/api/v2/admin/cache/stats')
+                .then(response => response.json())
+                .then(data => {
+                    cacheStats = data;
+                    renderCacheTypes(data);
+                    updatePerformanceMetrics(data);
+                })
+                .catch(error => {
+                    console.error('Error loading cache stats:', error);
+                    const container = document.getElementById('cache-types-container');
+                    container.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-danger">Error loading cache statistics. Please try again.</div>
+                        </div>
+                    `;
+                });
+        }
+    }
+    
+    // Render cache types
+    function renderCacheTypes(data) {
+        const container = document.getElementById('cache-types-container');
+        container.innerHTML = '';
+        
+        // Check if data exists
+        if (!data || !data.caches || Object.keys(data.caches).length === 0) {
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-info">No cache systems found.</div>
+                </div>
+            `;
+            return;
+        }
+        
+        // Render each cache type
+        Object.entries(data.caches).forEach(([type, stats]) => {
+            const cacheTypeCol = document.createElement('div');
+            cacheTypeCol.className = 'col-lg-4 col-md-6 mb-4';
+            
+            const hitRate = (stats.hits / (stats.hits + stats.misses || 1) * 100).toFixed(1);
+            const memoryUsage = formatBytes(stats.memory_usage_estimate || 0);
+            
+            cacheTypeCol.innerHTML = `
+                <div class="cache-type-card card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">${formatCacheType(type)}</h5>
+                        <span class="badge ${hitRate > 70 ? 'bg-success' : hitRate > 40 ? 'bg-warning' : 'bg-danger'}">
+                            ${hitRate}% hit rate
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="cache-stats">
+                            <div class="stat-item">
+                                <div class="value">${stats.size || 0}</div>
+                                <div class="label">Entries</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="value">${stats.hits || 0}</div>
+                                <div class="label">Hits</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="value">${stats.misses || 0}</div>
+                                <div class="label">Misses</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="value">${memoryUsage}</div>
+                                <div class="label">Memory</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="value">${stats.ttl ? (stats.ttl / 60).toFixed(0) : 'N/A'}</div>
+                                <div class="label">TTL (min)</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="value">${stats.last_save_time ? timeSince(new Date(stats.last_save_time)) : 'Never'}</div>
+                                <div class="label">Last Saved</div>
+                            </div>
+                        </div>
+                        
+                        <div class="cache-actions">
+                            <button class="btn btn-sm btn-outline-primary view-entries" data-cache-type="${type}">
+                                View Entries
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning invalidate-cache" data-cache-type="${type}">
+                                Invalidate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(cacheTypeCol);
+            
+            // Add event listeners
+            const viewButton = cacheTypeCol.querySelector('.view-entries');
+            viewButton.addEventListener('click', function() {
+                viewCacheEntries(type);
+            });
+            
+            const invalidateButton = cacheTypeCol.querySelector('.invalidate-cache');
+            invalidateButton.addEventListener('click', function() {
+                if (confirm(`Are you sure you want to invalidate the ${formatCacheType(type)} cache?`)) {
+                    invalidateCache(type);
+                }
+            });
+        });
+        
+        // Add event to update performance chart when all rendered
+        updatePerformanceChart(data);
+    }
+    
+    // View cache entries
+    function viewCacheEntries(cacheType) {
+        selectedCacheType = cacheType;
+        
+        // Update modal title
+        const modalTitle = document.getElementById('cacheEntriesModalLabel');
+        modalTitle.textContent = `${formatCacheType(cacheType)} Cache Entries`;
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('cacheEntriesModal'));
+        modal.show();
+        
+        // Load cache entries
+        loadCacheEntries(cacheType);
+    }
+    
+    // Load cache entries
+    function loadCacheEntries(cacheType, filter = '') {
+        const entriesContainer = document.getElementById('modal-cache-entries');
+        entriesContainer.innerHTML = `
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading cache entries...</p>
+            </div>
+        `;
+        
+        if (window.CacheManagementService) {
+            CacheManagementService.getCacheEntries(cacheType, { 
+                forceRefresh: true,
+                filter: filter
+            })
+                .then(data => {
+                    cacheEntries[cacheType] = data;
+                    renderCacheEntries(data);
+                })
+                .catch(error => {
+                    console.error('Error loading cache entries:', error);
+                    entriesContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            Error loading cache entries. Please try again.
+                        </div>
+                    `;
+                });
+        } else {
+            // Fallback to fetch API
+            let url = `/api/v2/admin/cache/entries/${cacheType}`;
+            if (filter) {
+                url += `?filter=${encodeURIComponent(filter)}`;
+            }
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    cacheEntries[cacheType] = data;
+                    renderCacheEntries(data);
+                })
+                .catch(error => {
+                    console.error('Error loading cache entries:', error);
+                    entriesContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            Error loading cache entries. Please try again.
+                        </div>
+                    `;
+                });
+        }
+    }
+    
+    // Render cache entries
+    function renderCacheEntries(entries) {
+        const entriesContainer = document.getElementById('modal-cache-entries');
+        entriesContainer.innerHTML = '';
+        
+        // Check if entries exist
+        if (!entries || entries.length === 0) {
+            entriesContainer.innerHTML = `
+                <div class="text-center py-4">
+                    <p class="text-muted">No cache entries found.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Reset selected entries
+        selectedEntries.clear();
+        
+        // Render each entry
+        entries.forEach(entry => {
+            const entryElement = document.createElement('div');
+            entryElement.className = 'cache-entry';
+            entryElement.dataset.key = entry.key;
+            
+            const expiryStatus = getExpiryStatus(entry.expires);
+            
+            entryElement.innerHTML = `
+                <div class="cache-key">${entry.key}</div>
+                <div class="cache-entry-meta">
+                    <span class="badge ${expiryStatus.class}">${expiryStatus.text}</span>
+                    <div class="cache-entry-actions">
+                        <button class="btn btn-sm btn-outline-info view-entry">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger invalidate-entry">
+                            <i class="bi bi-x"></i>
+                        </button>
+                        <div class="form-check d-inline-block ms-2">
+                            <input class="form-check-input select-entry" type="checkbox" value="${entry.key}">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            entriesContainer.appendChild(entryElement);
+            
+            // Add event listeners
+            const viewButton = entryElement.querySelector('.view-entry');
+            viewButton.addEventListener('click', function() {
+                viewEntryDetails(entry);
+            });
+            
+            const invalidateButton = entryElement.querySelector('.invalidate-entry');
+            invalidateButton.addEventListener('click', function() {
+                invalidateCacheEntry(entry.key);
+            });
+            
+            const checkbox = entryElement.querySelector('.select-entry');
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    selectedEntries.add(entry.key);
+                } else {
+                    selectedEntries.delete(entry.key);
+                }
+                
+                // Update invalidate selected button state
+                document.getElementById('invalidateSelectedEntries').disabled = selectedEntries.size === 0;
+            });
+        });
+    }
+    
+    // View entry details
+    function viewEntryDetails(entry) {
+        // Update modal content
+        document.getElementById('entry-detail-key').textContent = entry.key;
+        document.getElementById('entry-detail-created').textContent = formatDate(entry.created);
+        document.getElementById('entry-detail-expires').textContent = entry.expires ? formatDate(entry.expires) : 'Never';
+        document.getElementById('entry-detail-size').textContent = formatBytes(entry.size || 0);
+        document.getElementById('entry-detail-type').textContent = entry.type || 'Unknown';
+        
+        // Format value for display
+        let valueDisplay = 'No preview available';
+        if (entry.value_preview) {
+            try {
+                // Try to pretty-print JSON
+                const parsed = JSON.parse(entry.value_preview);
+                valueDisplay = JSON.stringify(parsed, null, 2);
+            } catch (e) {
+                // If not JSON, just display as is
+                valueDisplay = entry.value_preview;
+            }
+        }
+        
+        document.getElementById('entry-detail-value').textContent = valueDisplay;
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('cacheEntryDetailModal'));
+        modal.show();
+    }
+    
+    // Search cache entries
+    function searchCacheEntries(term) {
+        if (!selectedCacheType) return;
+        
+        // Load entries with filter
+        loadCacheEntries(selectedCacheType, term);
+    }
+    
+    // Filter cache entries (client-side)
+    function filterCacheEntries(term) {
+        if (!term || !selectedCacheType || !cacheEntries[selectedCacheType]) {
+            // If no term or no entries, show all
+            renderCacheEntries(cacheEntries[selectedCacheType] || []);
+            return;
+        }
+        
+        // Filter entries by term
+        const filtered = cacheEntries[selectedCacheType].filter(entry => 
+            entry.key.toLowerCase().includes(term.toLowerCase())
+        );
+        
+        // Render filtered entries
+        renderCacheEntries(filtered);
+    }
+    
+    // Invalidate cache
+    function invalidateCache(cacheType, pattern = '') {
+        if (window.CacheManagementService) {
+            CacheManagementService.invalidateCache(cacheType, { pattern })
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully invalidated ${result.count} entries from ${formatCacheType(cacheType)} cache.`);
+                        loadCacheStats();
+                        
+                        // If modal is open, refresh entries
+                        if (selectedCacheType === cacheType) {
+                            loadCacheEntries(cacheType);
+                        }
+                    } else {
+                        alert(`Error invalidating cache: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error invalidating cache:', error);
+                    alert(`Error invalidating cache: ${error.message || 'Unknown error'}`);
+                });
+        } else {
+            // Fallback to fetch API
+            const requestData = {
+                type: cacheType
+            };
+            
+            if (pattern) {
+                requestData.pattern = pattern;
+            }
+            
+            fetch('/api/v2/admin/cache/invalidate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully invalidated ${result.count} entries from ${formatCacheType(cacheType)} cache.`);
+                        loadCacheStats();
+                        
+                        // If modal is open, refresh entries
+                        if (selectedCacheType === cacheType) {
+                            loadCacheEntries(cacheType);
+                        }
+                    } else {
+                        alert(`Error invalidating cache: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error invalidating cache:', error);
+                    alert(`Error invalidating cache: ${error.message || 'Unknown error'}`);
+                });
+        }
+    }
+    
+    // Invalidate single cache entry
+    function invalidateCacheEntry(key) {
+        if (!selectedCacheType) return;
+        
+        if (window.CacheManagementService) {
+            CacheManagementService.invalidateCache(selectedCacheType, { key })
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully invalidated cache entry.`);
+                        loadCacheStats();
+                        loadCacheEntries(selectedCacheType);
+                        
+                        // Hide detail modal if open
+                        const detailModal = bootstrap.Modal.getInstance(document.getElementById('cacheEntryDetailModal'));
+                        if (detailModal) {
+                            detailModal.hide();
+                        }
+                    } else {
+                        alert(`Error invalidating cache entry: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error invalidating cache entry:', error);
+                    alert(`Error invalidating cache entry: ${error.message || 'Unknown error'}`);
+                });
+        } else {
+            // Fallback to fetch API
+            fetch('/api/v2/admin/cache/invalidate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: selectedCacheType,
+                    key: key
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully invalidated cache entry.`);
+                        loadCacheStats();
+                        loadCacheEntries(selectedCacheType);
+                        
+                        // Hide detail modal if open
+                        const detailModal = bootstrap.Modal.getInstance(document.getElementById('cacheEntryDetailModal'));
+                        if (detailModal) {
+                            detailModal.hide();
+                        }
+                    } else {
+                        alert(`Error invalidating cache entry: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error invalidating cache entry:', error);
+                    alert(`Error invalidating cache entry: ${error.message || 'Unknown error'}`);
+                });
+        }
+    }
+    
+    // Invalidate selected entries
+    function invalidateSelectedEntries() {
+        if (!selectedCacheType || selectedEntries.size === 0) return;
+        
+        const keys = Array.from(selectedEntries);
+        const promises = keys.map(key => {
+            if (window.CacheManagementService) {
+                return CacheManagementService.invalidateCache(selectedCacheType, { key });
+            } else {
+                // Fallback to fetch API
+                return fetch('/api/v2/admin/cache/invalidate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: selectedCacheType,
+                        key: key
+                    })
+                }).then(response => response.json());
+            }
+        });
+        
+        Promise.all(promises)
+            .then(results => {
+                const successCount = results.filter(r => r.success).length;
+                alert(`Successfully invalidated ${successCount} of ${keys.length} cache entries.`);
+                loadCacheStats();
+                loadCacheEntries(selectedCacheType);
+            })
+            .catch(error => {
+                console.error('Error invalidating selected entries:', error);
+                alert(`Error invalidating selected entries: ${error.message || 'Unknown error'}`);
+            });
+    }
+    
+    // Clear all caches
+    function clearAllCaches() {
+        if (window.CacheManagementService) {
+            CacheManagementService.invalidateCache('all')
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully cleared all caches (${result.count} entries).`);
+                        loadCacheStats();
+                    } else {
+                        alert(`Error clearing caches: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error clearing caches:', error);
+                    alert(`Error clearing caches: ${error.message || 'Unknown error'}`);
+                });
+        } else {
+            // Fallback to fetch API
+            fetch('/api/v2/admin/cache/invalidate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'all'
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully cleared all caches (${result.count} entries).`);
+                        loadCacheStats();
+                    } else {
+                        alert(`Error clearing caches: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error clearing caches:', error);
+                    alert(`Error clearing caches: ${error.message || 'Unknown error'}`);
+                });
+        }
+    }
+    
+    // Refresh all caches
+    function refreshAllCaches() {
+        if (window.CacheManagementService) {
+            CacheManagementService.refreshAllCaches()
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully refreshed all caches.`);
+                        loadCacheStats();
+                    } else {
+                        alert(`Error refreshing caches: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error refreshing caches:', error);
+                    alert(`Error refreshing caches: ${error.message || 'Unknown error'}`);
+                });
+        } else {
+            // Fallback to fetch API
+            fetch('/api/v2/admin/cache/refresh', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(`Successfully refreshed all caches.`);
+                        loadCacheStats();
+                    } else {
+                        alert(`Error refreshing caches: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error refreshing caches:', error);
+                    alert(`Error refreshing caches: ${error.message || 'Unknown error'}`);
+                });
+        }
+    }
+    
+    // Save cache configuration
+    function saveCacheConfig(config) {
+        fetch('/api/v2/admin/cache/config', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(config)
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(`Cache configuration saved successfully.`);
+                    loadCacheStats();
+                } else {
+                    alert(`Error saving cache configuration: ${result.error || 'Unknown error'}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error saving cache configuration:', error);
+                alert(`Error saving cache configuration: ${error.message || 'Unknown error'}`);
+            });
+    }
+    
+    // Backup cache
+    function backupCache() {
+        fetch('/api/v2/admin/cache/backup', {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(`Cache backed up successfully to ${result.file_path}`);
+                } else {
+                    alert(`Error backing up cache: ${result.error || 'Unknown error'}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error backing up cache:', error);
+                alert(`Error backing up cache: ${error.message || 'Unknown error'}`);
+            });
+    }
+    
+    // Restore cache
+    function restoreCache() {
+        if (confirm('Are you sure you want to restore the cache from backup? This will overwrite the current cache.')) {
+            fetch('/api/v2/admin/cache/restore', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(`Cache restored successfully from ${result.file_path}`);
+                        loadCacheStats();
+                    } else {
+                        alert(`Error restoring cache: ${result.error || 'Unknown error'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error restoring cache:', error);
+                    alert(`Error restoring cache: ${error.message || 'Unknown error'}`);
+                });
+        }
+    }
+    
+    // Initialize performance chart
+    function initPerformanceChart() {
+        const ctx = document.getElementById('cache-performance-chart').getContext('2d');
+        
+        window.performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Hit Rate (%)',
+                        data: [],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Response Time (ms)',
+                        data: [],
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Hit Rate (%)'
+                        },
+                        min: 0,
+                        max: 100
+                    },
+                    y1: {
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Response Time (ms)'
+                        },
+                        min: 0,
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Update performance chart
+    function updatePerformanceChart(data) {
+        if (!window.performanceChart || !data || !data.performance) return;
+        
+        // Add new data point
+        const now = new Date().toLocaleTimeString();
+        
+        // Calculate average hit rate across all caches
+        let totalHits = 0;
+        let totalMisses = 0;
+        
+        Object.values(data.caches || {}).forEach(cache => {
+            totalHits += cache.hits || 0;
+            totalMisses += cache.misses || 0;
+        });
+        
+        const hitRate = totalHits + totalMisses === 0 ? 0 : 
+            (totalHits / (totalHits + totalMisses) * 100);
+        
+        // Get average response time
+        const responseTime = data.performance.average_response_time || 0;
+        
+        // Add to performance data arrays (limited to 10 points)
+        performanceData.hitRates.push(hitRate);
+        performanceData.responseTimes.push(responseTime);
+        
+        if (performanceData.hitRates.length > 10) {
+            performanceData.hitRates.shift();
+            performanceData.responseTimes.shift();
+        }
+        
+        // Generate labels
+        const labels = [];
+        for (let i = 0; i < performanceData.hitRates.length; i++) {
+            labels.push(i === performanceData.hitRates.length - 1 ? 'Now' : `-${performanceData.hitRates.length - i - 1}m`);
+        }
+        
+        // Update chart
+        window.performanceChart.data.labels = labels;
+        window.performanceChart.data.datasets[0].data = performanceData.hitRates.map(hr => parseFloat(hr.toFixed(1)));
+        window.performanceChart.data.datasets[1].data = performanceData.responseTimes.map(rt => parseFloat(rt.toFixed(1)));
+        
+        window.performanceChart.update();
+    }
+    
+    // Update performance metrics
+    function updatePerformanceMetrics(data) {
+        if (!data || !data.performance) return;
+        
+        // Calculate average hit rate across all caches
+        let totalHits = 0;
+        let totalMisses = 0;
+        
+        Object.values(data.caches || {}).forEach(cache => {
+            totalHits += cache.hits || 0;
+            totalMisses += cache.misses || 0;
+        });
+        
+        const hitRate = totalHits + totalMisses === 0 ? 0 : 
+            (totalHits / (totalHits + totalMisses) * 100);
+        
+        // Update metrics
+        const metrics = document.getElementById('performance-metrics');
+        metrics.innerHTML = `
+            <div class="performance-metric">
+                <div class="value">${hitRate.toFixed(1)}%</div>
+                <div class="label">Hit Rate</div>
+            </div>
+            <div class="performance-metric">
+                <div class="value">${(data.performance.average_response_time || 0).toFixed(1)} ms</div>
+                <div class="label">Avg. Response Time</div>
+            </div>
+            <div class="performance-metric">
+                <div class="value">${formatBytes(data.performance.total_memory_usage || 0)}</div>
+                <div class="label">Memory Usage</div>
+            </div>
+            <div class="performance-metric">
+                <div class="value">${(data.performance.load_reduction || 0).toFixed(1)}%</div>
+                <div class="label">Load Reduction</div>
+            </div>
+        `;
+    }
+    
+    // Helper functions
+    
+    // Format cache type for display
+    function formatCacheType(type) {
+        switch (type) {
+            case 'monte_carlo':
+                return 'Monte Carlo Simulation';
+            case 'api':
+                return 'API Response';
+            case 'general':
+                return 'General Application';
+            default:
+                return type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+    }
+    
+    // Format bytes to human-readable string
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+        
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+    
+    // Format date to human-readable string
+    function formatDate(dateStr) {
+        if (!dateStr) return 'N/A';
+        
+        try {
+            const date = new Date(dateStr);
+            return date.toLocaleString();
+        } catch (e) {
+            return dateStr;
+        }
+    }
+    
+    // Calculate time since a date
+    function timeSince(date) {
+        const seconds = Math.floor((new Date() - date) / 1000);
+        
+        let interval = seconds / 31536000;
+        if (interval > 1) {
+            return Math.floor(interval) + " years ago";
+        }
+        
+        interval = seconds / 2592000;
+        if (interval > 1) {
+            return Math.floor(interval) + " months ago";
+        }
+        
+        interval = seconds / 86400;
+        if (interval > 1) {
+            return Math.floor(interval) + " days ago";
+        }
+        
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours ago";
+        }
+        
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes ago";
+        }
+        
+        return Math.floor(seconds) + " seconds ago";
+    }
+    
+    // Get expiry status for cache entry
+    function getExpiryStatus(expiryDate) {
+        if (!expiryDate) {
+            return {
+                text: 'No Expiry',
+                class: 'bg-info'
+            };
+        }
+        
+        const now = new Date();
+        const expires = new Date(expiryDate);
+        
+        if (expires < now) {
+            return {
+                text: 'Expired',
+                class: 'bg-danger'
+            };
+        }
+        
+        // Calculate time until expiry
+        const diff = expires - now;
+        
+        // Less than 5 minutes
+        if (diff < 1000 * 60 * 5) {
+            return {
+                text: 'Expiring Soon',
+                class: 'bg-warning text-dark'
+            };
+        }
+        
+        // Less than 1 hour
+        if (diff < 1000 * 60 * 60) {
+            return {
+                text: 'Expires in ' + Math.ceil(diff / (1000 * 60)) + 'm',
+                class: 'bg-success'
+            };
+        }
+        
+        // More than 1 hour
+        return {
+            text: 'Valid',
+            class: 'bg-success'
+        };
+    }
+</script>
+{% endblock %}

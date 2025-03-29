@@ -1,0 +1,33 @@
+
+=== MIDDLEWARE INITIALIZED ===
+Time: 2025-03-26 14:06:38
+Exempt paths: ['/static/', '/js/', '.js', '.css', '.html', '.ico', '.png', '.jpg', '.svg', '/loading_state_manager_js', '/goal_form_probability_js', '/inline_test', '/test_frontend_components', '/serve_test_file/']
+
+=== MIDDLEWARE INITIALIZED ===
+Time: 2025-03-26 14:06:39
+Exempt paths: ['/static/', '/js/', '.js', '.css', '.html', '.ico', '.png', '.jpg', '.svg', '/loading_state_manager_js', '/goal_form_probability_js', '/inline_test', '/test_frontend_components', '/serve_test_file/']
+
+=== MIDDLEWARE INITIALIZED ===
+Time: 2025-03-26 14:07:00
+Exempt paths: ['/static/', '/js/', '.js', '.css', '.html', '.ico', '.png', '.jpg', '.svg', '/loading_state_manager_js', '/goal_form_probability_js', '/inline_test', '/test_frontend_components', '/serve_test_file/']
+
+Request path: /
+AUTH_EXEMPT set: True (global override)
+
+Request path: /static/css/tooltips.css
+AUTH_EXEMPT set: True (global override)
+
+Request path: /static/css/style.css
+AUTH_EXEMPT set: True (global override)
+
+Request path: /static/css/loading-states.css
+AUTH_EXEMPT set: True (global override)
+
+Request path: /static/js/main.js
+AUTH_EXEMPT set: True (global override)
+
+Request path: /static/js/services/LoadingStateManager.js
+AUTH_EXEMPT set: True (global override)
+
+Request path: /profile/complete
+AUTH_EXEMPT set: True (global override)

@@ -1,0 +1,29 @@
+{
+  "financial_basics_monthly_expenses": {
+    "question_id": "financial_basics_monthly_expenses",
+    "question_text": "What are your average monthly expenses?",
+    "question_type": "core",
+    "generated_at": "2025-03-28T08:31:35.439897",
+    "displayed_at": null,
+    "answered_at": "2025-03-28T08:31:42.373926",
+    "answer": "34000"
+  },
+  "financial_basics_savings_percentage": {
+    "question_id": "financial_basics_savings_percentage",
+    "question_text": "What percentage of your income do you save monthly?",
+    "question_type": "core",
+    "generated_at": "2025-03-28T09:19:48.609794",
+    "displayed_at": null,
+    "answered_at": "2025-03-28T09:19:53.359355",
+    "answer": "20"
+  },
+  "financial_basics_current_savings": {
+    "question_id": "financial_basics_current_savings",
+    "question_text": "What is the total value of your current savings and investments?",
+    "question_type": "core",
+    "generated_at": "2025-03-28T09:19:53.373183",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer": null
+  }
+}

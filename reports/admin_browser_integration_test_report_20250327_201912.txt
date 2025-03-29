@@ -1,0 +1,23 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:19:12
+
+**NOTE: Tests were run using a mock WebDriver implementation.**
+Some tests may be marked as SKIPPED when run with mock driver.
+
+## Summary
+
+Total Tests: 1
+Passed: 0
+Failed: 0
+Skipped: 1
+Pass Percentage: 0% (excluding skipped tests)
+
+## Parameters Component
+
+Tests: 1, Passed: 0, Failed: 0, Skipped: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| PA-01 | Parameter Panel Loading | SKIP |  |
+

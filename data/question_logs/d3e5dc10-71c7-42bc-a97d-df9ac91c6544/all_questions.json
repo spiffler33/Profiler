@@ -1,0 +1,56 @@
+{
+  "demographics_health_status": {
+    "question_id": "demographics_health_status",
+    "question_text": "How would you rate your overall health?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.948501",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:30:22.951814",
+    "answer": "Excellent"
+  },
+  "financial_basics_monthly_expenses": {
+    "question_id": "financial_basics_monthly_expenses",
+    "question_text": "What are your average monthly expenses?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.953085",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:30:22.954421",
+    "answer": 50000
+  },
+  "financial_basics_savings_percentage": {
+    "question_id": "financial_basics_savings_percentage",
+    "question_text": "What percentage of your income do you save monthly?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.955102",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:30:22.956418",
+    "answer": 50000
+  },
+  "financial_basics_current_savings": {
+    "question_id": "financial_basics_current_savings",
+    "question_text": "What is the total value of your current savings and investments?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.957112",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:30:22.958240",
+    "answer": 50000
+  },
+  "assets_debts_total_debt": {
+    "question_id": "assets_debts_total_debt",
+    "question_text": "What is your total outstanding debt?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.959260",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:30:22.960424",
+    "answer": 50000
+  },
+  "assets_debts_housing_loan": {
+    "question_id": "assets_debts_housing_loan",
+    "question_text": "Do you have a housing loan?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:30:22.964296",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer": null
+  }
+}

@@ -286,3 +286,66 @@ None! All phases of the consolidation plan have been completed.
   - Logical structure that maps to system architecture
 
 This consolidation effort has successfully addressed the identified redundancies in the Monte Carlo system while ensuring a smooth transition with minimal disruption. The improved maintainability, consistency, and performance will make future enhancements easier and more reliable. The project was completed successfully, and all goals were achieved.
+
+## API Redundancy Removal (Additional Improvement)
+
+While working on the Monte Carlo consolidation, we identified additional redundancies in the API code that needed to be addressed:
+
+### Identified Redundancies
+
+1. Duplicated utility functions in multiple API files:
+   - Rate limiting code
+   - Cache management
+   - Performance monitoring
+   - Error handling
+   - Admin access control
+
+2. Similar patterns implemented differently across files:
+   - Response formatting
+   - Error handling
+   - Input validation
+
+### Consolidation Strategy
+
+1. Created a new centralized API utilities module at `/api/v2/utils.py` containing:
+   - Rate limiting system with automatic cleanup
+   - Cache management functions
+   - Performance monitoring decorator
+   - Admin access control
+   - Standardized error responses
+
+2. Updated API files to use the consolidated utilities:
+   - `/api/v2/goal_probability_api.py`
+   - `/api/v2/visualization_data.py`
+   - Will update other API files in future phases
+
+### Benefits of API Consolidation
+
+- ✅ Further reduced code duplication
+  - All common API patterns now in one place
+  - Consistent implementation across endpoints
+
+- ✅ Improved maintainability
+  - Changes to utility functions only needed in one place
+  - Consistent behavior across all API endpoints
+
+- ✅ Better testability
+  - Added dedicated tests for API utilities module
+  - Integration tests to verify APIs work with consolidated code
+
+- ✅ Clear documentation
+  - Added comprehensive documentation for the API utilities
+  - Usage examples for each utility function
+
+### Validation Testing
+
+- Created a dedicated test file `/tests/api_fix/utils_consolidation_test.py`
+- Added tests to the progressive test suite
+- Verified that:
+  - Rate limiting works correctly
+  - Caching behaves as expected
+  - Performance monitoring adds metrics consistently
+  - Error handling provides consistent responses
+  - Admin access control works properly
+
+This additional improvement extends the benefits of our consolidation work beyond the Monte Carlo system to the API layer, further improving code quality and maintainability.

@@ -25,68 +25,6 @@ class ProfileAnalyticsService:
         self.profile_manager = profile_manager
         logging.basicConfig(level=logging.INFO)
         
-    @staticmethod
-    def format_inr(amount: Union[int, float, str]) -> str:
-        """
-        Format a number as Indian Rupees (INR) with proper thousands separators.
-        
-        Args:
-            amount: The amount to format
-            
-        Returns:
-            Formatted string with Rupee symbol (₹) and Indian number format
-        """
-        try:
-            # Convert to float first
-            amount_float = float(amount)
-            
-            # Convert to integer if it's a whole number
-            if amount_float.is_integer():
-                amount_float = int(amount_float)
-                
-            # Format according to Indian numbering system (lakh, crore)
-            # For example: 10,00,000 (ten lakh) instead of 1,000,000 (one million)
-            str_amount = str(amount_float)
-            
-            # Handle decimals
-            if '.' in str_amount:
-                whole, decimal = str_amount.split('.')
-            else:
-                whole, decimal = str_amount, ""
-                
-            # Format whole number part with Indian system
-            if len(whole) > 3:
-                # Add comma after first 3 digits from right
-                result = whole[-3:]
-                whole = whole[:-3]
-                
-                # Add comma after every 2 digits from right
-                while whole:
-                    result = whole[-2:] + "," + result if whole[-2:] else whole + "," + result
-                    whole = whole[:-2]
-            else:
-                result = whole
-                
-            # Add decimal if exists
-            if decimal:
-                result = result + "." + decimal
-                
-            # Add Rupee symbol
-            return f"₹{result}"
-        except (ValueError, TypeError):
-            # Return original with Rupee symbol if we can't format it
-            return f"₹{amount}"
-    
-    def __init__(self, profile_manager):
-        """
-        Initialize the profile analytics service.
-        
-        Args:
-            profile_manager: DatabaseProfileManager for accessing profiles
-        """
-        self.profile_manager = profile_manager
-        logging.basicConfig(level=logging.INFO)
-        
         # Define mapping of core questions to analytics dimensions
         self.dimension_mappings = {
             # Risk dimension
@@ -155,6 +93,58 @@ class ProfileAnalyticsService:
                 }
             }
         }
+        
+    @staticmethod
+    def format_inr(amount: Union[int, float, str]) -> str:
+        """
+        Format a number as Indian Rupees (INR) with proper thousands separators.
+        
+        Args:
+            amount: The amount to format
+            
+        Returns:
+            Formatted string with Rupee symbol (₹) and Indian number format
+        """
+        try:
+            # Convert to float first
+            amount_float = float(amount)
+            
+            # Convert to integer if it's a whole number
+            if amount_float.is_integer():
+                amount_float = int(amount_float)
+                
+            # Format according to Indian numbering system (lakh, crore)
+            # For example: 10,00,000 (ten lakh) instead of 1,000,000 (one million)
+            str_amount = str(amount_float)
+            
+            # Handle decimals
+            if '.' in str_amount:
+                whole, decimal = str_amount.split('.')
+            else:
+                whole, decimal = str_amount, ""
+                
+            # Format whole number part with Indian system
+            if len(whole) > 3:
+                # Add comma after first 3 digits from right
+                result = whole[-3:]
+                whole = whole[:-3]
+                
+                # Add comma after every 2 digits from right
+                while whole:
+                    result = whole[-2:] + "," + result if whole[-2:] else whole + "," + result
+                    whole = whole[:-2]
+            else:
+                result = whole
+                
+            # Add decimal if exists
+            if decimal:
+                result = result + "." + decimal
+                
+            # Add Rupee symbol
+            return f"₹{result}"
+        except (ValueError, TypeError):
+            # Return original with Rupee symbol if we can't format it
+            return f"₹{amount}"
     
     def generate_profile_analytics(self, profile_id: str) -> Dict[str, Any]:
         """
@@ -171,24 +161,88 @@ class ProfileAnalyticsService:
             logging.error(f"Profile {profile_id} not found")
             return {"error": "Profile not found"}
         
+        # Check if there are answers in the profile
+        if not profile.get('answers'):
+            logging.warning(f"Profile {profile_id} has no answers to analyze")
+            return {
+                "error": "No profile data to analyze",
+                "profile_id": profile_id,
+                "profile_name": profile.get("name", "Unknown"),
+                "generated_at": datetime.now().isoformat(),
+                "dimensions": {},
+                "investment_profile": {
+                    "type": "Balanced",
+                    "description": "A balanced approach to risk and return.",
+                    "allocation": {
+                        "Fixed_Income": 40,
+                        "Large_Cap_Equity": 25,
+                        "Mid_Cap_Equity": 15,
+                        "Small_Cap_Equity": 10,
+                        "International_Equity": 5,
+                        "Alternative_Investments": 5
+                    }
+                },
+                "financial_health_score": {
+                    "score": 50,
+                    "status": "Unknown",
+                    "metrics": {}
+                },
+                "behavioral_profile": {
+                    "traits": {},
+                    "summary": "Complete profile questions to generate your financial personality profile",
+                    "strengths": [],
+                    "challenges": []
+                },
+                "key_insights": ["Complete profile questions to generate financial insights"],
+                "recommendations": ["Complete profile questions to receive personalized recommendations"]
+            }
+        
         # Extract all answers from the profile
         answers = {a['question_id']: a['answer'] for a in profile.get('answers', [])}
         
-        # Initialize analytics result
-        analytics = {
-            "profile_id": profile_id,
-            "profile_name": profile.get("name", "Unknown"),
-            "generated_at": datetime.now().isoformat(),
-            "dimensions": self._calculate_dimensions(answers),
-            "answer_summary": self._generate_answer_summary(profile),
-            "investment_profile": self._determine_investment_profile(answers),
-            "financial_health_score": self._calculate_financial_health(answers),
-            "behavioral_profile": self._generate_behavioral_profile(answers),
-            "key_insights": self._extract_key_insights(profile),
-            "recommendations": self._generate_recommendations(profile)
-        }
-        
-        return analytics
+        try:
+            # Initialize analytics result
+            analytics = {
+                "profile_id": profile_id,
+                "profile_name": profile.get("name", "Unknown"),
+                "generated_at": datetime.now().isoformat(),
+                "dimensions": self._calculate_dimensions(answers),
+                "answer_summary": self._generate_answer_summary(profile),
+                "investment_profile": self._determine_investment_profile(answers),
+                "financial_health_score": self._calculate_financial_health(answers),
+                "behavioral_profile": self._generate_behavioral_profile(answers),
+                "key_insights": self._extract_key_insights(profile),
+                "recommendations": self._generate_recommendations(profile)
+            }
+            
+            return analytics
+        except Exception as e:
+            logging.error(f"Error generating analytics for profile {profile_id}: {str(e)}")
+            return {
+                "error": f"Error generating analytics: {str(e)}",
+                "profile_id": profile_id,
+                "profile_name": profile.get("name", "Unknown"),
+                "generated_at": datetime.now().isoformat(),
+                "dimensions": {},
+                "investment_profile": {
+                    "type": "Balanced",
+                    "description": "A balanced approach to risk and return.",
+                    "allocation": {}
+                },
+                "financial_health_score": {
+                    "score": 50,
+                    "status": "Unknown",
+                    "metrics": {}
+                },
+                "behavioral_profile": {
+                    "traits": {},
+                    "summary": "Error analyzing profile data",
+                    "strengths": [],
+                    "challenges": []
+                },
+                "key_insights": ["Error analyzing profile data"],
+                "recommendations": ["Please try again or contact support if the issue persists"]
+            }
     
     def _calculate_dimensions(self, answers: Dict[str, Any]) -> Dict[str, float]:
         """

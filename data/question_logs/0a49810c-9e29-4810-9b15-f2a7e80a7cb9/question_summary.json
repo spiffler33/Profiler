@@ -1,0 +1,54 @@
+{
+  "test_GREEN_text_q": {
+    "question_id": "test_GREEN_text_q",
+    "question_text": "Test GREEN Text Question",
+    "question_type": "unknown",
+    "category": "unknown",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": null,
+    "displayed_at": null,
+    "answered_at": "2025-03-21T12:43:10.645966",
+    "answer_value": "Answer for GREEN text question",
+    "lifecycle_complete": false
+  },
+  "demographics_employment_type": {
+    "question_id": "demographics_employment_type",
+    "question_text": "What is your employment type?",
+    "question_type": "core",
+    "category": "demographics",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": "2025-03-21T12:43:10.654694",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  },
+  "test_GREEN_number_q": {
+    "question_id": "test_GREEN_number_q",
+    "question_text": "Test GREEN Number Question",
+    "question_type": "unknown",
+    "category": "unknown",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": null,
+    "displayed_at": null,
+    "answered_at": "2025-03-21T12:43:10.650375",
+    "answer_value": 42.0,
+    "lifecycle_complete": false
+  },
+  "test_GREEN_select_q": {
+    "question_id": "test_GREEN_select_q",
+    "question_text": "Test GREEN Select Question",
+    "question_type": "unknown",
+    "category": "unknown",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": null,
+    "displayed_at": null,
+    "answered_at": "2025-03-21T12:43:10.653657",
+    "answer_value": "Option A",
+    "lifecycle_complete": false
+  }
+}

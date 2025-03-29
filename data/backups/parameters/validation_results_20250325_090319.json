@@ -1,0 +1,27 @@
+{
+  "timestamp": "2025-03-25T09:03:19.318560",
+  "total_goals": 36,
+  "null_values": {
+    "simulation_data": 0,
+    "scenarios": 0,
+    "adjustments": 0,
+    "last_simulation_time": 0,
+    "simulation_parameters_json": 0
+  },
+  "invalid_values": {
+    "simulation_data_invalid_json": 0,
+    "scenarios_invalid_json": 0,
+    "adjustments_invalid_json": 0,
+    "simulation_parameters_json_invalid_json": 0
+  },
+  "statistics": {
+    "fully_populated_goals": 36,
+    "goals_needing_adjustment": 0,
+    "goals_with_adjustments": 36,
+    "goals_with_sip_data": 36,
+    "goals_with_simulation_timestamp": 36,
+    "goals_with_complete_parameters": 0,
+    "indexes_created": 3,
+    "total_indexes": 3
+  }
+}

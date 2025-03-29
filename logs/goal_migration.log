@@ -1,0 +1,151 @@
+2025-03-24 19:10:09,240 - INFO - ==== Starting Goal Categories Migration for Indian Financial Context ====
+2025-03-24 19:10:09,248 - WARNING - Schema needs migration: Missing columns: category_priority, typical_timeframe_years, requires_sip, applicable_tax_section
+2025-03-24 20:08:00,974 - migrations.enhance_probability_fields - ERROR - Database error: no such column: simulation_data
+2025-03-24 20:08:00,974 - migrations.enhance_probability_fields - ERROR - Validation failed: no such column: simulation_data
+2025-03-24 20:08:00,974 - __main__ - ERROR - Migration failed: no such column: simulation_data
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_goal_probability_migration.py", line 130, in main
+    results = validate_migration()
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/enhance_probability_fields.py", line 475, in validate_migration
+    cursor.execute(f"SELECT COUNT(*) as count FROM goals WHERE {column} IS NULL")
+sqlite3.OperationalError: no such column: simulation_data
+2025-03-25 08:55:48,047 - INFO - ==== Starting Goal Categories Migration for Indian Financial Context ====
+2025-03-25 08:55:48,054 - INFO - Schema needs migration: Missing columns: category_priority, typical_timeframe_years, requires_sip, applicable_tax_section
+2025-03-25 08:55:48,054 - INFO - Running database migration for goal categories with Indian financial context...
+2025-03-25 08:55:48,071 - INFO - Migration script completed successfully
+2025-03-25 08:55:48,071 - INFO - Goal categories migration for Indian financial context completed successfully
+2025-03-25 08:55:48,071 - INFO - ==== Goal Categories Migration Completed ====
+2025-03-25 08:56:53,299 - migrations.enhance_probability_fields - INFO - Created database backup at /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/parameters_db_backup_20250325_085653.db
+2025-03-25 08:56:53,302 - migrations.enhance_probability_fields - INFO - Exported goals to /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/parameters_backup_20250325_085653.json
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column probability_partial_success to goals table
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column simulation_iterations to goals table
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column simulation_path_data to goals table
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column monthly_sip_recommended to goals table
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column probability_metrics to goals table
+2025-03-25 08:56:53,305 - migrations.enhance_probability_fields - INFO - Added column success_threshold to goals table
+2025-03-25 08:56:53,306 - migrations.enhance_probability_fields - INFO - Created index on goal_success_probability
+2025-03-25 08:56:53,306 - migrations.enhance_probability_fields - INFO - Created index on last_simulation_time
+2025-03-25 08:56:53,306 - migrations.enhance_probability_fields - INFO - Created composite index on category and goal_success_probability
+2025-03-25 08:56:53,306 - migrations.enhance_probability_fields - INFO - Successfully added new columns and indexes to the goals table
+2025-03-25 08:56:53,309 - __main__ - ERROR - Migration failed: migrate_goals() got an unexpected keyword argument 'goals'
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_goal_probability_migration.py", line 195, in main
+    results = migrate_goals(goals=goals, dry_run=args.dry_run)
+TypeError: migrate_goals() got an unexpected keyword argument 'goals'
+2025-03-25 08:57:44,179 - migrations.enhance_probability_fields - INFO - Created database backup at /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/parameters_db_backup_20250325_085744.db
+2025-03-25 08:57:44,186 - migrations.enhance_probability_fields - INFO - Exported goals to /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/parameters_backup_20250325_085744.json
+2025-03-25 08:57:44,186 - migrations.enhance_probability_fields - INFO - All new columns already exist in the goals table.
+2025-03-25 08:57:44,188 - utils.goal_data_migrator - INFO - Starting goal data migration for probability fields...
+2025-03-25 08:57:44,189 - utils.goal_data_migrator - INFO - Found 36 goals to process
+2025-03-25 08:57:44,189 - utils.goal_data_migrator - INFO - Processing goal 1/36: ac0bda57-4218-4de8-aae5-b1da004b8d70 - Home Purchase
+2025-03-25 08:57:44,191 - root - INFO - Updated goal ac0bda57-4218-4de8-aae5-b1da004b8d70
+2025-03-25 08:57:44,192 - utils.goal_data_migrator - INFO - Successfully updated goal ac0bda57-4218-4de8-aae5-b1da004b8d70 with probability fields
+2025-03-25 08:57:44,192 - utils.goal_data_migrator - INFO - Processing goal 2/36: f6b875e4-9131-4dba-88aa-dfec319a3cf5 - Home Purchase
+2025-03-25 08:57:44,192 - root - INFO - Updated goal f6b875e4-9131-4dba-88aa-dfec319a3cf5
+2025-03-25 08:57:44,193 - utils.goal_data_migrator - INFO - Successfully updated goal f6b875e4-9131-4dba-88aa-dfec319a3cf5 with probability fields
+2025-03-25 08:57:44,193 - utils.goal_data_migrator - INFO - Processing goal 3/36: a273b8c6-dc5e-4e46-a317-a108c2cacbe6 - Home Purchase
+2025-03-25 08:57:44,193 - root - INFO - Updated goal a273b8c6-dc5e-4e46-a317-a108c2cacbe6
+2025-03-25 08:57:44,193 - utils.goal_data_migrator - INFO - Successfully updated goal a273b8c6-dc5e-4e46-a317-a108c2cacbe6 with probability fields
+2025-03-25 08:57:44,193 - utils.goal_data_migrator - INFO - Processing goal 4/36: 6e75a2a2-d863-445a-bdb9-b146bd1b1d2d - Home Purchase
+2025-03-25 08:57:44,194 - root - INFO - Updated goal 6e75a2a2-d863-445a-bdb9-b146bd1b1d2d
+2025-03-25 08:57:44,194 - utils.goal_data_migrator - INFO - Successfully updated goal 6e75a2a2-d863-445a-bdb9-b146bd1b1d2d with probability fields
+2025-03-25 08:57:44,194 - utils.goal_data_migrator - INFO - Processing goal 5/36: 37589646-c586-414d-94d9-02ef619be320 - Home Purchase
+2025-03-25 08:57:44,195 - root - INFO - Updated goal 37589646-c586-414d-94d9-02ef619be320
+2025-03-25 08:57:44,195 - utils.goal_data_migrator - INFO - Successfully updated goal 37589646-c586-414d-94d9-02ef619be320 with probability fields
+2025-03-25 08:57:44,195 - utils.goal_data_migrator - INFO - Processing goal 6/36: 78bbca7d-cdd9-40de-8b2e-db91644fcae7 - Retirement Corpus
+2025-03-25 08:57:44,196 - root - INFO - Updated goal 78bbca7d-cdd9-40de-8b2e-db91644fcae7
+2025-03-25 08:57:44,196 - utils.goal_data_migrator - INFO - Successfully updated goal 78bbca7d-cdd9-40de-8b2e-db91644fcae7 with probability fields
+2025-03-25 08:57:44,196 - utils.goal_data_migrator - INFO - Processing goal 7/36: 439c5af4-d316-425a-b90e-32a633b50b1c - Home Purchase
+2025-03-25 08:57:44,197 - root - INFO - Updated goal 439c5af4-d316-425a-b90e-32a633b50b1c
+2025-03-25 08:57:44,197 - utils.goal_data_migrator - INFO - Successfully updated goal 439c5af4-d316-425a-b90e-32a633b50b1c with probability fields
+2025-03-25 08:57:44,197 - utils.goal_data_migrator - INFO - Processing goal 8/36: 82ae83af-6aac-4d5f-9fca-323dff098315 - Home Purchase
+2025-03-25 08:57:44,197 - root - INFO - Updated goal 82ae83af-6aac-4d5f-9fca-323dff098315
+2025-03-25 08:57:44,197 - utils.goal_data_migrator - INFO - Successfully updated goal 82ae83af-6aac-4d5f-9fca-323dff098315 with probability fields
+2025-03-25 08:57:44,197 - utils.goal_data_migrator - INFO - Processing goal 9/36: 0e383430-42cb-4a98-8918-1b73963ece07 - Home Purchase
+2025-03-25 08:57:44,198 - root - INFO - Updated goal 0e383430-42cb-4a98-8918-1b73963ece07
+2025-03-25 08:57:44,198 - utils.goal_data_migrator - INFO - Successfully updated goal 0e383430-42cb-4a98-8918-1b73963ece07 with probability fields
+2025-03-25 08:57:44,198 - utils.goal_data_migrator - INFO - Processing goal 10/36: ff35ace3-14fe-4d66-a21d-f00106a3d27f - Home Purchase
+2025-03-25 08:57:44,199 - root - INFO - Updated goal ff35ace3-14fe-4d66-a21d-f00106a3d27f
+2025-03-25 08:57:44,199 - utils.goal_data_migrator - INFO - Successfully updated goal ff35ace3-14fe-4d66-a21d-f00106a3d27f with probability fields
+2025-03-25 08:57:44,199 - utils.goal_data_migrator - INFO - Processing goal 11/36: 9471d0e9-ee44-41e9-82d2-31c1639dc5d3 - Home Purchase
+2025-03-25 08:57:44,200 - root - INFO - Updated goal 9471d0e9-ee44-41e9-82d2-31c1639dc5d3
+2025-03-25 08:57:44,200 - utils.goal_data_migrator - INFO - Successfully updated goal 9471d0e9-ee44-41e9-82d2-31c1639dc5d3 with probability fields
+2025-03-25 08:57:44,200 - utils.goal_data_migrator - INFO - Processing goal 12/36: 0a6a5bf7-6eb4-4fb2-b96a-0c85d2c5e1bb - Retirement at age 65
+2025-03-25 08:57:44,201 - root - INFO - Updated goal 0a6a5bf7-6eb4-4fb2-b96a-0c85d2c5e1bb
+2025-03-25 08:57:44,201 - utils.goal_data_migrator - INFO - Successfully updated goal 0a6a5bf7-6eb4-4fb2-b96a-0c85d2c5e1bb with probability fields
+2025-03-25 08:57:44,201 - utils.goal_data_migrator - INFO - Processing goal 13/36: 2e6715be-945a-46c8-a6df-71307bacda98 - Car!
+2025-03-25 08:57:44,202 - root - INFO - Updated goal 2e6715be-945a-46c8-a6df-71307bacda98
+2025-03-25 08:57:44,202 - utils.goal_data_migrator - INFO - Successfully updated goal 2e6715be-945a-46c8-a6df-71307bacda98 with probability fields
+2025-03-25 08:57:44,202 - utils.goal_data_migrator - INFO - Processing goal 14/36: 237b3b38-c60b-475c-96e5-ba769d5981af - Home Purchase
+2025-03-25 08:57:44,202 - root - INFO - Updated goal 237b3b38-c60b-475c-96e5-ba769d5981af
+2025-03-25 08:57:44,203 - utils.goal_data_migrator - INFO - Successfully updated goal 237b3b38-c60b-475c-96e5-ba769d5981af with probability fields
+2025-03-25 08:57:44,203 - utils.goal_data_migrator - INFO - Processing goal 15/36: 29da6424-974a-4773-a3b5-90e45f37de76 - Emergency Fund
+2025-03-25 08:57:44,203 - root - INFO - Updated goal 29da6424-974a-4773-a3b5-90e45f37de76
+2025-03-25 08:57:44,203 - utils.goal_data_migrator - INFO - Successfully updated goal 29da6424-974a-4773-a3b5-90e45f37de76 with probability fields
+2025-03-25 08:57:44,203 - utils.goal_data_migrator - INFO - Processing goal 16/36: 8c234125-d2e6-40c6-a442-7e9e26dcb1c0 - Home Purchase
+2025-03-25 08:57:44,204 - root - INFO - Updated goal 8c234125-d2e6-40c6-a442-7e9e26dcb1c0
+2025-03-25 08:57:44,204 - utils.goal_data_migrator - INFO - Successfully updated goal 8c234125-d2e6-40c6-a442-7e9e26dcb1c0 with probability fields
+2025-03-25 08:57:44,204 - utils.goal_data_migrator - INFO - Processing goal 17/36: a14f1025-7b17-4545-a13c-8d54da846d08 - Retirement at age 65
+2025-03-25 08:57:44,205 - root - INFO - Updated goal a14f1025-7b17-4545-a13c-8d54da846d08
+2025-03-25 08:57:44,205 - utils.goal_data_migrator - INFO - Successfully updated goal a14f1025-7b17-4545-a13c-8d54da846d08 with probability fields
+2025-03-25 08:57:44,205 - utils.goal_data_migrator - INFO - Processing goal 18/36: baab33da-2131-4474-9ce3-c7affba363a5 - Home Purchase
+2025-03-25 08:57:44,206 - root - INFO - Updated goal baab33da-2131-4474-9ce3-c7affba363a5
+2025-03-25 08:57:44,206 - utils.goal_data_migrator - INFO - Successfully updated goal baab33da-2131-4474-9ce3-c7affba363a5 with probability fields
+2025-03-25 08:57:44,206 - utils.goal_data_migrator - INFO - Processing goal 19/36: ae3ccaab-aee9-437b-9460-5994a1e9ab9e - Home Purchase
+2025-03-25 08:57:44,206 - root - INFO - Updated goal ae3ccaab-aee9-437b-9460-5994a1e9ab9e
+2025-03-25 08:57:44,207 - utils.goal_data_migrator - INFO - Successfully updated goal ae3ccaab-aee9-437b-9460-5994a1e9ab9e with probability fields
+2025-03-25 08:57:44,207 - utils.goal_data_migrator - INFO - Processing goal 20/36: 32a78fee-ca15-46db-bcd3-d758a8d7fb45 - Education Funding
+2025-03-25 08:57:44,207 - root - INFO - Updated goal 32a78fee-ca15-46db-bcd3-d758a8d7fb45
+2025-03-25 08:57:44,207 - utils.goal_data_migrator - INFO - Successfully updated goal 32a78fee-ca15-46db-bcd3-d758a8d7fb45 with probability fields
+2025-03-25 08:57:44,207 - utils.goal_data_migrator - INFO - Processing goal 21/36: 21ed4c3d-03d7-448c-b81f-1c727852b217 - Home Purchase
+2025-03-25 08:57:44,208 - root - INFO - Updated goal 21ed4c3d-03d7-448c-b81f-1c727852b217
+2025-03-25 08:57:44,208 - utils.goal_data_migrator - INFO - Successfully updated goal 21ed4c3d-03d7-448c-b81f-1c727852b217 with probability fields
+2025-03-25 08:57:44,208 - utils.goal_data_migrator - INFO - Processing goal 22/36: e7ffc844-d828-40b0-9976-24469eb989c9 - Emergency Fund
+2025-03-25 08:57:44,209 - root - INFO - Updated goal e7ffc844-d828-40b0-9976-24469eb989c9
+2025-03-25 08:57:44,209 - utils.goal_data_migrator - INFO - Successfully updated goal e7ffc844-d828-40b0-9976-24469eb989c9 with probability fields
+2025-03-25 08:57:44,209 - utils.goal_data_migrator - INFO - Processing goal 23/36: 13564d45-9be2-43b7-ac2c-861ae46ce3bb - Home Purchase
+2025-03-25 08:57:44,210 - root - INFO - Updated goal 13564d45-9be2-43b7-ac2c-861ae46ce3bb
+2025-03-25 08:57:44,210 - utils.goal_data_migrator - INFO - Successfully updated goal 13564d45-9be2-43b7-ac2c-861ae46ce3bb with probability fields
+2025-03-25 08:57:44,210 - utils.goal_data_migrator - INFO - Processing goal 24/36: 5c661d3e-b25f-4832-baf1-aa3b0ff1ef02 - Home Purchase
+2025-03-25 08:57:44,211 - root - INFO - Updated goal 5c661d3e-b25f-4832-baf1-aa3b0ff1ef02
+2025-03-25 08:57:44,211 - utils.goal_data_migrator - INFO - Successfully updated goal 5c661d3e-b25f-4832-baf1-aa3b0ff1ef02 with probability fields
+2025-03-25 08:57:44,211 - utils.goal_data_migrator - INFO - Processing goal 25/36: 082d5022-d6d9-4887-8add-f5d253a8b140 - Home Purchase
+2025-03-25 08:57:44,211 - root - INFO - Updated goal 082d5022-d6d9-4887-8add-f5d253a8b140
+2025-03-25 08:57:44,211 - utils.goal_data_migrator - INFO - Successfully updated goal 082d5022-d6d9-4887-8add-f5d253a8b140 with probability fields
+2025-03-25 08:57:44,211 - utils.goal_data_migrator - INFO - Processing goal 26/36: 3c2fef5b-fe5d-46b8-82f4-af7e2faf59ce - Home Purchase
+2025-03-25 08:57:44,212 - root - INFO - Updated goal 3c2fef5b-fe5d-46b8-82f4-af7e2faf59ce
+2025-03-25 08:57:44,212 - utils.goal_data_migrator - INFO - Successfully updated goal 3c2fef5b-fe5d-46b8-82f4-af7e2faf59ce with probability fields
+2025-03-25 08:57:44,212 - utils.goal_data_migrator - INFO - Processing goal 27/36: 7cc976a7-a599-433d-bfff-13caa6d22fc6 - Emergency Fund
+2025-03-25 08:57:44,213 - root - INFO - Updated goal 7cc976a7-a599-433d-bfff-13caa6d22fc6
+2025-03-25 08:57:44,213 - utils.goal_data_migrator - INFO - Successfully updated goal 7cc976a7-a599-433d-bfff-13caa6d22fc6 with probability fields
+2025-03-25 08:57:44,213 - utils.goal_data_migrator - INFO - Processing goal 28/36: 53c57048-86c0-49c4-a0f3-3af55dc02d62 - Retirement Corpus
+2025-03-25 08:57:44,214 - root - INFO - Updated goal 53c57048-86c0-49c4-a0f3-3af55dc02d62
+2025-03-25 08:57:44,214 - utils.goal_data_migrator - INFO - Successfully updated goal 53c57048-86c0-49c4-a0f3-3af55dc02d62 with probability fields
+2025-03-25 08:57:44,215 - utils.goal_data_migrator - INFO - Processing goal 29/36: 6abda51e-86de-4593-8c48-45eb6b16eb00 - Home Purchase
+2025-03-25 08:57:44,215 - root - INFO - Updated goal 6abda51e-86de-4593-8c48-45eb6b16eb00
+2025-03-25 08:57:44,215 - utils.goal_data_migrator - INFO - Successfully updated goal 6abda51e-86de-4593-8c48-45eb6b16eb00 with probability fields
+2025-03-25 08:57:44,215 - utils.goal_data_migrator - INFO - Processing goal 30/36: d8a09510-f946-4959-8d18-0c13655cbe10 - Education Funding
+2025-03-25 08:57:44,216 - root - INFO - Updated goal d8a09510-f946-4959-8d18-0c13655cbe10
+2025-03-25 08:57:44,216 - utils.goal_data_migrator - INFO - Successfully updated goal d8a09510-f946-4959-8d18-0c13655cbe10 with probability fields
+2025-03-25 08:57:44,216 - utils.goal_data_migrator - INFO - Processing goal 31/36: 119f9c20-8102-4961-9800-14c2090b26f4 - Home Purchase
+2025-03-25 08:57:44,217 - root - INFO - Updated goal 119f9c20-8102-4961-9800-14c2090b26f4
+2025-03-25 08:57:44,217 - utils.goal_data_migrator - INFO - Successfully updated goal 119f9c20-8102-4961-9800-14c2090b26f4 with probability fields
+2025-03-25 08:57:44,217 - utils.goal_data_migrator - INFO - Processing goal 32/36: 73b9caed-b03c-4030-95a7-970c7cd70993 - Home Purchase
+2025-03-25 08:57:44,218 - root - INFO - Updated goal 73b9caed-b03c-4030-95a7-970c7cd70993
+2025-03-25 08:57:44,218 - utils.goal_data_migrator - INFO - Successfully updated goal 73b9caed-b03c-4030-95a7-970c7cd70993 with probability fields
+2025-03-25 08:57:44,218 - utils.goal_data_migrator - INFO - Processing goal 33/36: 91caaf86-0716-48b4-9a07-1b7086d76e98 - Home Purchase
+2025-03-25 08:57:44,219 - root - INFO - Updated goal 91caaf86-0716-48b4-9a07-1b7086d76e98
+2025-03-25 08:57:44,219 - utils.goal_data_migrator - INFO - Successfully updated goal 91caaf86-0716-48b4-9a07-1b7086d76e98 with probability fields
+2025-03-25 08:57:44,219 - utils.goal_data_migrator - INFO - Processing goal 34/36: 41a4d986-67da-4d87-b861-dfa46c210cb0 - Home Purchase
+2025-03-25 08:57:44,220 - root - INFO - Updated goal 41a4d986-67da-4d87-b861-dfa46c210cb0
+2025-03-25 08:57:44,220 - utils.goal_data_migrator - INFO - Successfully updated goal 41a4d986-67da-4d87-b861-dfa46c210cb0 with probability fields
+2025-03-25 08:57:44,220 - utils.goal_data_migrator - INFO - Processing goal 35/36: a17f0276-c07d-498d-91cc-c8d4b8d2e89b - car
+2025-03-25 08:57:44,221 - root - INFO - Updated goal a17f0276-c07d-498d-91cc-c8d4b8d2e89b
+2025-03-25 08:57:44,221 - utils.goal_data_migrator - INFO - Successfully updated goal a17f0276-c07d-498d-91cc-c8d4b8d2e89b with probability fields
+2025-03-25 08:57:44,221 - utils.goal_data_migrator - INFO - Processing goal 36/36: c691560e-f59d-408d-b6e8-ffbd9c61fb64 - Retirement Corpus
+2025-03-25 08:57:44,222 - root - INFO - Updated goal c691560e-f59d-408d-b6e8-ffbd9c61fb64
+2025-03-25 08:57:44,222 - utils.goal_data_migrator - INFO - Successfully updated goal c691560e-f59d-408d-b6e8-ffbd9c61fb64 with probability fields
+2025-03-25 08:57:44,222 - utils.goal_data_migrator - INFO - Goal migration completed: 36 successful, 0 errors
+2025-03-25 08:57:44,222 - utils.goal_data_migrator - INFO - Migration report saved to /Users/coddiwomplers/Desktop/Python/Profiler4/reports/goal_migration_report_20250325_085744.json
+2025-03-25 08:57:44,224 - migrations.enhance_probability_fields - INFO - Saved validation results to /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/validation_results_20250325_085744.json
+2025-03-25 09:03:19,320 - migrations.enhance_probability_fields - INFO - Saved validation results to /Users/coddiwomplers/Desktop/Python/Profiler4/data/backups/parameters/validation_results_20250325_090319.json

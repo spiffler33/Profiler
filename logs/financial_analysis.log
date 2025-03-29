@@ -1,0 +1,623 @@
+2025-03-22 22:41:34,699 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:41:34,700 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:41:34,700 - models.financial_context_analyzer - ERROR - Error analyzing profile test-profile-123: '<' not supported between instances of 'dict' and 'int'
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_context_analyzer.py", line 203, in analyze_profile
+    tax_efficiency = self.analyze_tax_efficiency(profile)
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_context_analyzer.py", line 486, in analyze_tax_efficiency
+    if section_80c_used < self.thresholds['section_80c_limit']:
+TypeError: '<' not supported between instances of 'dict' and 'int'
+2025-03-22 22:41:34,746 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:41:34,747 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-123
+2025-03-22 22:41:34,748 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-123
+2025-03-22 22:41:34,748 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:41:34,774 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:41:34,775 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:41:34,777 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:41:34,777 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile incomplete-profile
+2025-03-22 22:41:34,778 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:41:34,778 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:41:34,805 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-123
+2025-03-22 22:41:34,806 - models.financial_context_analyzer - INFO - Suggesting question path for profile profile-with-gaps
+2025-03-22 22:41:34,806 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:41:34,806 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:41:34,813 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:41:34,849 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:41:34,849 - models.financial_context_analyzer - ERROR - Error analyzing profile test-profile-123: Test exception
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_context_analyzer.py", line 203, in analyze_profile
+    tax_efficiency = self.analyze_tax_efficiency(profile)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1093, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1097, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1152, in _execute_mock_call
+    raise effect
+Exception: Test exception
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:45:29,067 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:45:29,068 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:45:29,170 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:45:29,174 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:45:29,174 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:45:29,176 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:45:29,177 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:45:29,199 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:45:29,199 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:45:29,199 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:45:29,199 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.02 seconds
+2025-03-22 22:46:54,892 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:46:54,892 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:46:54,892 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:46:54,893 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:46:54,993 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:46:54,996 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:46:54,997 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:46:54,999 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:46:55,000 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:46:55,000 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:46:55,000 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:46:55,000 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:46:55,000 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:47:17,210 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:47:17,210 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:47:17,210 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:47:17,211 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:47:17,216 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:17,281 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:17,281 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:17,283 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:47:17,283 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:47:17,283 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:17,283 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:47:17,283 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:47:17,284 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:47:56,105 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:56,106 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:47:56,107 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:47:56,111 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:56,172 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:56,173 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:47:56,175 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-gaps
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-gaps
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-gaps
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-gaps
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-gaps
+2025-03-22 22:47:56,176 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-gaps
+2025-03-22 22:47:56,177 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-gaps in 0.00 seconds
+2025-03-22 22:48:09,497 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:48:09,498 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:48:09,499 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:48:09,503 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:48:09,505 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:48:09,505 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:48:09,507 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:48:09,508 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-gaps
+2025-03-22 22:48:09,509 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-gaps in 0.00 seconds
+2025-03-22 22:51:12,545 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:51:12,545 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-123
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,546 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-123
+2025-03-22 22:51:12,547 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-123 in 0.00 seconds
+2025-03-22 22:51:12,548 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:51:12,548 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-123
+2025-03-22 22:51:12,549 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-123
+2025-03-22 22:51:12,550 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:51:12,550 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:51:12,551 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,552 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,553 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile incomplete-profile
+2025-03-22 22:51:12,554 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:51:12,554 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:51:12,554 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-123
+2025-03-22 22:51:12,555 - models.financial_context_analyzer - INFO - Suggesting question path for profile profile-with-gaps
+2025-03-22 22:51:12,555 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:51:12,555 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:51:12,557 - models.financial_context_analyzer - INFO - Cleared cache for profile test-profile-123
+2025-03-22 22:51:12,558 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:51:12,558 - models.financial_context_analyzer - ERROR - Error analyzing profile test-profile-123: Test exception
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_context_analyzer.py", line 208, in analyze_profile
+    tax_efficiency = self.analyze_tax_efficiency(profile)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1093, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1097, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1152, in _execute_mock_call
+    raise effect
+Exception: Test exception
+2025-03-22 22:51:12,562 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:51:12,562 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:51:12,562 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:51:12,562 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:51:12,562 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:51:12,563 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:51:12,567 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:51:12,569 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,569 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:51:12,571 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-gaps
+2025-03-22 22:51:12,572 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-gaps
+2025-03-22 22:51:12,573 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-gaps in 0.00 seconds
+2025-03-22 22:52:05,560 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-123
+2025-03-22 22:52:05,561 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-123
+2025-03-22 22:52:05,562 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-123 in 0.00 seconds
+2025-03-22 22:52:05,563 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-123
+2025-03-22 22:52:05,564 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-123
+2025-03-22 22:52:05,564 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-123
+2025-03-22 22:52:05,565 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-123
+2025-03-22 22:52:05,566 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:52:05,566 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,568 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,568 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile incomplete-profile
+2025-03-22 22:52:05,569 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:52:05,569 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:52:05,570 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-123
+2025-03-22 22:52:05,570 - models.financial_context_analyzer - INFO - Suggesting question path for profile profile-with-gaps
+2025-03-22 22:52:05,571 - models.financial_context_analyzer - INFO - Generating question suggestions for profile profile-with-gaps
+2025-03-22 22:52:05,571 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile profile-with-gaps
+2025-03-22 22:52:05,572 - models.financial_context_analyzer - INFO - Cleared cache for profile test-profile-123
+2025-03-22 22:52:05,573 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-123
+2025-03-22 22:52:05,573 - models.financial_context_analyzer - ERROR - Error analyzing profile test-profile-123: Test exception
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_context_analyzer.py", line 208, in analyze_profile
+    tax_efficiency = self.analyze_tax_efficiency(profile)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1093, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1097, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/unittest/mock.py", line 1152, in _execute_mock_call
+    raise effect
+Exception: Test exception
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:52:05,578 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:52:05,579 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:52:05,583 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:52:05,585 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,585 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-integration
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-integration
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-integration
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-integration
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-integration
+2025-03-22 22:52:05,587 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-integration
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-integration in 0.00 seconds
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing tax efficiency for profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing emergency fund for profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing debt burden for profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing investment allocation for profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing insurance coverage for profile test-profile-gaps
+2025-03-22 22:52:05,588 - models.financial_context_analyzer - INFO - Analyzing goal conflicts for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Analyzing HRA optimization for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Analyzing retirement tax benefits for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Analyzing Section 80C optimization for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Analyzing health insurance adequacy for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Detecting opportunities for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Identifying risks for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Generating insights for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Categorizing insights
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Prioritizing insights
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Generating action plan from insights
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Suggesting questions for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Suggesting question path for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Generating question suggestions for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Identifying question opportunities for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Calculating financial wellness score for profile test-profile-gaps
+2025-03-22 22:52:05,589 - models.financial_context_analyzer - INFO - Completed analysis for profile test-profile-gaps in 0.00 seconds
+2025-03-25 08:55:52,016 - __main__ - WARNING - Could not backup existing parameters: No item with that key
+2025-03-25 08:55:52,016 - __main__ - INFO - Created parameters backup at data/backups/parameters/parameters_backup_20250325_085552.json
+2025-03-25 08:55:52,017 - __main__ - INFO - Database initialized successfully
+2025-03-25 08:55:52,017 - __main__ - INFO - Parameters already exist in the database, checking for updates
+2025-03-25 08:55:52,017 - __main__ - ERROR - Error during migration, rolled back: no such column: parameter_value
+2025-03-25 08:55:52,017 - __main__ - ERROR - Database error: no such column: parameter_value
+2025-03-25 08:55:52,017 - __main__ - ERROR - Migration failed: no such column: parameter_value
+2025-03-25 08:55:52,017 - __main__ - ERROR - Migration failed: no such column: parameter_value
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_financial_parameters_migration.py", line 1616, in main
+    migrate_parameters()
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_financial_parameters_migration.py", line 1547, in migrate_parameters
+    cursor.execute(
+sqlite3.OperationalError: no such column: parameter_value
+2025-03-25 08:56:33,525 - __main__ - WARNING - Could not backup existing parameters: No item with that key
+2025-03-25 08:56:33,525 - __main__ - INFO - Created parameters backup at data/backups/parameters/parameters_backup_20250325_085633.json
+2025-03-25 08:56:33,525 - __main__ - INFO - Database initialized successfully
+2025-03-25 08:56:33,526 - __main__ - INFO - Parameters already exist in the database, checking for updates
+2025-03-25 08:56:33,526 - __main__ - ERROR - Error during migration, rolled back: no such column: parameter_value
+2025-03-25 08:56:33,526 - __main__ - ERROR - Database error: no such column: parameter_value
+2025-03-25 08:56:33,526 - __main__ - ERROR - Migration failed: no such column: parameter_value
+2025-03-25 08:56:33,526 - __main__ - ERROR - Migration failed: no such column: parameter_value
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_financial_parameters_migration.py", line 1616, in main
+    migrate_parameters()
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/migrations/runners/run_financial_parameters_migration.py", line 1547, in migrate_parameters
+    cursor.execute(
+sqlite3.OperationalError: no such column: parameter_value
+2025-03-25 08:56:49,048 - __main__ - INFO - Created parameters backup at data/backups/parameters/parameters_backup_20250325_085649.json
+2025-03-25 08:56:49,051 - __main__ - INFO - Database initialized successfully
+2025-03-25 08:56:49,052 - __main__ - INFO - Inserted 137 Indian financial parameters
+2025-03-25 08:56:49,052 - __main__ - INFO - Successfully migrated financial parameters with Indian market assumptions

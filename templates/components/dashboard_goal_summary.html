@@ -1,0 +1,646 @@
+{% comment %}
+HTML template for displaying goal summaries with probability information on the user dashboard.
+{% endcomment %}
+
+<div class="dashboard-goals-container">
+  <div class="dashboard-section-header">
+    <h3>Financial Goals</h3>
+    <a href="{{ url_for('list_goals') }}" class="view-all-link">View All <i class="fa fa-arrow-right"></i></a>
+  </div>
+  
+  <!-- Overall financial health summary -->
+  <div class="financial-health-summary">
+    <div class="health-indicator-container">
+      <div class="health-score-circle" style="--health-score: {{ overall_health_score|default(50) }}%">
+        <div class="health-score-value">{{ overall_health_score|default(50) }}%</div>
+        <div class="health-score-label">Financial Health</div>
+      </div>
+      
+      <div class="health-breakdown">
+        <div class="health-metric">
+          <div class="metric-label">Goals On Track</div>
+          <div class="metric-value">{{ on_track_count|default(0) }}/{{ total_goals|default(0) }}</div>
+          <div class="metric-bar">
+            <div class="metric-bar-fill" style="width: {{ (on_track_count / total_goals * 100)|default(0) }}%"></div>
+          </div>
+        </div>
+        
+        <div class="health-metric">
+          <div class="metric-label">Average Goal Probability</div>
+          <div class="metric-value">{{ avg_probability|default(0)|round(1) }}%</div>
+          <div class="metric-bar">
+            <div class="metric-bar-fill" style="width: {{ avg_probability|default(0) }}%"></div>
+          </div>
+        </div>
+        
+        <div class="health-metric">
+          <div class="metric-label">Priority Goals</div>
+          <div class="metric-value">{{ high_priority_on_track|default(0) }}/{{ high_priority_total|default(0) }}</div>
+          <div class="metric-bar">
+            <div class="metric-bar-fill" style="width: {{ (high_priority_on_track / high_priority_total * 100)|default(0) }}%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="health-recommendation">
+      <i class="fa fa-lightbulb-o"></i>
+      <div class="recommendation-text">
+        {{ health_recommendation|default('Use the goal probability metrics to focus on improving your financial health.') }}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Goal cards grid -->
+  {% if goals %}
+  <div class="dashboard-goals-grid">
+    {% for goal in goals %}
+    <div class="dashboard-goal-card">
+      <div class="goal-card-header">
+        <div class="goal-category">{{ goal.category|replace('_', ' ')|title }}</div>
+        <div class="goal-probability-indicator 
+          {% if goal.goal_success_probability > 75 %}high-probability
+          {% elif goal.goal_success_probability > 50 %}medium-probability
+          {% else %}low-probability{% endif %}">
+          {{ goal.goal_success_probability|default(0)|round(1) }}%
+        </div>
+      </div>
+      
+      <h4 class="goal-title">{{ goal.title }}</h4>
+      
+      <div class="goal-progress-compact">
+        <div class="progress-bar">
+          <div class="progress-fill progress-fill-{{ goal.importance }}" 
+              style="width: {{ goal.current_progress }}%"></div>
+        </div>
+        <div class="progress-details">
+          <div class="progress-percentage">{{ goal.current_progress|round(1) }}%</div>
+          <div class="progress-amount">${{ goal.current_amount|round(2) }} / ${{ goal.target_amount|round(2) }}</div>
+        </div>
+      </div>
+      
+      <div class="goal-timeline-bar">
+        <div class="timeline-start">Start</div>
+        <div class="timeline-progress" style="--progress: {{ goal.time_progress|default(0) }}%">
+          <div class="timeline-indicator"></div>
+        </div>
+        <div class="timeline-end">{{ goal.timeframe|replace('T', ' ')|truncate(10, True, '') }}</div>
+      </div>
+      
+      <div class="goal-probability-compact">
+        <div class="probability-chart mini-chart">
+          <!-- Simplified mini chart showing probability -->
+          <div class="mini-chart-bar">
+            <div class="mini-chart-fill" style="height: {{ goal.goal_success_probability|default(0) }}%"></div>
+          </div>
+          <div class="mini-chart-label">Probability</div>
+        </div>
+        
+        <div class="probability-chart mini-chart">
+          <!-- Simplified mini chart showing monthly progress -->
+          <div class="mini-chart-bar">
+            <div class="mini-chart-fill" style="height: {{ goal.monthly_progress|default(0) }}%"></div>
+          </div>
+          <div class="mini-chart-label">Monthly</div>
+        </div>
+        
+        <div class="probability-chart mini-chart">
+          <!-- Simplified mini chart showing trend -->
+          <div class="mini-chart-bar">
+            <div class="mini-chart-fill" style="height: {{ goal.trend_score|default(0) }}%"></div>
+          </div>
+          <div class="mini-chart-label">Trend</div>
+        </div>
+      </div>
+      
+      <div class="goal-card-actions">
+        <a href="{{ url_for('edit_goal', goal_id=goal.id) }}" class="btn-icon" title="Edit Goal">
+          <i class="fa fa-pencil"></i>
+        </a>
+        <a href="{{ url_for('goal_detail', goal_id=goal.id) }}" class="btn-icon" title="View Details">
+          <i class="fa fa-eye"></i>
+        </a>
+        <a href="{{ url_for('goal_recommendations', goal_id=goal.id) }}" class="btn-icon" title="Get Recommendations">
+          <i class="fa fa-magic"></i>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="no-goals-message">
+    <p>You haven't set up any financial goals yet.</p>
+    <a href="{{ url_for('create_goal') }}" class="btn primary">Create Your First Goal</a>
+  </div>
+  {% endif %}
+  
+  <!-- Top recommendations section -->
+  {% if recommendations %}
+  <div class="top-recommendations">
+    <h4>Top Recommendations</h4>
+    <ul class="recommendation-list">
+      {% for rec in recommendations %}
+      <li class="recommendation-item">
+        <div class="recommendation-icon">
+          <i class="fa {{ rec.icon }}"></i>
+        </div>
+        <div class="recommendation-content">
+          <div class="recommendation-title">{{ rec.title }}</div>
+          <div class="recommendation-description">{{ rec.description }}</div>
+        </div>
+        <div class="recommendation-impact 
+          {% if rec.impact > 15 %}high-impact
+          {% elif rec.impact > 5 %}medium-impact
+          {% else %}low-impact{% endif %}">
+          +{{ rec.impact }}%
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+
+<!-- CSS for dashboard goals component -->
+<style>
+  /* Dashboard goals container */
+  .dashboard-goals-container {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .dashboard-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .dashboard-section-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  .view-all-link {
+    font-size: 0.875rem;
+    color: #0d6efd;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .view-all-link i {
+    margin-left: 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Financial health summary */
+  .financial-health-summary {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .health-indicator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .health-indicator-container {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .health-score-circle {
+      margin-right: 1.5rem;
+    }
+    
+    .health-breakdown {
+      flex: 1;
+    }
+  }
+  
+  .health-score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #28a745 0% var(--health-score),
+      #e9ecef var(--health-score) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .health-score-circle::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: white;
+  }
+  
+  .health-score-value, .health-score-label {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .health-score-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .health-score-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  .health-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .health-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .metric-label {
+    font-size: 0.85rem;
+    color: #495057;
+  }
+  
+  .metric-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+  }
+  
+  .metric-bar {
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .metric-bar-fill {
+    height: 100%;
+    background-color: #0d6efd;
+    border-radius: 3px;
+  }
+  
+  .health-recommendation {
+    margin-top: 1rem;
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem;
+    background-color: #e7f5ff;
+    border-left: 3px solid #0d6efd;
+    border-radius: 4px;
+  }
+  
+  .health-recommendation i {
+    color: #0d6efd;
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+  }
+  
+  .recommendation-text {
+    font-size: 0.875rem;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  /* Dashboard goals grid */
+  .dashboard-goals-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 576px) {
+    .dashboard-goals-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .dashboard-goals-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Dashboard goal card */
+  .dashboard-goal-card {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .dashboard-goal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .goal-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .goal-category {
+    font-size: 0.75rem;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .goal-probability-indicator {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .high-probability {
+    background-color: #d4edda;
+    color: #28a745;
+  }
+  
+  .medium-probability {
+    background-color: #fff3cd;
+    color: #fd7e14;
+  }
+  
+  .low-probability {
+    background-color: #f8d7da;
+    color: #dc3545;
+  }
+  
+  .goal-title {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Goal progress compact */
+  .goal-progress-compact {
+    margin-bottom: 0.75rem;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  
+  .progress-fill-high {
+    background-color: #28a745;
+  }
+  
+  .progress-fill-medium {
+    background-color: #0d6efd;
+  }
+  
+  .progress-fill-low {
+    background-color: #fd7e14;
+  }
+  
+  .progress-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  /* Goal timeline bar */
+  .goal-timeline-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  .timeline-progress {
+    flex: 1;
+    height: 3px;
+    background-color: #e9ecef;
+    margin: 0 0.5rem;
+    position: relative;
+  }
+  
+  .timeline-indicator {
+    position: absolute;
+    left: var(--progress);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+  }
+  
+  /* Goal probability compact */
+  .goal-probability-compact {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.75rem;
+  }
+  
+  .probability-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mini-chart {
+    width: 30px;
+  }
+  
+  .mini-chart-bar {
+    width: 100%;
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mini-chart-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0d6efd;
+    border-radius: 0 0 3px 3px;
+  }
+  
+  .mini-chart-label {
+    font-size: 0.7rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+  
+  /* Goal card actions */
+  .goal-card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .btn-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s;
+  }
+  
+  .btn-icon:hover {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+  }
+  
+  /* No goals message */
+  .no-goals-message {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+  }
+  
+  .no-goals-message p {
+    margin-bottom: 1rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  /* Top recommendations */
+  .top-recommendations {
+    margin-top: 1.5rem;
+  }
+  
+  .top-recommendations h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+  
+  .recommendation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .recommendation-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendation-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e7f5ff;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .recommendation-content {
+    flex: 1;
+  }
+  
+  .recommendation-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .recommendation-description {
+    font-size: 0.8rem;
+    color: #6c757d;
+    line-height: 1.3;
+  }
+  
+  .recommendation-impact {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .high-impact {
+    background-color: #d4edda;
+    color: #28a745;
+  }
+  
+  .medium-impact {
+    background-color: #e7f5ff;
+    color: #0d6efd;
+  }
+  
+  .low-impact {
+    background-color: #fff3cd;
+    color: #fd7e14;
+  }
+</style>
+
+<!-- Optional JavaScript for interactions -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Nothing to initialize for this component yet
+    // Future enhancements could include interactive charts or animations
+  });
+</script>

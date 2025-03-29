@@ -1,0 +1,23 @@
+{
+  "demographics_age": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:43:11.187830",
+      "question_id": "demographics_age",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your age?",
+      "input_type": "number",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 1
+    },
+    {
+      "event": "question_displayed",
+      "timestamp": "2025-03-21T12:43:11.188424",
+      "question_id": "demographics_age",
+      "question_text": "What is your age?"
+    }
+  ]
+}

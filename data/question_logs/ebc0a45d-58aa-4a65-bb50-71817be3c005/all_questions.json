@@ -1,0 +1,76 @@
+{
+  "test_AMBER_text_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:42:14.973172",
+      "question_id": "test_AMBER_text_q",
+      "answer_value": "Answer for AMBER text question",
+      "question_text": "Test AMBER Text Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ],
+  "demographics_employment_type": [
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:42:14.973693",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:42:14.976764",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    },
+    {
+      "event": "question_generated",
+      "timestamp": "2025-03-21T12:42:14.979428",
+      "question_id": "demographics_employment_type",
+      "question_type": "core",
+      "question_category": "demographics",
+      "question_text": "What is your employment type?",
+      "input_type": "select",
+      "is_llm_generated": false,
+      "is_fallback": false,
+      "is_required": true,
+      "order": 2
+    }
+  ],
+  "test_AMBER_number_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:42:14.975737",
+      "question_id": "test_AMBER_number_q",
+      "answer_value": 42.0,
+      "question_text": "Test AMBER Number Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ],
+  "test_AMBER_select_q": [
+    {
+      "event": "question_answered",
+      "timestamp": "2025-03-21T12:42:14.978667",
+      "question_id": "test_AMBER_select_q",
+      "answer_value": "Option A",
+      "question_text": "Test AMBER Select Question",
+      "question_type": "core",
+      "question_category": "test"
+    }
+  ]
+}

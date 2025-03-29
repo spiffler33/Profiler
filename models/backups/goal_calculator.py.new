@@ -1,0 +1,39 @@
+"""
+Goal Calculator module for financial goals.
+
+This module has been updated to import the classes from the goal_calculators package.
+
+This file is maintained for backward compatibility.
+"""
+
+from models.goal_calculators import (
+    GoalCalculator,
+    EmergencyFundCalculator,
+    RetirementCalculator,
+    EarlyRetirementCalculator,
+    EducationCalculator,
+    HomeDownPaymentCalculator,
+    DebtRepaymentCalculator,
+    DiscretionaryGoalCalculator,
+    VehicleCalculator,
+    WeddingCalculator,
+    LegacyPlanningCalculator,
+    CharitableGivingCalculator,
+    CustomGoalCalculator
+)
+
+__all__ = [
+    'GoalCalculator',
+    'EmergencyFundCalculator',
+    'RetirementCalculator',
+    'EarlyRetirementCalculator',
+    'EducationCalculator',
+    'HomeDownPaymentCalculator',
+    'DebtRepaymentCalculator',
+    'DiscretionaryGoalCalculator',
+    'VehicleCalculator',
+    'WeddingCalculator',
+    'LegacyPlanningCalculator',
+    'CharitableGivingCalculator',
+    'CustomGoalCalculator'
+]

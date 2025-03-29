@@ -1,0 +1,46 @@
+2025-03-25 09:03:14,781 - __main__ - INFO - Created database backup at data/backups/profiles_backup_20250325_090314.db
+2025-03-25 09:03:14,786 - __main__ - INFO - Found 36 goals with NULL simulation_parameters_json
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 8c234125-d2e6-40c6-a442-7e9e26dcb1c0 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal a14f1025-7b17-4545-a13c-8d54da846d08 (Retirement at age 65) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 9471d0e9-ee44-41e9-82d2-31c1639dc5d3 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 0a6a5bf7-6eb4-4fb2-b96a-0c85d2c5e1bb (Retirement at age 65) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal ac0bda57-4218-4de8-aae5-b1da004b8d70 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 82ae83af-6aac-4d5f-9fca-323dff098315 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 082d5022-d6d9-4887-8add-f5d253a8b140 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 237b3b38-c60b-475c-96e5-ba769d5981af (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal a273b8c6-dc5e-4e46-a317-a108c2cacbe6 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 37589646-c586-414d-94d9-02ef619be320 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 6e75a2a2-d863-445a-bdb9-b146bd1b1d2d (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,788 - __main__ - INFO - Updated goal 0e383430-42cb-4a98-8918-1b73963ece07 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 3c2fef5b-fe5d-46b8-82f4-af7e2faf59ce (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 6abda51e-86de-4593-8c48-45eb6b16eb00 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal baab33da-2131-4474-9ce3-c7affba363a5 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal f6b875e4-9131-4dba-88aa-dfec319a3cf5 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 91caaf86-0716-48b4-9a07-1b7086d76e98 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal ae3ccaab-aee9-437b-9460-5994a1e9ab9e (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 13564d45-9be2-43b7-ac2c-861ae46ce3bb (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 73b9caed-b03c-4030-95a7-970c7cd70993 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 2e6715be-945a-46c8-a6df-71307bacda98 (Car!) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal a17f0276-c07d-498d-91cc-c8d4b8d2e89b (car) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal 41a4d986-67da-4d87-b861-dfa46c210cb0 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,789 - __main__ - INFO - Updated goal ff35ace3-14fe-4d66-a21d-f00106a3d27f (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 439c5af4-d316-425a-b90e-32a633b50b1c (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 5c661d3e-b25f-4832-baf1-aa3b0ff1ef02 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 21ed4c3d-03d7-448c-b81f-1c727852b217 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 32a78fee-ca15-46db-bcd3-d758a8d7fb45 (Education Funding) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 119f9c20-8102-4961-9800-14c2090b26f4 (Home Purchase) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal d8a09510-f946-4959-8d18-0c13655cbe10 (Education Funding) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 7cc976a7-a599-433d-bfff-13caa6d22fc6 (Emergency Fund) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal c691560e-f59d-408d-b6e8-ffbd9c61fb64 (Retirement Corpus) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 29da6424-974a-4773-a3b5-90e45f37de76 (Emergency Fund) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 53c57048-86c0-49c4-a0f3-3af55dc02d62 (Retirement Corpus) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal e7ffc844-d828-40b0-9976-24469eb989c9 (Emergency Fund) with simulation parameters
+2025-03-25 09:03:14,790 - __main__ - INFO - Updated goal 78bbca7d-cdd9-40de-8b2e-db91644fcae7 (Retirement Corpus) with simulation parameters
+2025-03-25 09:03:14,791 - __main__ - INFO - Successfully updated 36 goals with simulation parameters
+2025-03-25 09:03:14,792 - __main__ - INFO - All goals now have valid simulation_parameters_json
+2025-03-25 09:03:14,792 - __main__ - INFO - Validating JSON fields for 36 goals
+2025-03-25 09:03:14,793 - __main__ - INFO - JSON Field Validation Results:
+2025-03-25 09:03:14,793 - __main__ - INFO -   simulation_data: ✓ Valid
+2025-03-25 09:03:14,793 - __main__ - INFO -   scenarios: ✓ Valid
+2025-03-25 09:03:14,793 - __main__ - INFO -   adjustments: ✓ Valid
+2025-03-25 09:03:14,793 - __main__ - INFO -   simulation_parameters_json: ✓ Valid

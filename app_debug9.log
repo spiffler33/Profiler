@@ -1,0 +1,136 @@
+2025-03-29 10:27:27,038 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-29 10:27:27,038 - root - INFO - Monte Carlo cache enabled with size=100, TTL=3600s
+2025-03-29 10:27:27,038 - root - INFO - Running in DEVELOPMENT MODE - Authentication will be bypassed for admin routes
+2025-03-29 10:27:27,039 - app - INFO - Application starting with DEV_MODE=True
+2025-03-29 10:27:27,044 - root - INFO - Mock API endpoints registered for testing
+2025-03-29 10:27:27,047 - models.monte_carlo.cache - INFO - Monte Carlo cache configured: max_size=100, ttl=3600s, save_interval=300s, path=/Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle
+2025-03-29 10:27:27,047 - models.monte_carlo.cache - INFO - Loaded cache from /Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle (0 entries)
+2025-03-29 10:27:27,048 - models.monte_carlo.cache - INFO - Monte Carlo cache system initialized successfully with loaded cache
+2025-03-29 10:27:27,048 - app - INFO - Monte Carlo cache system initialized
+
+====== APPLICATION STARTUP ======
+Python version: 3.9.5 (default, May 18 2021, 12:31:01) 
+[Clang 10.0.0 ]
+Running file: /Users/coddiwomplers/Desktop/Python/Profiler4/app.py
+Application name: app
+Static folder: /Users/coddiwomplers/Desktop/Python/Profiler4/static
+Static URL path: /static
+==================================
+
+
+===== APP CONFIGURATION =====
+PREFERRED_URL_SCHEME: http
+SERVER_NAME: None
+APPLICATION_ROOT: /
+SESSION_COOKIE_SECURE: False
+PERMANENT_SESSION_LIFETIME: 31 days, 0:00:00
+SESSION_COOKIE_HTTPONLY: True
+SESSION_COOKIE_SAMESITE: None
+DEBUG: True
+TESTING: False
+PROPAGATE_EXCEPTIONS: None
+=============================
+
+
+=== Registered Routes ===
+/<path:filename> -> serve_any_static [HEAD,GET,OPTIONS]
+/api/v2/admin/cache/configure -> goal_probability_api.configure_cache_endpoint [POST,OPTIONS]
+/api/v2/admin/cache/invalidate -> goal_probability_api.invalidate_cache_endpoint [POST,OPTIONS]
+/api/v2/admin/cache/load -> goal_probability_api.load_cache_endpoint [POST,OPTIONS]
+/api/v2/admin/cache/save -> goal_probability_api.save_cache_endpoint [POST,OPTIONS]
+/api/v2/admin/cache_stats -> goal_probability_api.get_cache_stats_api [HEAD,GET,OPTIONS]
+/api/v2/admin/health -> admin_health_api.get_health [HEAD,GET,OPTIONS]
+/api/v2/admin/health/history -> admin_health_api.get_health_history [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters -> admin_parameters_api.get_admin_parameters [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters -> admin_parameters_api.create_parameter [POST,OPTIONS]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.get_admin_parameter [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.update_parameter [PUT,OPTIONS]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.delete_parameter [DELETE,OPTIONS]
+/api/v2/admin/parameters/audit -> admin_parameters_api.get_parameter_audit_log [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/history/<path:parameter_path> -> admin_parameters_api.get_admin_parameter_history [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/impact/<path:parameter_path> -> admin_parameters_api.get_parameter_impact [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/related/<path:parameter_path> -> admin_parameters_api.get_related_parameters [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.get_user_parameters [HEAD,GET,OPTIONS]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.set_user_parameter [POST,OPTIONS]
+/api/v2/admin/parameters/user/<profile_id>/reset -> admin_parameters_api.reset_user_parameter [POST,OPTIONS]
+/api/v2/admin/performance -> goal_probability_api.get_monte_carlo_performance [HEAD,GET,OPTIONS]
+/api/v2/admin/profiles -> admin_parameters_api.get_profiles [HEAD,GET,OPTIONS]
+/api/v2/admin/test -> admin_test_endpoint [HEAD,GET,OPTIONS]
+/api/v2/check_server -> check_server [HEAD,GET,OPTIONS]
+/api/v2/debug/goal_probability/<goal_id> -> debug_goal_probability [HEAD,GET,OPTIONS]
+/api/v2/direct-auth-test -> direct_auth_test [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/adjustments -> goal_probability_api.get_goal_adjustments [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/probability -> goal_probability_api.get_goal_probability [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/probability/calculate -> goal_probability_api.calculate_goal_probability [POST,OPTIONS]
+/api/v2/goals/<goal_id>/projection-data -> visualization_api.get_goal_projection_data [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.get_goal_scenarios [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.create_goal_scenario [POST,OPTIONS]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.get_goal_scenario [HEAD,GET,OPTIONS]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.delete_goal_scenario [DELETE,OPTIONS]
+/api/v2/goals/<goal_id>/visualization-data -> visualization_api.get_visualization_data [HEAD,GET,OPTIONS]
+/api/v2/goals/calculate-probability -> goal_probability_api.calculate_probability_frontend_compatible [POST,OPTIONS]
+/api/v2/goals/portfolio-data -> visualization_api.get_portfolio_data [HEAD,GET,OPTIONS]
+/api/v2/goals/simulation/<goal_id> -> goal_probability_api.get_goal_simulation [HEAD,GET,OPTIONS]
+/api/v2/parameters -> parameter_api.get_parameters [HEAD,GET,OPTIONS]
+/api/v2/parameters -> parameter_api.create_parameter [POST,OPTIONS]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.get_parameter [HEAD,GET,OPTIONS]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.update_parameter [PUT,OPTIONS]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.delete_parameter [DELETE,OPTIONS]
+/api/v2/parameters/bulk -> parameter_api.bulk_update_parameters [POST,OPTIONS]
+/api/v2/parameters/history/<path:parameter_path> -> parameter_api.get_parameter_history [HEAD,GET,OPTIONS]
+/api/v2/profiles/<profile_id>/overview -> mock_api.get_profile_overview [HEAD,GET,OPTIONS]
+/api/v2/profiles/<profile_id>/recommendations/<action_type> -> mock_api.apply_recommendation [POST,OPTIONS]
+/api/v2/profiles/<profile_id>/recommendations/apply -> mock_api.apply_general_recommendation [POST,OPTIONS]
+/api/v2/public/debug -> public_debug_endpoint [HEAD,GET,OPTIONS]
+/api/v2/questions/dynamic -> question_flow_api.get_dynamic_question_data [HEAD,GET,OPTIONS]
+/api/v2/questions/flow -> mock_api.get_next_question [HEAD,GET,OPTIONS]
+/api/v2/questions/flow -> question_flow_api.get_next_question [HEAD,GET,OPTIONS]
+/api/v2/questions/submit -> mock_api.submit_question_answer [POST,OPTIONS]
+/api/v2/questions/submit -> question_flow_api.submit_question_answer [POST,OPTIONS]
+/api/v2/test/auth_headers -> test_auth_headers [HEAD,GET,OPTIONS]
+/api/v2/test/simulation/<goal_id> -> test_simulation_endpoint [HEAD,GET,OPTIONS]
+/debug-info -> debug_info [HEAD,GET,OPTIONS]
+/debug-static/<path:filename> -> debug_serve_static [HEAD,GET,OPTIONS]
+/goal_form_probability_js -> goal_form_probability_js [HEAD,GET,OPTIONS]
+/inline_test -> inline_test [HEAD,GET,OPTIONS]
+/js/<path:filename> -> serve_js [HEAD,GET,OPTIONS]
+/js/services/<path:filename> -> serve_js_services [HEAD,GET,OPTIONS]
+/loading_state_manager_js -> loading_state_manager_js [HEAD,GET,OPTIONS]
+/no-auth-test -> no_auth_test [HEAD,GET,OPTIONS]
+/serve_test_file/<path:filepath> -> serve_test_file [HEAD,GET,OPTIONS]
+/static/<path:filename> -> static [HEAD,GET,OPTIONS]
+/static/<path:filename> -> serve_static [HEAD,GET,OPTIONS]
+/test_api_service -> test_api_service [HEAD,GET,OPTIONS]
+/test_financial_dashboard -> test_financial_dashboard [HEAD,GET,OPTIONS]
+/test_frontend_components -> test_frontend_components [HEAD,GET,OPTIONS]
+/test_question_flow_api -> test_question_flow_api [HEAD,GET,OPTIONS]
+===========================
+
+ * Debug mode: on
+2025-03-29 10:27:27,082 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-29 10:27:27,082 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-29 10:27:27,083 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:27:27,675 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-29 10:27:27,676 - root - INFO - Monte Carlo cache enabled with size=100, TTL=3600s
+2025-03-29 10:27:27,676 - root - INFO - Running in DEVELOPMENT MODE - Authentication will be bypassed for admin routes
+2025-03-29 10:27:27,676 - app - INFO - Application starting with DEV_MODE=True
+2025-03-29 10:27:27,681 - root - INFO - Mock API endpoints registered for testing
+2025-03-29 10:27:27,684 - models.monte_carlo.cache - INFO - Monte Carlo cache configured: max_size=100, ttl=3600s, save_interval=300s, path=/Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle
+2025-03-29 10:27:27,684 - models.monte_carlo.cache - INFO - Loaded cache from /Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle (0 entries)
+2025-03-29 10:27:27,685 - models.monte_carlo.cache - INFO - Monte Carlo cache system initialized successfully with loaded cache
+2025-03-29 10:27:27,685 - app - INFO - Monte Carlo cache system initialized
+2025-03-29 10:27:27,719 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:27:27,735 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:27:28,678 - app - INFO - Received request from: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15
+2025-03-29 10:27:28,678 - app - INFO - Path: /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140
+2025-03-29 10:27:28,679 - app - INFO - Method: GET
+2025-03-29 10:27:28,679 - app - INFO - Headers: {'Host': '127.0.0.1:5000', 'Sec-Fetch-Site': 'same-origin', 'Accept-Language': 'en-SG,en-GB;q=0.9,en;q=0.8', 'Accept-Encoding': 'gzip, deflate', 'Sec-Fetch-Mode': 'navigate', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15', 'Connection': 'keep-alive', 'Upgrade-Insecure-Requests': '1', 'Referer': 'http://127.0.0.1:5000/check_probability/082d5022-d6d9-4887-8add-f5d253a8b140', 'Sec-Fetch-Dest': 'document', 'Cookie': 'session=eyJfZmxhc2hlcyI6W3siIHQiOlsic3VjY2VzcyIsIlByb2JhYmlsaXR5IHVwZGF0ZWQgc3VjY2Vzc2Z1bGx5Il19XX0.Z-daeA.MnjZ9yDMTyYxOlRMPD1HNoRTXuA'}
+2025-03-29 10:27:28,679 - app - INFO - Request: GET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140
+2025-03-29 10:27:28,679 - app - INFO - Remote address: 127.0.0.1
+2025-03-29 10:27:28,679 - app - INFO - Important headers: {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15', 'Referer': 'http://127.0.0.1:5000/check_probability/082d5022-d6d9-4887-8add-f5d253a8b140'}
+2025-03-29 10:27:28,683 - app - INFO - Checking probability for goal 082d5022-d6d9-4887-8add-f5d253a8b140:
+2025-03-29 10:27:28,683 - app - INFO - Goal data: {'id': '082d5022-d6d9-4887-8add-f5d253a8b140', 'user_profile_id': '8f2f1a99-3040-4351-8197-20fba4179ebe', 'category': 'home_purchase', 'title': 'Home Purchase', 'target_amount': 90000000.0, 'timeframe': '5-10 years', 'current_amount': 0.0, 'importance': 'medium', 'flexibility': 'fixed', 'notes': 'Saving for home purchase or down payment', 'created_at': '2025-03-15T17:06:24.093205', 'updated_at': '2025-03-29T10:27:04.307559', 'current_progress': 0.0, 'priority_score': 65.0, 'additional_funding_sources': '', 'goal_success_probability': 75.5, 'adjustments_required': False, 'funding_strategy': '', 'simulation_data': '{"success_probability": 75.5, "probability_factors": []}', 'scenarios': '{"conservative": {"return_rate": 6.0, "inflation": 6.0, "success_probability": 30.799999999999997, "sip_amount": 1170000.0}, "moderate": {"return_rate": 9.0, "inflation": 5.0, "success_probability": 50.8, "sip_amount": 900000.0}, "aggressive": {"return_rate": 12.0, "inflation": 5.0, "success_probability": 65.8, "sip_amount": 765000.0}}', 'adjustments': '{"recommended": [{"type": "increase_sip", "amount": 180000.0, "impact": 15.0, "description": "Increase monthly SIP by \\u20b91.80 L"}, {"type": "lumpsum_investment", "amount": 9000000.0, "impact": 10.0, "description": "Add lumpsum of \\u20b990.00 L"}], "applied": [], "history": []}', 'last_simulation_time': '2025-03-29T10:27:04.307173', 'simulation_parameters_json': '{"simulation_version": "1.0.0", "created_at": "2025-03-25T09:03:14.788532", "simulation_count": 1000, "time_horizon_years": 7, "confidence_level": 0.95, "asset_allocations": {"equity": 0.5, "debt": 0.4, "gold": 0.1}, "return_assumptions": {"equity": {"mean": 12.0, "std_dev": 18.0}, "debt": {"mean": 7.0, "std_dev": 5.0}, "gold": {"mean": 8.0, "std_dev": 15.0}}, "inflation_assumption": 5.0, "tax_rate": 20.0, "is_india_specific": true, "property_inflation": 6.0, "down_payment_percentage": 20.0}', 'probability_partial_success': 0.0, 'simulation_iterations': 1000, 'simulation_path_data': None, 'monthly_sip_recommended': 0.0, 'probability_metrics': None, 'success_threshold': 0.8}
+2025-03-29 10:27:28,683 - app - INFO - Goal probability value: 75.5
+2025-03-29 10:27:28,683 - app - INFO - Goal probability type: <class 'float'>
+2025-03-29 10:27:28,690 - werkzeug - INFO - 127.0.0.1 - - [29/Mar/2025 10:27:28] "GET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140 HTTP/1.1" 200 -

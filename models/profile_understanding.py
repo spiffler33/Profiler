@@ -180,6 +180,19 @@ class ProfileUnderstandingCalculator:
         logging.info(f"Final understanding level for profile {profile_id}: {current_level}")
         return level_info
     
+    def calculate_understanding_level(self, profile: Dict[str, Any], completion_metrics: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Alias for calculate_level for backward compatibility.
+        
+        Args:
+            profile (Dict): The user profile
+            completion_metrics (Dict): Metrics from question_service.get_profile_completion()
+            
+        Returns:
+            Dict: The understanding level information
+        """
+        return self.calculate_level(profile, completion_metrics)
+    
     def _get_next_level(self, current_level: str, current_counts: Dict[str, int]) -> Optional[Dict[str, Any]]:
         """
         Determine the next level and what's needed to achieve it.

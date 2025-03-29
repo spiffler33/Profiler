@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Financial Profiler{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tooltips.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-states.css') }}">
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -18,10 +24,20 @@
                     <li><a href="{{ url_for('index') }}">Home</a></li>
                     {% if session.get('profile_id') %}
                     <li><a href="{{ url_for('questions') }}">Continue Profile</a></li>
+                    <li><a href="{{ url_for('list_goals') }}">Goals</a></li>
                     <li><a href="{{ url_for('switch_profile') }}">Switch Profile</a></li>
                     {% else %}
                     <li><a href="{{ url_for('create_profile') }}">Create Profile</a></li>
                     {% endif %}
+                    
+                    <!-- Admin links (shown based on authentication) -->
+                    <li class="admin-link" style="display: none;"><a href="{{ url_for('admin_dashboard') }}">Admin</a></li>
+                    
+                    <!-- Authentication links -->
+                    <li class="auth-status">
+                        <a href="{{ url_for('login') }}" class="login-link">Login</a>
+                        <a href="{{ url_for('logout') }}" class="logout-link" style="display: none;">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +63,67 @@
         </div>
     </footer>
 
+    <!-- Load authentication and API services -->
+    <script src="{{ url_for('static', filename='js/AuthenticationService.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ApiService.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/auth_error_handler.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+        // Initialize authentication UI
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminLink = document.querySelector('.admin-link');
+            const loginLink = document.querySelector('.login-link');
+            const logoutLink = document.querySelector('.logout-link');
+            
+            // Update authentication UI based on authentication state
+            function updateAuthUI() {
+                if (window.AuthenticationService && window.AuthenticationService.isAuthenticated()) {
+                    // User is authenticated
+                    loginLink.style.display = 'none';
+                    logoutLink.style.display = 'inline-block';
+                    
+                    // Only show admin link if user has admin role
+                    if (window.AuthenticationService.isAdmin()) {
+                        adminLink.style.display = 'inline-block';
+                    } else {
+                        adminLink.style.display = 'none';
+                    }
+                } else {
+                    // User is not authenticated
+                    loginLink.style.display = 'inline-block';
+                    logoutLink.style.display = 'none';
+                    adminLink.style.display = 'none';
+                }
+            }
+            
+            // Initialize by checking authentication state
+            updateAuthUI();
+            
+            // Subscribe to authentication state changes
+            if (window.AuthenticationService) {
+                window.AuthenticationService.addAuthChangeListener(function(isAuthenticated) {
+                    updateAuthUI();
+                });
+            }
+            
+            // Handle logout click
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    if (window.AuthenticationService) {
+                        window.AuthenticationService.logout().then(() => {
+                            window.location.href = '/';
+                        });
+                    } else {
+                        window.location.href = logoutLink.getAttribute('href');
+                    }
+                });
+            }
+        });
+    </script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>

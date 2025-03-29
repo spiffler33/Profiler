@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Flow API Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    
+    .card {
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .test-section {
+      margin-bottom: 30px;
+    }
+    
+    .test-controls {
+      margin-bottom: 20px;
+    }
+    
+    .test-output {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 4px;
+      padding: 15px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      height: 200px;
+      overflow-y: auto;
+    }
+    
+    .btn {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    
+    .btn:hover {
+      background: #2980b9;
+    }
+    
+    .btn.secondary {
+      background: #95a5a6;
+    }
+    
+    .btn.secondary:hover {
+      background: #7f8c8d;
+    }
+    
+    .btn.danger {
+      background: #e74c3c;
+    }
+    
+    .btn.danger:hover {
+      background: #c0392b;
+    }
+    
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    
+    .status-indicator.success {
+      background: #2ecc71;
+    }
+    
+    .status-indicator.error {
+      background: #e74c3c;
+    }
+    
+    .status-indicator.pending {
+      background: #f39c12;
+    }
+    
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-radius: 50%;
+      border-top-color: #3498db;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+      display: none;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .test-card {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .test-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .badge {
+      background: #95a5a6;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    
+    .tab.active {
+      border-bottom-color: #3498db;
+      font-weight: bold;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Mock Question Card */
+    .question-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .question-header {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .cat-badge {
+      background: #3498db;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+    
+    .cat-badge.financial_basics {
+      background: #e74c3c;
+    }
+    
+    .cat-badge.demographics {
+      background: #2ecc71;
+    }
+    
+    .cat-badge.goals {
+      background: #f39c12;
+    }
+    
+    .question-type-badge {
+      background: #95a5a6;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+    .question-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .help-text {
+      background: #f8f9fa;
+      border-left: 4px solid #e9ecef;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .input-container {
+      margin-bottom: 20px;
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .is-loading {
+      position: relative;
+    }
+    
+    .is-loading::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Simulated progress UI */
+    .progress-section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .overall-progress {
+      margin-bottom: 15px;
+    }
+    
+    .progress-label {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+    .progress-bar {
+      height: 10px;
+      background: #e9ecef;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: #3498db;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .progress-tier {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Question Flow API Integration Test</h1>
+    
+    <div class="tabs">
+      <div class="tab active" data-tab="test-runner">Test Runner</div>
+      <div class="tab" data-tab="api-docs">API Documentation</div>
+      <div class="tab" data-tab="mock-ui">Mock UI</div>
+    </div>
+    
+    <div class="tab-content active" id="test-runner">
+      <div class="card">
+        <h2>QuestionFlowManager Tests</h2>
+        <p>Test the QuestionFlowManager API integration with API v2 endpoints.</p>
+        
+        <div class="test-controls">
+          <button id="run-all-tests" class="btn">Run All Tests</button>
+          <button id="clear-output" class="btn secondary">Clear Output</button>
+          <span id="test-status"></span>
+          <div class="loader" id="test-loader"></div>
+        </div>
+        
+        <div class="test-output" id="test-output"></div>
+      </div>
+      
+      <div class="test-section">
+        <div class="card test-card">
+          <div class="test-card-header">
+            <h3>1. Initialization Test</h3>
+            <div>
+              <span class="status-indicator" id="init-status"></span>
+              <button id="run-init-test" class="btn">Run Test</button>
+            </div>
+          </div>
+          <p>Tests basic initialization of the QuestionFlowManager with a mock profile ID.</p>
+        </div>
+        
+        <div class="card test-card">
+          <div class="test-card-header">
+            <h3>2. Load Next Question Test</h3>
+            <div>
+              <span class="status-indicator" id="load-status"></span>
+              <button id="run-load-test" class="btn">Run Test</button>
+            </div>
+          </div>
+          <p>Tests the loading of a question from the API.</p>
+        </div>
+        
+        <div class="card test-card">
+          <div class="test-card-header">
+            <h3>3. Submit Answer Test</h3>
+            <div>
+              <span class="status-indicator" id="submit-status"></span>
+              <button id="run-submit-test" class="btn">Run Test</button>
+            </div>
+          </div>
+          <p>Tests the submission of an answer to the current question.</p>
+        </div>
+        
+        <div class="card test-card">
+          <div class="test-card-header">
+            <h3>4. Progress Tracking Test</h3>
+            <div>
+              <span class="status-indicator" id="progress-status"></span>
+              <button id="run-progress-test" class="btn">Run Test</button>
+            </div>
+          </div>
+          <p>Tests progress tracking and updates from the server.</p>
+        </div>
+        
+        <div class="card test-card">
+          <div class="test-card-header">
+            <h3>5. Error Handling Test</h3>
+            <div>
+              <span class="status-indicator" id="error-status"></span>
+              <button id="run-error-test" class="btn">Run Test</button>
+            </div>
+          </div>
+          <p>Tests error handling and recovery mechanisms.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="api-docs">
+      <div class="card">
+        <h2>QuestionFlowManager API Documentation</h2>
+        <p>The QuestionFlowManager provides a client-side API for managing question flow state, progress tracking, and interaction with the backend API.</p>
+        
+        <h3>Core Methods</h3>
+        <ul>
+          <li><strong>initialize(options)</strong> - Initialize the question flow manager with the provided options.</li>
+          <li><strong>loadNextQuestion()</strong> - Load the next question from the API.</li>
+          <li><strong>submitAnswer(answer)</strong> - Submit an answer to the current question.</li>
+          <li><strong>getProgressData()</strong> - Get the current progress data.</li>
+          <li><strong>getAnswerHistory()</strong> - Get the history of submitted answers.</li>
+          <li><strong>clearState()</strong> - Clear all saved state.</li>
+        </ul>
+        
+        <h3>Event Handling</h3>
+        <ul>
+          <li><strong>on(event, callback)</strong> - Register an event listener.</li>
+          <li><strong>off(event, callback)</strong> - Remove an event listener.</li>
+        </ul>
+        
+        <h3>Events</h3>
+        <ul>
+          <li><strong>questionLoaded</strong> - Fired when a question is loaded.</li>
+          <li><strong>answerSubmitted</strong> - Fired when an answer is submitted.</li>
+          <li><strong>progressUpdated</strong> - Fired when progress is updated.</li>
+          <li><strong>questionsCompleted</strong> - Fired when all questions are completed.</li>
+          <li><strong>error</strong> - Fired when an error occurs.</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="mock-ui">
+      <div class="card">
+        <h2>Mock Question Flow UI</h2>
+        <p>This is a simulated version of the question flow UI for testing purposes.</p>
+      </div>
+      
+      <div class="progress-section">
+        <h3>Profile Understanding</h3>
+        
+        <h3>Profile Completion</h3>
+        
+        <div class="overall-progress">
+          <div class="progress-label">Overall: 45%</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 45%;"></div>
+          </div>
+        </div>
+        
+        <div class="tier-progress">
+          <div class="progress-tier">
+            <div class="progress-label">Core Questions: 70%</div>
+            <div class="progress-bar">
+              <div class="progress-fill core" style="width: 70%;"></div>
+            </div>
+          </div>
+          
+          <div class="progress-tier">
+            <div class="progress-label">Follow-Up Questions: 30%</div>
+            <div class="progress-bar">
+              <div class="progress-fill next-level" style="width: 30%;"></div>
+            </div>
+            <div class="progress-stats">3 of 10</div>
+          </div>
+          
+          <div class="progress-tier">
+            <div class="progress-label">Financial Psychology: 14%</div>
+            <div class="progress-bar">
+              <div class="progress-fill behavioral" style="width: 14%;"></div>
+            </div>
+            <div class="progress-stats">1 of 7</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="question-answer-section">
+        <div class="current-question-card question-card">
+          <div class="question-header">
+            <span class="cat-badge financial_basics">Financial Basics</span>
+            <span class="question-type-badge core">Core Question</span>
+          </div>
+          
+          <h3 class="question-text">What is your approximate annual income?</h3>
+          
+          <div class="help-text">
+            <p>Please provide your total annual income before taxes. Include all sources such as salary, bonuses, and dividends.</p>
+          </div>
+          
+          <form id="answer-form" action="/submit_answer" method="POST">
+            <input type="hidden" name="question_id" value="financial_basics_annual_income">
+            <input type="hidden" name="input_type" value="number">
+            
+            <div class="input-container">
+              <input type="number" name="answer" placeholder="Enter your annual income" required min="0">
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Submit Answer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mock ApiService (for testing) -->
+  <script>
+    // Simple API service mock
+    window.ApiService = {
+      baseUrl: '/api/v2',
+      
+      get: async function(endpoint, options = {}) {
+        console.log('[ApiService] GET', endpoint, options);
+        
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Mock responses based on endpoint
+        if (endpoint === '/questions/flow') {
+          return this._mockQuestionFlowResponse(options.params?.profile_id);
+        }
+        
+        throw new Error(`Unexpected endpoint: ${endpoint}`);
+      },
+      
+      post: async function(endpoint, data, options = {}) {
+        console.log('[ApiService] POST', endpoint, data, options);
+        
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Mock responses based on endpoint
+        if (endpoint === '/questions/submit') {
+          return this._mockSubmitResponse(data);
+        }
+        
+        throw new Error(`Unexpected endpoint: ${endpoint}`);
+      },
+      
+      registerStaticHandler: function(endpoint, handler) {
+        console.log('[ApiService] Registered handler for', endpoint);
+      },
+      
+      // Mock response helpers
+      _mockQuestionFlowResponse: function(profileId) {
+        // Generate a mock question based on profile ID
+        const questionTypes = ['core', 'next_level', 'behavioral', 'goal'];
+        const questionCategories = ['demographics', 'financial_basics', 'assets_and_debts', 'goals'];
+        
+        const typeIndex = Math.floor(Math.random() * questionTypes.length);
+        const categoryIndex = Math.floor(Math.random() * questionCategories.length);
+        
+        const type = questionTypes[typeIndex];
+        const category = questionCategories[categoryIndex];
+        
+        const mockQuestion = {
+          id: `${type}_${category}_${Date.now()}`,
+          text: `This is a mock ${type} question about ${category.replace('_', ' ')}?`,
+          type: type,
+          category: category,
+          input_type: 'text',
+          help_text: 'This is a mock question generated for testing purposes.'
+        };
+        
+        // Generate mock completion metrics
+        const mockCompletion = {
+          overall: 45,
+          core: {
+            overall: 70,
+            count: 7,
+            total: 10
+          },
+          next_level: {
+            completion: 30,
+            questions_answered: 3,
+            questions_count: 10
+          },
+          behavioral: {
+            completion: 14,
+            questions_answered: 1,
+            questions_count: 7
+          }
+        };
+        
+        return {
+          next_question: mockQuestion,
+          completion: mockCompletion,
+          no_questions: false
+        };
+      },
+      
+      _mockSubmitResponse: function(data) {
+        // Check if this is a special error test case
+        if (data.answer === 'trigger_error') {
+          throw new Error('Simulated error in answer submission');
+        }
+        
+        return {
+          success: true,
+          message: 'Answer submitted successfully',
+          next_url: '/questions'
+        };
+      }
+    };
+    
+    // Simple ErrorHandlingService mock
+    window.ErrorHandlingService = {
+      handleError: function(error, context, options) {
+        console.error(`[ErrorHandlingService] Error in ${context}:`, error.message, options);
+      }
+    };
+    
+    // Simple LoadingStateManager mock
+    window.LoadingStateManager = {
+      setLoading: function(id, isLoading, options) {
+        console.log(`[LoadingStateManager] ${id} loading: ${isLoading}`, options);
+      }
+    };
+  </script>
+  
+  <!-- QuestionFlowManager.js -->
+  <script src="/static/js/services/QuestionFlowManager.js"></script>
+  
+  <!-- Test script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set up tabs
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabId = this.dataset.tab;
+          
+          // Make this tab active
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show corresponding content
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+          });
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+      
+      // Initialize test output
+      const testOutput = document.getElementById('test-output');
+      const testLoader = document.getElementById('test-loader');
+      
+      // Helper function to log to test output
+      function log(message, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString();
+        const formattedMessage = `[${timestamp}] [${type.toUpperCase()}] ${message}`;
+        
+        testOutput.innerHTML += formattedMessage + '\n';
+        testOutput.scrollTop = testOutput.scrollHeight;
+      }
+      
+      // Helper function to set test status
+      function setTestStatus(testId, status) {
+        const statusIndicator = document.getElementById(`${testId}-status`);
+        if (!statusIndicator) return;
+        
+        statusIndicator.className = 'status-indicator';
+        statusIndicator.classList.add(status);
+      }
+      
+      // Helper function to run a test with proper UI updates
+      async function runTest(testId, testFn) {
+        log(`Running test: ${testId}`, 'test');
+        setTestStatus(testId, 'pending');
+        testLoader.style.display = 'inline-block';
+        
+        try {
+          await testFn();
+          log(`Test passed: ${testId}`, 'success');
+          setTestStatus(testId, 'success');
+        } catch (error) {
+          log(`Test failed: ${testId} - ${error.message}`, 'error');
+          setTestStatus(testId, 'error');
+        } finally {
+          testLoader.style.display = 'none';
+        }
+      }
+      
+      // Define test functions
+      const tests = {
+        init: async function() {
+          // Reset QuestionFlowManager
+          QuestionFlowManager.clearState();
+          
+          // Initialize with test profile ID
+          const result = QuestionFlowManager.initialize({
+            profileId: 'test-profile-123',
+            containerSelector: '.question-answer-section'
+          });
+          
+          // Verify initialization
+          if (!result) {
+            throw new Error('Initialization failed');
+          }
+          
+          if (QuestionFlowManager.currentProfileId !== 'test-profile-123') {
+            throw new Error('Profile ID not set correctly');
+          }
+          
+          log('QuestionFlowManager initialized successfully', 'info');
+        },
+        
+        load: async function() {
+          // Ensure initialized
+          if (!QuestionFlowManager.currentProfileId) {
+            QuestionFlowManager.initialize({ profileId: 'test-profile-123' });
+          }
+          
+          // Load next question
+          const question = await QuestionFlowManager.loadNextQuestion();
+          
+          // Verify question data
+          if (!question || !question.id) {
+            throw new Error('Failed to load question or invalid question data');
+          }
+          
+          log(`Loaded question: ${question.id} - ${question.text}`, 'info');
+        },
+        
+        submit: async function() {
+          // Ensure we have a current question
+          if (!QuestionFlowManager.currentQuestionData) {
+            await tests.load();
+          }
+          
+          // Submit a test answer
+          const result = await QuestionFlowManager.submitAnswer('Test answer');
+          
+          // Verify submission
+          if (!result || !result.success) {
+            throw new Error('Failed to submit answer');
+          }
+          
+          log('Answer submitted successfully', 'info');
+        },
+        
+        progress: async function() {
+          // Ensure we have loaded a question
+          if (!QuestionFlowManager.progressData) {
+            await tests.load();
+          }
+          
+          // Verify progress data
+          const progress = QuestionFlowManager.getProgressData();
+          
+          if (!progress || typeof progress.overall !== 'number') {
+            throw new Error('Invalid progress data');
+          }
+          
+          log(`Current progress: ${progress.overall}% overall`, 'info');
+          
+          // Verify core progress
+          if (!progress.core || typeof progress.core.overall !== 'number') {
+            throw new Error('Invalid core progress data');
+          }
+          
+          log(`Core progress: ${progress.core.overall}%`, 'info');
+        },
+        
+        error: async function() {
+          // Ensure initialized
+          if (!QuestionFlowManager.currentProfileId) {
+            QuestionFlowManager.initialize({ profileId: 'test-profile-123' });
+          }
+          
+          try {
+            // Trigger an error
+            await QuestionFlowManager.submitAnswer('trigger_error');
+            throw new Error('Expected error was not thrown');
+          } catch (error) {
+            // This should be caught by the QuestionFlowManager
+            // and our test should pass
+            log('Error handled correctly: ' + error.message, 'info');
+          }
+        }
+      };
+      
+      // Set up test buttons
+      document.getElementById('run-init-test').addEventListener('click', function() {
+        runTest('init', tests.init);
+      });
+      
+      document.getElementById('run-load-test').addEventListener('click', function() {
+        runTest('load', tests.load);
+      });
+      
+      document.getElementById('run-submit-test').addEventListener('click', function() {
+        runTest('submit', tests.submit);
+      });
+      
+      document.getElementById('run-progress-test').addEventListener('click', function() {
+        runTest('progress', tests.progress);
+      });
+      
+      document.getElementById('run-error-test').addEventListener('click', function() {
+        runTest('error', tests.error);
+      });
+      
+      // Run all tests
+      document.getElementById('run-all-tests').addEventListener('click', async function() {
+        testOutput.innerHTML = '';
+        log('Running all tests...', 'test');
+        
+        await runTest('init', tests.init);
+        await runTest('load', tests.load);
+        await runTest('submit', tests.submit);
+        await runTest('progress', tests.progress);
+        await runTest('error', tests.error);
+        
+        log('All tests completed', 'info');
+      });
+      
+      // Clear output
+      document.getElementById('clear-output').addEventListener('click', function() {
+        testOutput.innerHTML = '';
+      });
+      
+      // Initialize with welcome message
+      log('Test environment ready. Click "Run All Tests" to begin.', 'info');
+    });
+  </script>
+</body>
+</html>

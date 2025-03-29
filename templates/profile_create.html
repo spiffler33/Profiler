@@ -2,33 +2,37 @@
 
 {% block title %}Create Your Profile{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile-wizard.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="profile-create-container">
     <h2>Create Your Financial Profile</h2>
     
     <div class="intro-text">
         <p>
-            Let's start by creating your financial profile. This information helps us
-            identify you and track your progress.
+            Let's create your financial profile. This step-by-step process will help us
+            customize your experience and track your progress.
         </p>
     </div>
     
-    <form class="profile-form" action="{{ url_for('create_profile') }}" method="POST">
-        <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your full name">
-        </div>
-        
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email address">
-            <div class="help-text">We'll use this to identify your profile</div>
-        </div>
-        
-        <div class="form-actions">
-            <button type="submit" class="btn primary">Create Profile & Start Questionnaire</button>
-            <a href="{{ url_for('index') }}" class="btn secondary">Cancel</a>
-        </div>
-    </form>
+    <div id="profile-wizard-container"></div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/components/ProfileCreationWizard.jsx') }}"></script>
+<script>
+    // Initialize the wizard when the DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create profile wizard instance
+        const wizard = new ProfileCreationWizard('profile-wizard-container', {
+            redirectOnComplete: true,
+            redirectUrl: '/questions',
+            steps: ['basic', 'additional', 'confirm'],
+            persistenceKey: 'profile_wizard_data'
+        });
+    });
+</script>
 {% endblock %}

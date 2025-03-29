@@ -1,0 +1,11 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:45:57
+
+## Summary
+
+Total Tests: 0
+Passed: 0
+Failed: 0
+Pass Percentage: 0%
+

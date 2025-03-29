@@ -1,0 +1,29 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 20:19:35
+
+**NOTE: Tests were run using a mock WebDriver implementation.**
+Some tests may be marked as SKIPPED when run with mock driver.
+
+## Summary
+
+Total Tests: 7
+Passed: 1
+Failed: 5
+Skipped: 1
+Pass Percentage: 16.7% (excluding skipped tests)
+
+## Health Component
+
+Tests: 7, Passed: 1, Failed: 5, Skipped: 1
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| SH-01 | Dashboard Loading | SKIP |  |
+| SH-02 | Service Status Indicators | PASS |  |
+| SH-03 | System Metrics Display | FAIL |  |
+| SH-04 | Alerts Section | FAIL |  |
+| SH-05 | Historical Data Charts | FAIL |  |
+| SH-06 | Time Range Selection | FAIL |  |
+| SH-07 | Auto-Refresh Functionality | FAIL |  |
+

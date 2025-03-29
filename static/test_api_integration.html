@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Integration Tests</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Load our services -->
+  <script src="/static/js/services/LoadingStateManager.js"></script>
+  <script src="/static/js/services/dataEventBus.js"></script>
+  <script src="/static/js/services/visualizationDataService.js"></script>
+  <script src="/static/js/services/ErrorHandlingService.js"></script>
+  <script src="/static/js/goal_visualization_initializer.js"></script>
+  
+  <!-- Load test script -->
+  <script src="/static/js/test_api_integration.js"></script>
+  
+  <style>
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.25rem;
+    }
+    
+    .config-section {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .config-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .console-output {
+      background-color: #f8f9fa;
+      padding: 10px;
+      font-family: monospace;
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <div class="test-header">
+      <h1 class="text-2xl font-bold text-gray-800">API Integration Tests</h1>
+      <div>
+        <button id="run-tests-btn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Run All Tests
+        </button>
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <p class="text-gray-700">
+        This page tests the API integration for Phase 4, Item 2 - End-to-End Testing, verifying:
+      </p>
+      <ul class="list-disc ml-6 mt-2">
+        <li>API connectivity and data fetching</li>
+        <li>Caching and data validation</li>
+        <li>Component event synchronization</li>
+        <li>Error handling and recovery</li>
+        <li>Loading states</li>
+      </ul>
+    </div>
+    
+    <div class="config-section">
+      <h2 class="config-title">Test Configuration</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="input-group">
+          <label for="goal-id">Goal ID (required)</label>
+          <input type="text" id="goal-id" placeholder="Enter a goal ID for testing">
+        </div>
+        
+        <div class="input-group">
+          <label for="test-timeout">Test Timeout (ms)</label>
+          <input type="number" id="test-timeout" value="15000" min="1000" step="1000">
+        </div>
+      </div>
+      
+      <div class="flex gap-4 mt-4">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" id="stop-on-failure">
+          <span>Stop on First Failure</span>
+        </label>
+        
+        <label class="flex items-center gap-2">
+          <input type="checkbox" id="mock-offline">
+          <span>Run Network Tests</span>
+        </label>
+      </div>
+    </div>
+    
+    <div id="test-results-container" class="space-y-4">
+      <!-- Test results will appear here -->
+      <p class="text-gray-500">Click "Run All Tests" to start testing.</p>
+    </div>
+    
+    <!-- Console Output -->
+    <h2 class="text-xl font-semibold mt-8 mb-2">Console Output</h2>
+    <div id="console-output" class="console-output"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const runButton = document.getElementById('run-tests-btn');
+      const goalIdInput = document.getElementById('goal-id');
+      const timeoutInput = document.getElementById('test-timeout');
+      const stopOnFailureCheckbox = document.getElementById('stop-on-failure');
+      const mockOfflineCheckbox = document.getElementById('mock-offline');
+      const resultsContainer = document.getElementById('test-results-container');
+      const consoleOutput = document.getElementById('console-output');
+      
+      // Capture console output
+      (function() {
+        // Store original console methods
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        // Override console.log
+        console.log = function() {
+          // Call original console.log
+          originalLog.apply(console, arguments);
+          
+          // Add to output div
+          const text = Array.from(arguments).map(arg => {
+            if (typeof arg === 'object') {
+              try {
+                return JSON.stringify(arg);
+              } catch (e) {
+                return String(arg);
+              }
+            }
+            return String(arg);
+          }).join(' ');
+          
+          const logLine = document.createElement('div');
+          logLine.textContent = text;
+          consoleOutput.appendChild(logLine);
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+        
+        // Override console.error
+        console.error = function() {
+          // Call original console.error
+          originalError.apply(console, arguments);
+          
+          // Add to output div with error styling
+          const text = Array.from(arguments).map(arg => {
+            if (typeof arg === 'object') {
+              try {
+                return JSON.stringify(arg);
+              } catch (e) {
+                return String(arg);
+              }
+            }
+            return String(arg);
+          }).join(' ');
+          
+          const logLine = document.createElement('div');
+          logLine.textContent = text;
+          logLine.style.color = 'red';
+          consoleOutput.appendChild(logLine);
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+        
+        // Override console.warn
+        console.warn = function() {
+          // Call original console.warn
+          originalWarn.apply(console, arguments);
+          
+          // Add to output div with warning styling
+          const text = Array.from(arguments).map(arg => {
+            if (typeof arg === 'object') {
+              try {
+                return JSON.stringify(arg);
+              } catch (e) {
+                return String(arg);
+              }
+            }
+            return String(arg);
+          }).join(' ');
+          
+          const logLine = document.createElement('div');
+          logLine.textContent = text;
+          logLine.style.color = 'orange';
+          consoleOutput.appendChild(logLine);
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+      })();
+      
+      // Try to get saved goal ID from localStorage
+      const savedGoalId = localStorage.getItem('test_goal_id');
+      if (savedGoalId) {
+        goalIdInput.value = savedGoalId;
+      }
+      
+      runButton.addEventListener('click', function() {
+        // Get configuration
+        const goalId = goalIdInput.value.trim();
+        if (!goalId) {
+          alert('Goal ID is required');
+          goalIdInput.focus();
+          return;
+        }
+        
+        // Save goal ID to localStorage
+        localStorage.setItem('test_goal_id', goalId);
+        
+        // Update configuration
+        window.APIIntegrationTests.configure({
+          testGoalId: goalId,
+          testTimeouts: {
+            medium: parseInt(timeoutInput.value) || 15000,
+            short: Math.floor(parseInt(timeoutInput.value) / 3) || 5000,
+            long: parseInt(timeoutInput.value) * 2 || 30000
+          },
+          stopOnFailure: stopOnFailureCheckbox.checked,
+          mockOffline: mockOfflineCheckbox.checked
+        });
+        
+        // Clear results container
+        resultsContainer.innerHTML = '<p class="animate-pulse text-blue-600">Running tests...</p>';
+        
+        // Run tests
+        window.APIIntegrationTests.runAllTests();
+        
+        // Results will be displayed by the test suite itself
+      });
+    });
+  </script>
+</body>
+</html>

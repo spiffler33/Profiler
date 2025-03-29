@@ -1,0 +1,23 @@
+# Admin Browser Integration Test Report
+
+Date: 2025-03-27 21:26:57
+
+## Summary
+
+Total Tests: 5
+Passed: 3
+Failed: 2
+Pass Percentage: 60.0%
+
+## Parameters Component
+
+Tests: 5, Passed: 3, Failed: 2
+
+| Test ID | Test Name | Result | Error |
+|---------|-----------|--------|-------|
+| PA-01 | Parameter Panel Loading | FAIL |  |
+| PA-02 | Parameter List Display | FAIL |  |
+| PA-03 | Parameter Search | PASS |  |
+| PA-04 | Parameter Details | PASS |  |
+| PA-05 | Parameter Tree Navigation | PASS |  |
+

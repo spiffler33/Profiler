@@ -1,0 +1,41 @@
+
+=== SYSTEM HEALTH API TEST REPORT ===
+Test Run: 2025-03-27 18:53:44
+Server: http://localhost:5432
+Tests Run: 7
+Passed: 7
+Failed: 0
+Success Rate: 100.0%
+
+=== TEST DETAILS ===
+✅ Current Health Metrics (ID: test_current_health)
+   Duration: 0.42 seconds
+
+✅ Health History (ID: test_health_history)
+   Duration: 0.01 seconds
+
+✅ History with Different Time Ranges (ID: test_history_ranges)
+   Duration: 0.02 seconds
+
+✅ Interval Validation (ID: test_interval_validation)
+   Duration: 0.04 seconds
+
+✅ Error Handling (ID: test_error_handling)
+   Duration: 0.02 seconds
+
+✅ Alert Generation (ID: test_alerts)
+   Duration: 0.22 seconds
+
+✅ Browser Integration (ID: test_browser_integration)
+   Duration: 0.24 seconds
+
+=== INTEGRATION TEST PLAN MAPPING ===
+| Test Case | Description | Status |
+|-----------|-------------|--------|
+| SH-01 | Verify real-time metrics | ✅ PASSED |
+| SH-02 | Test alert triggering | ✅ PASSED |
+| SH-03 | Historical data visualization | ✅ PASSED |
+| SH-04 | Historical data with different time ranges | ✅ PASSED |
+| SH-05 | Test interval parameter validation | ✅ PASSED |
+| SH-06 | Error handling with invalid parameters | ✅ PASSED |
+| SH-07 | Browser integration points | ✅ PASSED |

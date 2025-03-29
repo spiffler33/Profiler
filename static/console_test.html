@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .console {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-check {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        
+        .success {
+            color: green;
+        }
+        
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Console Test Page</h1>
+    <p>This page checks if JavaScript files are loading correctly.</p>
+    
+    <div class="file-check">
+        <h2>File Checks:</h2>
+        <ul id="file-checks">
+            <li id="check-loading-manager">LoadingStateManager.js: <span class="status">Checking...</span></li>
+            <li id="check-goal-form">goal_form_probability.js: <span class="status">Checking...</span></li>
+            <li id="check-test-file">test_loading_states.js: <span class="status">Checking...</span></li>
+            <li id="check-api-test">test_api_integration.js: <span class="status">Checking...</span></li>
+        </ul>
+    </div>
+    
+    <div class="console" id="console-output">
+        Console output will appear here...
+    </div>
+    
+    <script>
+        // Capture console output
+        (function() {
+            const consoleOutput = document.getElementById('console-output');
+            
+            // Store original console methods
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            
+            // Override console.log
+            console.log = function() {
+                // Call original
+                originalLog.apply(console, arguments);
+                
+                // Format for display
+                const text = Array.from(arguments).map(arg => {
+                    if (typeof arg === 'object') {
+                        try {
+                            return JSON.stringify(arg);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }
+                    return String(arg);
+                }).join(' ');
+                
+                // Add to output
+                const line = document.createElement('div');
+                line.textContent = text;
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            };
+            
+            // Override console.error
+            console.error = function() {
+                // Call original
+                originalError.apply(console, arguments);
+                
+                // Format for display
+                const text = Array.from(arguments).map(arg => {
+                    if (typeof arg === 'object') {
+                        try {
+                            return JSON.stringify(arg);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }
+                    return String(arg);
+                }).join(' ');
+                
+                // Add to output with error styling
+                const line = document.createElement('div');
+                line.textContent = text;
+                line.style.color = 'red';
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            };
+            
+            // Override console.warn
+            console.warn = function() {
+                // Call original
+                originalWarn.apply(console, arguments);
+                
+                // Format for display
+                const text = Array.from(arguments).map(arg => {
+                    if (typeof arg === 'object') {
+                        try {
+                            return JSON.stringify(arg);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }
+                    return String(arg);
+                }).join(' ');
+                
+                // Add to output with warning styling
+                const line = document.createElement('div');
+                line.textContent = text;
+                line.style.color = 'orange';
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            };
+        })();
+        
+        // Check if files can be loaded
+        function checkFile(url, elementId) {
+            const element = document.querySelector(`#${elementId} .status`);
+            
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        element.textContent = 'Loaded successfully';
+                        element.classList.add('success');
+                        console.log(`${url} loaded successfully`);
+                    } else {
+                        element.textContent = `Error: ${response.status} ${response.statusText}`;
+                        element.classList.add('error');
+                        console.error(`Failed to load ${url}: ${response.status} ${response.statusText}`);
+                    }
+                })
+                .catch(error => {
+                    element.textContent = `Error: ${error.message}`;
+                    element.classList.add('error');
+                    console.error(`Failed to load ${url}: ${error.message}`);
+                });
+        }
+        
+        // Run checks when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            
+            // Check files
+            checkFile('/static/js/services/LoadingStateManager.js', 'check-loading-manager');
+            checkFile('/static/js/goal_form_probability.js', 'check-goal-form');
+            checkFile('/static/js/test_loading_states.js', 'check-test-file');
+            checkFile('/static/js/test_api_integration.js', 'check-api-test');
+            
+            console.log('Script checks started');
+        });
+    </script>
+    
+    <!-- Try loading our test scripts -->
+    <script src="/static/js/console_test.js"></script>
+</body>
+</html>

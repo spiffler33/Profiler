@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .console {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .hidden { display: none !important; }
+        
+        /* Basic loading state styles */
+        .is-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .is-loading::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 1000;
+            border-radius: 0.5rem;
+        }
+        
+        .is-loading::after {
+            content: "";
+            position: absolute;
+            top: calc(50% - 20px);
+            left: calc(50% - 20px);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0d6efd;
+            border-radius: 50%;
+            z-index: 1001;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Integration Test</h1>
+    <p>This page tests the loading and functionality of our JavaScript modules.</p>
+    
+    <div class="test-box">
+        <h2>Test Controls</h2>
+        <div>
+            <button id="load-js-btn">Load JavaScript Files</button>
+            <button id="test-loading-btn" disabled>Test Loading States</button>
+            <button id="test-probability-btn" disabled>Test Probability Updates</button>
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>File Status</h2>
+        <ul id="file-status">
+            <li id="loading-manager-status">LoadingStateManager.js: <span class="status">Not loaded</span></li>
+            <li id="goal-form-status">goal_form_probability.js: <span class="status">Not loaded</span></li>
+        </ul>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test Area</h2>
+        <div id="test-area">
+            <div id="loading-test-area" class="hidden">
+                <h3>Loading State Test</h3>
+                <div id="test-element" style="padding: 20px; background-color: #f8f9fa; border-radius: 4px;">
+                    This element will show a loading state
+                </div>
+                <button id="toggle-loading">Toggle Loading</button>
+            </div>
+            
+            <div id="probability-test-area" class="hidden">
+                <h3>Probability Update Test</h3>
+                <form id="goal-form">
+                    <div style="margin-bottom: 10px;">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="emergency_fund">Emergency Fund</option>
+                            <option value="traditional_retirement">Traditional Retirement</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="target_amount">Target Amount:</label>
+                        <input type="number" id="target_amount" name="target_amount" value="10000">
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="current_amount">Current Amount:</label>
+                        <input type="number" id="current_amount" name="current_amount" value="1000">
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="timeframe">Target Date:</label>
+                        <input type="date" id="timeframe" name="timeframe" value="2027-01-01">
+                    </div>
+                    
+                    <div class="probability-container">
+                        <div id="success-probability-value">--</div>
+                        <div class="probability-loading hidden">Calculating...</div>
+                        <div id="probability-bar-fill" style="height: 10px; background-color: #0d6efd; width: 0%;"></div>
+                        <div id="probability-status-text">Enter values above to calculate probability</div>
+                    </div>
+                    
+                    <div id="adjustment-impacts"></div>
+                </form>
+                <button id="calculate-btn">Calculate Probability</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test Results</h2>
+        <div id="test-results">
+            No tests run yet.
+        </div>
+    </div>
+    
+    <div class="console" id="console-output"></div>
+    
+    <script>
+        // Console capture
+        (function() {
+            const consoleOutput = document.getElementById('console-output');
+            const originalLog = console.log;
+            const originalError = console.error;
+            
+            function addConsoleMessage(text, isError) {
+                const line = document.createElement('div');
+                line.textContent = text;
+                if (isError) line.style.color = 'red';
+                consoleOutput.appendChild(line);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+            
+            console.log = function() {
+                originalLog.apply(console, arguments);
+                const text = Array.from(arguments).map(arg => {
+                    if (typeof arg === 'object') {
+                        try { return JSON.stringify(arg); } 
+                        catch (e) { return String(arg); }
+                    }
+                    return String(arg);
+                }).join(' ');
+                addConsoleMessage(text, false);
+            };
+            
+            console.error = function() {
+                originalError.apply(console, arguments);
+                const text = Array.from(arguments).map(arg => {
+                    if (typeof arg === 'object') {
+                        try { return JSON.stringify(arg); } 
+                        catch (e) { return String(arg); }
+                    }
+                    return String(arg);
+                }).join(' ');
+                addConsoleMessage(text, true);
+            };
+        })();
+        
+        // Main code
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Loaded - page is ready');
+            document.getElementById('test-results').textContent = 'Page loaded successfully.';
+            
+            // Set up load button
+            document.getElementById('load-js-btn').addEventListener('click', function() {
+                loadJavaScriptFiles();
+            });
+            
+            // Set up testing buttons (initially disabled)
+            document.getElementById('test-loading-btn').addEventListener('click', function() {
+                showTestArea('loading-test-area');
+                runLoadingTest();
+            });
+            
+            document.getElementById('test-probability-btn').addEventListener('click', function() {
+                showTestArea('probability-test-area');
+                runProbabilityTest();
+            });
+        });
+        
+        // Test area display
+        function showTestArea(areaId) {
+            // Hide all test areas
+            document.querySelectorAll('#test-area > div').forEach(div => {
+                div.classList.add('hidden');
+            });
+            
+            // Show requested area
+            document.getElementById(areaId).classList.remove('hidden');
+        }
+        
+        // Load JavaScript files
+        function loadJavaScriptFiles() {
+            console.log('Loading JavaScript files...');
+            document.getElementById('test-results').textContent = 'Loading JavaScript files...';
+            
+            // Create mock DataEventBus
+            window.DataEventBus = {
+                publish: function(event, data) {
+                    console.log('DataEventBus.publish', event, data);
+                },
+                subscribe: function(event, callback) {
+                    console.log('DataEventBus.subscribe', event);
+                }
+            };
+            
+            // Create mock VisualizationDataService
+            window.VisualizationDataService = {
+                calculateProbability: function(goalId, params, options) {
+                    console.log('VisualizationDataService.calculateProbability', goalId, params);
+                    
+                    if (options && typeof options.onLoadingChange === 'function') {
+                        options.onLoadingChange(true);
+                    }
+                    
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            if (options && typeof options.onLoadingChange === 'function') {
+                                options.onLoadingChange(false);
+                            }
+                            
+                            // Calculate mock probability based on parameters
+                            let probability = 50;
+                            if (params.target_amount && params.current_amount) {
+                                probability = (params.current_amount / params.target_amount) * 100;
+                                probability = Math.min(100, Math.max(0, probability));
+                            }
+                            
+                            resolve({
+                                successProbability: probability,
+                                adjustments: [
+                                    {
+                                        description: "Increase monthly contribution",
+                                        impact_metrics: {
+                                            probability_increase: 0.15
+                                        }
+                                    },
+                                    {
+                                        description: "Extend timeline by 6 months",
+                                        impact_metrics: {
+                                            probability_increase: 0.08
+                                        }
+                                    }
+                                ],
+                                simulationData: {}
+                            });
+                        }, 1000);
+                    });
+                }
+            };
+            
+            // Load LoadingStateManager.js
+            loadScript('/loading_state_manager_js', function() {
+                updateFileStatus('loading-manager-status', true);
+                
+                // Load goal_form_probability.js
+                loadScript('/goal_form_probability_js', function() {
+                    updateFileStatus('goal-form-status', true);
+                    
+                    // Enable test buttons
+                    document.getElementById('test-loading-btn').disabled = false;
+                    document.getElementById('test-probability-btn').disabled = false;
+                    
+                    document.getElementById('test-results').textContent = 'All JavaScript files loaded successfully!';
+                    console.log('All JavaScript files loaded successfully!');
+                }, function(error) {
+                    updateFileStatus('goal-form-status', false, error);
+                    document.getElementById('test-results').textContent = 'Failed to load goal_form_probability.js';
+                    console.error('Failed to load goal_form_probability.js:', error);
+                });
+            }, function(error) {
+                updateFileStatus('loading-manager-status', false, error);
+                document.getElementById('test-results').textContent = 'Failed to load LoadingStateManager.js';
+                console.error('Failed to load LoadingStateManager.js:', error);
+            });
+        }
+        
+        // Update file status display
+        function updateFileStatus(elementId, success, error) {
+            const element = document.querySelector(`#${elementId} .status`);
+            if (success) {
+                element.textContent = 'Loaded ✓';
+                element.className = 'status success';
+            } else {
+                element.textContent = `Failed ✗ ${error ? error.message : ''}`;
+                element.className = 'status error';
+            }
+        }
+        
+        // Helper to load scripts
+        function loadScript(url, onSuccess, onError) {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = onSuccess;
+            script.onerror = function(e) {
+                if (onError) onError(e);
+            };
+            document.head.appendChild(script);
+        }
+        
+        // Run loading state test
+        function runLoadingTest() {
+            if (!window.loadingState) {
+                document.getElementById('test-results').textContent = 'LoadingStateManager not available';
+                return;
+            }
+            
+            console.log('Running Loading State test...');
+            document.getElementById('test-results').textContent = 'Running Loading State test...';
+            
+            const testElement = document.getElementById('test-element');
+            let isLoading = false;
+            
+            document.getElementById('toggle-loading').addEventListener('click', function() {
+                isLoading = !isLoading;
+                window.loadingState.setLoading(testElement, isLoading);
+                document.getElementById('test-results').textContent = isLoading ? 
+                    'Loading state activated' : 'Loading state deactivated';
+            });
+        }
+        
+        // Run probability calculation test
+        function runProbabilityTest() {
+            if (!window.GoalFormProbability) {
+                document.getElementById('test-results').textContent = 'GoalFormProbability not available';
+                return;
+            }
+            
+            console.log('Running Probability Update test...');
+            document.getElementById('test-results').textContent = 'Running Probability Update test...';
+            
+            // Initialize probability calculator
+            window.GoalFormProbability.init({
+                debounceTime: 300
+            });
+            
+            // Add calculate button handler
+            document.getElementById('calculate-btn').addEventListener('click', function() {
+                window.GoalFormProbability.calculateProbability();
+            });
+            
+            // Add listeners to form inputs
+            ['category', 'target_amount', 'current_amount', 'timeframe'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', function() {
+                        console.log(`${id} changed to ${element.value}`);
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

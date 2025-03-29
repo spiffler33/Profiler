@@ -1,0 +1,214 @@
+/**
+ * Loading States - Standardized loading indicators and states
+ * 
+ * This file contains styles for consistent loading states across
+ * all components in the application, especially API-connected
+ * visualization components.
+ */
+
+/* Container States */
+.is-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.is-loading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  border-radius: 0.5rem;
+}
+
+.is-loading::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0d6efd;
+  border-radius: 50%;
+  z-index: 1001;
+  animation: spin 1s linear infinite;
+}
+
+/* Different sizes for loading indicators */
+.is-loading.size-sm::after {
+  width: 24px;
+  height: 24px;
+  top: calc(50% - 12px);
+  left: calc(50% - 12px);
+  border-width: 3px;
+}
+
+.is-loading.size-lg::after {
+  width: 60px;
+  height: 60px;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border-width: 5px;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Skeleton loading placeholders */
+.skeleton-loader {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background-color: #EAEBED;
+  border-radius: 4px;
+  animation: pulse 1.5s ease-in-out 0.5s infinite;
+}
+
+.skeleton-loader::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.2) 20%, 
+    rgba(255, 255, 255, 0.5) 60%, 
+    rgba(255, 255, 255, 0) 100%);
+  animation: shimmer 2s infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Enhanced skeleton animation for dashboard */
+.financial-overview-dashboard .skeleton-loader {
+  animation: shimmer 2s infinite, pulse 1.5s ease-in-out 0.5s infinite;
+}
+
+/* Skeleton shapes */
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.skeleton-text.width-75 { width: 75%; }
+.skeleton-text.width-50 { width: 50%; }
+.skeleton-text.width-25 { width: 25%; }
+
+.skeleton-button {
+  height: 2rem;
+  width: 5rem;
+  border-radius: 0.25rem;
+}
+
+.skeleton-circle {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.skeleton-box {
+  height: 5rem;
+  border-radius: 0.25rem;
+}
+
+/* Progress bar loader for the top of the screen */
+.progress-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  overflow: hidden;
+  background-color: #f3f3f3;
+}
+
+.progress-loader::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background-color: #0d6efd;
+  animation: progress-animation 2s linear infinite;
+}
+
+@keyframes progress-animation {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+/* Loading text with dots */
+.loading-text::after {
+  content: "...";
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ""; }
+  40% { content: "."; }
+  60% { content: ".."; }
+  80%, 100% { content: "..."; }
+}
+
+/* Loading overlay for modals and forms */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-overlay-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+/* Loading states for specific components */
+.goal-form.is-loading .form-actions {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.probability-calculator.is-loading input,
+.probability-calculator.is-loading select {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Hidden elements */
+.hidden {
+  display: none !important;
+}

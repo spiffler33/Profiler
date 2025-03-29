@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-03-25T08:57:44.189598",
+  "total_goals": 36,
+  "success_count": 36,
+  "error_count": 0,
+  "by_category": {
+    "home_purchase": {
+      "total": 24,
+      "success": 24,
+      "error": 0,
+      "avg_probability": 49.80833333333334
+    },
+    "traditional_retirement": {
+      "total": 5,
+      "success": 5,
+      "error": 0,
+      "avg_probability": 57.39199452201558
+    },
+    "custom": {
+      "total": 2,
+      "success": 2,
+      "error": 0,
+      "avg_probability": 50.75
+    },
+    "emergency_fund": {
+      "total": 3,
+      "success": 3,
+      "error": 0,
+      "avg_probability": 57.5
+    },
+    "education": {
+      "total": 2,
+      "success": 2,
+      "error": 0,
+      "avg_probability": 49.5
+    }
+  },
+  "goals_requiring_adjustments": 0,
+  "average_success_probability": 51.53777701694662
+}

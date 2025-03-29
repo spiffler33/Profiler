@@ -378,49 +378,94 @@ class DatabaseProfileManager:
             answer_value: The answer value (could be string, number, boolean, etc.)
             
         Returns:
-            dict: Updated profile with new answer
+            bool: Success status
         """
+        # Generate a unique operation ID for this request to track it in logs
+        op_id = f"add_answer_{uuid.uuid4().hex[:6]}"
+        
         if not profile or 'id' not in profile:
-            logging.error("Invalid profile for adding answer")
-            raise ValueError("Invalid profile")
+            logging.error(f"[{op_id}] Invalid profile for adding answer - profile={bool(profile)}")
+            return False
         
-        # Ensure this is the cached reference
-        profile_id = profile['id']
-        if profile_id in self.cache and id(profile) != id(self.cache[profile_id]):
-            logging.warning(f"Using different profile reference for {profile_id}")
-            profile = self.cache[profile_id]  # Use cached reference
+        if not question_id:
+            logging.error(f"[{op_id}] Invalid question_id for adding answer")
+            return False
         
-        # Ensure answers array exists
-        if 'answers' not in profile:
-            profile['answers'] = []
-        
-        # Check if this question already has an answer
-        answer_updated = False
-        for answer in profile['answers']:
-            if answer['question_id'] == question_id:
-                answer['answer'] = answer_value
-                answer['timestamp'] = datetime.now().isoformat()
-                answer_updated = True
-                break
-        
-        # If not found, create new answer
-        if not answer_updated:
+        try:
+            # Extract profile ID for logging
+            profile_id = profile['id']
+            logging.info(f"[{op_id}] Starting add_answer for profile {profile_id}, question {question_id}")
+            
+            # Ensure this is the cached reference
+            if profile_id in self.cache and id(profile) != id(self.cache[profile_id]):
+                logging.warning(f"[{op_id}] Using different profile reference for {profile_id}")
+                profile = self.cache[profile_id]  # Use cached reference
+            else:
+                logging.info(f"[{op_id}] Using provided profile reference")
+            
+            # Ensure answers array exists
+            if 'answers' not in profile:
+                logging.info(f"[{op_id}] Creating answers array in profile")
+                profile['answers'] = []
+            else:
+                logging.info(f"[{op_id}] Profile has {len(profile['answers'])} existing answers")
+                
+            # First remove any existing answer with the same question_id
+            original_answer_count = len(profile['answers'])
+            profile['answers'] = [a for a in profile['answers'] if a.get('question_id') != question_id]
+            new_answer_count = len(profile['answers'])
+            
+            if original_answer_count != new_answer_count:
+                logging.info(f"[{op_id}] Removed existing answer for question {question_id}")
+            
+            # Create new answer record
+            answer_id = str(uuid.uuid4())
             new_answer = {
-                "id": str(uuid.uuid4()),
+                "id": answer_id,
                 "question_id": question_id,
                 "answer": answer_value,
                 "timestamp": datetime.now().isoformat()
             }
+            
+            # Add the new answer
             profile['answers'].append(new_answer)
-        
-        # Save changes
-        self.save_profile(profile)
-        
-        # Verify answers are still there
-        cache_profile = self.cache[profile_id]
-        logging.info(f"After add_answer: Profile has {len(cache_profile.get('answers', []))} answers")
-        
-        return profile
+            logging.info(f"[{op_id}] Added new answer with ID {answer_id}")
+            
+            # Save changes
+            logging.info(f"[{op_id}] Saving profile with {len(profile['answers'])} answers")
+            try:
+                self.save_profile(profile)
+                logging.info(f"[{op_id}] Profile saved successfully")
+            except Exception as save_error:
+                logging.error(f"[{op_id}] Error saving profile: {str(save_error)}")
+                return False
+            
+            # Verify answers are still there
+            try:
+                cache_profile = self.cache[profile_id]
+                cache_answer_count = len(cache_profile.get('answers', []))
+                logging.info(f"[{op_id}] After add_answer: Profile in cache has {cache_answer_count} answers")
+                
+                # Additional verification - check if our answer is actually in the cache
+                answer_found = False
+                for answer in cache_profile.get('answers', []):
+                    if answer.get('id') == answer_id:
+                        answer_found = True
+                        break
+                        
+                if answer_found:
+                    logging.info(f"[{op_id}] Answer {answer_id} verified in cache")
+                else:
+                    logging.error(f"[{op_id}] Answer {answer_id} NOT found in cached profile!")
+            except Exception as verify_error:
+                logging.error(f"[{op_id}] Error verifying cache: {str(verify_error)}")
+            
+            logging.info(f"[{op_id}] Successfully added answer for question {question_id} to profile {profile_id}")
+            return True
+            
+        except Exception as e:
+            logging.error(f"[{op_id}] Error in add_answer: {str(e)}")
+            return False
     
     def create_version(self, profile, reason):
         """

@@ -1,0 +1,15 @@
+{
+  "demographics_age": {
+    "question_id": "demographics_age",
+    "question_text": "What is your age?",
+    "question_type": "core",
+    "category": "demographics",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": "2025-03-21T12:44:00.923361",
+    "displayed_at": "2025-03-21T12:44:00.924100",
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  }
+}

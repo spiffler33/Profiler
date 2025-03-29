@@ -1,0 +1,41 @@
+{
+  "llm_next_level_demographics_1742206307_0": {
+    "question_id": "llm_next_level_demographics_1742206307_0",
+    "question_text": "Are there any financial responsibilities or commitments you have, such as supporting family members or paying off student loans?",
+    "question_type": "next_level",
+    "category": "demographics",
+    "is_llm_generated": true,
+    "is_fallback": false,
+    "generated_at": "2025-03-17T18:11:54.523117",
+    "displayed_at": "2025-03-17T18:11:54.527002",
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  },
+  "llm_next_level_financial_basics_1742206310_0": {
+    "question_id": "llm_next_level_financial_basics_1742206310_0",
+    "question_text": "What are your primary financial goals over the next 5 to 10 years, and how do you plan to achieve them?",
+    "question_type": "next_level",
+    "category": "financial_basics",
+    "is_llm_generated": true,
+    "is_fallback": false,
+    "generated_at": "2025-03-17T18:11:50.832581",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  },
+  "llm_next_level_assets_and_debts_1742206314_0": {
+    "question_id": "llm_next_level_assets_and_debts_1742206314_0",
+    "question_text": "How liquid are your current assets, and do you have a strategy in place for accessing funds quickly if needed?",
+    "question_type": "next_level",
+    "category": "assets_and_debts",
+    "is_llm_generated": true,
+    "is_fallback": false,
+    "generated_at": "2025-03-17T18:11:54.515919",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  }
+}

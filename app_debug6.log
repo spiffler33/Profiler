@@ -1,0 +1,278 @@
+2025-03-29 10:25:39,654 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-29 10:25:39,655 - root - INFO - Monte Carlo cache enabled with size=100, TTL=3600s
+2025-03-29 10:25:39,655 - root - INFO - Running in DEVELOPMENT MODE - Authentication will be bypassed for admin routes
+2025-03-29 10:25:39,655 - app - INFO - Application starting with DEV_MODE=True
+2025-03-29 10:25:39,661 - root - INFO - Mock API endpoints registered for testing
+2025-03-29 10:25:39,664 - models.monte_carlo.cache - INFO - Monte Carlo cache configured: max_size=100, ttl=3600s, save_interval=300s, path=/Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle
+2025-03-29 10:25:39,664 - models.monte_carlo.cache - INFO - Loaded cache from /Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle (0 entries)
+2025-03-29 10:25:39,664 - models.monte_carlo.cache - INFO - Monte Carlo cache system initialized successfully with loaded cache
+2025-03-29 10:25:39,664 - app - INFO - Monte Carlo cache system initialized
+
+====== APPLICATION STARTUP ======
+Python version: 3.9.5 (default, May 18 2021, 12:31:01) 
+[Clang 10.0.0 ]
+Running file: /Users/coddiwomplers/Desktop/Python/Profiler4/app.py
+Application name: app
+Static folder: /Users/coddiwomplers/Desktop/Python/Profiler4/static
+Static URL path: /static
+==================================
+
+
+===== APP CONFIGURATION =====
+PREFERRED_URL_SCHEME: http
+SERVER_NAME: None
+APPLICATION_ROOT: /
+SESSION_COOKIE_SECURE: False
+PERMANENT_SESSION_LIFETIME: 31 days, 0:00:00
+SESSION_COOKIE_HTTPONLY: True
+SESSION_COOKIE_SAMESITE: None
+DEBUG: True
+TESTING: False
+PROPAGATE_EXCEPTIONS: None
+=============================
+
+
+=== Registered Routes ===
+/<path:filename> -> serve_any_static [OPTIONS,HEAD,GET]
+/api/v2/admin/cache/configure -> goal_probability_api.configure_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/invalidate -> goal_probability_api.invalidate_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/load -> goal_probability_api.load_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/save -> goal_probability_api.save_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache_stats -> goal_probability_api.get_cache_stats_api [OPTIONS,HEAD,GET]
+/api/v2/admin/health -> admin_health_api.get_health [OPTIONS,HEAD,GET]
+/api/v2/admin/health/history -> admin_health_api.get_health_history [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters -> admin_parameters_api.get_admin_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters -> admin_parameters_api.create_parameter [OPTIONS,POST]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.get_admin_parameter [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.update_parameter [OPTIONS,PUT]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.delete_parameter [DELETE,OPTIONS]
+/api/v2/admin/parameters/audit -> admin_parameters_api.get_parameter_audit_log [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/history/<path:parameter_path> -> admin_parameters_api.get_admin_parameter_history [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/impact/<path:parameter_path> -> admin_parameters_api.get_parameter_impact [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/related/<path:parameter_path> -> admin_parameters_api.get_related_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.get_user_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.set_user_parameter [OPTIONS,POST]
+/api/v2/admin/parameters/user/<profile_id>/reset -> admin_parameters_api.reset_user_parameter [OPTIONS,POST]
+/api/v2/admin/performance -> goal_probability_api.get_monte_carlo_performance [OPTIONS,HEAD,GET]
+/api/v2/admin/profiles -> admin_parameters_api.get_profiles [OPTIONS,HEAD,GET]
+/api/v2/admin/test -> admin_test_endpoint [OPTIONS,HEAD,GET]
+/api/v2/check_server -> check_server [OPTIONS,HEAD,GET]
+/api/v2/debug/goal_probability/<goal_id> -> debug_goal_probability [OPTIONS,HEAD,GET]
+/api/v2/direct-auth-test -> direct_auth_test [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/adjustments -> goal_probability_api.get_goal_adjustments [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/probability -> goal_probability_api.get_goal_probability [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/probability/calculate -> goal_probability_api.calculate_goal_probability [OPTIONS,POST]
+/api/v2/goals/<goal_id>/projection-data -> visualization_api.get_goal_projection_data [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.get_goal_scenarios [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.create_goal_scenario [OPTIONS,POST]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.get_goal_scenario [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.delete_goal_scenario [DELETE,OPTIONS]
+/api/v2/goals/<goal_id>/visualization-data -> visualization_api.get_visualization_data [OPTIONS,HEAD,GET]
+/api/v2/goals/calculate-probability -> goal_probability_api.calculate_probability_frontend_compatible [OPTIONS,POST]
+/api/v2/goals/portfolio-data -> visualization_api.get_portfolio_data [OPTIONS,HEAD,GET]
+/api/v2/goals/simulation/<goal_id> -> goal_probability_api.get_goal_simulation [OPTIONS,HEAD,GET]
+/api/v2/parameters -> parameter_api.get_parameters [OPTIONS,HEAD,GET]
+/api/v2/parameters -> parameter_api.create_parameter [OPTIONS,POST]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.get_parameter [OPTIONS,HEAD,GET]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.update_parameter [OPTIONS,PUT]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.delete_parameter [DELETE,OPTIONS]
+/api/v2/parameters/bulk -> parameter_api.bulk_update_parameters [OPTIONS,POST]
+/api/v2/parameters/history/<path:parameter_path> -> parameter_api.get_parameter_history [OPTIONS,HEAD,GET]
+/api/v2/profiles/<profile_id>/overview -> mock_api.get_profile_overview [OPTIONS,HEAD,GET]
+/api/v2/profiles/<profile_id>/recommendations/<action_type> -> mock_api.apply_recommendation [OPTIONS,POST]
+/api/v2/profiles/<profile_id>/recommendations/apply -> mock_api.apply_general_recommendation [OPTIONS,POST]
+/api/v2/public/debug -> public_debug_endpoint [OPTIONS,HEAD,GET]
+/api/v2/questions/dynamic -> question_flow_api.get_dynamic_question_data [OPTIONS,HEAD,GET]
+/api/v2/questions/flow -> mock_api.get_next_question [OPTIONS,HEAD,GET]
+/api/v2/questions/flow -> question_flow_api.get_next_question [OPTIONS,HEAD,GET]
+/api/v2/questions/submit -> mock_api.submit_question_answer [OPTIONS,POST]
+/api/v2/questions/submit -> question_flow_api.submit_question_answer [OPTIONS,POST]
+/api/v2/test/auth_headers -> test_auth_headers [OPTIONS,HEAD,GET]
+/api/v2/test/simulation/<goal_id> -> test_simulation_endpoint [OPTIONS,HEAD,GET]
+/debug-info -> debug_info [OPTIONS,HEAD,GET]
+/debug-static/<path:filename> -> debug_serve_static [OPTIONS,HEAD,GET]
+/goal_form_probability_js -> goal_form_probability_js [OPTIONS,HEAD,GET]
+/inline_test -> inline_test [OPTIONS,HEAD,GET]
+/js/<path:filename> -> serve_js [OPTIONS,HEAD,GET]
+/js/services/<path:filename> -> serve_js_services [OPTIONS,HEAD,GET]
+/loading_state_manager_js -> loading_state_manager_js [OPTIONS,HEAD,GET]
+/no-auth-test -> no_auth_test [OPTIONS,HEAD,GET]
+/serve_test_file/<path:filepath> -> serve_test_file [OPTIONS,HEAD,GET]
+/static/<path:filename> -> static [OPTIONS,HEAD,GET]
+/static/<path:filename> -> serve_static [OPTIONS,HEAD,GET]
+/test_api_service -> test_api_service [OPTIONS,HEAD,GET]
+/test_financial_dashboard -> test_financial_dashboard [OPTIONS,HEAD,GET]
+/test_frontend_components -> test_frontend_components [OPTIONS,HEAD,GET]
+/test_question_flow_api -> test_question_flow_api [OPTIONS,HEAD,GET]
+===========================
+
+ * Debug mode: on
+2025-03-29 10:25:39,700 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-29 10:25:39,700 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-29 10:25:39,700 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:25:40,282 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-29 10:25:40,282 - root - INFO - Monte Carlo cache enabled with size=100, TTL=3600s
+2025-03-29 10:25:40,282 - root - INFO - Running in DEVELOPMENT MODE - Authentication will be bypassed for admin routes
+2025-03-29 10:25:40,283 - app - INFO - Application starting with DEV_MODE=True
+2025-03-29 10:25:40,288 - root - INFO - Mock API endpoints registered for testing
+2025-03-29 10:25:40,291 - models.monte_carlo.cache - INFO - Monte Carlo cache configured: max_size=100, ttl=3600s, save_interval=300s, path=/Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle
+2025-03-29 10:25:40,291 - models.monte_carlo.cache - INFO - Loaded cache from /Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle (0 entries)
+2025-03-29 10:25:40,291 - models.monte_carlo.cache - INFO - Monte Carlo cache system initialized successfully with loaded cache
+2025-03-29 10:25:40,291 - app - INFO - Monte Carlo cache system initialized
+2025-03-29 10:25:40,325 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:25:40,344 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:25:47,760 - app - INFO - Received request from: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15
+2025-03-29 10:25:47,760 - app - INFO - Path: /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140
+2025-03-29 10:25:47,760 - app - INFO - Method: GET
+2025-03-29 10:25:47,760 - app - INFO - Headers: {'Host': '127.0.0.1:5000', 'Sec-Fetch-Site': 'none', 'Connection': 'keep-alive', 'Upgrade-Insecure-Requests': '1', 'Sec-Fetch-Mode': 'navigate', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15', 'Accept-Language': 'en-SG,en-GB;q=0.9,en;q=0.8', 'Sec-Fetch-Dest': 'document', 'Accept-Encoding': 'gzip, deflate'}
+2025-03-29 10:25:47,760 - app - INFO - Request: GET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140
+2025-03-29 10:25:47,760 - app - INFO - Remote address: 127.0.0.1
+2025-03-29 10:25:47,760 - app - INFO - Important headers: {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15'}
+2025-03-29 10:25:47,777 - werkzeug - INFO - 127.0.0.1 - - [29/Mar/2025 10:25:47] "[35m[1mGET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 2551, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 2531, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/app.py", line 1297, in check_probability
+    return render_template('check_probability.html', goal=goal)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Users/coddiwomplers/opt/miniconda3/lib/python3.9/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/coddiwomplers/Desktop/Python/Profiler4/templates/check_probability.html", line 34, in top-level template code
+    Python Repr: {{ goal.goal_success_probability|repr if goal.goal_success_probability is not none else 'None' }}</pre>
+jinja2.exceptions.TemplateRuntimeError: No filter named 'repr' found.
+2025-03-29 10:25:47,795 - werkzeug - INFO - 127.0.0.1 - - [29/Mar/2025 10:25:47] "[36mGET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-03-29 10:25:47,796 - werkzeug - INFO - 127.0.0.1 - - [29/Mar/2025 10:25:47] "[36mGET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-03-29 10:25:47,802 - werkzeug - INFO - 127.0.0.1 - - [29/Mar/2025 10:25:47] "[36mGET /check_probability/082d5022-d6d9-4887-8add-f5d253a8b140?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-03-29 10:25:55,727 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:25:55,727 - models.monte_carlo.cache - INFO - Cache is clean, no need to save during shutdown
+
+====== APPLICATION STARTUP ======
+Python version: 3.9.5 (default, May 18 2021, 12:31:01) 
+[Clang 10.0.0 ]
+Running file: /Users/coddiwomplers/Desktop/Python/Profiler4/app.py
+Application name: app
+Static folder: /Users/coddiwomplers/Desktop/Python/Profiler4/static
+Static URL path: /static
+==================================
+
+
+===== APP CONFIGURATION =====
+PREFERRED_URL_SCHEME: http
+SERVER_NAME: None
+APPLICATION_ROOT: /
+SESSION_COOKIE_SECURE: False
+PERMANENT_SESSION_LIFETIME: 31 days, 0:00:00
+SESSION_COOKIE_HTTPONLY: True
+SESSION_COOKIE_SAMESITE: None
+DEBUG: True
+TESTING: False
+PROPAGATE_EXCEPTIONS: None
+=============================
+
+
+=== Registered Routes ===
+/<path:filename> -> serve_any_static [OPTIONS,HEAD,GET]
+/api/v2/admin/cache/configure -> goal_probability_api.configure_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/invalidate -> goal_probability_api.invalidate_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/load -> goal_probability_api.load_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache/save -> goal_probability_api.save_cache_endpoint [OPTIONS,POST]
+/api/v2/admin/cache_stats -> goal_probability_api.get_cache_stats_api [OPTIONS,HEAD,GET]
+/api/v2/admin/health -> admin_health_api.get_health [OPTIONS,HEAD,GET]
+/api/v2/admin/health/history -> admin_health_api.get_health_history [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters -> admin_parameters_api.get_admin_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters -> admin_parameters_api.create_parameter [OPTIONS,POST]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.get_admin_parameter [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.update_parameter [PUT,OPTIONS]
+/api/v2/admin/parameters/<path:parameter_path> -> admin_parameters_api.delete_parameter [OPTIONS,DELETE]
+/api/v2/admin/parameters/audit -> admin_parameters_api.get_parameter_audit_log [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/history/<path:parameter_path> -> admin_parameters_api.get_admin_parameter_history [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/impact/<path:parameter_path> -> admin_parameters_api.get_parameter_impact [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/related/<path:parameter_path> -> admin_parameters_api.get_related_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.get_user_parameters [OPTIONS,HEAD,GET]
+/api/v2/admin/parameters/user/<profile_id> -> admin_parameters_api.set_user_parameter [OPTIONS,POST]
+/api/v2/admin/parameters/user/<profile_id>/reset -> admin_parameters_api.reset_user_parameter [OPTIONS,POST]
+/api/v2/admin/performance -> goal_probability_api.get_monte_carlo_performance [OPTIONS,HEAD,GET]
+/api/v2/admin/profiles -> admin_parameters_api.get_profiles [OPTIONS,HEAD,GET]
+/api/v2/admin/test -> admin_test_endpoint [OPTIONS,HEAD,GET]
+/api/v2/check_server -> check_server [OPTIONS,HEAD,GET]
+/api/v2/debug/goal_probability/<goal_id> -> debug_goal_probability [OPTIONS,HEAD,GET]
+/api/v2/direct-auth-test -> direct_auth_test [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/adjustments -> goal_probability_api.get_goal_adjustments [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/probability -> goal_probability_api.get_goal_probability [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/probability/calculate -> goal_probability_api.calculate_goal_probability [OPTIONS,POST]
+/api/v2/goals/<goal_id>/projection-data -> visualization_api.get_goal_projection_data [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.get_goal_scenarios [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios -> goal_probability_api.create_goal_scenario [OPTIONS,POST]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.get_goal_scenario [OPTIONS,HEAD,GET]
+/api/v2/goals/<goal_id>/scenarios/<scenario_id> -> goal_probability_api.delete_goal_scenario [OPTIONS,DELETE]
+/api/v2/goals/<goal_id>/visualization-data -> visualization_api.get_visualization_data [OPTIONS,HEAD,GET]
+/api/v2/goals/calculate-probability -> goal_probability_api.calculate_probability_frontend_compatible [OPTIONS,POST]
+/api/v2/goals/portfolio-data -> visualization_api.get_portfolio_data [OPTIONS,HEAD,GET]
+/api/v2/goals/simulation/<goal_id> -> goal_probability_api.get_goal_simulation [OPTIONS,HEAD,GET]
+/api/v2/parameters -> parameter_api.get_parameters [OPTIONS,HEAD,GET]
+/api/v2/parameters -> parameter_api.create_parameter [OPTIONS,POST]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.get_parameter [OPTIONS,HEAD,GET]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.update_parameter [PUT,OPTIONS]
+/api/v2/parameters/<path:parameter_path> -> parameter_api.delete_parameter [OPTIONS,DELETE]
+/api/v2/parameters/bulk -> parameter_api.bulk_update_parameters [OPTIONS,POST]
+/api/v2/parameters/history/<path:parameter_path> -> parameter_api.get_parameter_history [OPTIONS,HEAD,GET]
+/api/v2/profiles/<profile_id>/overview -> mock_api.get_profile_overview [OPTIONS,HEAD,GET]
+/api/v2/profiles/<profile_id>/recommendations/<action_type> -> mock_api.apply_recommendation [OPTIONS,POST]
+/api/v2/profiles/<profile_id>/recommendations/apply -> mock_api.apply_general_recommendation [OPTIONS,POST]
+/api/v2/public/debug -> public_debug_endpoint [OPTIONS,HEAD,GET]
+/api/v2/questions/dynamic -> question_flow_api.get_dynamic_question_data [OPTIONS,HEAD,GET]
+/api/v2/questions/flow -> mock_api.get_next_question [OPTIONS,HEAD,GET]
+/api/v2/questions/flow -> question_flow_api.get_next_question [OPTIONS,HEAD,GET]
+/api/v2/questions/submit -> mock_api.submit_question_answer [OPTIONS,POST]
+/api/v2/questions/submit -> question_flow_api.submit_question_answer [OPTIONS,POST]
+/api/v2/test/auth_headers -> test_auth_headers [OPTIONS,HEAD,GET]
+/api/v2/test/simulation/<goal_id> -> test_simulation_endpoint [OPTIONS,HEAD,GET]
+/debug-info -> debug_info [OPTIONS,HEAD,GET]
+/debug-static/<path:filename> -> debug_serve_static [OPTIONS,HEAD,GET]
+/goal_form_probability_js -> goal_form_probability_js [OPTIONS,HEAD,GET]
+/inline_test -> inline_test [OPTIONS,HEAD,GET]
+/js/<path:filename> -> serve_js [OPTIONS,HEAD,GET]
+/js/services/<path:filename> -> serve_js_services [OPTIONS,HEAD,GET]
+/loading_state_manager_js -> loading_state_manager_js [OPTIONS,HEAD,GET]
+/no-auth-test -> no_auth_test [OPTIONS,HEAD,GET]
+/serve_test_file/<path:filepath> -> serve_test_file [OPTIONS,HEAD,GET]
+/static/<path:filename> -> static [OPTIONS,HEAD,GET]
+/static/<path:filename> -> serve_static [OPTIONS,HEAD,GET]
+/test_api_service -> test_api_service [OPTIONS,HEAD,GET]
+/test_financial_dashboard -> test_financial_dashboard [OPTIONS,HEAD,GET]
+/test_frontend_components -> test_frontend_components [OPTIONS,HEAD,GET]
+/test_question_flow_api -> test_question_flow_api [OPTIONS,HEAD,GET]
+===========================
+
+2025-03-29 10:25:55,819 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:25:56,429 - root - INFO - LLM service is enabled using model: gpt-4o
+2025-03-29 10:25:56,429 - root - INFO - Monte Carlo cache enabled with size=100, TTL=3600s
+2025-03-29 10:25:56,429 - root - INFO - Running in DEVELOPMENT MODE - Authentication will be bypassed for admin routes
+2025-03-29 10:25:56,430 - app - INFO - Application starting with DEV_MODE=True
+2025-03-29 10:25:56,435 - root - INFO - Mock API endpoints registered for testing
+2025-03-29 10:25:56,438 - models.monte_carlo.cache - INFO - Monte Carlo cache configured: max_size=100, ttl=3600s, save_interval=300s, path=/Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle
+2025-03-29 10:25:56,438 - models.monte_carlo.cache - INFO - Loaded cache from /Users/coddiwomplers/Desktop/Python/Profiler4/data/cache/monte_carlo_cache.pickle (0 entries)
+2025-03-29 10:25:56,438 - models.monte_carlo.cache - INFO - Monte Carlo cache system initialized successfully with loaded cache
+2025-03-29 10:25:56,438 - app - INFO - Monte Carlo cache system initialized
+2025-03-29 10:25:56,471 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:25:56,486 - werkzeug - INFO -  * Debugger PIN: 238-080-037

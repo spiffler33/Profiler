@@ -1,0 +1,312 @@
+{# 
+HTML template for indicating dynamically generated questions and their relationship to user's financial data.
+#}
+
+{% if question.is_dynamic %}
+<div class="dynamic-question-indicator">
+  <!-- Dynamic Question Badge -->
+  <span class="dynamic-badge">
+    <i class="fa fa-brain"></i> Adaptive Question
+  </span>
+  
+  <!-- Tooltip with explanation -->
+  <div class="tooltip-container">
+    <span class="tooltip-icon">?</span>
+    <div class="tooltip-content tooltip-top">
+      <div class="tooltip-title">
+        <i class="tooltip-icon-info fa fa-lightbulb"></i> Personalized Question
+      </div>
+      <p>This question was dynamically generated based on your profile data.</p>
+      
+      {% if question.data_sources %}
+      <div class="data-sources">
+        <strong>Based on:</strong>
+        <ul class="data-source-list">
+          {% for source in question.data_sources %}
+          <li>
+            <span class="data-source-name">{{ source.name }}</span>
+            {% if source.value %}
+            <span class="data-source-value">{{ source.value }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      
+      {% if question.reasoning %}
+      <div class="generation-reasoning">
+        <strong>Reasoning:</strong>
+        <p>{{ question.reasoning }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  <!-- Contextual information button -->
+  {% if question.context_panel %}
+  <button class="context-panel-toggle" data-target="context-panel-{{ question.id }}">
+    <i class="fa fa-info-circle"></i> Why this question?
+  </button>
+  
+  <div id="context-panel-{{ question.id }}" class="context-panel hidden">
+    <div class="context-panel-header">
+      <h4>Why we're asking this question</h4>
+      <button class="context-panel-close">&times;</button>
+    </div>
+    <div class="context-panel-content">
+      {{ question.context_panel|safe }}
+      
+      {% if question.related_goals %}
+      <div class="related-goals">
+        <h5>Related to your goals:</h5>
+        <ul class="related-goals-list">
+          {% for goal in question.related_goals %}
+          <li>
+            <span class="goal-title">{{ goal.title }}</span>
+            {% if goal.relevance %}
+            <span class="goal-relevance">{{ goal.relevance }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      
+      {% if question.parameters %}
+      <div class="related-parameters">
+        <h5>Financial parameters used:</h5>
+        <ul class="parameter-list">
+          {% for param in question.parameters %}
+          <li>
+            <span class="parameter-name">{{ param.name }}</span>
+            {% if param.influence %}
+            <span class="parameter-influence">{{ param.influence }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- CSS for the dynamic question indicator -->
+<style>
+  /* Dynamic question indicator styling */
+  .dynamic-question-indicator {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .dynamic-badge {
+    background-color: #6f42c1;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .dynamic-badge i {
+    margin-right: 0.25rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Context panel styling */
+  .context-panel-toggle {
+    background-color: transparent;
+    border: none;
+    color: #6f42c1;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .context-panel-toggle:hover {
+    background-color: #f0e7ff;
+  }
+  
+  .context-panel-toggle i {
+    margin-right: 0.25rem;
+  }
+  
+  .context-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+    margin-top: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+  }
+  
+  .context-panel.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .context-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+  }
+  
+  .context-panel-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .context-panel-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+    line-height: 1;
+  }
+  
+  .context-panel-content {
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  /* Data sources styling */
+  .data-sources, .related-goals, .related-parameters {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .data-source-list, .related-goals-list, .parameter-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.5rem;
+  }
+  
+  .data-source-list li, .related-goals-list li, .parameter-list li {
+    margin-bottom: 0.25rem;
+  }
+  
+  .data-source-value, .goal-relevance, .parameter-influence {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-left: 0.5rem;
+  }
+  
+  /* Enhanced tooltip styling specifically for dynamic questions */
+  .dynamic-question-indicator .tooltip-container .tooltip-content {
+    width: 300px;
+    margin-left: -150px;
+  }
+  
+  .generation-reasoning {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+  }
+  
+  .generation-reasoning p {
+    margin: 0.5rem 0 0;
+  }
+  
+  /* Handle mobile display */
+  @media (max-width: 768px) {
+    .dynamic-question-indicator {
+      margin: 0.5rem 0;
+    }
+    
+    .context-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+    }
+    
+    .context-panel.hidden {
+      transform: translate(-50%, -60%);
+    }
+    
+    .dynamic-question-indicator .tooltip-container .tooltip-content {
+      width: 250px;
+      margin-left: -125px;
+    }
+  }
+</style>
+
+<!-- JavaScript for the dynamic question indicator -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize context panel toggles
+    const toggleButtons = document.querySelectorAll('.context-panel-toggle');
+    
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const targetId = this.dataset.target;
+        const panel = document.getElementById(targetId);
+        
+        if (panel.classList.contains('hidden')) {
+          // Close any open panels first
+          document.querySelectorAll('.context-panel:not(.hidden)').forEach(p => {
+            p.classList.add('hidden');
+          });
+          
+          // Open this panel
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    });
+    
+    // Initialize context panel close buttons
+    const closeButtons = document.querySelectorAll('.context-panel-close');
+    
+    closeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const panel = this.closest('.context-panel');
+        panel.classList.add('hidden');
+      });
+    });
+    
+    // Close panels when clicking outside
+    document.addEventListener('click', function(event) {
+      const isToggleButton = event.target.closest('.context-panel-toggle');
+      const isContextPanel = event.target.closest('.context-panel');
+      
+      if (!isToggleButton && !isContextPanel) {
+        document.querySelectorAll('.context-panel:not(.hidden)').forEach(panel => {
+          panel.classList.add('hidden');
+        });
+      }
+    });
+  });
+</script>
+{% endif %}

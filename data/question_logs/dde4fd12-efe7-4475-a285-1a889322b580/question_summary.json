@@ -1,0 +1,15 @@
+{
+  "demographics_employment_type": {
+    "question_id": "demographics_employment_type",
+    "question_text": "What is your employment type?",
+    "question_type": "core",
+    "category": "demographics",
+    "is_llm_generated": false,
+    "is_fallback": false,
+    "generated_at": "2025-03-21T12:43:09.930758",
+    "displayed_at": "2025-03-21T12:43:09.931441",
+    "answered_at": null,
+    "answer_value": null,
+    "lifecycle_complete": false
+  }
+}

@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block title %}Financial Goals{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Status colors */
+    .status-on-track {
+        color: #28a745;
+    }
+    .status-at-risk {
+        color: #ffc107;
+    }
+    .status-off-track {
+        color: #dc3545;
+    }
+    
+    /* Progress fill colors */
+    .progress-fill-high {
+        background-color: #28a745;
+    }
+    .progress-fill-medium {
+        background-color: #007bff;
+    }
+    .progress-fill-low {
+        background-color: #ffc107;
+    }
+    
+    /* Tabs for visualization sections */
+    .visualization-tabs {
+        display: flex;
+        margin-top: 1rem;
+        border-bottom: 1px solid #ddd;
+        align-items: center;
+    }
+    
+    .visualization-tab {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-bottom: none;
+        margin-right: 0.5rem;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .visualization-tab.active {
+        border-color: #ddd;
+        background-color: white;
+        margin-bottom: -1px;
+    }
+    
+    .visualization-content {
+        display: none;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-top: none;
+        margin-bottom: 1rem;
+    }
+    
+    .visualization-content.active {
+        display: block;
+    }
+    
+    /* Loader and error styling */
+    .visualization-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+    
+    .loader-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 0.5rem;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .visualization-error {
+        padding: 0.75rem;
+        background-color: #fce4e4;
+        border: 1px solid #f8c6c6;
+        color: #cc0033;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .refresh-visualizations-btn {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: #3498db;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background-color 0.2s;
+    }
+    
+    .refresh-visualizations-btn:hover {
+        background-color: rgba(52, 152, 219, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="goal-container">
+    <div class="goal-header">
+        <h2>Your Financial Goals</h2>
+        <a href="{{ url_for('create_goal') }}" class="btn primary">Create New Goal</a>
+    </div>
+    
+    {% if goals %}
+    <div class="goal-filters">
+        <h3 class="mb-2">Filter Goals</h3>
+        <div class="filter-options">
+            <div class="filter-option active" data-filter="all">All Goals</div>
+            {% for category in categories %}
+            <div class="filter-option" data-filter="{{ category.name }}">{{ category.name|replace('_', ' ')|title }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="goal-grid">
+        {% for goal in goals %}
+        <div class="goal-card" data-goal-id="{{ goal.id }}" data-category="{{ goal.category }}">
+            <div class="goal-card-header">
+                <div class="goal-category">{{ goal.category|replace('_', ' ')|title }}</div>
+                <h3 class="goal-title">{{ goal.title }}</h3>
+            </div>
+            
+            <div class="goal-amounts">
+                <div class="amount-item">
+                    <div class="amount-label">Target Amount</div>
+                    <div class="amount-value">₹{{ '%0.2f'|format(goal.target_amount) }}</div>
+                </div>
+                <div class="amount-item">
+                    <div class="amount-label">Current Amount</div>
+                    <div class="amount-value">₹{{ '%0.2f'|format(goal.current_amount) }}</div>
+                </div>
+            </div>
+            
+            <div class="goal-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill progress-fill-{{ goal.importance }}" 
+                         style="width: {{ goal.current_progress }}%"></div>
+                </div>
+                <div class="progress-details">
+                    <div class="progress-percentage">{{ '%0.1f'|format(goal.current_progress) }}% Complete</div>
+                    <div class="progress-remaining">₹{{ '%0.2f'|format(goal.target_amount - goal.current_amount) }} Remaining</div>
+                </div>
+            </div>
+            
+            <div class="goal-card-actions">
+                <button class="btn secondary goal-expand-button">Expand</button>
+                <div class="goal-actions">
+                    <a href="{{ url_for('edit_goal', goal_id=goal.id) }}" class="btn secondary">Edit</a>
+                    <button class="btn secondary goal-delete-button">Delete</button>
+                </div>
+            </div>
+            
+            <div class="goal-expanded-content hidden">
+                <div class="detail-grid">
+                    {% if goal.timeframe %}
+                    <div class="detail-item">
+                        <div class="detail-label">Target Date</div>
+                        <div class="detail-value">{{ goal.timeframe|replace('T', ' ')|truncate(10, True, '') }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Priority</div>
+                        <div class="detail-value">
+                            <span class="priority-badge priority-{{ goal.importance }}">
+                                {{ goal.importance }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    {% if goal.required_monthly_savings %}
+                    <div class="detail-item">
+                        <div class="detail-label">Monthly Savings</div>
+                        <div class="detail-value">₹{{ '%0.2f'|format(goal.required_monthly_savings) }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if goal.goal_success_probability %}
+                    <div class="detail-item">
+                        <div class="detail-label">Success Probability</div>
+                        <div class="detail-value 
+                            {% if goal.goal_success_probability > 75 %}status-on-track
+                            {% elif goal.goal_success_probability > 50 %}status-at-risk
+                            {% else %}status-off-track{% endif %}">
+                            {{ '%0.1f'|format(goal.goal_success_probability) }}%
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if goal.flexibility %}
+                    <div class="detail-item">
+                        <div class="detail-label">Flexibility</div>
+                        <div class="detail-value">{{ goal.flexibility|replace('_', ' ')|title }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if goal.notes %}
+                <div class="goal-notes">
+                    <h4>Notes</h4>
+                    <p>{{ goal.notes }}</p>
+                </div>
+                {% endif %}
+                
+                {% if goal.recommended_allocation %}
+                <div class="goal-allocation">
+                    <h4>Recommended Asset Allocation</h4>
+                    <div class="allocation-chart"></div>
+                </div>
+                {% endif %}
+                
+                <div class="goal-update-form">
+                    <h4>Update Progress</h4>
+                    <form class="progress-update-form">
+                        <input type="number" name="progress_amount" placeholder="Current Amount" 
+                               value="{{ goal.current_amount }}" step="0.01" min="0" class="form-control">
+                        <button type="submit" class="btn primary">Update</button>
+                    </form>
+                </div>
+                
+                <!-- Goal Visualizations Section -->
+                <div class="goal-visualizations-section">
+                    <h4>Goal Analysis</h4>
+                    
+                    <!-- Global loading and error indicators -->
+                    <div id="visualization-loader" class="hidden"></div>
+                    <div id="visualization-error" class="hidden"></div>
+                    
+                    <div class="visualization-tabs">
+                        <div class="visualization-tab active" data-tab="probability">Probability</div>
+                        <div class="visualization-tab" data-tab="adjustments">Adjustments</div>
+                        <div class="visualization-tab" data-tab="scenarios">Scenarios</div>
+                        <button class="refresh-visualizations-btn" data-goal-id="{{ goal.id }}">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="visualization-content active" data-content="probability">
+                        <div class="probability-section">
+                            <h5>Goal Success Probability</h5>
+                            <!-- Mount point for ProbabilisticGoalVisualizer -->
+                            <div 
+                                id="probabilistic-goal-visualizer" 
+                                class="react-component-mount" 
+                                data-goal-id="{{ goal.id }}" 
+                                data-goal-target="{{ goal.target_amount }}"
+                                data-goal-timeline="{{ goal.timeframe }}"
+                                data-goal-probability="{{ goal.goal_success_probability }}"
+                                data-simulation-data="{{ goal.simulation_data|tojson|safe if goal.simulation_data else '{}' }}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="visualization-content" data-content="adjustments">
+                        <div class="adjustments-section">
+                            <h5>Recommended Adjustments</h5>
+                            <!-- Mount point for AdjustmentImpactPanel -->
+                            <div 
+                                id="adjustment-impact-panel" 
+                                class="react-component-mount" 
+                                data-goal-id="{{ goal.id }}"
+                                data-adjustments="{{ goal.adjustments|tojson|safe if goal.adjustments else '[]' }}"
+                                data-current-probability="{{ goal.goal_success_probability }}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="visualization-content" data-content="scenarios">
+                        <div class="scenarios-section">
+                            <h5>Scenario Comparison</h5>
+                            <!-- Mount point for ScenarioComparisonChart -->
+                            <div 
+                                id="scenario-comparison-chart" 
+                                class="react-component-mount" 
+                                data-goal-id="{{ goal.id }}"
+                                data-scenarios="{{ goal.scenarios|tojson|safe if goal.scenarios else '[]' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% else %}
+    <div class="text-center mt-3">
+        <p>You don't have any goals yet. Let's create your first financial goal!</p>
+        <a href="{{ url_for('create_goal') }}" class="btn primary mt-2">Create New Goal</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Include the visualization services -->
+<script src="{{ url_for('static', filename='js/services/visualizationDataService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/components/SimpleProbabilityVisualizer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/goal_visualization_initializer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/goal_adjustment_handler.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scenario_comparison_handler.js') }}"></script>
+
+<!-- Define missing React components -->
+<script>
+// Temporary placeholder components to make goal_visualization_initializer.js work
+class ProbabilisticGoalVisualizer extends SimpleProbabilityVisualizer {}
+class AdjustmentImpactPanel extends React.Component {
+  render() {
+    return React.createElement(
+      'div', 
+      { className: 'adjustment-panel' },
+      React.createElement('h4', {}, 'Goal Adjustments'),
+      React.createElement('p', {}, 'Recommended adjustments will appear here.')
+    );
+  }
+}
+class ScenarioComparisonChart extends React.Component {
+  render() {
+    return React.createElement(
+      'div', 
+      { className: 'scenario-panel' },
+      React.createElement('h4', {}, 'Goal Scenarios'),
+      React.createElement('p', {}, 'Scenario comparisons will appear here.')
+    );
+  }
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize filter functionality
+        const filterOptions = document.querySelectorAll('.filter-option');
+        const goalCards = document.querySelectorAll('.goal-card');
+        
+        filterOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                filterOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // Add active class to clicked option
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                // Show/hide cards based on filter
+                goalCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Expand/collapse functionality is now fully handled in main.js
+        // We don't need to add event listeners here to avoid duplicates
+        
+        // Initialize visualization tabs
+        const visualizationTabs = document.querySelectorAll('.visualization-tab');
+        
+        visualizationTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabType = this.dataset.tab;
+                const goalCard = this.closest('.goal-card');
+                
+                // Remove active class from all tabs in this card
+                const allTabs = goalCard.querySelectorAll('.visualization-tab');
+                allTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all content sections in this card
+                const allContent = goalCard.querySelectorAll('.visualization-content');
+                allContent.forEach(c => c.classList.remove('active'));
+                
+                // Show the selected content
+                const selectedContent = goalCard.querySelector(`.visualization-content[data-content="${tabType}"]`);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                    
+                    // Refresh the visualization if needed
+                    if (tabType === 'probability') {
+                        window.GoalVisualizationInitializer.refreshVisualization('probabilistic-goal-visualizer', null);
+                    } else if (tabType === 'adjustments') {
+                        window.GoalVisualizationInitializer.refreshVisualization('adjustment-impact-panel', null);
+                    } else if (tabType === 'scenarios') {
+                        window.GoalVisualizationInitializer.refreshVisualization('scenario-comparison-chart', null);
+                    }
+                }
+            });
+        });
+        
+        // Initialize the goal adjustment handler
+        if (window.GoalAdjustmentHandler) {
+            // Configure the handler with our API endpoint
+            window.GoalAdjustmentHandler.configure({
+                apiEndpoint: '/api/v2/goals/{goal_id}/apply-adjustment',
+                loadingClass: 'is-applying-adjustment',
+                successMessageDuration: 3000
+            });
+            
+            // No need to manually handle goalAdjustmentSelected events anymore,
+            // as the GoalAdjustmentHandler will take care of this
+        } else {
+            // Fall back to the previous implementation if the handler is not available
+            document.addEventListener('goalAdjustmentSelected', function(event) {
+                const { goalId, adjustmentId } = event.detail;
+                console.log(`Adjustment ${adjustmentId} selected for goal ${goalId}`);
+                
+                // Example: Show confirmation dialog
+                if (confirm('Would you like to apply this adjustment to your goal?')) {
+                    fetch(`/api/goals/${goalId}/adjustments/${adjustmentId}/apply`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Adjustment applied successfully!');
+                            // Refresh the visualizations with new data
+                            window.GoalVisualizationInitializer.fetchAndRefresh(goalId, {
+                                forceRefresh: true
+                            });
+                        } else {
+                            alert('Failed to apply adjustment: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error applying adjustment:', error);
+                        alert('An error occurred while applying the adjustment.');
+                    });
+                }
+            });
+        }
+        
+        // Handle manual refresh button clicks
+        const refreshButtons = document.querySelectorAll('.refresh-visualizations-btn');
+        refreshButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const goalId = this.dataset.goalId;
+                if (goalId) {
+                    // Add spinning animation to the refresh icon
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-spin');
+                        
+                        // Remove spinning after data is loaded or on error
+                        const removeSpinning = () => {
+                            icon.classList.remove('fa-spin');
+                        };
+                        
+                        // Force a refresh from the API instead of using cache
+                        window.GoalVisualizationInitializer.fetchAndRefresh(goalId, {
+                            forceRefresh: true,
+                            onSuccess: removeSpinning,
+                            onError: removeSpinning
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,1415 @@
+2025-03-27 12:30:23,366 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 12:30:23,366 - root - INFO - DEV_MODE: True
+2025-03-27 12:30:23,377 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2025-03-27 12:30:23,378 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-27 12:30:23,378 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 12:30:23,509 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 12:30:23,509 - root - INFO - DEV_MODE: True
+2025-03-27 12:30:23,514 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 12:30:23,525 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 12:30:30,153 - root - INFO - Public endpoint accessed
+2025-03-27 12:30:30,154 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /public HTTP/1.1" 200 -
+2025-03-27 12:30:30,159 - root - INFO - Public endpoint accessed
+2025-03-27 12:30:30,159 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /public HTTP/1.1" 200 -
+2025-03-27 12:30:30,163 - root - INFO - Admin endpoint accessed, DEV_MODE: True
+2025-03-27 12:30:30,164 - root - INFO - Authentication bypassed due to DEV_MODE
+2025-03-27 12:30:30,164 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /admin HTTP/1.1" 200 -
+2025-03-27 12:30:30,168 - root - INFO - Admin endpoint accessed, DEV_MODE: True
+2025-03-27 12:30:30,168 - root - INFO - Authentication bypassed due to DEV_MODE
+2025-03-27 12:30:30,169 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /admin HTTP/1.1" 200 -
+2025-03-27 12:30:30,174 - root - INFO - Auth debug endpoint accessed
+2025-03-27 12:30:30,174 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /auth-debug HTTP/1.1" 200 -
+2025-03-27 12:30:30,178 - root - INFO - Auth debug endpoint accessed
+2025-03-27 12:30:30,179 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 12:30:30] "GET /auth-debug HTTP/1.1" 200 -
+2025-03-27 14:56:46,285 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/vp_test_debug/debug_server.py', reloading
+2025-03-27 14:56:46,339 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 14:56:46,619 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 14:56:46,619 - root - INFO - DEV_MODE: True
+2025-03-27 14:56:46,627 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 14:56:46,642 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 14:58:46,970 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 14:58:47,020 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 14:58:47,246 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 14:58:47,247 - root - INFO - DEV_MODE: True
+2025-03-27 14:58:47,254 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 14:58:47,268 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 15:08:40,221 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 15:08:40,274 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 15:08:40,513 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 15:08:40,513 - root - INFO - DEV_MODE: True
+2025-03-27 15:08:40,522 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 15:08:40,536 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 15:16:27,906 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 15:16:27] "[33mGET / HTTP/1.1[0m" 404 -
+2025-03-27 15:16:27,947 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 15:16:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-27 15:16:36,340 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 15:16:36] "[33mGET /static_test HTTP/1.1[0m" 404 -
+2025-03-27 15:18:25,525 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 15:18:25] "[33mGET /static_test HTTP/1.1[0m" 404 -
+2025-03-27 15:18:25,589 - werkzeug - INFO - 127.0.0.1 - - [27/Mar/2025 15:18:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-27 15:20:37,444 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 15:20:37,490 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 15:20:37,713 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 15:20:37,713 - root - INFO - DEV_MODE: True
+2025-03-27 15:20:37,720 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 15:20:37,732 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:07:53,671 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/auth_test.py', reloading
+2025-03-27 17:07:53,692 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:07:53,836 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:07:53,837 - root - INFO - DEV_MODE: True
+2025-03-27 17:07:53,845 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:07:53,859 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:14:29,757 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:14:29,799 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:14:30,022 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:14:30,022 - root - INFO - DEV_MODE: True
+2025-03-27 17:14:30,030 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:14:30,045 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:14:53,652 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:14:53,695 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:14:53,869 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:14:53,869 - root - INFO - DEV_MODE: True
+2025-03-27 17:14:53,877 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:14:53,888 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:18:36,011 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:18:36,053 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:18:36,262 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:18:36,262 - root - INFO - DEV_MODE: True
+2025-03-27 17:18:36,270 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:18:36,290 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:19:22,644 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:19:22,688 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:19:22,895 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:19:22,895 - root - INFO - DEV_MODE: True
+2025-03-27 17:19:22,903 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:19:22,915 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:19:47,637 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:19:47,668 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:19:47,830 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:19:47,830 - root - INFO - DEV_MODE: True
+2025-03-27 17:19:47,837 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:19:47,848 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:20:36,250 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:20:36,296 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:20:36,485 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:20:36,485 - root - INFO - DEV_MODE: True
+2025-03-27 17:20:36,493 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:20:36,507 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:25:04,476 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/auth_debug.py', reloading
+2025-03-27 17:25:04,502 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:25:04,688 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:25:04,689 - root - INFO - DEV_MODE: True
+2025-03-27 17:25:04,697 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:25:04,710 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:26:52,511 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/auth_debug.py', reloading
+2025-03-27 17:26:52,534 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:26:52,736 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:26:52,736 - root - INFO - DEV_MODE: True
+2025-03-27 17:26:52,744 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:26:52,758 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:27:59,380 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/auth_debug_updated.py', reloading
+2025-03-27 17:27:59,405 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:27:59,578 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:27:59,578 - root - INFO - DEV_MODE: True
+2025-03-27 17:27:59,584 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:27:59,595 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:30:39,229 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/models/financial_projection.py', reloading
+2025-03-27 17:30:39,258 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:30:39,475 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:30:39,475 - root - INFO - DEV_MODE: True
+2025-03-27 17:30:39,483 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:30:39,496 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:33:30,569 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/auth_utils.py', reloading
+2025-03-27 17:33:30,601 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:33:30,855 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:33:30,856 - root - INFO - DEV_MODE: True
+2025-03-27 17:33:30,865 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:33:30,877 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:34:32,235 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-27 17:34:32,255 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:34:32,394 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:34:32,395 - root - INFO - DEV_MODE: True
+2025-03-27 17:34:32,402 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:34:32,415 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:44:05,210 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-27 17:44:05,264 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:44:05,546 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:44:05,546 - root - INFO - DEV_MODE: True
+2025-03-27 17:44:05,556 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:44:05,571 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:44:26,001 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-27 17:44:26,020 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:44:26,154 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:44:26,154 - root - INFO - DEV_MODE: True
+2025-03-27 17:44:26,162 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:44:26,174 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:44:40,495 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-27 17:44:40,515 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:44:40,685 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:44:40,685 - root - INFO - DEV_MODE: True
+2025-03-27 17:44:40,692 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:44:40,703 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:53:19,871 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:53:19,924 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:53:20,119 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:53:20,119 - root - INFO - DEV_MODE: True
+2025-03-27 17:53:20,127 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:53:20,142 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 17:55:08,686 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 17:55:08,711 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 17:55:08,930 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 17:55:08,930 - root - INFO - DEV_MODE: True
+2025-03-27 17:55:08,938 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 17:55:08,951 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:03:23,351 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 18:03:23,384 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:03:23,613 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:03:23,613 - root - INFO - DEV_MODE: True
+2025-03-27 18:03:23,623 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:03:23,644 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:04:31,125 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 18:04:31,152 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:04:31,319 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:04:31,319 - root - INFO - DEV_MODE: True
+2025-03-27 18:04:31,327 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:04:31,339 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:05:41,855 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 18:05:41,892 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:05:42,087 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:05:42,087 - root - INFO - DEV_MODE: True
+2025-03-27 18:05:42,095 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:05:42,107 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:06:51,474 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 18:06:51,496 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:06:51,643 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:06:51,643 - root - INFO - DEV_MODE: True
+2025-03-27 18:06:51,651 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:06:51,664 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:25:29,121 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:25:29,149 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:25:29,335 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:25:29,335 - root - INFO - DEV_MODE: True
+2025-03-27 18:25:29,343 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:25:29,355 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:26:17,429 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:26:17,448 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:26:17,610 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:26:17,611 - root - INFO - DEV_MODE: True
+2025-03-27 18:26:17,618 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:26:17,629 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:26:55,484 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:26:55,519 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:26:55,707 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:26:55,707 - root - INFO - DEV_MODE: True
+2025-03-27 18:26:55,715 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:26:55,726 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:33:49,200 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:33:49,222 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:33:49,399 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:33:49,399 - root - INFO - DEV_MODE: True
+2025-03-27 18:33:49,408 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:33:49,420 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:33:59,629 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:33:59,651 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:33:59,792 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:33:59,792 - root - INFO - DEV_MODE: True
+2025-03-27 18:33:59,797 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:33:59,808 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:34:11,057 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:34:11,084 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:34:11,216 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:34:11,216 - root - INFO - DEV_MODE: True
+2025-03-27 18:34:11,222 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:34:11,232 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:34:29,614 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:34:29,636 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:34:29,808 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:34:29,808 - root - INFO - DEV_MODE: True
+2025-03-27 18:34:29,816 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:34:29,829 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:34:38,033 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:34:38,052 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:34:38,186 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:34:38,186 - root - INFO - DEV_MODE: True
+2025-03-27 18:34:38,192 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:34:38,203 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:34:47,393 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:34:47,427 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:34:47,569 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:34:47,569 - root - INFO - DEV_MODE: True
+2025-03-27 18:34:47,574 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:34:47,585 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:34:55,745 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:34:55,781 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:34:55,934 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:34:55,934 - root - INFO - DEV_MODE: True
+2025-03-27 18:34:55,940 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:34:55,952 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:37:50,826 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:37:50,847 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:37:51,011 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:37:51,012 - root - INFO - DEV_MODE: True
+2025-03-27 18:37:51,019 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:37:51,031 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:38:22,661 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:38:22,692 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:38:22,874 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:38:22,874 - root - INFO - DEV_MODE: True
+2025-03-27 18:38:22,882 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:38:22,894 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:38:39,225 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:38:39,251 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:38:39,380 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:38:39,380 - root - INFO - DEV_MODE: True
+2025-03-27 18:38:39,385 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:38:39,397 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:38:45,544 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:38:45,569 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:38:45,724 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:38:45,724 - root - INFO - DEV_MODE: True
+2025-03-27 18:38:45,730 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:38:45,741 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:41:05,608 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:41:05,635 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:41:05,806 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:41:05,806 - root - INFO - DEV_MODE: True
+2025-03-27 18:41:05,813 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:41:05,825 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:41:31,382 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:41:31,406 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:41:31,583 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:41:31,583 - root - INFO - DEV_MODE: True
+2025-03-27 18:41:31,591 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:41:31,603 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:42:26,756 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/admin_parameters_api.py', reloading
+2025-03-27 18:42:26,775 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:42:26,964 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:42:26,964 - root - INFO - DEV_MODE: True
+2025-03-27 18:42:26,972 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:42:26,985 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:45:30,937 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:45:30,973 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:45:31,155 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:45:31,155 - root - INFO - DEV_MODE: True
+2025-03-27 18:45:31,163 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:45:31,174 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:45:59,784 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:45:59,804 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:45:59,963 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:45:59,963 - root - INFO - DEV_MODE: True
+2025-03-27 18:45:59,970 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:45:59,986 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:46:07,142 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:46:07,164 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:46:07,297 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:46:07,297 - root - INFO - DEV_MODE: True
+2025-03-27 18:46:07,303 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:46:07,319 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:46:24,671 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:46:24,690 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:46:24,829 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:46:24,829 - root - INFO - DEV_MODE: True
+2025-03-27 18:46:24,835 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:46:24,846 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:46:58,560 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:46:58,580 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:46:58,749 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:46:58,749 - root - INFO - DEV_MODE: True
+2025-03-27 18:46:58,756 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:46:58,768 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:47:23,282 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-27 18:47:23,303 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:47:23,436 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:47:23,436 - root - INFO - DEV_MODE: True
+2025-03-27 18:47:23,441 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:47:23,452 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:48:54,367 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:48:54,386 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:48:54,564 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:48:54,564 - root - INFO - DEV_MODE: True
+2025-03-27 18:48:54,572 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:48:54,584 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:49:09,917 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:49:09,945 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:49:10,134 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:49:10,134 - root - INFO - DEV_MODE: True
+2025-03-27 18:49:10,143 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:49:10,155 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:49:20,385 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:49:20,403 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:49:20,547 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:49:20,548 - root - INFO - DEV_MODE: True
+2025-03-27 18:49:20,554 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:49:20,565 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:49:57,354 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:49:57,388 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:49:57,530 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:49:57,530 - root - INFO - DEV_MODE: True
+2025-03-27 18:49:57,537 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:49:57,550 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:51:07,011 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:51:07,036 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:51:07,177 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:51:07,177 - root - INFO - DEV_MODE: True
+2025-03-27 18:51:07,183 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:51:07,193 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:52:32,968 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:52:33,003 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:52:33,141 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:52:33,141 - root - INFO - DEV_MODE: True
+2025-03-27 18:52:33,147 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:52:33,157 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:53:32,319 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:53:32,346 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:53:32,500 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:53:32,500 - root - INFO - DEV_MODE: True
+2025-03-27 18:53:32,506 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:53:32,517 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 18:53:40,691 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/system_health_api_test.py', reloading
+2025-03-27 18:53:40,714 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 18:53:40,866 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 18:53:40,866 - root - INFO - DEV_MODE: True
+2025-03-27 18:53:40,873 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 18:53:40,883 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 19:47:05,297 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 19:47:05,331 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 19:47:05,544 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 19:47:05,544 - root - INFO - DEV_MODE: True
+2025-03-27 19:47:05,553 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 19:47:05,568 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 19:47:14,796 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 19:47:14,819 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 19:47:14,992 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 19:47:14,992 - root - INFO - DEV_MODE: True
+2025-03-27 19:47:15,000 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 19:47:15,011 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 19:50:20,008 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 19:50:20,028 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 19:50:20,203 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 19:50:20,203 - root - INFO - DEV_MODE: True
+2025-03-27 19:50:20,211 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 19:50:20,222 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 19:51:34,705 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-27 19:51:34,730 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 19:51:34,917 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 19:51:34,917 - root - INFO - DEV_MODE: True
+2025-03-27 19:51:34,925 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 19:51:34,936 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:07:57,254 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:07:57,286 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:07:57,460 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:07:57,460 - root - INFO - DEV_MODE: True
+2025-03-27 20:07:57,468 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:07:57,479 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:08:57,389 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:08:57,432 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:08:57,631 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:08:57,631 - root - INFO - DEV_MODE: True
+2025-03-27 20:08:57,638 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:08:57,651 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:09:06,874 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:09:06,908 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:09:07,049 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:09:07,049 - root - INFO - DEV_MODE: True
+2025-03-27 20:09:07,054 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:09:07,065 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:09:15,269 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:09:15,303 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:09:15,441 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:09:15,441 - root - INFO - DEV_MODE: True
+2025-03-27 20:09:15,447 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:09:15,458 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:10:33,153 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:10:33,172 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:10:33,314 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:10:33,314 - root - INFO - DEV_MODE: True
+2025-03-27 20:10:33,320 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:10:33,331 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:11:21,337 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:11:21,371 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:11:21,512 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:11:21,512 - root - INFO - DEV_MODE: True
+2025-03-27 20:11:21,517 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:11:21,528 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:11:29,733 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:11:29,768 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:11:29,910 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:11:29,910 - root - INFO - DEV_MODE: True
+2025-03-27 20:11:29,915 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:11:29,926 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:11:49,380 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:11:49,413 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:11:49,551 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:11:49,551 - root - INFO - DEV_MODE: True
+2025-03-27 20:11:49,556 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:11:49,567 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:11:56,738 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:11:56,766 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:11:56,902 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:11:56,902 - root - INFO - DEV_MODE: True
+2025-03-27 20:11:56,907 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:11:56,918 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:12:09,212 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:12:09,246 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:12:09,388 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:12:09,388 - root - INFO - DEV_MODE: True
+2025-03-27 20:12:09,393 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:12:09,404 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:12:20,667 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:12:20,699 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:12:20,842 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:12:20,842 - root - INFO - DEV_MODE: True
+2025-03-27 20:12:20,848 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:12:20,859 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:12:25,986 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:12:26,020 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:12:26,170 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:12:26,170 - root - INFO - DEV_MODE: True
+2025-03-27 20:12:26,176 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:12:26,186 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:13:19,366 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:13:19,397 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:13:19,534 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:13:19,534 - root - INFO - DEV_MODE: True
+2025-03-27 20:13:19,540 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:13:19,550 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:14:23,958 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:14:23,991 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:14:24,127 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:14:24,127 - root - INFO - DEV_MODE: True
+2025-03-27 20:14:24,133 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:14:24,143 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:14:40,522 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:14:40,556 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:14:40,696 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:14:40,696 - root - INFO - DEV_MODE: True
+2025-03-27 20:14:40,701 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:14:40,722 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:15:37,981 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:15:38,015 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:15:38,157 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:15:38,157 - root - INFO - DEV_MODE: True
+2025-03-27 20:15:38,163 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:15:38,174 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:15:47,414 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:15:47,448 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:15:47,588 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:15:47,588 - root - INFO - DEV_MODE: True
+2025-03-27 20:15:47,593 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:15:47,604 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:19:53,228 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:19:53,262 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:19:53,401 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:19:53,402 - root - INFO - DEV_MODE: True
+2025-03-27 20:19:53,407 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:19:53,418 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:20:07,756 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:20:07,792 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:20:07,931 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:20:07,931 - root - INFO - DEV_MODE: True
+2025-03-27 20:20:07,937 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:20:07,948 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:20:23,304 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:20:23,326 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:20:23,484 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:20:23,484 - root - INFO - DEV_MODE: True
+2025-03-27 20:20:23,490 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:20:23,501 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:20:37,837 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:20:37,872 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:20:38,012 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:20:38,012 - root - INFO - DEV_MODE: True
+2025-03-27 20:20:38,017 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:20:38,028 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:20:43,159 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:20:43,195 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:20:43,335 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:20:43,336 - root - INFO - DEV_MODE: True
+2025-03-27 20:20:43,341 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:20:43,353 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:21:14,051 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:21:14,084 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:21:14,226 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:21:14,226 - root - INFO - DEV_MODE: True
+2025-03-27 20:21:14,232 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:21:14,242 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:21:21,419 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:21:21,453 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:21:21,614 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:21:21,614 - root - INFO - DEV_MODE: True
+2025-03-27 20:21:21,619 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:21:21,630 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:25:21,051 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:25:21,086 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:25:21,223 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:25:21,223 - root - INFO - DEV_MODE: True
+2025-03-27 20:25:21,228 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:25:21,239 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:25:30,462 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:25:30,498 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:25:30,643 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:25:30,643 - root - INFO - DEV_MODE: True
+2025-03-27 20:25:30,649 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:25:30,660 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:25:38,855 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:25:38,890 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:25:39,048 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:25:39,048 - root - INFO - DEV_MODE: True
+2025-03-27 20:25:39,054 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:25:39,064 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:25:44,195 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:25:44,229 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:25:44,366 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:25:44,366 - root - INFO - DEV_MODE: True
+2025-03-27 20:25:44,371 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:25:44,382 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:25:55,645 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:25:55,679 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:25:55,820 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:25:55,820 - root - INFO - DEV_MODE: True
+2025-03-27 20:25:55,826 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:25:55,836 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:26:45,917 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:26:45,950 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:26:46,091 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:26:46,091 - root - INFO - DEV_MODE: True
+2025-03-27 20:26:46,096 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:26:46,107 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:26:54,303 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:26:54,338 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:26:54,494 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:26:54,494 - root - INFO - DEV_MODE: True
+2025-03-27 20:26:54,499 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:26:54,510 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:27:04,764 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:27:04,794 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:27:04,931 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:27:04,931 - root - INFO - DEV_MODE: True
+2025-03-27 20:27:04,937 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:27:04,947 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:27:14,167 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:27:14,203 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:27:14,341 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:27:14,341 - root - INFO - DEV_MODE: True
+2025-03-27 20:27:14,346 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:27:14,357 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:27:21,524 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:27:21,550 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:27:21,679 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:27:21,679 - root - INFO - DEV_MODE: True
+2025-03-27 20:27:21,684 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:27:21,695 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:27:32,956 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:27:32,990 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:27:33,129 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:27:33,130 - root - INFO - DEV_MODE: True
+2025-03-27 20:27:33,135 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:27:33,146 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:27:45,443 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:27:45,478 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:27:45,619 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:27:45,619 - root - INFO - DEV_MODE: True
+2025-03-27 20:27:45,625 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:27:45,636 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:42:31,118 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:42:31,167 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:42:31,362 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:42:31,362 - root - INFO - DEV_MODE: True
+2025-03-27 20:42:31,379 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:42:31,397 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:51:33,800 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:51:33,822 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:51:34,010 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:51:34,010 - root - INFO - DEV_MODE: True
+2025-03-27 20:51:34,020 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:51:34,035 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:51:39,160 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:51:39,195 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:51:39,334 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:51:39,334 - root - INFO - DEV_MODE: True
+2025-03-27 20:51:39,340 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:51:39,350 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:51:45,496 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:51:45,525 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:51:45,657 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:51:45,657 - root - INFO - DEV_MODE: True
+2025-03-27 20:51:45,663 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:51:45,674 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:51:51,824 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:51:51,856 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:51:51,993 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:51:51,994 - root - INFO - DEV_MODE: True
+2025-03-27 20:51:51,999 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:51:52,015 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:52:10,420 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:52:10,454 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:52:10,618 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:52:10,619 - root - INFO - DEV_MODE: True
+2025-03-27 20:52:10,625 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:52:10,636 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:53:21,662 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:53:21,703 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:53:21,860 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:53:21,860 - root - INFO - DEV_MODE: True
+2025-03-27 20:53:21,866 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:53:21,878 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:53:33,232 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:53:33,268 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:53:33,421 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:53:33,421 - root - INFO - DEV_MODE: True
+2025-03-27 20:53:33,427 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:53:33,437 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:53:56,141 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:53:56,183 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:53:56,345 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:53:56,345 - root - INFO - DEV_MODE: True
+2025-03-27 20:53:56,352 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:53:56,364 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:54:03,600 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:54:03,636 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:54:03,772 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:54:03,773 - root - INFO - DEV_MODE: True
+2025-03-27 20:54:03,778 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:54:03,789 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:54:36,764 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:54:36,785 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:54:36,918 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:54:36,918 - root - INFO - DEV_MODE: True
+2025-03-27 20:54:36,923 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:54:36,935 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:55:05,821 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:55:05,857 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:55:05,996 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:55:05,996 - root - INFO - DEV_MODE: True
+2025-03-27 20:55:06,002 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:55:06,013 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:55:20,454 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:55:20,475 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:55:20,639 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:55:20,639 - root - INFO - DEV_MODE: True
+2025-03-27 20:55:20,647 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:55:20,658 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:55:51,550 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:55:51,587 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:55:51,753 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:55:51,753 - root - INFO - DEV_MODE: True
+2025-03-27 20:55:51,760 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:55:51,771 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:56:03,141 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:56:03,183 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:56:03,322 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:56:03,323 - root - INFO - DEV_MODE: True
+2025-03-27 20:56:03,328 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:56:03,338 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:57:09,644 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:57:09,684 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:57:09,854 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:57:09,855 - root - INFO - DEV_MODE: True
+2025-03-27 20:57:09,862 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:57:09,873 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:57:24,361 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:57:24,388 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:57:24,520 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:57:24,520 - root - INFO - DEV_MODE: True
+2025-03-27 20:57:24,525 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:57:24,536 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:57:39,032 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:57:39,073 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:57:39,240 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:57:39,241 - root - INFO - DEV_MODE: True
+2025-03-27 20:57:39,248 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:57:39,259 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 20:57:50,681 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 20:57:50,722 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 20:57:50,857 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 20:57:50,857 - root - INFO - DEV_MODE: True
+2025-03-27 20:57:50,863 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 20:57:50,874 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:08:47,675 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:08:47,711 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:08:47,884 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:08:47,884 - root - INFO - DEV_MODE: True
+2025-03-27 21:08:47,891 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:08:47,903 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:08:55,083 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:08:55,119 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:08:55,285 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:08:55,286 - root - INFO - DEV_MODE: True
+2025-03-27 21:08:55,293 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:08:55,309 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:09:19,872 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:09:19,906 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:09:20,087 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:09:20,087 - root - INFO - DEV_MODE: True
+2025-03-27 21:09:20,094 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:09:20,105 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:12:17,530 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:12:17,568 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:12:17,754 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:12:17,754 - root - INFO - DEV_MODE: True
+2025-03-27 21:12:17,762 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:12:17,775 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:12:25,972 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:12:26,007 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:12:26,162 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:12:26,162 - root - INFO - DEV_MODE: True
+2025-03-27 21:12:26,168 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:12:26,179 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:14:38,262 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:14:38,299 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:14:38,455 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:14:38,455 - root - INFO - DEV_MODE: True
+2025-03-27 21:14:38,462 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:14:38,473 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:14:53,822 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:14:53,857 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:14:53,995 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:14:53,995 - root - INFO - DEV_MODE: True
+2025-03-27 21:14:54,000 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:14:54,011 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:15:06,291 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:15:06,325 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:15:06,465 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:15:06,465 - root - INFO - DEV_MODE: True
+2025-03-27 21:15:06,470 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:15:06,481 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-27 21:25:15,320 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/admin_browser_integration_test.py', reloading
+2025-03-27 21:25:15,352 - werkzeug - INFO -  * Restarting with stat
+2025-03-27 21:25:15,524 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-27 21:25:15,525 - root - INFO - DEV_MODE: True
+2025-03-27 21:25:15,532 - werkzeug - WARNING -  * Debugger is active!
+2025-03-27 21:25:15,545 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:04:51,123 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:04:51,150 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:04:51,335 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:04:51,335 - root - INFO - DEV_MODE: True
+2025-03-28 08:04:51,343 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:04:51,355 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:06:19,386 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:06:19,419 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:06:19,627 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:06:19,627 - root - INFO - DEV_MODE: True
+2025-03-28 08:06:19,636 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:06:19,647 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:06:31,932 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:06:31,951 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:06:32,095 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:06:32,095 - root - INFO - DEV_MODE: True
+2025-03-28 08:06:32,101 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:06:32,113 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:08:21,853 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:08:21,879 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:08:22,085 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:08:22,085 - root - INFO - DEV_MODE: True
+2025-03-28 08:08:22,093 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:08:22,105 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:09:48,070 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:09:48,093 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:09:48,246 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:09:48,246 - root - INFO - DEV_MODE: True
+2025-03-28 08:09:48,253 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:09:48,265 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:16:17,427 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:16:17,450 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:16:17,609 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:16:17,610 - root - INFO - DEV_MODE: True
+2025-03-28 08:16:17,618 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:16:17,631 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:16:25,823 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:16:25,845 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:16:26,002 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:16:26,002 - root - INFO - DEV_MODE: True
+2025-03-28 08:16:26,009 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:16:26,020 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:36:59,930 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 08:36:59,961 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:37:00,155 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:37:00,155 - root - INFO - DEV_MODE: True
+2025-03-28 08:37:00,163 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:37:00,177 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:38:11,939 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:38:11,973 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:38:12,194 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:38:12,194 - root - INFO - DEV_MODE: True
+2025-03-28 08:38:12,202 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:38:12,214 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:43:57,000 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:43:57,039 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:43:57,225 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:43:57,226 - root - INFO - DEV_MODE: True
+2025-03-28 08:43:57,233 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:43:57,245 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:44:33,076 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:44:33,097 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:44:33,251 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:44:33,251 - root - INFO - DEV_MODE: True
+2025-03-28 08:44:33,258 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:44:33,270 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:44:45,562 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:44:45,597 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:44:45,756 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:44:45,756 - root - INFO - DEV_MODE: True
+2025-03-28 08:44:45,762 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:44:45,773 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:47:34,662 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:47:34,694 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:47:34,881 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:47:34,881 - root - INFO - DEV_MODE: True
+2025-03-28 08:47:34,889 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:47:34,901 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:48:17,858 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 08:48:17,877 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:48:18,016 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:48:18,017 - root - INFO - DEV_MODE: True
+2025-03-28 08:48:18,024 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:48:18,036 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:56:54,135 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:56:54,160 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:56:54,296 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:56:54,296 - root - INFO - DEV_MODE: True
+2025-03-28 08:56:54,305 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:56:54,318 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:57:03,571 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:57:03,590 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:57:03,727 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:57:03,727 - root - INFO - DEV_MODE: True
+2025-03-28 08:57:03,733 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:57:03,744 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:57:16,103 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:57:16,141 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:57:16,328 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:57:16,328 - root - INFO - DEV_MODE: True
+2025-03-28 08:57:16,335 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:57:16,347 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:57:29,711 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:57:29,744 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:57:29,882 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:57:29,882 - root - INFO - DEV_MODE: True
+2025-03-28 08:57:29,888 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:57:29,898 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:57:46,349 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:57:46,372 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:57:46,506 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:57:46,506 - root - INFO - DEV_MODE: True
+2025-03-28 08:57:46,512 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:57:46,523 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:58:03,967 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:58:03,987 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:58:04,125 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:58:04,125 - root - INFO - DEV_MODE: True
+2025-03-28 08:58:04,131 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:58:04,143 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:58:21,629 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:58:21,663 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:58:21,817 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:58:21,817 - root - INFO - DEV_MODE: True
+2025-03-28 08:58:21,822 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:58:21,834 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:58:37,200 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:58:37,239 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:58:37,422 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:58:37,422 - root - INFO - DEV_MODE: True
+2025-03-28 08:58:37,429 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:58:37,441 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:58:58,981 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/test_admin_parameters.py', reloading
+2025-03-28 08:58:59,003 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:58:59,141 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:58:59,141 - root - INFO - DEV_MODE: True
+2025-03-28 08:58:59,148 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:58:59,160 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 08:59:56,668 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-28 08:59:56,688 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 08:59:56,823 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 08:59:56,823 - root - INFO - DEV_MODE: True
+2025-03-28 08:59:56,828 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 08:59:56,839 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:00:10,181 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api_fix/parameter_admin_api_test.py', reloading
+2025-03-28 09:00:10,203 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:00:10,338 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:00:10,338 - root - INFO - DEV_MODE: True
+2025-03-28 09:00:10,343 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:00:10,355 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:11:31,493 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:11:31,533 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:11:31,746 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:11:31,746 - root - INFO - DEV_MODE: True
+2025-03-28 09:11:31,755 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:11:31,767 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:11:36,923 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:11:36,957 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:11:37,100 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:11:37,100 - root - INFO - DEV_MODE: True
+2025-03-28 09:11:37,105 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:11:37,116 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:11:42,252 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:11:42,287 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:11:42,438 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:11:42,439 - root - INFO - DEV_MODE: True
+2025-03-28 09:11:42,445 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:11:42,457 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:11:47,596 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:11:47,616 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:11:47,753 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:11:47,753 - root - INFO - DEV_MODE: True
+2025-03-28 09:11:47,759 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:11:47,771 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:11:53,957 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:11:53,992 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:11:54,130 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:11:54,130 - root - INFO - DEV_MODE: True
+2025-03-28 09:11:54,136 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:11:54,146 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:01,344 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:01,367 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:01,502 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:01,502 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:01,507 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:01,518 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:11,781 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:11,802 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:11,944 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:11,944 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:11,951 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:11,964 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:17,094 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:17,116 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:17,253 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:17,253 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:17,259 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:17,270 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:26,547 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:26,580 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:26,722 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:26,723 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:26,728 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:26,739 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:34,935 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:34,973 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:35,144 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:35,144 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:35,149 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:35,161 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:12:58,774 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:12:58,796 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:12:58,936 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:12:58,936 - root - INFO - DEV_MODE: True
+2025-03-28 09:12:58,942 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:12:58,953 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:13:20,562 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:13:20,590 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:13:20,726 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:13:20,726 - root - INFO - DEV_MODE: True
+2025-03-28 09:13:20,732 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:13:20,743 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:20:26,728 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-28 09:20:26,757 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:20:26,943 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:20:26,944 - root - INFO - DEV_MODE: True
+2025-03-28 09:20:26,951 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:20:26,963 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:20:51,518 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api/test_goal_probability_api.py', reloading
+2025-03-28 09:20:51,546 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:20:51,713 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:20:51,713 - root - INFO - DEV_MODE: True
+2025-03-28 09:20:51,721 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:20:51,732 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:21:31,620 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:21:31,661 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:21:31,809 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:21:31,810 - root - INFO - DEV_MODE: True
+2025-03-28 09:21:31,817 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:21:31,829 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:21:45,126 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 09:21:45,145 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:21:45,281 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:21:45,281 - root - INFO - DEV_MODE: True
+2025-03-28 09:21:45,287 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:21:45,298 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:22:00,644 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api/test_goal_probability_api.py', reloading
+2025-03-28 09:22:00,680 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:22:00,817 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:22:00,817 - root - INFO - DEV_MODE: True
+2025-03-28 09:22:00,823 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:22:00,834 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:22:04,932 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/tests/api/test_goal_probability_api.py', reloading
+2025-03-28 09:22:04,955 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:22:05,089 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:22:05,089 - root - INFO - DEV_MODE: True
+2025-03-28 09:22:05,094 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:22:05,105 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:27:43,771 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 09:27:43,793 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:27:43,931 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:27:43,931 - root - INFO - DEV_MODE: True
+2025-03-28 09:27:43,938 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:27:43,951 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:27:48,046 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 09:27:48,070 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:27:48,213 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:27:48,213 - root - INFO - DEV_MODE: True
+2025-03-28 09:27:48,218 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:27:48,230 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:28:11,758 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 09:28:11,779 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:28:11,920 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:28:11,920 - root - INFO - DEV_MODE: True
+2025-03-28 09:28:11,926 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:28:11,939 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 09:31:48,860 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 09:31:48,898 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 09:31:49,042 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 09:31:49,042 - root - INFO - DEV_MODE: True
+2025-03-28 09:31:49,047 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 09:31:49,058 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:46:41,625 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 11:46:41,648 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:46:41,818 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:46:41,819 - root - INFO - DEV_MODE: True
+2025-03-28 11:46:41,826 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:46:41,838 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:47:31,932 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 11:47:31,972 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:47:32,153 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:47:32,153 - root - INFO - DEV_MODE: True
+2025-03-28 11:47:32,161 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:47:32,172 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:48:00,817 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/question_service.py', reloading
+2025-03-28 11:48:00,841 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:48:01,050 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:48:01,050 - root - INFO - DEV_MODE: True
+2025-03-28 11:48:01,058 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:48:01,069 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:51:51,429 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 11:51:51,468 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:51:51,656 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:51:51,656 - root - INFO - DEV_MODE: True
+2025-03-28 11:51:51,664 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:51:51,678 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:52:21,338 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/question_service.py', reloading
+2025-03-28 11:52:21,359 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:52:21,498 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:52:21,498 - root - INFO - DEV_MODE: True
+2025-03-28 11:52:21,506 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:52:21,518 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:52:51,188 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/models/database_profile_manager.py', reloading
+2025-03-28 11:52:51,210 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:52:51,341 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:52:51,341 - root - INFO - DEV_MODE: True
+2025-03-28 11:52:51,346 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:52:51,357 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 11:59:25,705 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/question_flow_api.py', reloading
+2025-03-28 11:59:25,748 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 11:59:25,949 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 11:59:25,950 - root - INFO - DEV_MODE: True
+2025-03-28 11:59:25,958 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 11:59:25,970 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:00:15,073 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/question_service.py', reloading
+2025-03-28 12:00:15,094 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:00:15,253 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:00:15,253 - root - INFO - DEV_MODE: True
+2025-03-28 12:00:15,261 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:00:15,274 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:01:50,389 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-28 12:01:50,409 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:01:50,546 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:01:50,546 - root - INFO - DEV_MODE: True
+2025-03-28 12:01:50,554 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:01:50,567 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:02:00,798 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/utils.py', reloading
+2025-03-28 12:02:00,827 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:02:00,979 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:02:00,979 - root - INFO - DEV_MODE: True
+2025-03-28 12:02:00,987 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:02:01,001 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:02:28,594 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/question_flow_api.py', reloading
+2025-03-28 12:02:28,614 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:02:28,752 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:02:28,752 - root - INFO - DEV_MODE: True
+2025-03-28 12:02:28,758 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:02:28,769 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:04:13,374 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/question_service.py', reloading
+2025-03-28 12:04:13,417 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:04:13,594 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:04:13,594 - root - INFO - DEV_MODE: True
+2025-03-28 12:04:13,601 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:04:13,613 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:11:54,784 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:11:54,832 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:11:55,031 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:11:55,031 - root - INFO - DEV_MODE: True
+2025-03-28 12:11:55,040 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:11:55,052 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:15:10,520 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/models/question_repository.py', reloading
+2025-03-28 12:15:10,560 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:15:10,716 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:15:10,716 - root - INFO - DEV_MODE: True
+2025-03-28 12:15:10,724 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:15:10,736 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:16:16,290 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:16:16,311 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:16:16,487 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:16:16,487 - root - INFO - DEV_MODE: True
+2025-03-28 12:16:16,495 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:16:16,505 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:17:43,616 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:17:43,641 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:17:43,862 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:17:43,862 - root - INFO - DEV_MODE: True
+2025-03-28 12:17:43,874 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:17:43,886 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:18:12,487 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/profile_analytics_service.py', reloading
+2025-03-28 12:18:12,511 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:18:12,658 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:18:12,659 - root - INFO - DEV_MODE: True
+2025-03-28 12:18:12,666 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:18:12,678 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:20:39,974 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/profile_analytics_service.py', reloading
+2025-03-28 12:20:39,992 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:20:40,130 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:20:40,130 - root - INFO - DEV_MODE: True
+2025-03-28 12:20:40,136 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:20:40,148 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:20:52,439 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:20:52,474 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:20:52,615 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:20:52,615 - root - INFO - DEV_MODE: True
+2025-03-28 12:20:52,622 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:20:52,633 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:23:44,735 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:23:44,778 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:23:44,976 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:23:44,976 - root - INFO - DEV_MODE: True
+2025-03-28 12:23:44,985 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:23:44,998 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 12:23:51,142 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 12:23:51,163 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 12:23:51,308 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 12:23:51,308 - root - INFO - DEV_MODE: True
+2025-03-28 12:23:51,314 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 12:23:51,326 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 15:45:30,677 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/profile_analytics_service.py', reloading
+2025-03-28 15:45:30,699 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 15:45:30,838 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 15:45:30,839 - root - INFO - DEV_MODE: True
+2025-03-28 15:45:30,846 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 15:45:30,858 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 15:47:02,071 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 15:47:02,101 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 15:47:02,326 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 15:47:02,326 - root - INFO - DEV_MODE: True
+2025-03-28 15:47:02,334 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 15:47:02,345 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:18:13,999 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 16:18:14,048 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:18:14,282 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:18:14,282 - root - INFO - DEV_MODE: True
+2025-03-28 16:18:14,291 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:18:14,304 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:19:53,488 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 16:19:53,519 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:19:53,700 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:19:53,700 - root - INFO - DEV_MODE: True
+2025-03-28 16:19:53,708 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:19:53,719 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:20:16,233 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 16:20:16,252 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:20:16,399 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:20:16,399 - root - INFO - DEV_MODE: True
+2025-03-28 16:20:16,409 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:20:16,426 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:20:27,693 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 16:20:27,712 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:20:27,854 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:20:27,854 - root - INFO - DEV_MODE: True
+2025-03-28 16:20:27,862 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:20:27,875 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:21:36,569 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 16:21:36,597 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:21:36,857 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:21:36,857 - root - INFO - DEV_MODE: True
+2025-03-28 16:21:36,866 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:21:36,881 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:21:37,930 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 16:21:37,961 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:21:38,098 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:21:38,098 - root - INFO - DEV_MODE: True
+2025-03-28 16:21:38,103 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:21:38,114 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:22:35,369 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 16:22:35,404 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:22:35,543 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:22:35,543 - root - INFO - DEV_MODE: True
+2025-03-28 16:22:35,549 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:22:35,560 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:23:08,306 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 16:23:08,341 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:23:08,492 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:23:08,492 - root - INFO - DEV_MODE: True
+2025-03-28 16:23:08,498 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:23:08,509 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:23:15,664 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 16:23:15,684 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:23:15,839 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:23:15,839 - root - INFO - DEV_MODE: True
+2025-03-28 16:23:15,845 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:23:15,857 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 16:46:21,236 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-28 16:46:21,296 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 16:46:21,500 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 16:46:21,501 - root - INFO - DEV_MODE: True
+2025-03-28 16:46:21,509 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 16:46:21,522 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:12:57,373 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-28 21:12:57,395 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:12:57,544 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:12:57,544 - root - INFO - DEV_MODE: True
+2025-03-28 21:12:57,553 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:12:57,568 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:28:41,129 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 21:28:41,169 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:28:41,392 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:28:41,392 - root - INFO - DEV_MODE: True
+2025-03-28 21:28:41,401 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:28:41,414 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:43:22,540 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:43:22,588 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:43:22,828 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:43:22,828 - root - INFO - DEV_MODE: True
+2025-03-28 21:43:22,836 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:43:22,851 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:43:28,029 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:43:28,066 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:43:28,202 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:43:28,202 - root - INFO - DEV_MODE: True
+2025-03-28 21:43:28,207 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:43:28,218 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:43:32,346 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:43:32,383 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:43:32,524 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:43:32,524 - root - INFO - DEV_MODE: True
+2025-03-28 21:43:32,530 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:43:32,542 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:43:43,854 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:43:43,874 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:43:44,036 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:43:44,036 - root - INFO - DEV_MODE: True
+2025-03-28 21:43:44,044 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:43:44,055 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:43:56,395 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:43:56,437 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:43:56,607 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:43:56,607 - root - INFO - DEV_MODE: True
+2025-03-28 21:43:56,614 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:43:56,626 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:44:15,119 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:44:15,144 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:44:15,333 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:44:15,333 - root - INFO - DEV_MODE: True
+2025-03-28 21:44:15,341 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:44:15,353 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:44:36,926 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:44:36,971 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:44:37,112 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:44:37,112 - root - INFO - DEV_MODE: True
+2025-03-28 21:44:37,118 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:44:37,128 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:44:49,470 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/visualization_data.py', reloading
+2025-03-28 21:44:49,506 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:44:49,674 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:44:49,674 - root - INFO - DEV_MODE: True
+2025-03-28 21:44:49,681 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:44:49,693 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:50:27,233 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 21:50:27,281 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:50:27,490 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:50:27,490 - root - INFO - DEV_MODE: True
+2025-03-28 21:50:27,499 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:50:27,512 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-28 21:51:06,414 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-28 21:51:06,436 - werkzeug - INFO -  * Restarting with stat
+2025-03-28 21:51:06,578 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-28 21:51:06,578 - root - INFO - DEV_MODE: True
+2025-03-28 21:51:06,586 - werkzeug - WARNING -  * Debugger is active!
+2025-03-28 21:51:06,598 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:08:32,909 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/goal_probability_api.py', reloading
+2025-03-29 09:08:32,951 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:08:33,137 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:08:33,137 - root - INFO - DEV_MODE: True
+2025-03-29 09:08:33,145 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:08:33,162 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:08:39,301 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/api/v2/fixes/attribute_fix.py', reloading
+2025-03-29 09:08:39,321 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:08:39,483 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:08:39,484 - root - INFO - DEV_MODE: True
+2025-03-29 09:08:39,490 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:08:39,503 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:14:37,914 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 09:14:37,989 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:14:38,201 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:14:38,201 - root - INFO - DEV_MODE: True
+2025-03-29 09:14:38,210 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:14:38,221 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:15:01,746 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 09:15:01,768 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:15:01,961 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:15:01,961 - root - INFO - DEV_MODE: True
+2025-03-29 09:15:01,968 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:15:01,980 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:15:44,904 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-29 09:15:44,924 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:15:45,057 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:15:45,058 - root - INFO - DEV_MODE: True
+2025-03-29 09:15:45,064 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:15:45,076 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:15:54,286 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-29 09:15:54,305 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:15:54,441 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:15:54,441 - root - INFO - DEV_MODE: True
+2025-03-29 09:15:54,448 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:15:54,460 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:16:03,670 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-29 09:16:03,694 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:16:03,838 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:16:03,838 - root - INFO - DEV_MODE: True
+2025-03-29 09:16:03,843 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:16:03,855 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 09:16:08,979 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-29 09:16:08,998 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 09:16:09,160 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 09:16:09,160 - root - INFO - DEV_MODE: True
+2025-03-29 09:16:09,166 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 09:16:09,176 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:22:18,931 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:22:18,966 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:22:19,147 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:22:19,147 - root - INFO - DEV_MODE: True
+2025-03-29 10:22:19,155 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:22:19,166 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:22:38,583 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:22:38,607 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:22:38,743 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:22:38,744 - root - INFO - DEV_MODE: True
+2025-03-29 10:22:38,749 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:22:38,761 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:25:01,954 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:25:01,979 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:25:02,139 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:25:02,140 - root - INFO - DEV_MODE: True
+2025-03-29 10:25:02,145 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:25:02,157 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:25:29,809 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/services/goal_service.py', reloading
+2025-03-29 10:25:29,832 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:25:30,019 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:25:30,019 - root - INFO - DEV_MODE: True
+2025-03-29 10:25:30,027 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:25:30,056 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:25:55,677 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:25:55,697 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:25:55,848 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:25:55,848 - root - INFO - DEV_MODE: True
+2025-03-29 10:25:55,857 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:25:55,869 - werkzeug - INFO -  * Debugger PIN: 238-080-037
+2025-03-29 10:27:16,805 - werkzeug - INFO -  * Detected change in '/Users/coddiwomplers/Desktop/Python/Profiler4/app.py', reloading
+2025-03-29 10:27:16,833 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 10:27:17,039 - root - INFO - Starting minimal auth test app on port 5050
+2025-03-29 10:27:17,039 - root - INFO - DEV_MODE: True
+2025-03-29 10:27:17,047 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 10:27:17,059 - werkzeug - INFO -  * Debugger PIN: 238-080-037

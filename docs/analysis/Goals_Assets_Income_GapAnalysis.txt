@@ -1,0 +1,147 @@
+flowchart TD
+    title["10. Financial Projection and Needs Analysis"]
+
+    start[Begin Financial Projection] --> collectAssets[Collect Current Asset Data]
+    collectAssets --> assetClasses[Categorize by Asset Classes]
+
+    assetClasses --> equity[Equity Holdings]
+    assetClasses --> debt[Debt Instruments]
+    assetClasses --> realEstate[Real Estate Assets]
+    assetClasses --> gold[Gold & Precious Metals]
+    assetClasses --> cash[Cash & Equivalents]
+    assetClasses --> otherAssets[Other Assets/Alternatives]
+
+    equity --> currentWorth[Calculate Current Net Worth]
+    debt --> currentWorth
+    realEstate --> currentWorth
+    gold --> currentWorth
+    cash --> currentWorth
+    otherAssets --> currentWorth
+
+    collectIncome[Collect Income Data] --> incomeStreams[Identify Income Streams]
+    incomeStreams --> salary[Salary/Business Income]
+    incomeStreams --> rentalIncome[Rental Income]
+    incomeStreams --> dividends[Dividends & Interest]
+    incomeStreams --> otherIncome[Other Income Sources]
+
+    salary --> currentIncome[Calculate Current Total Income]
+    rentalIncome --> currentIncome
+    dividends --> currentIncome
+    otherIncome --> currentIncome
+
+    collectGoals[Identify Future Goals] --> goalTimeline[Create Goal Timeline]
+    goalTimeline --> shortTerm[Short-term Goals 0-3 years]
+    goalTimeline --> mediumTerm[Medium-term Goals 3-7 years]
+    goalTimeline --> longTerm[Long-term Goals 7+ years]
+
+    shortTerm --> goalValuation[Assign Future Values to Goals]
+    mediumTerm --> goalValuation
+    longTerm --> goalValuation
+
+    goalValuation --> inflationAdjust[Adjust for Inflation]
+    inflationAdjust --> totalGoalAmount[Calculate Total Goal Requirements]
+
+    currentWorth --> assetGrowth[Project Asset Growth]
+    assetGrowth --> assetAssumptions{Set Growth Assumptions}
+    assetAssumptions --> equityRate[Equity Growth Rate]
+    assetAssumptions --> debtRate[Debt Return Rate]
+    assetAssumptions --> realEstateRate[Real Estate Appreciation Rate]
+    assetAssumptions --> goldRate[Gold Appreciation Rate]
+    assetAssumptions --> cashRate[Cash/FD Return Rate]
+    assetAssumptions --> otherRate[Other Asset Return Rates]
+
+    equityRate --> compoundCalculations[Calculate Compounded Growth]
+    debtRate --> compoundCalculations
+    realEstateRate --> compoundCalculations
+    goldRate --> compoundCalculations
+    cashRate --> compoundCalculations
+    otherRate --> compoundCalculations
+
+    compoundCalculations --> assetTimeline[Create Year-by-Year Asset Projection]
+
+    currentIncome --> incomeGrowth[Project Income Growth]
+    incomeGrowth --> incomeAssumptions{Set Income Assumptions}
+    incomeAssumptions --> salaryGrowth[Salary Growth Rate]
+    incomeAssumptions --> rentalGrowth[Rental Income Growth]
+    incomeAssumptions --> dividendGrowth[Dividend/Interest Growth]
+    incomeAssumptions --> otherIncomeGrowth[Other Income Growth]
+
+    salaryGrowth --> incomeProjection[Calculate Projected Income]
+    rentalGrowth --> incomeProjection
+    dividendGrowth --> incomeProjection
+    otherIncomeGrowth --> incomeProjection
+
+    incomeProjection --> incomeTimeline[Create Year-by-Year Income Projection]
+
+    assetTimeline --> surplusCalculation[Calculate Annual Surplus/Savings]
+    incomeTimeline --> surplusCalculation
+    surplusCalculation --> reinvestment[Account for Reinvestment]
+    reinvestment --> updatedAssetGrowth[Update Asset Growth with Reinvestment]
+
+    updatedAssetGrowth --> futureNetWorth[Project Future Net Worth]
+    totalGoalAmount --> futureRequirement[Future Financial Requirements]
+
+    futureNetWorth --> gapAnalysis[Perform Gap Analysis]
+    futureRequirement --> gapAnalysis
+    gapAnalysis --> A{Surplus or Deficit?}
+
+    A -->|Surplus| surplusStrategy[Develop Surplus Utilization Strategy]
+    A -->|Deficit| deficitStrategy[Develop Gap Closing Strategy]
+
+    deficitStrategy --> B{Gap Size}
+    B -->|Small| minorAdjustments[Recommend Minor Adjustments]
+    B -->|Medium| moderateChanges[Recommend Moderate Changes]
+    B -->|Large| majorRevisions[Recommend Major Strategy Revisions]
+
+    minorAdjustments --> adjustSavings[Adjust Savings Rate]
+    minorAdjustments --> optimizeReturns[Optimize Asset Returns]
+
+    moderateChanges --> adjustGoals[Adjust Goal Timelines/Amounts]
+    moderateChanges --> increaseIncome[Identify Income Enhancement Opportunities]
+    moderateChanges --> reallocateAssets[Reallocate Asset Mix]
+
+    majorRevisions --> reprioritizeGoals[Reprioritize or Scale Down Goals]
+    majorRevisions --> careerStrategy[Suggest Career Strategy Changes]
+    majorRevisions --> seekAlternatives[Seek Alternative Funding Sources]
+
+    surplusStrategy --> additionalGoals[Suggest Additional Goals]
+    surplusStrategy --> riskManagement[Enhanced Risk Management]
+    surplusStrategy --> legacyPlanning[Legacy/Estate Planning]
+
+    adjustSavings --> createTimeline[Create Action Timeline]
+    optimizeReturns --> createTimeline
+    adjustGoals --> createTimeline
+    increaseIncome --> createTimeline
+    reallocateAssets --> createTimeline
+    reprioritizeGoals --> createTimeline
+    careerStrategy --> createTimeline
+    seekAlternatives --> createTimeline
+    additionalGoals --> createTimeline
+    riskManagement --> createTimeline
+    legacyPlanning --> createTimeline
+
+    createTimeline --> scenarioModeling[Model Alternative Scenarios]
+    scenarioModeling --> sensitivityAnalysis[Perform Sensitivity Analysis]
+    sensitivityAnalysis --> bestWorstCase[Define Best/Worst Case Scenarios]
+
+    bestWorstCase --> visualizeProjection[Visualize Financial Projection]
+    visualizeProjection --> wealthTrajectory[Wealth Trajectory Chart]
+    visualizeProjection --> goalFunding[Goal Funding Timeline]
+    visualizeProjection --> needsMap[Needs Analysis Map]
+
+    wealthTrajectory --> documentFindings[Document Projection Findings]
+    goalFunding --> documentFindings
+    needsMap --> documentFindings
+
+    documentFindings --> recommendationSet[Create Recommendation Set]
+    recommendationSet --> integrateFinancialPlan[Integrate into Financial Plan]
+    integrateFinancialPlan --> reviewTriggers[Set Review Triggers]
+
+    reviewTriggers --> endProcess[End Financial Projection Process]
+
+    style title fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style start fill:#d4f1f9,stroke:#0e87cc,stroke-width:2px
+    style gapAnalysis fill:#ffe6cc,stroke:#d79b00,stroke-width:2px
+    style scenarioModeling fill:#fad9d5,stroke:#ae431e,stroke-width:2px
+    style visualizeProjection fill:#d5e8d4,stroke:#82b366,stroke-width:2px
+    style integrateFinancialPlan fill:#fff2cc,stroke:#d6b656,stroke-width:2px

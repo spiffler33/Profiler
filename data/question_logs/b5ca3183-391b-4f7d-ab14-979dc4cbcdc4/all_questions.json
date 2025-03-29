@@ -1,0 +1,29 @@
+{
+  "demographics_health_status": {
+    "question_id": "demographics_health_status",
+    "question_text": "How would you rate your overall health?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:28:06.652842",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:28:06.655301",
+    "answer": "Excellent"
+  },
+  "financial_basics_monthly_expenses": {
+    "question_id": "financial_basics_monthly_expenses",
+    "question_text": "What are your average monthly expenses?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:28:06.656425",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:28:06.657850",
+    "answer": 50000
+  },
+  "financial_basics_savings_percentage": {
+    "question_id": "financial_basics_savings_percentage",
+    "question_text": "What percentage of your income do you save monthly?",
+    "question_type": "core",
+    "generated_at": "2025-03-22T14:28:06.658579",
+    "displayed_at": null,
+    "answered_at": "2025-03-22T14:28:06.659763",
+    "answer": 50000
+  }
+}

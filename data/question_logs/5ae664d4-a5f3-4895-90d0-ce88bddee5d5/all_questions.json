@@ -1,0 +1,11 @@
+{
+  "demographics_health_status": {
+    "question_id": "demographics_health_status",
+    "question_text": "How would you rate your overall health?",
+    "question_type": "core",
+    "generated_at": "2025-03-26T18:21:40.667674",
+    "displayed_at": "2025-03-26T18:21:40.669433",
+    "answered_at": null,
+    "answer": null
+  }
+}

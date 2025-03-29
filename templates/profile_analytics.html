@@ -410,38 +410,31 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get profile ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const profileId = urlParams.get('profile_id') || '{{ profile_id }}';
-        
-        if (!profileId) {
-            showError("No profile ID provided");
-            return;
-        }
-        
-        // Fetch analytics data
-        fetchAnalytics(profileId);
-    });
-    
-    function fetchAnalytics(profileId) {
-        fetch(`/profile/analytics/summary/${profileId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch analytics');
+        // Get analytics data from the template
+        try {
+            const analyticsData = {{ analytics|tojson }};
+            
+            // Check if data has error
+            if (analyticsData.error) {
+                showError(analyticsData.error);
+                // Still try to render available data even with error
+                if (analyticsData.profile_id) {
+                    console.log("Attempting to render partial analytics despite error");
+                    renderPartialAnalytics(analyticsData);
                 }
-                return response.json();
-            })
-            .then(data => {
-                // Render the analytics
-                renderAnalytics(data);
                 hideLoading();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showError("Failed to load analytics: " + error.message);
-                hideLoading();
-            });
-    }
+                return;
+            }
+            
+            // Render the analytics
+            renderAnalytics(analyticsData);
+            hideLoading();
+        } catch (error) {
+            console.error('Error processing analytics data:', error);
+            showError('Failed to process analytics data. Please try again.');
+            hideLoading();
+        }
+    });
     
     function renderAnalytics(data) {
         // Set timestamp
@@ -454,7 +447,7 @@
         renderInvestmentProfile(data.investment_profile);
         
         // Render financial health
-        renderFinancialHealth(data.financial_health);
+        renderFinancialHealth(data.financial_health_score);
         
         // Render behavioral profile
         renderBehavioralProfile(data.behavioral_profile);
@@ -466,9 +459,48 @@
         renderRecommendations(data.recommendations);
     }
     
+    function renderPartialAnalytics(data) {
+        // Set timestamp
+        document.getElementById('generated-timestamp').textContent = new Date().toLocaleString();
+        
+        // Check and render each component if data is available
+        if (data.dimensions) {
+            renderDimensions(data.dimensions);
+        }
+        
+        if (data.investment_profile) {
+            renderInvestmentProfile(data.investment_profile);
+        }
+        
+        // Note: Changed from financial_health to financial_health_score to match service naming
+        if (data.financial_health_score) {
+            renderFinancialHealth(data.financial_health_score);
+        }
+        
+        if (data.behavioral_profile) {
+            renderBehavioralProfile(data.behavioral_profile);
+        }
+        
+        if (data.key_insights) {
+            renderInsights(data.key_insights);
+        }
+        
+        if (data.recommendations) {
+            renderRecommendations(data.recommendations);
+        }
+    }
+    
     function renderDimensions(dimensions) {
         const grid = document.getElementById('dimensions-grid');
+        if (!grid) return;
+        
         grid.innerHTML = '';
+        
+        // Handle empty dimensions
+        if (!dimensions || Object.keys(dimensions).length === 0) {
+            grid.innerHTML = '<p>No dimension data available. Complete more profile questions to see your financial dimensions.</p>';
+            return;
+        }
         
         const dimensionLabels = {
             'risk': 'Risk Tolerance',
@@ -503,10 +535,25 @@
     }
     
     function renderInvestmentProfile(profile) {
-        document.getElementById('profile-type-title').textContent = profile.type || 'Balanced';
-        document.getElementById('profile-type-description').textContent = profile.description || '';
+        if (!profile) {
+            console.warn("No investment profile data available");
+            return;
+        }
         
-        // Create dummy allocation data for the chart
+        // Get elements
+        const titleEl = document.getElementById('profile-type-title');
+        const descEl = document.getElementById('profile-type-description');
+        
+        if (!titleEl || !descEl) {
+            console.warn("Investment profile elements not found");
+            return;
+        }
+        
+        // Set text content
+        titleEl.textContent = profile.type || 'Balanced';
+        descEl.textContent = profile.description || '';
+        
+        // Create allocation data for the chart
         const dummyData = {
             'Conservative': {
                 'Fixed Income': 60,
@@ -550,49 +597,72 @@
             }
         };
         
-        const allocationType = profile.type || 'Balanced';
-        const allocation = dummyData[allocationType] || dummyData['Balanced'];
+        let allocation;
         
-        // Create chart
-        const ctx = document.getElementById('allocation-chart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: Object.keys(allocation),
-                datasets: [{
-                    data: Object.values(allocation),
-                    backgroundColor: [
-                        '#3498db',
-                        '#2ecc71',
-                        '#e74c3c',
-                        '#f39c12',
-                        '#9b59b6',
-                        '#1abc9c'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            boxWidth: 12,
-                            font: {
-                                size: 10
+        // Use provided allocation if available, otherwise use dummy data
+        if (profile.allocation && Object.keys(profile.allocation).length > 0) {
+            // Convert API-style keys (Fixed_Income) to display format (Fixed Income)
+            allocation = {};
+            for (const [key, value] of Object.entries(profile.allocation)) {
+                const displayKey = key.replace(/_/g, ' ');
+                allocation[displayKey] = value;
+            }
+        } else {
+            const allocationType = profile.type || 'Balanced'; 
+            allocation = dummyData[allocationType] || dummyData['Balanced'];
+        }
+        
+        try {
+            // Get the canvas element
+            const canvas = document.getElementById('allocation-chart');
+            if (!canvas) {
+                console.warn("Allocation chart canvas not found");
+                return;
+            }
+            
+            // Create chart
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(allocation),
+                    datasets: [{
+                        data: Object.values(allocation),
+                        backgroundColor: [
+                            '#3498db',
+                            '#2ecc71',
+                            '#e74c3c',
+                            '#f39c12',
+                            '#9b59b6',
+                            '#1abc9c'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                font: {
+                                    size: 10
+                                }
                             }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.label}: ${context.raw}%`;
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
+            });
+        } catch (error) {
+            console.error("Error creating investment profile chart:", error);
+        }
     }
     
     function renderBehavioralProfile(profile) {
@@ -614,7 +684,14 @@
         if (profile.traits && Object.keys(profile.traits).length > 0) {
             summaryElement.textContent = profile.summary || 'Your financial personality is based on your responses to behavioral questions.';
         } else {
-            summaryElement.textContent = 'Financial personality profile not yet established';
+            // Check if the summary explicitly indicates it's not established
+            if (profile.summary && profile.summary.includes("not yet established")) {
+                summaryElement.textContent = profile.summary;
+            } else {
+                // If we have a summary from the API but no traits
+                summaryElement.textContent = profile.summary || 
+                    'Your financial personality analysis is being processed. You have completed all behavioral questions.';
+            }
         }
         
         // Render traits
@@ -629,7 +706,8 @@
             'fomo': 'FOMO',
             'emotional_investing': 'Emotional Investing',
             'discipline': 'Discipline',
-            'information_processing': 'Information Processing'
+            'information_processing': 'Information Processing',
+            'practical_risk_tolerance': 'Risk Tolerance'
         };
         
         if (profile.traits && Object.keys(profile.traits).length > 0) {
@@ -652,7 +730,12 @@
                 }
             }
         } else {
-            traitsContainer.innerHTML = '<p>No behavioral traits available yet.</p>';
+            // Different message when behavioral questions are complete but traits not calculated
+            if (profile.summary && profile.summary.includes("not yet established")) {
+                traitsContainer.innerHTML = '<p>No behavioral traits available yet.</p>';
+            } else {
+                traitsContainer.innerHTML = '<p>Behavioral traits will be analyzed based on your responses.</p>';
+            }
         }
         
         // Render strengths
@@ -667,7 +750,12 @@
                 strengthsList.appendChild(strengthItem);
             });
         } else {
-            strengthsList.innerHTML = '<li>Complete more behavioral questions to discover your strengths</li>';
+            // Check if behavioral analysis is still pending
+            if (profile.summary && profile.summary.includes("not yet established")) {
+                strengthsList.innerHTML = '<li>Complete more behavioral questions to discover your strengths</li>';
+            } else {
+                strengthsList.innerHTML = '<li>Your behavioral strengths will be analyzed soon</li>';
+            }
         }
         
         // Render challenges
@@ -682,34 +770,58 @@
                 challengesList.appendChild(challengeItem);
             });
         } else {
-            challengesList.innerHTML = '<li>Complete more behavioral questions to identify potential challenges</li>';
+            // Check if behavioral analysis is still pending
+            if (profile.summary && profile.summary.includes("not yet established")) {
+                challengesList.innerHTML = '<li>Complete more behavioral questions to identify potential challenges</li>';
+            } else {
+                challengesList.innerHTML = '<li>Your behavioral challenges will be analyzed soon</li>';
+            }
         }
     }
     
     function renderFinancialHealth(health) {
+        if (!health) {
+            console.warn("No financial health data available");
+            return;
+        }
+        
         const scoreElement = document.getElementById('health-score');
         const statusElement = document.getElementById('health-status');
         
-        scoreElement.textContent = health.score;
-        statusElement.textContent = health.status;
+        // Set defaults if data is missing
+        const score = health.score !== undefined ? health.score : '--';
+        const status = health.status || 'Unknown';
+        
+        scoreElement.textContent = score;
+        statusElement.textContent = status;
         
         // Add appropriate classes based on health status
-        if (health.status === 'Excellent') {
+        if (status === 'Excellent') {
             scoreElement.className = 'health-score excellent';
             statusElement.className = 'health-status excellent';
-        } else if (health.status === 'Good') {
+        } else if (status === 'Good') {
             scoreElement.className = 'health-score good';
             statusElement.className = 'health-status good';
-        } else if (health.status === 'Fair') {
+        } else if (status === 'Fair') {
             scoreElement.className = 'health-score fair';
             statusElement.className = 'health-status fair';
-        } else {
+        } else if (status === 'Poor' || status === 'Needs Attention') {
             scoreElement.className = 'health-score poor';
             statusElement.className = 'health-status poor';
+        } else {
+            // Default for Unknown or other statuses
+            scoreElement.className = 'health-score';
+            statusElement.className = 'health-status';
         }
         
         // Add additional financial metrics if available
         if (health.metrics) {
+            // Remove any existing metrics container first
+            const existingMetrics = document.querySelector('.financial-metrics');
+            if (existingMetrics) {
+                existingMetrics.remove();
+            }
+            
             const metricsContainer = document.createElement('div');
             metricsContainer.className = 'financial-metrics';
             metricsContainer.style.marginTop = '1.5rem';
@@ -766,17 +878,22 @@
                 showMetric('Debt to Savings', `${health.metrics.debt_to_savings_ratio}x`);
             }
             
-            // Append metrics to financial health section
-            document.querySelector('.financial-health').appendChild(metricsContainer);
+            // Only append if there are any metrics displayed
+            if (metricsContainer.children.length > 0) {
+                // Append metrics to financial health section
+                document.querySelector('.financial-health').appendChild(metricsContainer);
+            }
         }
     }
     
     function renderInsights(insights) {
         const list = document.getElementById('insights-list');
+        if (!list) return;
+        
         list.innerHTML = '';
         
         if (!insights || insights.length === 0) {
-            list.innerHTML = '<p>No insights available.</p>';
+            list.innerHTML = '<p>Complete more profile questions to generate personalized financial insights.</p>';
             return;
         }
         
@@ -790,10 +907,12 @@
     
     function renderRecommendations(recommendations) {
         const list = document.getElementById('recommendations-list');
+        if (!list) return;
+        
         list.innerHTML = '';
         
         if (!recommendations || recommendations.length === 0) {
-            list.innerHTML = '<p>No recommendations available.</p>';
+            list.innerHTML = '<p>Complete more profile questions to receive personalized recommendations.</p>';
             return;
         }
         

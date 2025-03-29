@@ -1,0 +1,499 @@
+[
+  {
+    "id": "demographics_health_status",
+    "text": "How would you rate your overall health?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "select",
+    "options": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor"
+    ],
+    "required": true,
+    "order": 4,
+    "help_text": "Your health status affects emergency fund sizing and insurance requirements",
+    "submitted_answer": "Excellent"
+  },
+  {
+    "id": "financial_basics_monthly_expenses",
+    "text": "What are your average monthly expenses?",
+    "type": "core",
+    "category": "financial_basics",
+    "input_type": "number",
+    "min": 0,
+    "required": true,
+    "order": 1,
+    "help_text": "Your monthly expenses are the foundation for emergency fund calculation",
+    "submitted_answer": 56286
+  },
+  {
+    "id": "financial_basics_savings_percentage",
+    "text": "What percentage of your income do you save monthly?",
+    "type": "core",
+    "category": "financial_basics",
+    "input_type": "number",
+    "min": 0,
+    "max": 100,
+    "required": true,
+    "order": 2,
+    "help_text": "Your savings rate is a key indicator of financial health",
+    "submitted_answer": 91
+  },
+  {
+    "id": "financial_basics_current_savings",
+    "text": "What is the total value of your current savings and investments?",
+    "type": "core",
+    "category": "financial_basics",
+    "input_type": "number",
+    "min": 0,
+    "required": true,
+    "order": 3,
+    "help_text": "Your current savings are the starting point for financial planning",
+    "submitted_answer": 136893
+  },
+  {
+    "id": "assets_debts_total_debt",
+    "text": "What is your total outstanding debt?",
+    "type": "core",
+    "category": "assets_and_debts",
+    "input_type": "number",
+    "min": 0,
+    "required": true,
+    "order": 1,
+    "help_text": "Your total debt helps assess your financial obligations",
+    "submitted_answer": 971170
+  },
+  {
+    "id": "assets_debts_housing_loan",
+    "text": "Do you have a housing loan?",
+    "type": "core",
+    "category": "assets_and_debts",
+    "input_type": "radio",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "required": true,
+    "order": 2,
+    "help_text": "Housing loans are treated differently from other debts",
+    "submitted_answer": "Yes"
+  },
+  {
+    "id": "demographics_age",
+    "text": "What is your age?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "number",
+    "min": 18,
+    "max": 100,
+    "required": true,
+    "order": 1,
+    "help_text": "Your age helps determine investment horizon and risk capacity",
+    "submitted_answer": 34
+  },
+  {
+    "id": "demographics_dependents",
+    "text": "How many dependents do you have?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "number",
+    "min": 0,
+    "max": 20,
+    "required": true,
+    "order": 3,
+    "help_text": "Dependents influence your insurance needs and protection planning",
+    "submitted_answer": 11
+  },
+  {
+    "id": "demographics_location",
+    "text": "Where are you located?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "text",
+    "required": true,
+    "order": 8,
+    "help_text": "Your location provides geographic context for recommendations",
+    "submitted_answer": "Response for demographics_location"
+  },
+  {
+    "id": "special_cases_business_value",
+    "text": "If you own a business, what is its approximate value?",
+    "type": "core",
+    "category": "special_cases",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 1,
+    "help_text": "Business value is important for business owners",
+    "depends_on": {
+      "question_id": "demographics_employment_type",
+      "value": "Business owner"
+    },
+    "submitted_answer": 1209604
+  },
+  {
+    "id": "demographics_employment_type",
+    "text": "What is your employment type?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "select",
+    "options": [
+      "Full-time employee",
+      "Part-time employee",
+      "Self-employed",
+      "Business owner",
+      "Retired",
+      "Unemployed",
+      "Student"
+    ],
+    "required": true,
+    "order": 2,
+    "help_text": "Your employment type affects income stability and emergency fund requirements",
+    "submitted_answer": "Self-employed"
+  },
+  {
+    "id": "special_cases_real_estate_value",
+    "text": "What is the total value of real estate you own?",
+    "type": "core",
+    "category": "special_cases",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 2,
+    "help_text": "Real estate value helps assess your total assets",
+    "depends_on": {
+      "question_id": "assets_debts_housing_loan",
+      "value": "Yes"
+    },
+    "submitted_answer": 826862
+  },
+  {
+    "id": "special_cases_real_estate_type",
+    "text": "What type of real estate do you own?",
+    "type": "core",
+    "category": "special_cases",
+    "input_type": "select",
+    "options": [
+      "None",
+      "Primary residence",
+      "Investment property",
+      "Vacation home",
+      "Multiple properties"
+    ],
+    "required": false,
+    "order": 3,
+    "help_text": "The type of real estate affects how it's considered in your financial plan",
+    "depends_on": {
+      "question_id": "special_cases_real_estate_value",
+      "value_condition": "greater_than_zero"
+    },
+    "submitted_answer": "Investment property"
+  },
+  {
+    "id": "demographics_risk_appetite",
+    "text": "How would you describe your risk tolerance?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "select",
+    "options": [
+      "Conservative (-1)",
+      "Moderate (0)",
+      "Aggressive (1)"
+    ],
+    "required": true,
+    "order": 5,
+    "help_text": "Your personal risk tolerance on a scale from conservative to aggressive",
+    "submitted_answer": "Moderate (0)"
+  },
+  {
+    "id": "demographics_financial_maturity",
+    "text": "How would you rate your financial knowledge?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "select",
+    "options": [
+      "Beginner",
+      "Intermediate",
+      "Advanced",
+      "Expert"
+    ],
+    "required": true,
+    "order": 6,
+    "help_text": "Your financial knowledge level helps determine appropriate recommendations",
+    "submitted_answer": "Intermediate"
+  },
+  {
+    "id": "demographics_market_outlook",
+    "text": "What is your outlook on the market for the next 12 months?",
+    "type": "core",
+    "category": "demographics",
+    "input_type": "select",
+    "options": [
+      "Bearish (Negative)",
+      "Neutral",
+      "Bullish (Positive)"
+    ],
+    "required": true,
+    "order": 7,
+    "help_text": "Your personal view on market conditions",
+    "submitted_answer": "Bearish (Negative)"
+  },
+  {
+    "id": "goals_emergency_fund_exists",
+    "text": "Do you have an emergency fund set aside for unexpected expenses?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "radio",
+    "options": [
+      "Yes",
+      "No",
+      "Partially"
+    ],
+    "required": false,
+    "order": 1,
+    "help_text": "In India, financial experts recommend an emergency fund covering 6-9 months of expenses, compared to the global standard of 3-6 months. This is due to factors like healthcare costs and employment market conditions.",
+    "submitted_answer": "Yes"
+  },
+  {
+    "id": "goals_emergency_fund_months",
+    "text": "How many months of expenses does your emergency fund cover?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "select",
+    "options": [
+      "Less than 1 month",
+      "1-2 months",
+      "3-4 months",
+      "5-6 months",
+      "6-9 months",
+      "More than 9 months"
+    ],
+    "required": false,
+    "order": 2,
+    "help_text": "In India, a minimum of 6 months is typically recommended, with 9 months being ideal for most situations. This helps assess the adequacy of your emergency fund.",
+    "depends_on": {
+      "question_id": "goals_emergency_fund_exists",
+      "values": [
+        "Yes",
+        "Partially"
+      ]
+    },
+    "submitted_answer": "9-12 months"
+  },
+  {
+    "id": "goals_emergency_fund_education",
+    "text": "Emergency Fund Guidelines for India",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "educational",
+    "required": false,
+    "order": 3,
+    "educational_content": "\n                <h3>Emergency Fund Guidelines for India</h3>\n                \n                <p>In India, financial experts recommend maintaining an emergency fund that covers <strong>6-9 months</strong> \n                of your regular monthly expenses. This differs from the global standard of 3-6 months due to several factors \n                specific to the Indian context:</p>\n                \n                <ul>\n                    <li><strong>Healthcare costs:</strong> Lower insurance penetration and higher out-of-pocket \n                    medical expenses necessitate larger emergency reserves</li>\n                    <li><strong>Employment conditions:</strong> Job transitions can take longer, and notice periods \n                    and severance packages may vary significantly</li>\n                    <li><strong>Family support systems:</strong> Many Indians have financial responsibilities for \n                    extended family members</li>\n                    <li><strong>Economic volatility:</strong> Inflationary pressures and economic cycles can impact \n                    expenses unpredictably</li>\n                </ul>\n                \n                <p>Having an adequate emergency fund is typically considered the foundation of financial security, \n                as it provides protection against unexpected expenses without derailing your long-term financial plans.</p>\n            ",
+    "help_text": "DISCLAIMER: We are only a profiler, not providing recommendations. The following information is for educational purposes only, based on financial literature, not personalized advice. We are not RBI/SEBI regulated financial advisors. Your specific situation may require different amounts.",
+    "depends_on": {
+      "question_id": "financial_basics_monthly_expenses",
+      "value_condition": "greater_than_zero"
+    },
+    "submitted_answer": "Generated answer for goals_emergency_fund_education"
+  },
+  {
+    "id": "goals_emergency_fund_calculation",
+    "text": "Your Emergency Fund Calculation",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "educational",
+    "required": false,
+    "order": 3.5,
+    "educational_content": "\n                <h3>Your Personalized Emergency Fund Calculation</h3>\n                \n                <p>Based on the financial guidelines for India and your reported monthly expenses, \n                we've calculated recommended emergency fund targets below. These are general \n                guidelines that serve as a starting point - your specific needs may vary based on \n                your individual circumstances.</p>\n            ",
+    "help_text": "Based on your monthly expenses, we've calculated recommended emergency fund amounts. This is not personalized financial advice but a general rule of thumb used in financial planning.",
+    "depends_on": {
+      "question_id": "financial_basics_monthly_expenses",
+      "value_condition": "greater_than_zero"
+    },
+    "submitted_answer": "Generated answer for goals_emergency_fund_calculation"
+  },
+  {
+    "id": "goals_emergency_fund_target",
+    "text": "Would you like to set a goal to build or enhance your emergency fund?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "radio",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "required": false,
+    "order": 4,
+    "help_text": "Creating an emergency fund is typically the first financial priority",
+    "educational_content": "\n                <h3>Your Personalized Emergency Fund Calculation</h3>\n                \n                <p>Based on the financial guidelines for India and your reported monthly expenses, \n                we've calculated recommended emergency fund targets for your specific situation:</p>\n            ",
+    "calculation_details": "\n            <div class=\"calculation-item\">\n                <div class=\"calculation-label\">Your Monthly Expenses:</div>\n                <div class=\"calculation-value\">\u20b956,286</div>\n            </div>\n            <div class=\"calculation-item\">\n                <div class=\"calculation-label\">Minimum Recommended (6 months):</div>\n                <div class=\"calculation-value\">\u20b9337,716</div>\n            </div>\n            <div class=\"calculation-item\">\n                <div class=\"calculation-label\">Ideal Recommended (9 months):</div>\n                <div class=\"calculation-value\">\u20b9506,574</div>\n            </div>\n        ",
+    "submitted_answer": 506574
+  },
+  {
+    "id": "goals_emergency_fund_timeframe",
+    "text": "By when would you like to complete your emergency fund goal?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "select",
+    "options": [
+      "Within 6 months",
+      "Within 1 year",
+      "Within 2 years",
+      "More than 2 years"
+    ],
+    "required": false,
+    "order": 6,
+    "help_text": "Your target timeframe helps prioritize this goal",
+    "depends_on": {
+      "question_id": "goals_emergency_fund_target",
+      "value": "Yes"
+    },
+    "submitted_answer": "3-5 years"
+  },
+  {
+    "id": "goals_emergency_fund_amount",
+    "text": "What is your target amount for your emergency fund?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 5,
+    "help_text": "In India, 6-9 months of expenses is recommended. You can override this with your own target amount that suits your specific situation.",
+    "depends_on": {
+      "question_id": "goals_emergency_fund_target",
+      "value": "Yes"
+    },
+    "default": 506574.0,
+    "submitted_answer": 4243908
+  },
+  {
+    "id": "goals_retirement_amount",
+    "text": "What is your target amount for retirement savings?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 18,
+    "help_text": "Your target amount for retirement savings",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_values_any": [
+        "Early retirement",
+        "Traditional retirement"
+      ]
+    },
+    "submitted_answer": 3530624
+  },
+  {
+    "id": "goals_retirement_timeframe",
+    "text": "By what age would you like to retire?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "number",
+    "min": 35,
+    "max": 80,
+    "required": false,
+    "order": 19,
+    "help_text": "Your target retirement age",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_values_any": [
+        "Early retirement",
+        "Traditional retirement"
+      ]
+    },
+    "submitted_answer": "10+ years"
+  },
+  {
+    "id": "goals_insurance_education",
+    "text": "Insurance Guidelines for India",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "educational",
+    "required": false,
+    "order": 5.5,
+    "educational_content": "\n                <h3>Insurance Planning in the Indian Context</h3>\n                \n                <p>Insurance planning in India requires special considerations due to the unique healthcare \n                system, family structures, and economic environment:</p>\n                \n                <ul>\n                    <li><strong>Health Insurance:</strong> A family floater policy of at least \u20b910-15 lakh \n                    is recommended for a family of four, with regular increases to match medical inflation \n                    (15-20% annually). Individual policies may be better for senior family members.</li>\n                    \n                    <li><strong>Term Life Insurance:</strong> Coverage should be 10-15 times your annual income \n                    to provide adequate financial security for dependents. Term insurance offers the highest \n                    coverage at the lowest cost.</li>\n                    \n                    <li><strong>Critical Illness Cover:</strong> A separate critical illness rider or \n                    standalone policy (\u20b925-50 lakh) is valuable in India where specific treatments like \n                    cancer care can be extremely costly.</li>\n                    \n                    <li><strong>Personal Accident:</strong> Coverage equal to at least 5 times annual \n                    income is recommended, especially for primary earning members.</li>\n                    \n                    <li><strong>Home Insurance:</strong> Despite low penetration in India, home insurance \n                    is crucial protection against natural disasters and unforeseen events.</li>\n                </ul>\n                \n                <p>Insurance policies should be reviewed annually and updated with major life events \n                (marriage, children, property purchase). Before purchasing, compare premiums, coverage, \n                claim settlement ratios, and exclusions across providers.</p>\n            ",
+    "help_text": "DISCLAIMER: We are only a profiler, not providing recommendations. The following information is for educational purposes only, based on financial literature, not personalized advice. We are not RBI/SEBI regulated financial advisors.",
+    "submitted_answer": "Generated answer for goals_insurance_education"
+  },
+  {
+    "id": "goals_education_amount",
+    "text": "What is your target amount for education funding?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 14,
+    "help_text": "Your target amount for education funding",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_value": "Education funding"
+    },
+    "submitted_answer": 4179966
+  },
+  {
+    "id": "goals_education_timeframe",
+    "text": "By when would you like to achieve your education funding goal?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "select",
+    "options": [
+      "Within 1 year",
+      "1-3 years",
+      "3-5 years",
+      "5-10 years",
+      "More than 10 years"
+    ],
+    "required": false,
+    "order": 15,
+    "help_text": "Your target timeframe for education funding goal",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_value": "Education funding"
+    },
+    "submitted_answer": "5-10 years"
+  },
+  {
+    "id": "goals_home_purchase_amount",
+    "text": "What is your target amount for home purchase or down payment?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "number",
+    "min": 0,
+    "required": false,
+    "order": 12,
+    "help_text": "Your target amount for home purchase or down payment",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_value": "Home purchase or down payment"
+    },
+    "submitted_answer": 2060646
+  },
+  {
+    "id": "goals_home_purchase_timeframe",
+    "text": "By when would you like to achieve your home purchase goal?",
+    "type": "goal",
+    "category": "goals",
+    "input_type": "select",
+    "options": [
+      "Within 1 year",
+      "1-3 years",
+      "3-5 years",
+      "5-10 years",
+      "More than 10 years"
+    ],
+    "required": false,
+    "order": 13,
+    "help_text": "Your target timeframe for home purchase goal",
+    "depends_on": {
+      "question_id": "goals_other_categories",
+      "has_value": "Home purchase or down payment"
+    },
+    "submitted_answer": "10+ years"
+  }
+]
