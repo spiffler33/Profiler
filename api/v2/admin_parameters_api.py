@@ -16,6 +16,9 @@ from services.financial_parameter_service import get_financial_parameter_service
 # Import centralized authentication
 from auth_utils import auth
 
+# Import models needed locally
+from models.database_profile_manager import DatabaseProfileManager
+
 # Create Blueprint
 admin_parameters_api = Blueprint('admin_parameters_api', __name__)
 
@@ -571,7 +574,6 @@ def get_profiles():
     
     try:
         # Get all profiles
-        from models.database_profile_manager import DatabaseProfileManager
         profile_manager = DatabaseProfileManager()
         all_profiles = profile_manager.get_all_profiles() or []
         
@@ -637,7 +639,6 @@ def get_user_parameters(profile_id):
     
     try:
         # Check if profile exists
-        from models.database_profile_manager import DatabaseProfileManager
         profile_manager = DatabaseProfileManager()
         profile = profile_manager.get_profile(profile_id)
         
@@ -717,7 +718,6 @@ def reset_user_parameter(profile_id):
     
     try:
         # Check if profile exists
-        from models.database_profile_manager import DatabaseProfileManager
         profile_manager = DatabaseProfileManager()
         profile = profile_manager.get_profile(profile_id)
         
@@ -1209,7 +1209,6 @@ def set_user_parameter(profile_id):
     
     try:
         # Check if profile exists
-        from models.database_profile_manager import DatabaseProfileManager
         profile_manager = DatabaseProfileManager()
         profile = profile_manager.get_profile(profile_id)
         
