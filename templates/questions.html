@@ -10,7 +10,7 @@
 <div class="questions-container">
     <div class="progress-section">
         <h3>Profile Understanding</h3>
-        
+
         {% if completion.understanding_level %}
         <!-- Understanding level visualization -->
         <div class="understanding-level-container">
@@ -20,7 +20,7 @@
                     {{ completion.understanding_level.label }}
                 </span>
             </div>
-            
+
             <!-- Growing metaphor indicator -->
             <div class="level-indicator-container">
                 <div class="level-indicator level-red {% if completion.understanding_level.id == 'RED' %}active{% endif %}">
@@ -44,11 +44,11 @@
                     <div class="level-label">Complete</div>
                 </div>
             </div>
-            
+
             <div class="understanding-level-description">
                 {{ completion.understanding_level.description }}
             </div>
-            
+
             {% if completion.understanding_level.next_level %}
             <div class="next-level-info">
                 <h5>Next Level: {{ completion.understanding_level.next_level.label }}</h5>
@@ -61,16 +61,16 @@
             {% endif %}
         </div>
         {% endif %}
-        
+
         <h3>Profile Completion</h3>
-        
+
         <div class="overall-progress">
             <div class="progress-label">Overall: {{ completion.overall }}%</div>
             <div class="progress-bar">
                 <div class="progress-fill" style="width: {{ completion.overall }}%;"></div>
             </div>
         </div>
-        
+
         <div class="tier-progress">
             <div class="progress-tier">
                 <div class="progress-label">Core Questions: {{ completion.core.overall }}%</div>
@@ -78,7 +78,7 @@
                     <div class="progress-fill core" style="width: {{ completion.core.overall }}%;"></div>
                 </div>
             </div>
-            
+
             <div class="progress-tier">
                 <div class="progress-label">Follow-Up Questions: {{ completion.next_level.completion }}%</div>
                 <div class="progress-bar">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="progress-stats">{{ completion.next_level.questions_answered }} of {{ completion.next_level.questions_count|default(1) }}</div>
             </div>
-            
+
             <div class="progress-tier">
                 <div class="progress-label">Financial Psychology: {{ completion.behavioral.completion }}%</div>
                 <div class="progress-bar">
@@ -95,7 +95,7 @@
                 <div class="progress-stats">{{ completion.behavioral.questions_answered }} of {{ completion.behavioral.questions_count|default(7) }}</div>
             </div>
         </div>
-        
+
         <div class="category-progress">
             <div class="progress-item">
                 <div class="progress-label">Demographics</div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="progress-percentage">{{ completion.by_category.demographics }}%</div>
             </div>
-            
+
             <div class="progress-item">
                 <div class="progress-label">Financial Basics</div>
                 <div class="progress-bar">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="progress-percentage">{{ completion.by_category.financial_basics }}%</div>
             </div>
-            
+
             <div class="progress-item">
                 <div class="progress-label">Assets & Debts</div>
                 <div class="progress-bar">
@@ -120,7 +120,7 @@
                 </div>
                 <div class="progress-percentage">{{ completion.by_category.assets_and_debts }}%</div>
             </div>
-            
+
             <div class="progress-item">
                 <div class="progress-label">Special Cases</div>
                 <div class="progress-bar">
@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="question-answer-section">
         {% if no_questions %}
             <div class="current-question-card">
@@ -167,25 +167,25 @@
                     {% else %}
                     <span class="question-type-badge">{{ next_question.type|replace('_', ' ')|title }}</span>
                     {% endif %}
-                    
+
                     {# Include the dynamic question indicator if this is a dynamically generated question #}
                     {% with question=next_question %}
                         {% include 'components/dynamic_question_indicator.html' %}
                     {% endwith %}
                 </div>
-                
+
                 <h3 class="question-text">{{ next_question.text }}</h3>
-                
+
                 {% if next_question.help_text %}
                 <div class="help-text">
                     <p>{{ next_question.help_text }}</p>
                 </div>
                 {% endif %}
-                
+
                 <form id="answer-form" action="{{ url_for('submit_answer') }}" method="POST" onsubmit="return handleFormSubmit(event)">
                     <input type="hidden" name="question_id" value="{{ next_question.id }}">
                     <input type="hidden" name="input_type" value="{{ next_question.input_type }}">
-                    
+
                     <div class="input-container">
                         {% if next_question.input_type == 'educational' %}
                         <div class="educational-panel">
@@ -193,10 +193,10 @@
                                 <!-- Single title and description -->
                                 <div class="educational-content">
                                     <h3>Your Emergency Fund Calculation</h3>
-                                    <p>Based on the financial guidelines for India and your reported monthly expenses, 
+                                    <p>Based on the financial guidelines for India and your reported monthly expenses,
                                     we've calculated recommended emergency fund targets for your specific situation:</p>
                                 </div>
-                                
+
                                 <!-- Clean calculation box with formatted values -->
                                 <div class="calculation-box">
                                     <div class="calculation-details">
@@ -219,7 +219,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                
+
                                 <!-- Clear disclaimer -->
                                 <div class="disclaimer-box">
                                     <p><strong>DISCLAIMER:</strong> This is not personalized financial advice but a general rule of thumb used in financial planning. Your specific situation may require different amounts. We are not RBI/SEBI regulated financial advisors.</p>
@@ -234,22 +234,22 @@
                                     {% endif %}
                                 </div>
                             {% endif %}
-                            
+
                             <input type="hidden" name="answer" value="acknowledged">
                         </div>
-                        
+
                         {% elif next_question.input_type == 'text' %}
                         <input type="text" name="answer" placeholder="Enter your answer" required>
-                        
+
                         {% elif next_question.input_type == 'number' %}
-                        <input type="number" name="answer" 
-                               placeholder="{% if next_question.suggested_value is defined %}Suggested: {{ next_question.suggested_value }}{% else %}Enter a number{% endif %}" 
+                        <input type="number" name="answer"
+                               placeholder="{% if next_question.suggested_value is defined %}Suggested: {{ next_question.suggested_value }}{% else %}Enter a number{% endif %}"
                                {% if next_question.min is defined %}min="{{ next_question.min }}"{% endif %}
                                {% if next_question.max is defined %}max="{{ next_question.max }}"{% endif %}
                                {% if next_question.step is defined %}step="{{ next_question.step }}"{% endif %}
                                {% if next_question.suggested_value is defined %}value="{{ next_question.suggested_value }}"{% endif %}
                                required>
-                               
+
                         {% elif next_question.input_type == 'select' %}
                         <select name="answer" required>
                             <option value="" disabled selected>Select an option</option>
@@ -257,7 +257,7 @@
                             <option value="{{ option }}">{{ option }}</option>
                             {% endfor %}
                         </select>
-                        
+
                         {% elif next_question.input_type == 'radio' %}
                         <div class="radio-options">
                             {% for option in next_question.options %}
@@ -267,17 +267,17 @@
                             </label>
                             {% endfor %}
                         </div>
-                        
+
                         {% elif next_question.input_type == 'slider' %}
                         <div class="slider-container">
-                            <input type="range" name="answer" class="slider" 
-                                   min="{{ next_question.min }}" 
-                                   max="{{ next_question.max }}" 
+                            <input type="range" name="answer" class="slider"
+                                   min="{{ next_question.min }}"
+                                   max="{{ next_question.max }}"
                                    step="{{ next_question.step|default(1) }}"
                                    value="{{ next_question.min }}">
                             <div class="slider-value">0</div>
                         </div>
-                        
+
                         {% elif next_question.input_type == 'multiselect' %}
                         <div class="multiselect-options">
                             {% for option in next_question.options %}
@@ -291,7 +291,7 @@
                         </div>
                         {% endif %}
                     </div>
-                    
+
                     <div class="form-actions">
                         {% if next_question.input_type == 'educational' %}
                             <button type="submit" class="btn primary">I Understand - Continue</button>
@@ -303,10 +303,10 @@
             </div>
         {% endif %}
     </div>
-    
+
     <div class="previous-answers-section">
         <h3>Your Previous Answers</h3>
-        
+
         {% if answered_questions %}
         <div class="answers-list">
             {% for qa in answered_questions %}
@@ -324,7 +324,7 @@
                     {% if qa.question.input_type == 'educational' %}
                         <em>Educational content - acknowledged</em>
                     {% else %}
-                        <strong>Your answer:</strong> 
+                        <strong>Your answer:</strong>
                         {% if qa.answer is string %}
                             {{ qa.answer }}
                         {% elif qa.answer is iterable and qa.answer is not string %}
@@ -357,7 +357,6 @@
 
 <!-- API service components -->
 {% if 'api_service' not in request.args or request.args.get('api_service') != 'disable' %}
-<script src="{{ url_for('static', filename='js/services/ApiService.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/ErrorHandlingService.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/LoadingStateManager.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/dataEventBus.js') }}"></script>
@@ -374,15 +373,15 @@
     // AJAX form submission handler
     function handleFormSubmit(event) {
         event.preventDefault();
-        
+
         const form = event.target;
         const formData = new FormData(form);
         const submitButton = form.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
-        
+
         submitButton.textContent = 'Saving...';
         submitButton.disabled = true;
-        
+
         // Process multiselect checkboxes
         const multiselectCheckboxes = form.querySelectorAll('.multiselect-checkbox:checked');
         if (multiselectCheckboxes.length > 0) {
@@ -392,7 +391,7 @@
             });
             formData.append('is_multiselect', 'true');
         }
-        
+
         // Set Accept header to ensure JSON response
         fetch(form.action, {
             method: 'POST',
@@ -410,7 +409,7 @@
                 // Show error
                 submitButton.textContent = originalButtonText;
                 submitButton.disabled = false;
-                
+
                 const errorMessage = document.createElement('div');
                 errorMessage.classList.add('error-message');
                 errorMessage.style.color = '#dc3545';
@@ -419,14 +418,14 @@
                 errorMessage.style.border = '1px solid #f5c6cb';
                 errorMessage.style.borderRadius = '0.25rem';
                 errorMessage.style.backgroundColor = '#f8d7da';
-                
+
                 let errorText = data.error || 'An error occurred while saving your answer. Please try again.';
                 errorMessage.textContent = errorText;
-                
+
                 // Remove existing errors
                 const existingErrors = form.querySelectorAll('.error-message');
                 existingErrors.forEach(err => err.remove());
-                
+
                 form.appendChild(errorMessage);
             }
         })
@@ -436,7 +435,7 @@
             submitButton.disabled = false;
             alert('An error occurred. Please try again.');
         });
-        
+
         return false; // Prevent traditional form submission
     }
 
@@ -445,16 +444,16 @@
         const sliders = document.querySelectorAll('.slider');
         sliders.forEach(slider => {
             const valueDisplay = slider.parentElement.querySelector('.slider-value');
-            
+
             // Update on load
             valueDisplay.textContent = slider.value;
-            
+
             // Update on change
             slider.addEventListener('input', function() {
                 valueDisplay.textContent = this.value;
             });
         });
-        
+
         // Initialize tooltips for dynamic question indicators in previous answers
         const dynamicMiniBadges = document.querySelectorAll('.dynamic-mini-badge');
         dynamicMiniBadges.forEach(badge => {
@@ -463,7 +462,7 @@
                 badge.removeAttribute('title'); // Remove native title to use our custom tooltips
             }
         });
-        
+
         // Close context panels when submitting the form
         const answerForm = document.getElementById('answer-form');
         if (answerForm) {
@@ -473,49 +472,49 @@
                 });
             });
         }
-        
+
         // Add profile ID to the questions container for API integration
         const questionsContainer = document.querySelector('.questions-container');
         if (questionsContainer) {
             questionsContainer.dataset.profileId = "{{ profile_id }}";
         }
-        
+
         // Initialize components
         const profileId = "{{ profile_id }}";
-        
+
         // Initialize QuestionFlowManager
         if (window.QuestionFlowManager) {
             QuestionFlowManager.initialize({
                 profileId: profileId,
                 containerSelector: '.question-answer-section'
             });
-            
+
             QuestionFlowManager.on('questionLoaded', function(data) {
                 console.log('QuestionFlowManager: Question loaded', data.question?.id);
             });
-            
+
             QuestionFlowManager.on('answerSubmitted', function(data) {
                 console.log('QuestionFlowManager: Answer submitted', data.questionId);
             });
-            
+
             QuestionFlowManager.on('error', function(data) {
                 console.error('QuestionFlowManager error:', data.error);
             });
         }
-        
+
         // Initialize DynamicQuestionRenderer
         if (window.DynamicQuestionRenderer) {
             DynamicQuestionRenderer.initialize({
                 profileId: profileId,
                 containerSelector: '.question-answer-section'
             });
-            
+
             // If there's a current dynamic question, enhance it
             const currentQuestionCard = document.querySelector('.current-question-card');
             if (currentQuestionCard) {
                 const questionId = currentQuestionCard.querySelector('input[name="question_id"]')?.value;
                 const isDynamic = currentQuestionCard.querySelector('.dynamic-question-indicator') !== null;
-                
+
                 if (questionId && isDynamic) {
                     DynamicQuestionRenderer.enhanceDynamicQuestion({
                         id: questionId,
@@ -524,20 +523,22 @@
                 }
             }
         }
-        
+
         // Initialize QuestionResponseSubmitter
-        if (window.QuestionResponseSubmitter) {
+        if (window.QuestionResponseSubmitter && typeof QuestionResponseSubmitter.initialize === 'function') {
             QuestionResponseSubmitter.initialize({
                 profileId: profileId
             });
         }
-        
+
         // Initialize UnderstandingLevelDisplay
-        if (window.UnderstandingLevelDisplay) {
+        if (window.UnderstandingLevelDisplay && typeof UnderstandingLevelDisplay.initialize === 'function') {
             UnderstandingLevelDisplay.initialize({
                 profileId: profileId,
                 autoRefresh: false
             });
+        } else if (window.UnderstandingLevelDisplay) {
+            console.warn('UnderstandingLevelDisplay exists but initialize method is not found');
         }
     });
 </script>

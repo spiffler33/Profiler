@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tooltips.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-states.css') }}">
     <!-- React Dependencies -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- React Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -29,10 +30,10 @@
                     {% else %}
                     <li><a href="{{ url_for('create_profile') }}">Create Profile</a></li>
                     {% endif %}
-                    
+
                     <!-- Admin links (shown based on authentication) -->
                     <li class="admin-link" style="display: none;"><a href="{{ url_for('admin_dashboard') }}">Admin</a></li>
-                    
+
                     <!-- Authentication links -->
                     <li class="auth-status">
                         <a href="{{ url_for('login') }}" class="login-link">Login</a>
@@ -68,21 +69,21 @@
     <script src="{{ url_for('static', filename='js/ApiService.js') }}"></script>
     <script src="{{ url_for('static', filename='js/auth_error_handler.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    
+
     <script>
         // Initialize authentication UI
         document.addEventListener('DOMContentLoaded', function() {
             const adminLink = document.querySelector('.admin-link');
             const loginLink = document.querySelector('.login-link');
             const logoutLink = document.querySelector('.logout-link');
-            
+
             // Update authentication UI based on authentication state
             function updateAuthUI() {
                 if (window.AuthenticationService && window.AuthenticationService.isAuthenticated()) {
                     // User is authenticated
                     loginLink.style.display = 'none';
                     logoutLink.style.display = 'inline-block';
-                    
+
                     // Only show admin link if user has admin role
                     if (window.AuthenticationService.isAdmin()) {
                         adminLink.style.display = 'inline-block';
@@ -96,22 +97,22 @@
                     adminLink.style.display = 'none';
                 }
             }
-            
+
             // Initialize by checking authentication state
             updateAuthUI();
-            
+
             // Subscribe to authentication state changes
             if (window.AuthenticationService) {
                 window.AuthenticationService.addAuthChangeListener(function(isAuthenticated) {
                     updateAuthUI();
                 });
             }
-            
+
             // Handle logout click
             if (logoutLink) {
                 logoutLink.addEventListener('click', function(event) {
                     event.preventDefault();
-                    
+
                     if (window.AuthenticationService) {
                         window.AuthenticationService.logout().then(() => {
                             window.location.href = '/';
@@ -123,7 +124,7 @@
             }
         });
     </script>
-    
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1433,5 +1433,5 @@ const ApiService = (function() {
   };
 })();
 
-// Make service available globally
-window.ApiService = ApiService;
+// Make service available globally with a different name to avoid conflicts
+window.ApiServiceExtended = ApiService;

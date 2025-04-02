@@ -414,7 +414,6 @@
 {% block extra_js %}
 <!-- API service components -->
 {% if 'api_service' not in request.args or request.args.get('api_service') != 'disable' %}
-<script src="{{ url_for('static', filename='js/services/ApiService.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/ErrorHandlingService.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/LoadingStateManager.js') }}"></script>
 <script src="{{ url_for('static', filename='js/services/dataEventBus.js') }}"></script>

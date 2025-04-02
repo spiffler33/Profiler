@@ -1,6 +1,6 @@
 /**
  * QuestionFlowManager.js
- * 
+ *
  * Manages the question flow state, progress tracking, and API interactions
  * for the question flow feature in the Financial Profiler application.
  */
@@ -16,13 +16,13 @@ class QuestionFlowManager {
     this.loadingTimeout = null;
     this.localStorage = window.localStorage;
     this.eventListeners = {};
-    
+
     // Integration with ApiService
     this.apiService = window.ApiService;
-    
+
     // Integration with LoadingStateManager if available
     this.loadingStateManager = window.LoadingStateManager || null;
-    
+
     // Integration with ErrorHandlingService if available
     this.errorHandlingService = window.ErrorHandlingService || null;
   }
@@ -38,18 +38,18 @@ class QuestionFlowManager {
     this.currentProfileId = options.profileId || this._extractProfileIdFromUrl();
     this.containerSelector = options.containerSelector || '.question-answer-section';
     this.onQuestionLoad = options.onQuestionLoad || null;
-    
+
     // Load any saved state from localStorage
     this._loadSavedState();
-    
+
     // Attach event listeners for UI elements
     this._attachEventListeners();
-    
+
     // Register with ApiService if available
-    if (this.apiService) {
+    if (this.apiService && typeof this.apiService.registerStaticHandler === 'function') {
       this.apiService.registerStaticHandler('questions/flow', this);
     }
-    
+
     // Return this for chaining
     return this;
   }
@@ -62,13 +62,13 @@ class QuestionFlowManager {
     if (!this.currentProfileId) {
       throw new Error('No profile ID provided. Call initialize() first.');
     }
-    
+
     this._setLoading(true, 'Loading next question...');
-    
+
     try {
       // Use ApiService if available, otherwise use fetch directly
       let questionData;
-      
+
       if (this.apiService) {
         questionData = await this.apiService.get(`/questions/flow`, {
           params: { profile_id: this.currentProfileId },
@@ -83,37 +83,37 @@ class QuestionFlowManager {
         }
         questionData = await response.json();
       }
-      
+
       if (!questionData || (questionData.no_questions && !questionData.next_question)) {
         // No more questions - handle completion
         this._handleQuestionCompletion();
         return null;
       }
-      
+
       // Store the current question
       this.currentQuestionData = questionData.next_question;
       this.progressData = questionData.completion;
-      
+
       // Save state to localStorage
       this._saveCurrentState();
-      
+
       // Render the question to the UI
       this._renderQuestion(this.currentQuestionData);
-      
+
       // Update progress indicators
       this._updateProgressIndicators(this.progressData);
-      
+
       // Call the onQuestionLoad callback if provided
       if (this.onQuestionLoad && typeof this.onQuestionLoad === 'function') {
         this.onQuestionLoad(this.currentQuestionData, this.progressData);
       }
-      
+
       // Emit question loaded event
       this._emit('questionLoaded', {
         question: this.currentQuestionData,
         progress: this.progressData
       });
-      
+
       return this.currentQuestionData;
     } catch (error) {
       this._handleError(error, 'loading question');
@@ -132,9 +132,9 @@ class QuestionFlowManager {
     if (!this.currentQuestionData) {
       throw new Error('No current question. Call loadNextQuestion() first.');
     }
-    
+
     this._setLoading(true, 'Submitting your answer...');
-    
+
     try {
       const questionId = this.currentQuestionData.id;
       const formData = {
@@ -142,10 +142,10 @@ class QuestionFlowManager {
         question_id: questionId,
         answer: answer
       };
-      
+
       // Use ApiService if available, otherwise use fetch directly
       let result;
-      
+
       if (this.apiService) {
         result = await this.apiService.post(`/questions/submit`, formData, {
           loadingId: 'question-submit',
@@ -160,14 +160,14 @@ class QuestionFlowManager {
           },
           body: JSON.stringify(formData)
         });
-        
+
         if (!response.ok) {
           throw new Error(`Error submitting answer: ${response.statusText}`);
         }
-        
+
         result = await response.json();
       }
-      
+
       // Add to answer history
       this.answerHistory.push({
         questionId,
@@ -175,20 +175,20 @@ class QuestionFlowManager {
         answer,
         timestamp: new Date().toISOString()
       });
-      
+
       // Save updated state
       this._saveCurrentState();
-      
+
       // Emit answer submitted event
       this._emit('answerSubmitted', {
         questionId,
         answer,
         result
       });
-      
+
       // Load the next question
       await this.loadNextQuestion();
-      
+
       return result;
     } catch (error) {
       this._handleError(error, 'submitting answer');
@@ -259,7 +259,7 @@ class QuestionFlowManager {
     if (profileMatch && profileMatch[1]) {
       return profileMatch[1];
     }
-    
+
     // Also try to get from query string ?profile_id=...
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('profile_id');
@@ -271,14 +271,14 @@ class QuestionFlowManager {
    */
   _saveCurrentState() {
     if (!this.currentProfileId) return;
-    
+
     const state = {
       currentQuestionData: this.currentQuestionData,
       progressData: this.progressData,
       answerHistory: this.answerHistory,
       lastUpdated: new Date().toISOString()
     };
-    
+
     try {
       this.localStorage.setItem(
         `question_flow_state_${this.currentProfileId}`,
@@ -295,7 +295,7 @@ class QuestionFlowManager {
    */
   _loadSavedState() {
     if (!this.currentProfileId) return;
-    
+
     try {
       const savedState = this.localStorage.getItem(`question_flow_state_${this.currentProfileId}`);
       if (savedState) {
@@ -303,12 +303,12 @@ class QuestionFlowManager {
         this.currentQuestionData = state.currentQuestionData;
         this.progressData = state.progressData;
         this.answerHistory = state.answerHistory || [];
-        
+
         // Check if state is too old (over 24 hours)
         const lastUpdated = new Date(state.lastUpdated);
         const now = new Date();
         const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
-        
+
         if (now - lastUpdated > TWENTY_FOUR_HOURS) {
           console.log('Saved question flow state is too old, clearing it');
           this.clearState();
@@ -326,7 +326,7 @@ class QuestionFlowManager {
   _attachEventListeners() {
     // Listen for form submission
     document.addEventListener('submit', this._handleFormSubmit.bind(this));
-    
+
     // Listen for reload/back events
     window.addEventListener('beforeunload', () => {
       // Save current state before unloading
@@ -343,19 +343,19 @@ class QuestionFlowManager {
     // Only handle answer form submissions
     const form = event.target;
     if (form.id !== 'answer-form') return;
-    
+
     // Prevent default form submission
     event.preventDefault();
-    
+
     // Check if this is our current question
     const questionIdInput = form.querySelector('input[name="question_id"]');
     if (!questionIdInput || questionIdInput.value !== this.currentQuestionData?.id) return;
-    
+
     // Extract answer data from form
     const formData = new FormData(form);
     let answer = formData.get('answer');
     const inputType = formData.get('input_type');
-    
+
     // Handle multiselect answers
     if (inputType === 'multiselect') {
       const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
@@ -363,7 +363,7 @@ class QuestionFlowManager {
         answer = Array.from(checkboxes).map(cb => cb.value);
       }
     }
-    
+
     // Submit the answer
     this.submitAnswer(answer).catch(error => {
       console.error('Error submitting answer:', error);
@@ -382,14 +382,14 @@ class QuestionFlowManager {
       console.error(`Question container not found: ${this.containerSelector}`);
       return;
     }
-    
+
     // If using a template-based approach, we'll leave rendering to the template engine
     if (this._isServerRendered()) {
       // Emit event so the server can handle the rendering
       this._emit('requestRender', { questionData });
       return;
     }
-    
+
     // For client-side rendering, we would implement DOM manipulation here
     // But for the integration with the existing template-based system,
     // we'll rely on the server-side rendering for now
@@ -403,25 +403,25 @@ class QuestionFlowManager {
    */
   _updateProgressIndicators(progressData) {
     if (!progressData) return;
-    
+
     // Update overall progress
     const overallFill = document.querySelector('.overall-progress .progress-fill');
     if (overallFill) {
       overallFill.style.width = `${progressData.overall}%`;
-      
+
       const overallLabel = document.querySelector('.overall-progress .progress-label');
       if (overallLabel) {
         overallLabel.textContent = `Overall: ${progressData.overall}%`;
       }
     }
-    
+
     // Update category progress bars
     const categoryProgressMappings = {
       core: '.progress-tier .progress-fill.core',
       next_level: '.progress-tier .progress-fill.next-level',
       behavioral: '.progress-tier .progress-fill.behavioral'
     };
-    
+
     Object.entries(categoryProgressMappings).forEach(([category, selector]) => {
       const progressBar = document.querySelector(selector);
       if (progressBar && progressData[category]) {
@@ -430,7 +430,7 @@ class QuestionFlowManager {
           completionValue = progressData[category].completion || 0;
         }
         progressBar.style.width = `${completionValue}%`;
-        
+
         // Update stats if available
         const statsContainer = progressBar.parentElement.nextElementSibling;
         if (statsContainer && statsContainer.classList.contains('progress-stats')) {
@@ -440,7 +440,7 @@ class QuestionFlowManager {
         }
       }
     });
-    
+
     // Dispatch event for external progress handling
     this._emit('progressUpdated', { progressData });
   }
@@ -453,7 +453,7 @@ class QuestionFlowManager {
     // Get the container
     const container = document.querySelector(this.containerSelector);
     if (!container) return;
-    
+
     // Clear the container
     const completionMessageHTML = `
       <div class="current-question-card">
@@ -466,9 +466,9 @@ class QuestionFlowManager {
         </div>
       </div>
     `;
-    
+
     container.innerHTML = completionMessageHTML;
-    
+
     // Emit completion event
     this._emit('questionsCompleted', {
       profileId: this.currentProfileId,
@@ -484,26 +484,26 @@ class QuestionFlowManager {
    */
   _setLoading(isLoading, message = 'Loading...') {
     this.isLoading = isLoading;
-    
+
     // Clear any existing timeout
     if (this.loadingTimeout) {
       clearTimeout(this.loadingTimeout);
       this.loadingTimeout = null;
     }
-    
+
     // Use LoadingStateManager if available
     if (this.loadingStateManager) {
       this.loadingStateManager.setLoading('question-flow', isLoading, { text: message });
       return;
     }
-    
+
     // Otherwise use simple loading class
     const container = document.querySelector(this.containerSelector);
     if (!container) return;
-    
+
     if (isLoading) {
       container.classList.add('is-loading');
-      
+
       // Add loading indicator if not present
       let loadingIndicator = container.querySelector('.loading-indicator');
       if (!loadingIndicator) {
@@ -521,7 +521,7 @@ class QuestionFlowManager {
           loadingText.textContent = message;
         }
       }
-      
+
       // Set a timeout to show loading state for at least 500ms
       // This prevents flickering for fast operations
       this.loadingTimeout = setTimeout(() => {
@@ -557,7 +557,7 @@ class QuestionFlowManager {
    */
   _handleError(error, context) {
     console.error(`Error ${context}:`, error);
-    
+
     // Use ErrorHandlingService if available
     if (this.errorHandlingService) {
       this.errorHandlingService.handleError(error, 'question_flow', {
@@ -566,11 +566,11 @@ class QuestionFlowManager {
       });
       return;
     }
-    
+
     // Fallback error handling
     const container = document.querySelector(this.containerSelector);
     if (!container) return;
-    
+
     const errorHTML = `
       <div class="error-message">
         <h3>Error ${context}</h3>
@@ -578,12 +578,12 @@ class QuestionFlowManager {
         <button type="button" class="btn primary retry-button">Try Again</button>
       </div>
     `;
-    
+
     // Add error message
     const errorElement = document.createElement('div');
     errorElement.className = 'question-error';
     errorElement.innerHTML = errorHTML;
-    
+
     // Replace loading indicator or append to container
     const loadingIndicator = container.querySelector('.loading-indicator');
     if (loadingIndicator) {
@@ -591,7 +591,7 @@ class QuestionFlowManager {
     } else {
       container.appendChild(errorElement);
     }
-    
+
     // Add retry handler
     const retryButton = errorElement.querySelector('.retry-button');
     if (retryButton) {
@@ -602,7 +602,7 @@ class QuestionFlowManager {
         }
       });
     }
-    
+
     // Emit error event
     this._emit('error', { error, context });
   }
@@ -615,7 +615,7 @@ class QuestionFlowManager {
    */
   _emit(event, data) {
     if (!this.eventListeners[event]) return;
-    
+
     this.eventListeners[event].forEach(callback => {
       try {
         callback(data);
@@ -623,7 +623,7 @@ class QuestionFlowManager {
         console.error(`Error in event listener for ${event}:`, error);
       }
     });
-    
+
     // Also dispatch DOM event for external listeners
     const customEvent = new CustomEvent(`questionFlow:${event}`, {
       detail: data,
@@ -633,32 +633,49 @@ class QuestionFlowManager {
   }
 
   /**
-   * Check if application is using server-side rendering
-   * @private
-   * @returns {boolean} True if server-rendered
-   */
-  _isServerRendered() {
-    // Look for signs of server-side rendering
-    // 1. Jinja2 template comments
-    const hasJinjaComments = document.documentElement.innerHTML.includes('{#') ||
-                             document.documentElement.innerHTML.includes('#}');
-                             
-    // 2. Form with server-side action
-    const answerForm = document.getElementById('answer-form');
-    const hasServerAction = answerForm && 
-                           answerForm.getAttribute('action') &&
-                           answerForm.getAttribute('action').includes('/submit_answer');
-    
-    return hasJinjaComments || hasServerAction;
+     * Check if application is using server-side rendering
+     * @private
+     * @returns {boolean} True if server-rendered
+     */
+    _isServerRendered() {
+      // Look for signs of server-side rendering
+      // 1. Jinja2 template comments
+      const hasJinjaComments = document.documentElement.innerHTML.includes('{#') ||
+                               document.documentElement.innerHTML.includes('#}');
+
+      // 2. Form with server-side action
+      const answerForm = document.getElementById('answer-form');
+      const hasServerAction = answerForm &&
+                             answerForm.getAttribute('action') &&
+                             answerForm.getAttribute('action').includes('/submit_answer');
+
+      return hasJinjaComments || hasServerAction;
+    }
   }
-}
 
-// Create singleton instance
-const questionFlowManager = new QuestionFlowManager();
+  // Create singleton instance
+  const questionFlowManager = new QuestionFlowManager();
 
-// Export as both module and global
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = questionFlowManager;
-} else {
-  window.QuestionFlowManager = questionFlowManager;
-}
+  // Export as both module and global
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = questionFlowManager;
+  } else {
+    window.QuestionFlowManager = questionFlowManager;
+  }
+
+  // Make static methods delegate to the instance
+  const staticMethods = ['initialize', 'on', 'off', '_emit', '_saveCurrentState'];
+  staticMethods.forEach(method => {
+      QuestionFlowManager[method] = function(...args) {
+          return questionFlowManager[method](...args);
+      };
+  });
+
+  // Make static properties delegate to the instance
+  const staticProperties = ['answerHistory', 'currentProfileId', 'progressData', 'currentQuestionData'];
+  staticProperties.forEach(prop => {
+      Object.defineProperty(QuestionFlowManager, prop, {
+          get: function() { return questionFlowManager[prop]; },
+          set: function(value) { questionFlowManager[prop] = value; }
+      });
+  });

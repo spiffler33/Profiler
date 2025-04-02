@@ -555,12 +555,23 @@ const QuestionFlowSettings = (function() {
    * Update the toggle states in the settings panel to reflect current settings
    */
   function updateSettingsPanelToggles() {
-    document.getElementById('setting-dynamic-indicators')?.checked = currentSettings.showDynamicIndicators;
-    document.getElementById('setting-data-sources')?.checked = currentSettings.showDataSources;
-    document.getElementById('setting-reasoning')?.checked = currentSettings.showReasoning;
-    document.getElementById('setting-context-panel')?.checked = currentSettings.showDetailedContextPanel;
-    document.getElementById('setting-compact-mode')?.checked = currentSettings.compactMode;
-    document.getElementById('setting-animations')?.checked = currentSettings.animationEnabled;
+    const dynamicIndicatorsEl = document.getElementById('setting-dynamic-indicators');
+    if (dynamicIndicatorsEl) dynamicIndicatorsEl.checked = currentSettings.showDynamicIndicators;
+    
+    const dataSourcesEl = document.getElementById('setting-data-sources');
+    if (dataSourcesEl) dataSourcesEl.checked = currentSettings.showDataSources;
+    
+    const reasoningEl = document.getElementById('setting-reasoning');
+    if (reasoningEl) reasoningEl.checked = currentSettings.showReasoning;
+    
+    const contextPanelEl = document.getElementById('setting-context-panel');
+    if (contextPanelEl) contextPanelEl.checked = currentSettings.showDetailedContextPanel;
+    
+    const compactModeEl = document.getElementById('setting-compact-mode');
+    if (compactModeEl) compactModeEl.checked = currentSettings.compactMode;
+    
+    const animationsEl = document.getElementById('setting-animations');
+    if (animationsEl) animationsEl.checked = currentSettings.animationEnabled;
   }
   
   /**

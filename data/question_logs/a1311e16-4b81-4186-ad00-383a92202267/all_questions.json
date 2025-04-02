@@ -1,0 +1,11 @@
+{
+  "goals_emergency_fund_exists": {
+    "question_id": "goals_emergency_fund_exists",
+    "question_text": "Do you have an emergency fund set aside for unexpected expenses?",
+    "question_type": "goal",
+    "generated_at": "2025-04-01T09:22:27.243207",
+    "displayed_at": null,
+    "answered_at": null,
+    "answer": null
+  }
+}
